@@ -2,8 +2,8 @@
 Contributors: Jouni Santara, TERE-tech ltd
 Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
-Requires at least: 3.5.1
-Tested up to: 3.5.1
+Requires at least: 3.3.2
+Tested up to: 3.8.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ NVD3 visualisations gives you tools to generate impressive business quality char
 
 NVD3 visualisations is a full set of visually interactive charts that can be controlled by simple options.
 
-You can start to create any example chart into your blog and study it more before you decide if that suits for your visual presentation's needs at hand.
+You can start to create any example's chart into your blog and study it more before you decide if that suits for your visual presentation's needs at hand.
 
 This product lets you generate as many copies of different charts on the one page as you wish and scale their size just the way you like case by case.
 
@@ -43,7 +43,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 * Data's import from any valid JSON file or from customized direct data generating JavaScript function.
 .
 
-**HAPPY charting on WordPress!**
+**HAPPY CHARTING on WordPress!**
 
 **Credits**
 
@@ -63,14 +63,14 @@ Two WP standard ways to install the package.
 1. Write 'NVD3' to the search box + Search PlugIns.
 1. Select 'Install Now' under the result of 'NVD3 tools'.
 1. Activate the PlugIn on WordPress after its download.
-1. Go to nvd3 plugin's edit (Plugins/Installed plugins/NVD3 Visualisations/edit) and test them starting to read from read_me_1st.txt.
+1. Go to nvd3 plugin's edit (Plugins -> Installed plugins -> NVD3 Visualisations -> edit) and test first examples starting to read from read_me_1st.txt file.
 
 Or you may want to do it 'old traditional way'.
 
 1. Download `nvd3` folder into your local computer.
 1. Upload this folder next to the `/wp-content/plugins/` directory into your WordPress server side.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to nvd3 plugin's edit (Plugins/Installed plugins/NVD3 Visualisations/edit) and test them starting to read from read_me_1st.txt.
+1. Go to nvd3 plugin's edit (Plugins -> Installed plugins -> NVD3 Visualisations -> edit) and test first examples starting to read from read_me_1st.txt file.
 
 == Frequently Asked Questions ==
 
@@ -82,13 +82,19 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 = How can I visualize my own data set? =
 
-You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the server side. 
+You just check at first the data folder's input file structures and then you can use any tool to create similar data sets on the root folder of your blog.
 
-You may also want to write own function from which you directly call JavaScript API when data set is ready to show out.
+You may also want to write own function from which you directly call JavaScript API on the fly when data set is ready to show out.
+
+= Where is open source & how I can improve it better? =
+
+Look at here:
+
+* [GitHub's source] (https://github.com/wp-plugins/nvd3-visualisations)
 
 == Screenshots ==
 
-1. Whole charts gallery showing out neatly on the page of WP.
+1. Whole charts gallery showing out neatly on the page of WP's blog.
 
 == Changelog ==
 
