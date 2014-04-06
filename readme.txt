@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.8.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,9 +82,13 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 = How can I visualize my own data set? =
 
-You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the server side. 
+You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. 
 
 Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+
+= How can I find all available chart types & their calling names? =
+
+Look at inside **gallery.js** file on examples dir, please.
 
 = How do I know which options work together with the chart type that I use? =
 
@@ -97,15 +101,21 @@ Here:
 
 == Screenshots ==
 
-1. Whole charts gallery showing out neatly on the page of WP.
+1. Charts gallery showing out neatly on the same page of WP's blog.
 
 == Changelog ==
 
+= 1.0.3 =
+Version 1.0.3 - 
+Cleaning & reordering of code.
+
 = 1.0.2 =
-Version 1.0.2 - Minor startup bugs + better readme texts.
+Version 1.0.2 - 
+Minor startup bugs + better readme texts.
 
 = 1.0.0 =
-Version 1.0.0 - The 1st release of visualisation gallery.
+Version 1.0.0 - 
+The 1st release of visualisation gallery.
 
  == Upgrade Notice ==
  

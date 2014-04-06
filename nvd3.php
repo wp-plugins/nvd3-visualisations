@@ -10,10 +10,10 @@ Author URI: http://www.linkedin.com/in/santara
 License: GPL2
 */
 
-// All included files to headers part of blog page
+// All included ext.files
 function write_headers($rood_dir) { 
-	echo '<!-- Start of NVD3 -->'; 
-	// $root = 'wp-content/plugins/nvd3/';
+	echo '<!-- Start of NVD3 -->';
+
 	$root = 'wp-content/plugins/'.$rood_dir.'/';
 	// D3.js
 	echo '<script src="'.$root.'d3.v3.js"></script>';
@@ -26,10 +26,29 @@ function write_headers($rood_dir) {
 	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading (TODO)
 	// NVD3 tools
 	echo '<script src="'.$root.'wpcharts.js"></script>';
-	// echo '<script src="'.$root.'mychart.js"></script>'; 
+
 	echo '<!-- End of NVD3 -->';
 }
-// add_action('wp_head', 'write_headers'); // Disabled: to make it faster for blog if charts are not on page/post.
+// Uncomment & write headers part of *every* blog page (=> no need to [loadNVD3])
+// add_action('wp_head', 'write_headers');
+// Note: to make it faster ext.files not included on page/post with no charts.
+
+function myroot() { // Finding root directory for JavaScript
+	$rood_dir='nvd3-visualisations';
+	write_headers($rood_dir);
+	setRootDir($rood_dir);
+}
+add_shortcode("rootDir", "myroot");
+add_shortcode("loadNVD3", "myroot");
+
+function setRootDir($rood_dir) {  
+?>
+<script>
+	rootpath = '<?php echo WP_PLUGIN_URL.'/'.$rood_dir.'/data/' ?>';
+</script>
+<?php
+	return WP_PLUGIN_URL . '/'.$rood_dir.'/';
+}
 
 // Nice demo gallery for the most of NVD3 chart types - START
 function demoCharts($data) {
@@ -69,7 +88,8 @@ function demoContainers() {
 }
 // Demos - END
 
-// Generate a chart into its place holder dynamically
+// Generate a chart demo into its place holder dynamically
+// ########## ShortCode's method test TODO ...
 function new_chart($data) { 
 
 	$container = $data['type']; // Frequent container's types: span / div
@@ -87,14 +107,6 @@ function new_chart($data) {
 }
 add_shortcode("svgChart", "new_chart");
 
-function myroot() { // Finding root directory for JS
-	$rood_dir='nvd3-visualisations';
-	write_headers($rood_dir);
-	setRootDir($rood_dir);
-}
-add_shortcode("rootDir", "myroot");
-add_shortcode("loadNVD3", "myroot");
-
 function genJS($id) {
 ?>
 <script>
@@ -102,13 +114,5 @@ function genJS($id) {
 </script>
 <?php
 }
-
-function setRootDir($rood_dir) {  
-?>
-<script>
-	rootpath = '<?php echo WP_PLUGIN_URL.'/'.$rood_dir.'/data/' ?>';
-</script>
-<?php
-	return WP_PLUGIN_URL . '/'.$rood_dir.'/';
-}
+// ##########
 ?>
