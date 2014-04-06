@@ -40,7 +40,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Data input**
 
-* Data's import from any valid JSON file or from customized direct data generating JavaScript function.
+* Data's import from any valid JSON file or from customized data generating own JavaScript function.
 .
 
 **HAPPY CHARTING on WordPress !**
@@ -84,16 +84,15 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the server side. 
 
-You may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
 
 = How do I know which options work together with the chart type that I use? =
 
-Look at inside chart_options.html file and its comparisions table.
+Look at inside **chart_options.html** file and its comparisions table, please.
 
 = Where is open source if I want to improve it? =
 
 Here:
-
 * http://github.com/wp-plugins/nvd3-visualisations
 
 == Screenshots ==
@@ -101,6 +100,9 @@ Here:
 1. Whole charts gallery showing out neatly on the page of WP.
 
 == Changelog ==
+
+= 1.0.2 =
+Version 1.0.2 - Minor startup bugs + better readme texts.
 
 = 1.0.0 =
 Version 1.0.0 - The 1st release of visualisation gallery.
