@@ -1,0 +1,12 @@
+<!-- Your very 1st data chart on the post / page of WordPress
+     Simply, do these steps:
+         1. Create new post / page normally on WP.
+         2. Copy all all these lines inside it by editing in html mode.
+         3. Copy file 'simpleLineData.json' from data/ folder into your blog's root folder.
+         4. Save it, preview & enjoy your first own data set's chart on the blog ! -->
+[loadNVD3]
+<h3>My First Own Data Chart</h3>
+<span id="chart1"></span>
+<script>
+	jsChart('1', 'simpleLineData.json', 'simpleline', {height:'200', width:'550'} );
+</script>

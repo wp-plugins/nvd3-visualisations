@@ -1,0 +1,13 @@
+<!-- Your very 1st chart on the post / page of WordPress
+     Simply, do these steps:
+         1. Create new post / page normally on WP.
+         2. Copy all all these lines inside it by editing in html mode.
+         3. Save it, preview & enjoy your first pretty chart on the blog ! -->
+[loadNVD3]
+<h3>My First Demo Chart</h3>
+<span id="chart1"></span>
+<script>
+	jsChart('1', '', 'simpleline', {height:'200', width:'550'} );
+</script>
+
+<!-- NOTE: you can find all legal chart type names by looking at 'gallery.js' script. -->
