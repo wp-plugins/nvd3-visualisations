@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.3.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Accurate placement of each chart based on freely selected any HTML container tag.
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
-1. Visual look of charts defined from the library's original CSS style file to match your blog's theme.
+1. Visual look of charts defined from the NVD3 library's original CSS style file to match your blog's theme.
 .
 
 **Data input**

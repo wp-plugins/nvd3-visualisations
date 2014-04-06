@@ -36,7 +36,7 @@ function jsChart(id, infile, type, dims, options) {
 // Data reader from different sources: demos / own file / function's output 
 function dataRead(infile, id, type, options) {
 
-	console.info(infile);
+	// console.info(infile);
 
 	if (infile == '')
 		demoShows(id, '', type, options);
@@ -80,7 +80,7 @@ function demoShows(id, data, type, options) {
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		chartSelector(id, data, type, options);
-		window.alert('Drawing demo file: data/'+demos[type]);
+		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
 	});
 	else if (infile.indexOf('.xml') > 0)
 	d3.xml(infile,function(error,data) {
