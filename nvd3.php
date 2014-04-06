@@ -42,8 +42,8 @@ function demoCharts($data) {
 	echo '<script src="'.$root.'examples/gallery.js"></script>';
 	
 	$count = 10;
-	if ($data['count'])	$count = $data['count'];
-	echo '<script> nvd3Demos('.$count.'); </script>'; // How many demos to show
+	if ($data['count'])	$count = $data['count']; 
+	echo '<script> nvd3Demos('.$count.'); </script>'; // How many demos to show 
 }
 add_shortcode("demosGallery", "demoCharts"); 
 
@@ -88,8 +88,9 @@ function new_chart($data) {
 add_shortcode("svgChart", "new_chart");
 
 function myroot() { // Finding root directory for JS
-	write_headers();
-	setRootDir();
+	$rood_dir='nvd3-visualisations';
+	write_headers($rood_dir);
+	setRootDir($rood_dir);
 }
 add_shortcode("rootDir", "myroot");
 add_shortcode("loadNVD3", "myroot");
