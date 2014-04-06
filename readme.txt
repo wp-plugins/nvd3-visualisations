@@ -3,7 +3,7 @@ Contributors: Jouni Santara, TERE-tech ltd
 Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
-Tested up to: 3.3.2
+Tested up to: 3.8.1
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
