@@ -49,8 +49,8 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 This open source distribution contains visualisation libraries from:
 
-* [Robin Hu, NVD3] (https://github.com/novus/nvd3 "Higher level library to create fast & easy D3 charts.")
-* [Michael Bostock, D3] (https://github.com/mbostock/d3 "Famous open source visualisation library core.")
+* [Robin Hu, NVD3] (http://github.com/novus/nvd3  "Higher level library to create fast & easy D3 charts.")
+* [Michael Bostock, D3] (http://github.com/mbostock/d3  "Famous open source visualisation library core.")
 
 Big thanks for these talents by making NVD3 visualisations for WordPress technically possible too.
 
@@ -63,14 +63,14 @@ Two WP standard ways to install the package.
 1. Write 'NVD3' to the search box + Search PlugIns.
 1. Select 'Install Now' under the result of 'NVD3 tools'.
 1. Activate the PlugIn on WordPress after its download.
-1. Go to nvd3 plugin's edit (Plugins/Installed plugins/NVD3 Visualisations/edit) and test them starting to read from read_me_1st.txt.
+1. Go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and test them starting to read from read_me_1st.txt.
 
 Or you may want to do it 'old traditional way'.
 
 1. Download `nvd3` folder into your local computer.
 1. Upload this folder next to the `/wp-content/plugins/` directory into your WordPress server side.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to nvd3 plugin's edit (Plugins/Installed plugins/NVD3 Visualisations/edit) and test them starting to read from read_me_1st.txt.
+1. Go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and test them starting to read from read_me_1st.txt.
 
 == Frequently Asked Questions ==
 
@@ -84,7 +84,17 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the server side. 
 
-You may also want to write own function from which you directly call JavaScript API when data set is ready to show out.
+You may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+
+= How do I know which options work together with the chart type that I use? =
+
+Look at inside chart_options.html file and its comparisions table.
+
+= Where is open source if I want to improve it? =
+
+Here:
+
+* http://github.com/wp-plugins/nvd3-visualisations
 
 == Screenshots ==
 
@@ -97,5 +107,5 @@ Version 1.0.0 - The 1st release of visualisation gallery.
 
  == Upgrade Notice ==
  
- Tested with the version 3.3.2. only.
+ Goal is to test parallel with 3.3.2 and newest 3.8.1 blogs.
  
