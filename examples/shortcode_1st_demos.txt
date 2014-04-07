@@ -1,0 +1,18 @@
+<!-- Your very 1st shortcode's charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+
+         2. Copy all all these lines inside it by editing in html mode. 
+
+         3. Save it, preview & enjoy your first pretty charts on the blog ! -->
+
+<h3>My Automatic Demo Charts</h3>
+
+[loadNVD3]
+Default Chart's Demo
+[jsChart]
+
+Scatter Chart's Demo
+[jsChart type="scatterbubble"]

@@ -4,11 +4,11 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.8.1
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NVD3 visualisations gives you tools to generate impressive business quality charts based on the famous NV3D visualisation library. 
+NVD3 visualisations gives you tools to generate impressive business quality charts based on the famous NV3D visualisation library.  
 
 == Description ==
 
@@ -30,9 +30,9 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 1. Full set of original NVD3's gallery charts (totally 12 types of charts).
 1. Super easy to illustrate your own data sets from blog's root directory.
-1. Many charts on the same page / post of WordPress from one API call.
+1. Many charts on the same page / post of WordPress from one API / shortcode call.
 1. Easy to scale them in pixels.
-1. Accurate placement of each chart based on freely selected any HTML container tag.
+1. Accurate layout of each chart based on any HTML container tag.
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
 1. Visual look of charts defined from the NVD3 library's original CSS style file to match your blog's theme.
@@ -82,9 +82,8 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 = How can I visualize my own data set? =
 
-You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. 
-
-Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+1. You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. 
+1. Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
 
 = How can I find all available chart types & their calling names? =
 
@@ -104,6 +103,10 @@ Here:
 1. Charts gallery showing out neatly on the same page of WP's blog.
 
 == Changelog ==
+
+= 1.1.0 =
+Version 1.1.0 - 
+NEW: direct shortcode API, simple to use + automatic generation of containers.
 
 = 1.0.3 =
 Version 1.0.3 - 

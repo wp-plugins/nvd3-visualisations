@@ -2,8 +2,8 @@
 /*
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
-Description: Draw attractive & accurate interactive charts from any data set of files / own functions.
-Version: 1.0.0
+Description: Draw business class interactive charts from any data set of files or own custom functions.
+Version: 1.1.0
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -15,16 +15,16 @@ function write_headers($rood_dir) {
 	echo '<!-- Start of NVD3 -->';
 
 	$root = 'wp-content/plugins/'.$rood_dir.'/';
-	// D3.js
+	// D3.js lib
 	echo '<script src="'.$root.'d3.v3.js"></script>';
-	// NVD3.js
+	// NVD3.js lib
 	echo '<link href="'.$root.'nv.d3.css" rel="stylesheet" type="text/css">';
 	
 	echo '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment if you need to develope NVD3 core
 	// echo '<script src="'.$root.'nv.d3.js"></script>'; // & edit this source file
 
 	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading (TODO)
-	// NVD3 tools
+	// NVD3 Visualisations
 	echo '<script src="'.$root.'wpcharts.js"></script>';
 
 	echo '<!-- End of NVD3 -->';
@@ -88,31 +88,46 @@ function demoContainers() {
 }
 // Demos - END
 
-// Generate a chart demo into its place holder dynamically
-// ########## ShortCode's method test TODO ...
-function new_chart($data) { 
+// API for the shortcode [jsChart] on WP
+function newChart($data) { 
 
-	$container = $data['type']; // Frequent container's types: span / div
-	$id = $data['id']; // Need to have unique ID for every chart
-	$height = $data['height'];  // Height of svg chart for browser
-	$width = '';
+	$id = mt_rand(10,10000);
+	if ($data['id']) // User's own defined ID of container
+		$id = $data['id'];
+
+	$ctype = 'simpleline';  // Def. chart's type
+	if ($data['type'])
+		$ctype = $data['type'];
+
+	$infile = '';  // Input data file name / rel.path
+	if ($data['datafile'])
+		$infile = $data['datafile'];
+
+	$container = 'span'; // Def.type of container
+	if ($data['type']) // User's choice
+		$container = $data['type'];
+
+	$height = '250'; // Def.height of chart (must exist)
+	if ($data['height']) // User's choice
+		$height = $data['height'];
+	$width = ' width:450';  // Def. width
 	if ($data['width'])
-		$width = ' width:'.$data['width'].'px ';
+		$width = ' width:'.$data['width'];
 
-	echo '<'.$container.' id="chart'.$id.'">';
-	echo "<svg style='height:".$height."px;".$width."'/>";
-	echo "</".$container.">";
+	$options = '';  // Def. options
+	if ($data['options'])
+		$options = ', '.$data['options'];
 
-	genJS($id);  // Generate JavaScript lines
+	$html = '<'.$container.' id="chart'.$id.'">';
+	$html .= "<svg style='height:".$height."px;".$width."px;'/>";
+	$html .= "</".$container.">"; 
+
+	$js = "jsChart('".$id."', '".$infile."', '".$ctype."', {height:'".$height."', ".$width."} ".$options." );";
+
+	$jsCall = "<script>".$js."</script>";
+
+	return $html . $jsCall;
 }
-add_shortcode("svgChart", "new_chart");
+add_shortcode("jsChart", "newChart");
 
-function genJS($id) {
-?>
-<script>
-	svgChart('<?php echo $id; ?>');
-</script>
-<?php
-}
-// ##########
 ?>

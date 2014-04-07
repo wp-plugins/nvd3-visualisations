@@ -1,0 +1,26 @@
+<!-- Your very 1st shortcode's charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+
+         2. Copy all all these lines inside it by editing in html mode. 
+
+         3. Copy file 'simpleLineData.json' from data/ folder into your blog's root folder.
+
+         4. Save it, preview & enjoy set of pretty charts on the blog ! -->
+
+<h3>Shortcode's Demo Charts</h3>
+
+[loadNVD3]
+Chart with your own custom dimensions
+[jsChart type="scatterbubble" height=150 width=600]
+
+Chart with your own options
+[jsChart type="Pie" options="{showLegend: false, tooltips: false}"]
+
+Chart with your own data on blog's root dir
+[jsChart type="simpleLine" datafile="simpleLineData.json"]
+
+Chart with all above features active together
+[jsChart type="simpleLine" datafile="simpleLineData.json" height=150 width=600 options="{showLegend: false, tooltips: false}"]
