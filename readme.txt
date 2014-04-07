@@ -82,8 +82,12 @@ YES indeed, the software is written so that it transparently creates and draws m
 
 = How can I visualize my own data set? =
 
-1. You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. 
+1. You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. If you open console when demo loads in you can also see what chart type connects to which input file.
 1. Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+
+= I hate to learn JavaScript API etc, is there any just simple way for to draw charts? =
+
+Shortcode [jsChart] is your solution then: peek to examples folder and start to test shortcodes demos there with your blog.
 
 = How can I find all available chart types & their calling names? =
 
