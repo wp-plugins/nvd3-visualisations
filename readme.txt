@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.8.1
-Stable tag: 1.1.1
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Here:
 1. Charts gallery showing out neatly on the same page of WP's blog.
 
 == Changelog ==
+
+= 1.2.1 =
+Version 1.2.1 - 
+NEW: Support of XML data format from input files & demo examples.
 
 = 1.1.1 =
 Version 1.1.1 - 

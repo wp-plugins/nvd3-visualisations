@@ -47,7 +47,8 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf('.xml') > 0)
 	d3.xml(infile,function(error,data) {
-		chartSelector(id, data, type, options);
+		data = buildXML(data);
+		chartSelector(id, data, type, options); 
 	});
 	else if (typeof infile == 'object') // Direct input of data set
 		chartSelector(id, infile, type, options);
@@ -66,6 +67,28 @@ function dataRead(infile, id, type, options) {
 		demoShows(id, '', type, options);
 */
 }
+function buildXML(data) {
+
+		data = xml2json(data, '  ');  // jQuery.parseJSON( ), 2nd choice
+		data = jQuery.parseJSON( data );
+		data = data['root']['element'];
+
+		var vsets = new Array();
+		for (i=0; i<data.length; i++) {
+			var gxxxdata = data;
+			data[i].values = gxxxdata[i].values.element;
+			vsets.push(data[i].values);
+		}
+		for (i=0; i<vsets.length; i++) {
+			for (j=0; j<vsets[i].length; j++) {
+				vsets[i][j] = vsets[i][j].element;
+				for (k=0; k<vsets[i][j].length; k++)
+					vsets[i][j][k] = +vsets[i][j][k];
+			}
+			data[i].values = vsets[i]; 
+		}
+		return data;
+}
 
 function demoShows(id, data, type, options) {
 
@@ -77,21 +100,20 @@ function demoShows(id, data, type, options) {
 	if (rootpath) // Global URL of root set by shortcode of WP
 		 infile = rootpath + demos[type];
 
+	if (options.xmldemo)
+		infile = infile.replace(/json/g, 'xml');
+
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
+		console.info(data);
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
 	});
 	else if (infile.indexOf('.xml') > 0)
 	d3.xml(infile,function(error,data) {
-		data = xml2json(data, '  ');  // jQuery.parseJSON( ) 
-		data = jQuery.parseJSON( data );
-		data = data['root']['element'];
-		console.info(data);
-/* TODO
-		data = removeObjectElements(data);
-		chartSelector(id, data, type, options);
-*/
+		data = buildXML(data);
+		chartSelector(id, data, type, options); 
+		console.info('Drawing chart demo "'+type+'" from a XML file: '+infile); // demos[type]
 	});
 }
 
