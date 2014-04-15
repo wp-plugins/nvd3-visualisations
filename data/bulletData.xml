@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <markers>
+      <element>250</element>
+   </markers>
+   <measures>
+      <element>220</element>
+   </measures>
+   <ranges>
+      <element>150</element>
+      <element>225</element>
+      <element>300</element>
+   </ranges>
+   <subtitle>US$, in thousands</subtitle>
+   <title>Revenue</title>
+</root>

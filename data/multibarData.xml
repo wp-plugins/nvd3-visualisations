@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <element>
+      <color>#d67777</color>
+      <key>Series 1</key>
+      <values>
+         <element>
+            <label>Group A</label>
+            <value>-1.8746445</value>
+         </element>
+         <element>
+            <label>Group B</label>
+            <value>-8.096154</value>
+         </element>
+         <element>
+            <label>Group C</label>
+            <value>-0.57072943</value>
+         </element>
+         <element>
+            <label>Group D</label>
+            <value>-2.417401</value>
+         </element>
+         <element>
+            <label>Group E</label>
+            <value>-0.7200907</value>
+         </element>
+         <element>
+            <label>Group F</label>
+            <value>-0.7715449</value>
+         </element>
+         <element>
+            <label>Group G</label>
+            <value>-0.90152097</value>
+         </element>
+         <element>
+            <label>Group H</label>
+            <value>-0.91445416</value>
+         </element>
+         <element>
+            <label>Group I</label>
+            <value>-0.05574632</value>
+         </element>
+      </values>
+   </element>
+   <element>
+      <color>#4f99b4</color>
+      <key>Series 2</key>
+      <values>
+         <element>
+            <label>Group A</label>
+            <value>25.307646</value>
+         </element>
+         <element>
+            <label>Group B</label>
+            <value>16.756779</value>
+         </element>
+         <element>
+            <label>Group C</label>
+            <value>18.451534</value>
+         </element>
+         <element>
+            <label>Group D</label>
+            <value>8.614235</value>
+         </element>
+         <element>
+            <label>Group E</label>
+            <value>7.808247</value>
+         </element>
+         <element>
+            <label>Group F</label>
+            <value>5.259101</value>
+         </element>
+         <element>
+            <label>Group G</label>
+            <value>0.30947953</value>
+         </element>
+         <element>
+            <label>Group H</label>
+            <value>0</value>
+         </element>
+         <element>
+            <label>Group I</label>
+            <value>0</value>
+         </element>
+      </values>
+   </element>
+</root>

@@ -1,56 +1,56 @@
+
+charts = new Array();
+bootup = 1;
 
-charts = new Array();
-bootup = 1;
-
-// API component to draw charts directly on WP page by one JS call
-
-function jsChart(id, infile, type, dims, options) {
-
-	if (bootup) {
-		bootup = 0;
-		checkJQ();
-	}
-
-	// Default size of chart: VGA screen
-	var height = '480';
-	var width = ' width:640px; ';
-	if (dims) {
-		height = dims['height'];
-		width = ' width:'+dims['width']+'px; ';
-	}
+// API component to draw charts directly on WP page by one JS call
+
+function jsChart(id, infile, type, dims, options) {
+
+	if (bootup) {
+		bootup = 0;
+		checkJQ();
+	}
+
+	// Default size of chart: VGA screen
+	var height = '480';
+	var width = ' width:640px; ';
+	if (dims) {
+		height = dims['height'];
+		width = ' width:'+dims['width']+'px; ';
+	}
 
 	if (!options)
 		options = new Object(); 
 
 	// console.info(height); // {height:'200', width:'350'}
-
-	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+"'/>";
-	jQuery('#chart'+id).empty();
-	jQuery('#chart'+id).html(svg);
-
+
+	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+"'/>";
+	jQuery('#chart'+id).empty();
+	jQuery('#chart'+id).html(svg);
+
 	// svgChart(id);
-	type = type.toLowerCase();
-	dataRead(infile, id, type, options);
+	type = type.toLowerCase();
+	dataRead(infile, id, type, options);
 }
 
 // Data reader from different sources: demos / own file / function's output 
 function dataRead(infile, id, type, options) {
-
+
 	// console.info(infile);
 
-	if (infile == '')
-		demoShows(id, '', type, options);
+	if (infile == '')
+		demoShows(id, '', type, options);
 	else if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		// console.info(data);
 		chartSelector(id, data, type, options);
 	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.xml(infile,function(error,data) {
+	else if (infile.indexOf('.xml') > 0)
+	d3.text(infile,function(error,data) {
 		data = buildXML(data);
 		chartSelector(id, data, type, options); 
-	});
-	else if (typeof infile == 'object') // Direct input of data set
+	});
+	else if (typeof infile == 'object') // Direct input of data set
 		chartSelector(id, infile, type, options);
 /* TODO
 	else if (infile.indexOf(".tsv") > 0)
@@ -62,59 +62,71 @@ function dataRead(infile, id, type, options) {
 	d3.csv(infile,function(error,data) {
 		chartSelector(id, data, type, options);
 	});
-
-	else
-		demoShows(id, '', type, options);
+
+	else
+		demoShows(id, '', type, options);
 */
-}
-function buildXML(data) {
-
-		data = xml2json(data, '  ');  // jQuery.parseJSON( ), 2nd choice
-		data = jQuery.parseJSON( data );
-		data = data['root']['element'];
-
-		var vsets = new Array();
-		for (i=0; i<data.length; i++) {
-			var gxxxdata = data;
-			data[i].values = gxxxdata[i].values.element;
-			vsets.push(data[i].values);
-		}
-		for (i=0; i<vsets.length; i++) {
-			for (j=0; j<vsets[i].length; j++) {
-				vsets[i][j] = vsets[i][j].element;
-				for (k=0; k<vsets[i][j].length; k++)
-					vsets[i][j][k] = +vsets[i][j][k];
-			}
-			data[i].values = vsets[i]; 
-		}
-		return data;
-}
-
-function demoShows(id, data, type, options) {
-
-	// Demo data sets for gallery
-	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
-
-	// Home dir of demo data sets
-	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
-	if (rootpath) // Global URL of root set by shortcode of WP
-		 infile = rootpath + demos[type];
-
-	if (options.xmldemo)
-		infile = infile.replace(/json/g, 'xml');
-
-	if (infile.indexOf(".json") > 0)
-	d3.json(infile,function(error,data) {
-		console.info(data);
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
-	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.xml(infile,function(error,data) {
-		data = buildXML(data);
-		chartSelector(id, data, type, options); 
-		console.info('Drawing chart demo "'+type+'" from a XML file: '+infile); // demos[type]
-	});
+}
+function buildXML(data) {
+
+	var xmlDoc = 0;
+	if (window.DOMParser)
+		{
+		parser=new DOMParser();
+		xmlDoc=parser.parseFromString(data,"text/xml");
+		}
+	else // Internet Explorer
+		{
+		xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+		xmlDoc.async=false;
+		xmlDoc.loadXML(data); 
+		}
+
+		data = xml2json(xmlDoc, '  ');
+		data = data.replace(/"element":/g, "");
+		data = data.replace(/\{\[/g, "[");
+		data = data.replace(/\]\}/g, "]");
+		
+		var forceArr = false;
+		if (data.indexOf("\{\{") > 0) {
+			data = data.replace(/\{\{/g, "{");
+			data = data.replace(/\}\}/g, "}");
+			forceArr = true;
+		}
+		// console.info(data);
+		data = jQuery.parseJSON( data );
+		data = data['root'];
+		// console.info(data);
+		if (forceArr)
+			return new Array(data);
+		return data;
+}
+
+function demoShows(id, data, type, options) {
+
+	// Demo data sets for gallery
+	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
+
+	// Home dir of demo data sets
+	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
+	if (rootpath) // Global URL of root set by shortcode of WP
+		 infile = rootpath + demos[type];
+
+	if (options.xmldemo)
+		infile = infile.replace(/json/g, 'xml'); 
+
+	if (infile.indexOf(".json") > 0)
+	d3.json(infile,function(error,data) {
+		// console.info(data);
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
+	});
+	else if (infile.indexOf('.xml') > 0)
+	d3.text(infile,function(error,data) {
+		data = buildXML(data);
+		chartSelector(id, data, type, options); 
+		console.info('Drawing chart demo "'+type+'" from a XML file: '+infile); // demos[type]
+	});
 }
 
 function chartSelector(id, data, type, options) {
@@ -144,19 +156,19 @@ function chartSelector(id, data, type, options) {
 	else if (type == 'bullet')
 		Bullet(id, data, options);
 }
-// Axis should be time formatted with chart ?
-function timeStamp(x, options) {
-	if (options.xtime)
-			return d3.time.format('%x')(new Date(x))
-	else
-		return x
-}
+// Axis should be time formatted with chart ?
+function timeStamp(x, options) {
+	if (options.xtime)
+			return d3.time.format('%x')(new Date(x))
+	else
+		return x
+}
 
 /* ALL Supported NVD3 Chart Types: 1 function/type */
 
 // Drawing chart: linePlusBar
-function linePlusBar(chartID, data, options) {
- 
+function linePlusBar(chartID, data, options) {
+ 
   nv.addGraph(function() {
 	  var chart = nv.models.linePlusBarChart()
             .margin({top: 30, right: 90, bottom: 50, left: 90})
@@ -165,11 +177,11 @@ function linePlusBar(chartID, data, options) {
             .y(function(d,i) {return d[1] })
             ;
 
-	  chart.xAxis.tickFormat(function(d) {
-        var dx = data[0].values[d] && data[0].values[d][0] || 0;
-		return timeStamp(dx, options);
-      });
-
+	  chart.xAxis.tickFormat(function(d) {
+        var dx = data[0].values[d] && data[0].values[d][0] || 0;
+		return timeStamp(dx, options);
+      });
+
 /* Uncomment => original demo show
 	  chart.xAxis.tickFormat(function(d) {
         var dx = data[0].values[d] && data[0].values[d][0] || 0;
@@ -182,14 +194,14 @@ function linePlusBar(chartID, data, options) {
       chart.y2Axis
           .tickFormat(function(d) { return d3.format(',f')(d) });
 
-    chart.y1Axis
-		.axisLabel(data[0]['key']);
-    chart.y2Axis
-		.axisLabel(data[1]['key']);
-
-    chart.y1Axis
-        .tickFormat(d3.format(',.1%')); 
-*/
+    chart.y1Axis
+		.axisLabel(data[0]['key']);
+    chart.y2Axis
+		.axisLabel(data[1]['key']);
+
+    chart.y1Axis
+        .tickFormat(d3.format(',.1%')); 
+*/
 	chart.bars.forceY([0]);
 
 	chart.options(options);
@@ -513,62 +525,62 @@ nv.addGraph(function() {
 
   return chart;
 });
-}
-
-function checkJQ() {
-
-	if ('undefined' == typeof window.jQuery)
-		window.alert('Please, load jQuery to use NVD3 tools properly.');
-	else
-		console.info('jQuery: ok.');
-}
-
-// A test for WP shortcode's calls
-function svgChart(chartID, infile, type, dims, options) {
-
-charts.push(chartID+' ');
-
-nv.addGraph(function() {
-    var chart = nv.models.lineChart();
-
-    chart.xAxis
-        .axisLabel("X-axis Label");
-
-    chart.yAxis
-        .axisLabel("Y-axis Label")
-        .tickFormat(d3.format("d"))
-        ;
-
-	// var cID = charts.pop();
-	var cID = charts[charts.length-1];
-	d3.select("#chart"+cID+" svg")
-        .datum(myData())
-        .transition().duration(500).call(chart);
-
-    nv.utils.windowResize(
-            function() {
-                chart.update();
-            }
-        );
-	return chart;
-});
-
-};
-
-// Data set generator, original mychart.js example
-
-function myData() {
-    var series1 = [];
-    for(var i =1; i < 100; i ++) {
-        series1.push({
-            x: i, y: 100 / i
-        });
-    }
-    return [
-        {
-            key: "Series #1",
-            values: series1,
-            color: "#0000ff"
-        }
-    ];
+}
+
+function checkJQ() {
+
+	if ('undefined' == typeof window.jQuery)
+		window.alert('Please, load jQuery to use NVD3 tools properly.');
+	else
+		console.info('jQuery: ok.');
+}
+
+// A test for WP shortcode's calls
+function svgChart(chartID, infile, type, dims, options) {
+
+charts.push(chartID+' ');
+
+nv.addGraph(function() {
+    var chart = nv.models.lineChart();
+
+    chart.xAxis
+        .axisLabel("X-axis Label");
+
+    chart.yAxis
+        .axisLabel("Y-axis Label")
+        .tickFormat(d3.format("d"))
+        ;
+
+	// var cID = charts.pop();
+	var cID = charts[charts.length-1];
+	d3.select("#chart"+cID+" svg")
+        .datum(myData())
+        .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(
+            function() {
+                chart.update();
+            }
+        );
+	return chart;
+});
+
+};
+
+// Data set generator, original mychart.js example
+
+function myData() {
+    var series1 = [];
+    for(var i =1; i < 100; i ++) {
+        series1.push({
+            x: i, y: 100 / i
+        });
+    }
+    return [
+        {
+            key: "Series #1",
+            values: series1,
+            color: "#0000ff"
+        }
+    ];
 }

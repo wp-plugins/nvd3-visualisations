@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <element>
+      <label>One</label>
+      <value>29.765957</value>
+   </element>
+   <element>
+      <label>Two</label>
+      <value>0</value>
+   </element>
+   <element>
+      <label>Three</label>
+      <value>32.807804</value>
+   </element>
+   <element>
+      <label>Four</label>
+      <value>196.45947</value>
+   </element>
+   <element>
+      <label>Five</label>
+      <value>0.1943403</value>
+   </element>
+   <element>
+      <label>Six</label>
+      <value>98.07978</value>
+   </element>
+   <element>
+      <label>Seven</label>
+      <value>13.925743</value>
+   </element>
+   <element>
+      <label>Eight</label>
+      <value>5.1387324</value>
+   </element>
+</root>
