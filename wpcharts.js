@@ -46,7 +46,7 @@ function dataRead(infile, id, type, options) {
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) {
+	d3.text(infile,function(error,data) { // d3.xml has parsing problems
 		data = buildXML(data);
 		chartSelector(id, data, type, options); 
 	});
@@ -68,8 +68,9 @@ function dataRead(infile, id, type, options) {
 */
 }
 function buildXML(data) {
+// TODO: find a way to force type cast float for bottom level nodes of JS
 
-	var xmlDoc = 0;
+	var xmlDoc = 0; // debug: change this global
 	if (window.DOMParser)
 		{
 		parser=new DOMParser();
@@ -96,36 +97,104 @@ function buildXML(data) {
 		// console.info(data);
 		data = jQuery.parseJSON( data );
 		data = data['root'];
-		// console.info(data);
+
+		// var dataX = recursiveTraveller(data);
+
 		if (forceArr)
 			return new Array(data);
 		return data;
 }
 
+/* Failed effort to type cast all bottom nodes into floats / ints
+// This is causing the errors of showing out some chart types right - TODO.
+function recursiveTraveller(data) {
+	if (cycleable(data))
+	for (var cell in data)
+	
+		if (cycleable(data[cell]))
+		for (var cell2 in data[cell])
+		
+			if (cycleable(data[cell][cell2]))
+			for (var cell3 in data[cell][cell2])
+			
+				if (cycleable(data[cell][cell2][cell3]))
+				for (var cell4 in data[cell][cell2][cell3])
+				
+					if (cycleable(data[cell][cell2][cell3][cell4]))
+					for (var cell5 in data[cell][cell2][cell3][cell4])
+			
+						if (cycleable(data[cell][cell2][cell3][cell4][cell5]))
+						for (var cell6 in data[cell][cell2][cell3][cell4][cell5])
+						
+							if (cycleable(data[cell][cell2][cell3][cell4][cell5][cell6]))
+							for (var cell7 in data[cell][cell2][cell3][cell4][cell5][cell6]) {
+								var x = +data[cell][cell2][cell3][cell4][cell5][cell6][cell7];
+								data[cell][cell2][cell3][cell4][cell5][cell6][cell7] = +x;
+							}
+							else
+								if (data[cell][cell2][cell3][cell4][cell5][cell6][cell7])
+								console.info(data[cell][cell2][cell3][cell4][cell5][cell6][cell7]);
+						else {
+							var x = cycleable(data[cell][cell2][cell3][cell4][cell5][cell6]);
+							data[cell][cell2][cell3][cell4][cell5][cell6] = x; }
+					else {
+						var x = cycleable(data[cell][cell2][cell3][cell4][cell5]);
+						data[cell][cell2][cell3][cell4][cell5] = x; }
+				else {
+					var x = cycleable(data[cell][cell2][cell3][cell4]);
+					data[cell][cell2][cell3][cell4] = x; }
+			else {
+				var x = cycleable(data[cell][cell2][cell3]);
+				data[cell][cell2][cell3] = x; }
+		else {
+			var x = cycleable(data[cell][cell2]);
+			data[cell][cell2] = x; }
+	else {
+		var x = cycleable(data[cell]);
+		data[cell] = cycleable(x); }
+
+	console.info(data);
+	return data;
+}
+function cycleable(data) {
+	if (typeof data == 'object' || typeof data == 'array')
+		return true;
+//	console.info(typeof +data);
+	if (typeof data != 'string')
+		return data;
+	var x = data-1;
+//	console.info(x);
+	return x+1;
+}
+*/
 function demoShows(id, data, type, options) {
 
 	// Demo data sets for gallery
 	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
+
+	if (options.xmldemo)
+		demos[type] = demos[type].replace(/json/g, 'xml');
 
 	// Home dir of demo data sets
 	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
 	if (rootpath) // Global URL of root set by shortcode of WP
 		 infile = rootpath + demos[type];
 
-	if (options.xmldemo)
-		infile = infile.replace(/json/g, 'xml'); 
-
+	var desc = 'Demo from file: data/'+demos[type];
+	var subs = '<sup> ?</sup>';
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		// console.info(data);
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
+		jquery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
 	});
 	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) {
+	d3.text(infile,function(error,data) { // d3.xml has parsing problems
 		data = buildXML(data);
-		chartSelector(id, data, type, options); 
-		console.info('Drawing chart demo "'+type+'" from a XML file: '+infile); // demos[type]
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
+		jquery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
 	});
 }
 

@@ -1,0 +1,17 @@
+<!-- Your very 1st shortcode's charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+
+         2. Copy all all these lines inside it by editing in html mode. 
+
+         3. Copy file 'viewFinderData.xml' from plugin's data/ folder into your blog's root folder.
+
+         4. Save it, preview & enjoy pretty chart on the blog ! -->
+
+<h3>Viewfinder Chart from XML Data</h3>
+
+[loadNVD3]
+Interactive chart with your own custom dimensions is here.
+[jsChart type="viewfinder" datafile="viewFinderData.xml" height=300 width=600]
