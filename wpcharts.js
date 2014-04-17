@@ -187,14 +187,14 @@ function demoShows(id, data, type, options) {
 		// console.info(data);
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
-		jquery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
+		jQuery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
 	});
 	else if (infile.indexOf('.xml') > 0)
 	d3.text(infile,function(error,data) { // d3.xml has parsing problems
 		data = buildXML(data);
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
-		jquery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
+		jQuery("#chart"+id).append('<br /><b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>');
 	});
 }
 
