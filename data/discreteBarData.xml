@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-   <element>
-      <key>Cumulative Return</key>
-      <values>
-         <element>
-            <label>A Label</label>
-            <value>-29.765957</value>
-         </element>
-         <element>
-            <label>B Label</label>
-            <value>0</value>
-         </element>
-         <element>
-            <label>C Label</label>
-            <value>32.807804</value>
-         </element>
-         <element>
-            <label>D Label</label>
-            <value>196.45947</value>
-         </element>
-         <element>
-            <label>E Label</label>
-            <value>0.1943403</value>
-         </element>
-         <element>
-            <label>F Label</label>
-            <value>-98.07978</value>
-         </element>
-         <element>
-            <label>G Label</label>
-            <value>-13.925743</value>
-         </element>
-         <element>
-            <label>H Label</label>
-            <value>-5.1387324</value>
-         </element>
-      </values>
-   </element>
-</root>
+<element>
+<key>Cumulative Return</key>
+<values>
+  <element>    <label>A Label</label>    <value>-29.765957771107</value>  </element>
+  <element>    <label>B Label</label>    <value>0</value>  </element>
+  <element>    <label>C Label</label>    <value>32.807804682612</value>  </element>
+  <element>    <label>D Label</label>    <value>196.45946739256</value>  </element>
+  <element>    <label>E Label</label>    <value>0.19434030906893</value>  </element>
+  <element>    <label>F Label</label>    <value>-98.079782601442</value>  </element>
+  <element>    <label>G Label</label>    <value>-13.925743130903</value>  </element>
+  <element>    <label>H Label</label>    <value>-5.1387322875705</value>  </element>
+
+</values>
+</element>
+</root>

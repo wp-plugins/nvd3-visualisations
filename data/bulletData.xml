@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
    <markers>
-      <element>250</element>
+      <values>
+	  <element>250</element>
+	  </values>
    </markers>
    <measures>
-      <element>220</element>
+      <values>
+	  <element>220</element>
+	  </values>
    </measures>
    <ranges>
-      <element>150</element>
+      <values>
+	  <element>150</element>
       <element>225</element>
       <element>300</element>
+	  </values>
    </ranges>
    <subtitle>US$, in thousands</subtitle>
    <title>Revenue</title>
-</root>
+</root>

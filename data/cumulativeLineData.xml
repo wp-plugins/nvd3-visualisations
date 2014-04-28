@@ -1,1895 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-   <element>
-      <key>Series 1</key>
-      <values>
-         <element>
-            <element>1025409600000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1028088000000</element>
-            <element>-6.3382187</element>
-         </element>
-         <element>
-            <element>1030766400000</element>
-            <element>-5.9507875</element>
-         </element>
-         <element>
-            <element>1033358400000</element>
-            <element>-11.569147</element>
-         </element>
-         <element>
-            <element>1036040400000</element>
-            <element>-5.476733</element>
-         </element>
-         <element>
-            <element>1038632400000</element>
-            <element>0.50794685</element>
-         </element>
-         <element>
-            <element>1041310800000</element>
-            <element>-5.5310287</element>
-         </element>
-         <element>
-            <element>1043989200000</element>
-            <element>-5.7838297</element>
-         </element>
-         <element>
-            <element>1046408400000</element>
-            <element>-7.324934</element>
-         </element>
-         <element>
-            <element>1049086800000</element>
-            <element>-6.707863</element>
-         </element>
-         <element>
-            <element>1051675200000</element>
-            <element>0.44227126</element>
-         </element>
-         <element>
-            <element>1054353600000</element>
-            <element>7.248166</element>
-         </element>
-         <element>
-            <element>1056945600000</element>
-            <element>9.251238</element>
-         </element>
-         <element>
-            <element>1059624000000</element>
-            <element>11.341211</element>
-         </element>
-         <element>
-            <element>1062302400000</element>
-            <element>14.73482</element>
-         </element>
-         <element>
-            <element>1064894400000</element>
-            <element>12.387148</element>
-         </element>
-         <element>
-            <element>1067576400000</element>
-            <element>18.436472</element>
-         </element>
-         <element>
-            <element>1070168400000</element>
-            <element>19.830742</element>
-         </element>
-         <element>
-            <element>1072846800000</element>
-            <element>22.643206</element>
-         </element>
-         <element>
-            <element>1075525200000</element>
-            <element>26.743156</element>
-         </element>
-         <element>
-            <element>1078030800000</element>
-            <element>29.597479</element>
-         </element>
-         <element>
-            <element>1080709200000</element>
-            <element>30.831697</element>
-         </element>
-         <element>
-            <element>1083297600000</element>
-            <element>28.054068</element>
-         </element>
-         <element>
-            <element>1085976000000</element>
-            <element>29.294079</element>
-         </element>
-         <element>
-            <element>1088568000000</element>
-            <element>30.269264</element>
-         </element>
-         <element>
-            <element>1091246400000</element>
-            <element>24.934526</element>
-         </element>
-         <element>
-            <element>1093924800000</element>
-            <element>24.265984</element>
-         </element>
-         <element>
-            <element>1096516800000</element>
-            <element>27.217794</element>
-         </element>
-         <element>
-            <element>1099195200000</element>
-            <element>30.802603</element>
-         </element>
-         <element>
-            <element>1101790800000</element>
-            <element>36.331005</element>
-         </element>
-         <element>
-            <element>1104469200000</element>
-            <element>43.142498</element>
-         </element>
-         <element>
-            <element>1107147600000</element>
-            <element>40.558266</element>
-         </element>
-         <element>
-            <element>1109566800000</element>
-            <element>42.54362</element>
-         </element>
-         <element>
-            <element>1112245200000</element>
-            <element>41.683586</element>
-         </element>
-         <element>
-            <element>1114833600000</element>
-            <element>36.375366</element>
-         </element>
-         <element>
-            <element>1117512000000</element>
-            <element>40.71969</element>
-         </element>
-         <element>
-            <element>1120104000000</element>
-            <element>43.897964</element>
-         </element>
-         <element>
-            <element>1122782400000</element>
-            <element>49.797035</element>
-         </element>
-         <element>
-            <element>1125460800000</element>
-            <element>47.085995</element>
-         </element>
-         <element>
-            <element>1128052800000</element>
-            <element>46.601974</element>
-         </element>
-         <element>
-            <element>1130734800000</element>
-            <element>41.567783</element>
-         </element>
-         <element>
-            <element>1133326800000</element>
-            <element>47.296925</element>
-         </element>
-         <element>
-            <element>1136005200000</element>
-            <element>47.64297</element>
-         </element>
-         <element>
-            <element>1138683600000</element>
-            <element>50.781517</element>
-         </element>
-         <element>
-            <element>1141102800000</element>
-            <element>52.600227</element>
-         </element>
-         <element>
-            <element>1143781200000</element>
-            <element>55.599686</element>
-         </element>
-         <element>
-            <element>1146369600000</element>
-            <element>57.920387</element>
-         </element>
-         <element>
-            <element>1149048000000</element>
-            <element>53.503593</element>
-         </element>
-         <element>
-            <element>1151640000000</element>
-            <element>53.522972</element>
-         </element>
-         <element>
-            <element>1154318400000</element>
-            <element>49.84682</element>
-         </element>
-         <element>
-            <element>1156996800000</element>
-            <element>54.72134</element>
-         </element>
-         <element>
-            <element>1159588800000</element>
-            <element>58.186237</element>
-         </element>
-         <element>
-            <element>1162270800000</element>
-            <element>63.908066</element>
-         </element>
-         <element>
-            <element>1164862800000</element>
-            <element>69.76729</element>
-         </element>
-         <element>
-            <element>1167541200000</element>
-            <element>72.53401</element>
-         </element>
-         <element>
-            <element>1170219600000</element>
-            <element>77.99182</element>
-         </element>
-         <element>
-            <element>1172638800000</element>
-            <element>78.143585</element>
-         </element>
-         <element>
-            <element>1175313600000</element>
-            <element>83.7024</element>
-         </element>
-         <element>
-            <element>1177905600000</element>
-            <element>91.14086</element>
-         </element>
-         <element>
-            <element>1180584000000</element>
-            <element>98.59096</element>
-         </element>
-         <element>
-            <element>1183176000000</element>
-            <element>96.245636</element>
-         </element>
-         <element>
-            <element>1185854400000</element>
-            <element>92.32636</element>
-         </element>
-         <element>
-            <element>1188532800000</element>
-            <element>97.06876</element>
-         </element>
-         <element>
-            <element>1191124800000</element>
-            <element>105.81026</element>
-         </element>
-         <element>
-            <element>1193803200000</element>
-            <element>114.38349</element>
-         </element>
-         <element>
-            <element>1196398800000</element>
-            <element>103.59605</element>
-         </element>
-         <element>
-            <element>1199077200000</element>
-            <element>101.724884</element>
-         </element>
-         <element>
-            <element>1201755600000</element>
-            <element>89.84015</element>
-         </element>
-         <element>
-            <element>1204261200000</element>
-            <element>86.9636</element>
-         </element>
-         <element>
-            <element>1206936000000</element>
-            <element>84.07551</element>
-         </element>
-         <element>
-            <element>1209528000000</element>
-            <element>93.170105</element>
-         </element>
-         <element>
-            <element>1212206400000</element>
-            <element>103.62838</element>
-         </element>
-         <element>
-            <element>1214798400000</element>
-            <element>87.458244</element>
-         </element>
-         <element>
-            <element>1217476800000</element>
-            <element>85.80837</element>
-         </element>
-         <element>
-            <element>1220155200000</element>
-            <element>93.15806</element>
-         </element>
-         <element>
-            <element>1222747200000</element>
-            <element>65.97325</element>
-         </element>
-         <element>
-            <element>1225425600000</element>
-            <element>44.58069</element>
-         </element>
-         <element>
-            <element>1228021200000</element>
-            <element>36.418976</element>
-         </element>
-         <element>
-            <element>1230699600000</element>
-            <element>38.727676</element>
-         </element>
-         <element>
-            <element>1233378000000</element>
-            <element>36.692673</element>
-         </element>
-         <element>
-            <element>1235797200000</element>
-            <element>30.033022</element>
-         </element>
-         <element>
-            <element>1238472000000</element>
-            <element>36.70753</element>
-         </element>
-         <element>
-            <element>1241064000000</element>
-            <element>52.191456</element>
-         </element>
-         <element>
-            <element>1243742400000</element>
-            <element>56.357883</element>
-         </element>
-         <element>
-            <element>1246334400000</element>
-            <element>57.629</element>
-         </element>
-         <element>
-            <element>1249012800000</element>
-            <element>66.650986</element>
-         </element>
-         <element>
-            <element>1251691200000</element>
-            <element>70.83924</element>
-         </element>
-         <element>
-            <element>1254283200000</element>
-            <element>78.732</element>
-         </element>
-         <element>
-            <element>1256961600000</element>
-            <element>72.37553</element>
-         </element>
-         <element>
-            <element>1259557200000</element>
-            <element>81.73839</element>
-         </element>
-         <element>
-            <element>1262235600000</element>
-            <element>87.539795</element>
-         </element>
-         <element>
-            <element>1264914000000</element>
-            <element>84.32076</element>
-         </element>
-         <element>
-            <element>1267333200000</element>
-            <element>90.62128</element>
-         </element>
-         <element>
-            <element>1270008000000</element>
-            <element>102.47145</element>
-         </element>
-         <element>
-            <element>1272600000000</element>
-            <element>102.793205</element>
-         </element>
-         <element>
-            <element>1275278400000</element>
-            <element>90.52974</element>
-         </element>
-         <element>
-            <element>1277870400000</element>
-            <element>76.58086</element>
-         </element>
-         <element>
-            <element>1280548800000</element>
-            <element>86.54898</element>
-         </element>
-         <element>
-            <element>1283227200000</element>
-            <element>81.879654</element>
-         </element>
-         <element>
-            <element>1285819200000</element>
-            <element>101.7255</element>
-         </element>
-         <element>
-            <element>1288497600000</element>
-            <element>107.979645</element>
-         </element>
-         <element>
-            <element>1291093200000</element>
-            <element>106.16241</element>
-         </element>
-         <element>
-            <element>1293771600000</element>
-            <element>114.84269</element>
-         </element>
-         <element>
-            <element>1296450000000</element>
-            <element>121.60793</element>
-         </element>
-         <element>
-            <element>1298869200000</element>
-            <element>133.41437</element>
-         </element>
-         <element>
-            <element>1301544000000</element>
-            <element>125.46646</element>
-         </element>
-         <element>
-            <element>1304136000000</element>
-            <element>129.76785</element>
-         </element>
-         <element>
-            <element>1306814400000</element>
-            <element>128.15799</element>
-         </element>
-         <element>
-            <element>1309406400000</element>
-            <element>121.92389</element>
-         </element>
-         <element>
-            <element>1312084800000</element>
-            <element>116.70036</element>
-         </element>
-         <element>
-            <element>1314763200000</element>
-            <element>88.3677</element>
-         </element>
-         <element>
-            <element>1317355200000</element>
-            <element>59.159664</element>
-         </element>
-         <element>
-            <element>1320033600000</element>
-            <element>79.79357</element>
-         </element>
-         <element>
-            <element>1322629200000</element>
-            <element>75.90383</element>
-         </element>
-         <element>
-            <element>1325307600000</element>
-            <element>72.704216</element>
-         </element>
-         <element>
-            <element>1327986000000</element>
-            <element>84.93699</element>
-         </element>
-         <element>
-            <element>1330491600000</element>
-            <element>93.388145</element>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Series 2</key>
-      <values>
-         <element>
-            <element>1025409600000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1028088000000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1030766400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1033358400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1036040400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1038632400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1041310800000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1043989200000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1046408400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1049086800000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1051675200000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1054353600000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1056945600000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1059624000000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1062302400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1064894400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1067576400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1070168400000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1072846800000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1075525200000</element>
-            <element>-0.049184266</element>
-         </element>
-         <element>
-            <element>1078030800000</element>
-            <element>-0.10757569</element>
-         </element>
-         <element>
-            <element>1080709200000</element>
-            <element>-0.07560153</element>
-         </element>
-         <element>
-            <element>1083297600000</element>
-            <element>-0.061245278</element>
-         </element>
-         <element>
-            <element>1085976000000</element>
-            <element>-0.06822731</element>
-         </element>
-         <element>
-            <element>1088568000000</element>
-            <element>-0.11242758</element>
-         </element>
-         <element>
-            <element>1091246400000</element>
-            <element>-0.074848436</element>
-         </element>
-         <element>
-            <element>1093924800000</element>
-            <element>-0.11465624</element>
-         </element>
-         <element>
-            <element>1096516800000</element>
-            <element>-0.24370633</element>
-         </element>
-         <element>
-            <element>1099195200000</element>
-            <element>-0.21523269</element>
-         </element>
-         <element>
-            <element>1101790800000</element>
-            <element>-0.3785937</element>
-         </element>
-         <element>
-            <element>1104469200000</element>
-            <element>-0.41932884</element>
-         </element>
-         <element>
-            <element>1107147600000</element>
-            <element>-0.45393735</element>
-         </element>
-         <element>
-            <element>1109566800000</element>
-            <element>-0.5086818</element>
-         </element>
-         <element>
-            <element>1112245200000</element>
-            <element>-0.48164397</element>
-         </element>
-         <element>
-            <element>1114833600000</element>
-            <element>-0.41605964</element>
-         </element>
-         <element>
-            <element>1117512000000</element>
-            <element>-0.48490348</element>
-         </element>
-         <element>
-            <element>1120104000000</element>
-            <element>-0.5507104</element>
-         </element>
-         <element>
-            <element>1122782400000</element>
-            <element>-0.6748917</element>
-         </element>
-         <element>
-            <element>1125460800000</element>
-            <element>-0.7497807</element>
-         </element>
-         <element>
-            <element>1128052800000</element>
-            <element>-0.8639505</element>
-         </element>
-         <element>
-            <element>1130734800000</element>
-            <element>-0.785249</element>
-         </element>
-         <element>
-            <element>1133326800000</element>
-            <element>-0.99800444</element>
-         </element>
-         <element>
-            <element>1136005200000</element>
-            <element>-1.1177951</element>
-         </element>
-         <element>
-            <element>1138683600000</element>
-            <element>-1.4119976</element>
-         </element>
-         <element>
-            <element>1141102800000</element>
-            <element>-1.240996</element>
-         </element>
-         <element>
-            <element>1143781200000</element>
-            <element>-1.3088937</element>
-         </element>
-         <element>
-            <element>1146369600000</element>
-            <element>-1.5495785</element>
-         </element>
-         <element>
-            <element>1149048000000</element>
-            <element>-1.1563416</element>
-         </element>
-         <element>
-            <element>1151640000000</element>
-            <element>-0.8719247</element>
-         </element>
-         <element>
-            <element>1154318400000</element>
-            <element>-0.84073997</element>
-         </element>
-         <element>
-            <element>1156996800000</element>
-            <element>-0.8876189</element>
-         </element>
-         <element>
-            <element>1159588800000</element>
-            <element>-0.81748515</element>
-         </element>
-         <element>
-            <element>1162270800000</element>
-            <element>-1.2874081</element>
-         </element>
-         <element>
-            <element>1164862800000</element>
-            <element>-1.9234703</element>
-         </element>
-         <element>
-            <element>1167541200000</element>
-            <element>-1.8377768</element>
-         </element>
-         <element>
-            <element>1170219600000</element>
-            <element>-2.7107654</element>
-         </element>
-         <element>
-            <element>1172638800000</element>
-            <element>-2.6493268</element>
-         </element>
-         <element>
-            <element>1175313600000</element>
-            <element>-3.0814552</element>
-         </element>
-         <element>
-            <element>1177905600000</element>
-            <element>-3.8509839</element>
-         </element>
-         <element>
-            <element>1180584000000</element>
-            <element>-5.291917</element>
-         </element>
-         <element>
-            <element>1183176000000</element>
-            <element>-5.229775</element>
-         </element>
-         <element>
-            <element>1185854400000</element>
-            <element>-3.9335668</element>
-         </element>
-         <element>
-            <element>1188532800000</element>
-            <element>-2.3695526</element>
-         </element>
-         <element>
-            <element>1191124800000</element>
-            <element>-2.3084242</element>
-         </element>
-         <element>
-            <element>1193803200000</element>
-            <element>-3.0753682</element>
-         </element>
-         <element>
-            <element>1196398800000</element>
-            <element>-2.234661</element>
-         </element>
-         <element>
-            <element>1199077200000</element>
-            <element>-3.059881</element>
-         </element>
-         <element>
-            <element>1201755600000</element>
-            <element>-1.8410155</element>
-         </element>
-         <element>
-            <element>1204261200000</element>
-            <element>-1.6479442</element>
-         </element>
-         <element>
-            <element>1206936000000</element>
-            <element>-1.9293859</element>
-         </element>
-         <element>
-            <element>1209528000000</element>
-            <element>-3.0769591</element>
-         </element>
-         <element>
-            <element>1212206400000</element>
-            <element>-4.2423935</element>
-         </element>
-         <element>
-            <element>1214798400000</element>
-            <element>-2.6951492</element>
-         </element>
-         <element>
-            <element>1217476800000</element>
-            <element>-2.8981826</element>
-         </element>
-         <element>
-            <element>1220155200000</element>
-            <element>-2.9662728</element>
-         </element>
-         <element>
-            <element>1222747200000</element>
-            <element>0.2155675</element>
-         </element>
-         <element>
-            <element>1225425600000</element>
-            <element>2.6784995</element>
-         </element>
-         <element>
-            <element>1228021200000</element>
-            <element>4.129671</element>
-         </element>
-         <element>
-            <element>1230699600000</element>
-            <element>3.7311068</element>
-         </element>
-         <element>
-            <element>1233378000000</element>
-            <element>4.769533</element>
-         </element>
-         <element>
-            <element>1235797200000</element>
-            <element>5.191913</element>
-         </element>
-         <element>
-            <element>1238472000000</element>
-            <element>4.102586</element>
-         </element>
-         <element>
-            <element>1241064000000</element>
-            <element>2.849894</element>
-         </element>
-         <element>
-            <element>1243742400000</element>
-            <element>2.8106017</element>
-         </element>
-         <element>
-            <element>1246334400000</element>
-            <element>2.8456526</element>
-         </element>
-         <element>
-            <element>1249012800000</element>
-            <element>0.6556307</element>
-         </element>
-         <element>
-            <element>1251691200000</element>
-            <element>-0.30022344</element>
-         </element>
-         <element>
-            <element>1254283200000</element>
-            <element>-1.1600358</element>
-         </element>
-         <element>
-            <element>1256961600000</element>
-            <element>-0.26674408</element>
-         </element>
-         <element>
-            <element>1259557200000</element>
-            <element>-1.469339</element>
-         </element>
-         <element>
-            <element>1262235600000</element>
-            <element>-2.7855422</element>
-         </element>
-         <element>
-            <element>1264914000000</element>
-            <element>-1.2668244</element>
-         </element>
-         <element>
-            <element>1267333200000</element>
-            <element>-2.5537803</element>
-         </element>
-         <element>
-            <element>1270008000000</element>
-            <element>-4.9144554</element>
-         </element>
-         <element>
-            <element>1272600000000</element>
-            <element>-6.048441</element>
-         </element>
-         <element>
-            <element>1275278400000</element>
-            <element>-3.383435</element>
-         </element>
-         <element>
-            <element>1277870400000</element>
-            <element>-0.46752828</element>
-         </element>
-         <element>
-            <element>1280548800000</element>
-            <element>-1.8030186</element>
-         </element>
-         <element>
-            <element>1283227200000</element>
-            <element>-0.9962323</element>
-         </element>
-         <element>
-            <element>1285819200000</element>
-            <element>-3.347537</element>
-         </element>
-         <element>
-            <element>1288497600000</element>
-            <element>-3.8187027</element>
-         </element>
-         <element>
-            <element>1291093200000</element>
-            <element>-4.2354145</element>
-         </element>
-         <element>
-            <element>1293771600000</element>
-            <element>-5.6795406</element>
-         </element>
-         <element>
-            <element>1296450000000</element>
-            <element>-6.2928667</element>
-         </element>
-         <element>
-            <element>1298869200000</element>
-            <element>-6.8549275</element>
-         </element>
-         <element>
-            <element>1301544000000</element>
-            <element>-6.992531</element>
-         </element>
-         <element>
-            <element>1304136000000</element>
-            <element>-8.321655</element>
-         </element>
-         <element>
-            <element>1306814400000</element>
-            <element>-7.7682867</element>
-         </element>
-         <element>
-            <element>1309406400000</element>
-            <element>-6.9244213</element>
-         </element>
-         <element>
-            <element>1312084800000</element>
-            <element>-5.740762</element>
-         </element>
-         <element>
-            <element>1314763200000</element>
-            <element>-2.181315</element>
-         </element>
-         <element>
-            <element>1317355200000</element>
-            <element>2.9407597</element>
-         </element>
-         <element>
-            <element>1320033600000</element>
-            <element>-1.1130607</element>
-         </element>
-         <element>
-            <element>1322629200000</element>
-            <element>-2.0274823</element>
-         </element>
-         <element>
-            <element>1325307600000</element>
-            <element>-1.837256</element>
-         </element>
-         <element>
-            <element>1327986000000</element>
-            <element>-4.073282</element>
-         </element>
-         <element>
-            <element>1330491600000</element>
-            <element>-6.441704</element>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Series 3</key>
-      <values>
-         <element>
-            <element>1025409600000</element>
-            <element>0</element>
-         </element>
-         <element>
-            <element>1028088000000</element>
-            <element>-6.3382187</element>
-         </element>
-         <element>
-            <element>1030766400000</element>
-            <element>-5.9507875</element>
-         </element>
-         <element>
-            <element>1033358400000</element>
-            <element>-11.569147</element>
-         </element>
-         <element>
-            <element>1036040400000</element>
-            <element>-5.476733</element>
-         </element>
-         <element>
-            <element>1038632400000</element>
-            <element>0.50794685</element>
-         </element>
-         <element>
-            <element>1041310800000</element>
-            <element>-5.5310287</element>
-         </element>
-         <element>
-            <element>1043989200000</element>
-            <element>-5.7838297</element>
-         </element>
-         <element>
-            <element>1046408400000</element>
-            <element>-7.324934</element>
-         </element>
-         <element>
-            <element>1049086800000</element>
-            <element>-6.707863</element>
-         </element>
-         <element>
-            <element>1051675200000</element>
-            <element>0.44227126</element>
-         </element>
-         <element>
-            <element>1054353600000</element>
-            <element>7.248166</element>
-         </element>
-         <element>
-            <element>1056945600000</element>
-            <element>9.251238</element>
-         </element>
-         <element>
-            <element>1059624000000</element>
-            <element>11.341211</element>
-         </element>
-         <element>
-            <element>1062302400000</element>
-            <element>14.73482</element>
-         </element>
-         <element>
-            <element>1064894400000</element>
-            <element>12.387148</element>
-         </element>
-         <element>
-            <element>1067576400000</element>
-            <element>18.436472</element>
-         </element>
-         <element>
-            <element>1070168400000</element>
-            <element>19.830742</element>
-         </element>
-         <element>
-            <element>1072846800000</element>
-            <element>22.643206</element>
-         </element>
-         <element>
-            <element>1075525200000</element>
-            <element>26.693972</element>
-         </element>
-         <element>
-            <element>1078030800000</element>
-            <element>29.489902</element>
-         </element>
-         <element>
-            <element>1080709200000</element>
-            <element>30.756096</element>
-         </element>
-         <element>
-            <element>1083297600000</element>
-            <element>27.992823</element>
-         </element>
-         <element>
-            <element>1085976000000</element>
-            <element>29.225853</element>
-         </element>
-         <element>
-            <element>1088568000000</element>
-            <element>30.156836</element>
-         </element>
-         <element>
-            <element>1091246400000</element>
-            <element>24.859678</element>
-         </element>
-         <element>
-            <element>1093924800000</element>
-            <element>24.151327</element>
-         </element>
-         <element>
-            <element>1096516800000</element>
-            <element>26.974089</element>
-         </element>
-         <element>
-            <element>1099195200000</element>
-            <element>30.58737</element>
-         </element>
-         <element>
-            <element>1101790800000</element>
-            <element>35.95241</element>
-         </element>
-         <element>
-            <element>1104469200000</element>
-            <element>42.72317</element>
-         </element>
-         <element>
-            <element>1107147600000</element>
-            <element>40.10433</element>
-         </element>
-         <element>
-            <element>1109566800000</element>
-            <element>42.03494</element>
-         </element>
-         <element>
-            <element>1112245200000</element>
-            <element>41.201942</element>
-         </element>
-         <element>
-            <element>1114833600000</element>
-            <element>35.95931</element>
-         </element>
-         <element>
-            <element>1117512000000</element>
-            <element>40.234787</element>
-         </element>
-         <element>
-            <element>1120104000000</element>
-            <element>43.34725</element>
-         </element>
-         <element>
-            <element>1122782400000</element>
-            <element>49.122143</element>
-         </element>
-         <element>
-            <element>1125460800000</element>
-            <element>46.336212</element>
-         </element>
-         <element>
-            <element>1128052800000</element>
-            <element>45.73802</element>
-         </element>
-         <element>
-            <element>1130734800000</element>
-            <element>40.782536</element>
-         </element>
-         <element>
-            <element>1133326800000</element>
-            <element>46.29892</element>
-         </element>
-         <element>
-            <element>1136005200000</element>
-            <element>46.525173</element>
-         </element>
-         <element>
-            <element>1138683600000</element>
-            <element>49.36952</element>
-         </element>
-         <element>
-            <element>1141102800000</element>
-            <element>51.359234</element>
-         </element>
-         <element>
-            <element>1143781200000</element>
-            <element>54.29079</element>
-         </element>
-         <element>
-            <element>1146369600000</element>
-            <element>56.37081</element>
-         </element>
-         <element>
-            <element>1149048000000</element>
-            <element>52.34725</element>
-         </element>
-         <element>
-            <element>1151640000000</element>
-            <element>52.65105</element>
-         </element>
-         <element>
-            <element>1154318400000</element>
-            <element>49.00608</element>
-         </element>
-         <element>
-            <element>1156996800000</element>
-            <element>53.83372</element>
-         </element>
-         <element>
-            <element>1159588800000</element>
-            <element>57.36875</element>
-         </element>
-         <element>
-            <element>1162270800000</element>
-            <element>62.62066</element>
-         </element>
-         <element>
-            <element>1164862800000</element>
-            <element>67.84381</element>
-         </element>
-         <element>
-            <element>1167541200000</element>
-            <element>70.696236</element>
-         </element>
-         <element>
-            <element>1170219600000</element>
-            <element>75.28105</element>
-         </element>
-         <element>
-            <element>1172638800000</element>
-            <element>75.494255</element>
-         </element>
-         <element>
-            <element>1175313600000</element>
-            <element>80.62094</element>
-         </element>
-         <element>
-            <element>1177905600000</element>
-            <element>87.28988</element>
-         </element>
-         <element>
-            <element>1180584000000</element>
-            <element>93.29904</element>
-         </element>
-         <element>
-            <element>1183176000000</element>
-            <element>91.01586</element>
-         </element>
-         <element>
-            <element>1185854400000</element>
-            <element>88.3928</element>
-         </element>
-         <element>
-            <element>1188532800000</element>
-            <element>94.69921</element>
-         </element>
-         <element>
-            <element>1191124800000</element>
-            <element>103.50183</element>
-         </element>
-         <element>
-            <element>1193803200000</element>
-            <element>111.30812</element>
-         </element>
-         <element>
-            <element>1196398800000</element>
-            <element>101.36139</element>
-         </element>
-         <element>
-            <element>1199077200000</element>
-            <element>98.665</element>
-         </element>
-         <element>
-            <element>1201755600000</element>
-            <element>87.99913</element>
-         </element>
-         <element>
-            <element>1204261200000</element>
-            <element>85.31565</element>
-         </element>
-         <element>
-            <element>1206936000000</element>
-            <element>82.14612</element>
-         </element>
-         <element>
-            <element>1209528000000</element>
-            <element>90.09315</element>
-         </element>
-         <element>
-            <element>1212206400000</element>
-            <element>99.38599</element>
-         </element>
-         <element>
-            <element>1214798400000</element>
-            <element>84.76309</element>
-         </element>
-         <element>
-            <element>1217476800000</element>
-            <element>82.910194</element>
-         </element>
-         <element>
-            <element>1220155200000</element>
-            <element>90.19178</element>
-         </element>
-         <element>
-            <element>1222747200000</element>
-            <element>66.18882</element>
-         </element>
-         <element>
-            <element>1225425600000</element>
-            <element>47.259186</element>
-         </element>
-         <element>
-            <element>1228021200000</element>
-            <element>40.54865</element>
-         </element>
-         <element>
-            <element>1230699600000</element>
-            <element>42.458786</element>
-         </element>
-         <element>
-            <element>1233378000000</element>
-            <element>41.462208</element>
-         </element>
-         <element>
-            <element>1235797200000</element>
-            <element>35.224937</element>
-         </element>
-         <element>
-            <element>1238472000000</element>
-            <element>40.81012</element>
-         </element>
-         <element>
-            <element>1241064000000</element>
-            <element>55.04135</element>
-         </element>
-         <element>
-            <element>1243742400000</element>
-            <element>59.168488</element>
-         </element>
-         <element>
-            <element>1246334400000</element>
-            <element>60.474655</element>
-         </element>
-         <element>
-            <element>1249012800000</element>
-            <element>67.30662</element>
-         </element>
-         <element>
-            <element>1251691200000</element>
-            <element>70.53902</element>
-         </element>
-         <element>
-            <element>1254283200000</element>
-            <element>77.57196</element>
-         </element>
-         <element>
-            <element>1256961600000</element>
-            <element>72.10879</element>
-         </element>
-         <element>
-            <element>1259557200000</element>
-            <element>80.26905</element>
-         </element>
-         <element>
-            <element>1262235600000</element>
-            <element>84.75425</element>
-         </element>
-         <element>
-            <element>1264914000000</element>
-            <element>83.05394</element>
-         </element>
-         <element>
-            <element>1267333200000</element>
-            <element>88.0675</element>
-         </element>
-         <element>
-            <element>1270008000000</element>
-            <element>97.55699</element>
-         </element>
-         <element>
-            <element>1272600000000</element>
-            <element>96.74477</element>
-         </element>
-         <element>
-            <element>1275278400000</element>
-            <element>87.1463</element>
-         </element>
-         <element>
-            <element>1277870400000</element>
-            <element>76.113335</element>
-         </element>
-         <element>
-            <element>1280548800000</element>
-            <element>84.745964</element>
-         </element>
-         <element>
-            <element>1283227200000</element>
-            <element>80.88342</element>
-         </element>
-         <element>
-            <element>1285819200000</element>
-            <element>98.37796</element>
-         </element>
-         <element>
-            <element>1288497600000</element>
-            <element>104.16094</element>
-         </element>
-         <element>
-            <element>1291093200000</element>
-            <element>101.926994</element>
-         </element>
-         <element>
-            <element>1293771600000</element>
-            <element>109.16315</element>
-         </element>
-         <element>
-            <element>1296450000000</element>
-            <element>115.31506</element>
-         </element>
-         <element>
-            <element>1298869200000</element>
-            <element>126.55945</element>
-         </element>
-         <element>
-            <element>1301544000000</element>
-            <element>118.47393</element>
-         </element>
-         <element>
-            <element>1304136000000</element>
-            <element>121.4462</element>
-         </element>
-         <element>
-            <element>1306814400000</element>
-            <element>120.3897</element>
-         </element>
-         <element>
-            <element>1309406400000</element>
-            <element>114.999466</element>
-         </element>
-         <element>
-            <element>1312084800000</element>
-            <element>110.9596</element>
-         </element>
-         <element>
-            <element>1314763200000</element>
-            <element>86.186386</element>
-         </element>
-         <element>
-            <element>1317355200000</element>
-            <element>62.100426</element>
-         </element>
-         <element>
-            <element>1320033600000</element>
-            <element>78.680504</element>
-         </element>
-         <element>
-            <element>1322629200000</element>
-            <element>73.87635</element>
-         </element>
-         <element>
-            <element>1325307600000</element>
-            <element>70.86696</element>
-         </element>
-         <element>
-            <element>1327986000000</element>
-            <element>80.86371</element>
-         </element>
-         <element>
-            <element>1330491600000</element>
-            <element>86.94644</element>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Series 4</key>
-      <values>
-         <element>
-            <element>1025409600000</element>
-            <element>-7.067441</element>
-         </element>
-         <element>
-            <element>1028088000000</element>
-            <element>-14.66336</element>
-         </element>
-         <element>
-            <element>1030766400000</element>
-            <element>-14.104393</element>
-         </element>
-         <element>
-            <element>1033358400000</element>
-            <element>-23.114477</element>
-         </element>
-         <element>
-            <element>1036040400000</element>
-            <element>-16.774256</element>
-         </element>
-         <element>
-            <element>1038632400000</element>
-            <element>-11.902028</element>
-         </element>
-         <element>
-            <element>1041310800000</element>
-            <element>-16.88304</element>
-         </element>
-         <element>
-            <element>1043989200000</element>
-            <element>-19.104223</element>
-         </element>
-         <element>
-            <element>1046408400000</element>
-            <element>-20.420523</element>
-         </element>
-         <element>
-            <element>1049086800000</element>
-            <element>-19.660555</element>
-         </element>
-         <element>
-            <element>1051675200000</element>
-            <element>-13.106912</element>
-         </element>
-         <element>
-            <element>1054353600000</element>
-            <element>-8.244846</element>
-         </element>
-         <element>
-            <element>1056945600000</element>
-            <element>-7.031306</element>
-         </element>
-         <element>
-            <element>1059624000000</element>
-            <element>-5.148512</element>
-         </element>
-         <element>
-            <element>1062302400000</element>
-            <element>-3.001103</element>
-         </element>
-         <element>
-            <element>1064894400000</element>
-            <element>-4.1367264</element>
-         </element>
-         <element>
-            <element>1067576400000</element>
-            <element>1.542521</element>
-         </element>
-         <element>
-            <element>1070168400000</element>
-            <element>2.7673533</element>
-         </element>
-         <element>
-            <element>1072846800000</element>
-            <element>7.7077117</element>
-         </element>
-         <element>
-            <element>1075525200000</element>
-            <element>9.756501</element>
-         </element>
-         <element>
-            <element>1078030800000</element>
-            <element>11.396889</element>
-         </element>
-         <element>
-            <element>1080709200000</element>
-            <element>10.013965</element>
-         </element>
-         <element>
-            <element>1083297600000</element>
-            <element>8.055889</element>
-         </element>
-         <element>
-            <element>1085976000000</element>
-            <element>9.608196</element>
-         </element>
-         <element>
-            <element>1088568000000</element>
-            <element>11.918591</element>
-         </element>
-         <element>
-            <element>1091246400000</element>
-            <element>7.9945345</element>
-         </element>
-         <element>
-            <element>1093924800000</element>
-            <element>8.3201275</element>
-         </element>
-         <element>
-            <element>1096516800000</element>
-            <element>9.828396</element>
-         </element>
-         <element>
-            <element>1099195200000</element>
-            <element>11.527126</element>
-         </element>
-         <element>
-            <element>1101790800000</element>
-            <element>16.413658</element>
-         </element>
-         <element>
-            <element>1104469200000</element>
-            <element>20.393799</element>
-         </element>
-         <element>
-            <element>1107147600000</element>
-            <element>17.456308</element>
-         </element>
-         <element>
-            <element>1109566800000</element>
-            <element>20.087778</element>
-         </element>
-         <element>
-            <element>1112245200000</element>
-            <element>17.988337</element>
-         </element>
-         <element>
-            <element>1114833600000</element>
-            <element>15.37849</element>
-         </element>
-         <element>
-            <element>1117512000000</element>
-            <element>19.474323</element>
-         </element>
-         <element>
-            <element>1120104000000</element>
-            <element>20.013851</element>
-         </element>
-         <element>
-            <element>1122782400000</element>
-            <element>24.749943</element>
-         </element>
-         <element>
-            <element>1125460800000</element>
-            <element>23.55871</element>
-         </element>
-         <element>
-            <element>1128052800000</element>
-            <element>24.558914</element>
-         </element>
-         <element>
-            <element>1130734800000</element>
-            <element>22.35586</element>
-         </element>
-         <element>
-            <element>1133326800000</element>
-            <element>27.138027</element>
-         </element>
-         <element>
-            <element>1136005200000</element>
-            <element>27.20222</element>
-         </element>
-         <element>
-            <element>1138683600000</element>
-            <element>31.219437</element>
-         </element>
-         <element>
-            <element>1141102800000</element>
-            <element>31.392355</element>
-         </element>
-         <element>
-            <element>1143781200000</element>
-            <element>33.3731</element>
-         </element>
-         <element>
-            <element>1146369600000</element>
-            <element>35.095276</element>
-         </element>
-         <element>
-            <element>1149048000000</element>
-            <element>30.923357</element>
-         </element>
-         <element>
-            <element>1151640000000</element>
-            <element>31.083717</element>
-         </element>
-         <element>
-            <element>1154318400000</element>
-            <element>31.290691</element>
-         </element>
-         <element>
-            <element>1156996800000</element>
-            <element>34.24777</element>
-         </element>
-         <element>
-            <element>1159588800000</element>
-            <element>37.41107</element>
-         </element>
-         <element>
-            <element>1162270800000</element>
-            <element>42.079178</element>
-         </element>
-         <element>
-            <element>1164862800000</element>
-            <element>44.97819</element>
-         </element>
-         <element>
-            <element>1167541200000</element>
-            <element>46.713272</element>
-         </element>
-         <element>
-            <element>1170219600000</element>
-            <element>49.20389</element>
-         </element>
-         <element>
-            <element>1172638800000</element>
-            <element>46.684723</element>
-         </element>
-         <element>
-            <element>1175313600000</element>
-            <element>48.38546</element>
-         </element>
-         <element>
-            <element>1177905600000</element>
-            <element>54.6602</element>
-         </element>
-         <element>
-            <element>1180584000000</element>
-            <element>60.31184</element>
-         </element>
-         <element>
-            <element>1183176000000</element>
-            <element>57.583282</element>
-         </element>
-         <element>
-            <element>1185854400000</element>
-            <element>52.4254</element>
-         </element>
-         <element>
-            <element>1188532800000</element>
-            <element>54.66354</element>
-         </element>
-         <element>
-            <element>1191124800000</element>
-            <element>60.181843</element>
-         </element>
-         <element>
-            <element>1193803200000</element>
-            <element>62.87722</element>
-         </element>
-         <element>
-            <element>1196398800000</element>
-            <element>55.760612</element>
-         </element>
-         <element>
-            <element>1199077200000</element>
-            <element>54.73528</element>
-         </element>
-         <element>
-            <element>1201755600000</element>
-            <element>45.495914</element>
-         </element>
-         <element>
-            <element>1204261200000</element>
-            <element>40.934917</element>
-         </element>
-         <element>
-            <element>1206936000000</element>
-            <element>40.303776</element>
-         </element>
-         <element>
-            <element>1209528000000</element>
-            <element>47.40374</element>
-         </element>
-         <element>
-            <element>1212206400000</element>
-            <element>49.95196</element>
-         </element>
-         <element>
-            <element>1214798400000</element>
-            <element>37.53459</element>
-         </element>
-         <element>
-            <element>1217476800000</element>
-            <element>36.405758</element>
-         </element>
-         <element>
-            <element>1220155200000</element>
-            <element>38.545372</element>
-         </element>
-         <element>
-            <element>1222747200000</element>
-            <element>26.10636</element>
-         </element>
-         <element>
-            <element>1225425600000</element>
-            <element>4.2658005</element>
-         </element>
-         <element>
-            <element>1228021200000</element>
-            <element>-3.551784</element>
-         </element>
-         <element>
-            <element>1230699600000</element>
-            <element>-2.087892</element>
-         </element>
-         <element>
-            <element>1233378000000</element>
-            <element>-10.408879</element>
-         </element>
-         <element>
-            <element>1235797200000</element>
-            <element>-19.924242</element>
-         </element>
-         <element>
-            <element>1238472000000</element>
-            <element>-12.906492</element>
-         </element>
-         <element>
-            <element>1241064000000</element>
-            <element>-3.9774866</element>
-         </element>
-         <element>
-            <element>1243742400000</element>
-            <element>1.0319172</element>
-         </element>
-         <element>
-            <element>1246334400000</element>
-            <element>1.310935</element>
-         </element>
-         <element>
-            <element>1249012800000</element>
-            <element>9.166831</element>
-         </element>
-         <element>
-            <element>1251691200000</element>
-            <element>13.121179</element>
-         </element>
-         <element>
-            <element>1254283200000</element>
-            <element>17.57868</element>
-         </element>
-         <element>
-            <element>1256961600000</element>
-            <element>14.971294</element>
-         </element>
-         <element>
-            <element>1259557200000</element>
-            <element>21.551327</element>
-         </element>
-         <element>
-            <element>1262235600000</element>
-            <element>24.592329</element>
-         </element>
-         <element>
-            <element>1264914000000</element>
-            <element>20.158089</element>
-         </element>
-         <element>
-            <element>1267333200000</element>
-            <element>24.135662</element>
-         </element>
-         <element>
-            <element>1270008000000</element>
-            <element>31.815205</element>
-         </element>
-         <element>
-            <element>1272600000000</element>
-            <element>34.389526</element>
-         </element>
-         <element>
-            <element>1275278400000</element>
-            <element>23.785557</element>
-         </element>
-         <element>
-            <element>1277870400000</element>
-            <element>17.082756</element>
-         </element>
-         <element>
-            <element>1280548800000</element>
-            <element>25.248007</element>
-         </element>
-         <element>
-            <element>1283227200000</element>
-            <element>19.415178</element>
-         </element>
-         <element>
-            <element>1285819200000</element>
-            <element>30.413637</element>
-         </element>
-         <element>
-            <element>1288497600000</element>
-            <element>35.357952</element>
-         </element>
-         <element>
-            <element>1291093200000</element>
-            <element>35.886414</element>
-         </element>
-         <element>
-            <element>1293771600000</element>
-            <element>45.0036</element>
-         </element>
-         <element>
-            <element>1296450000000</element>
-            <element>48.274895</element>
-         </element>
-         <element>
-            <element>1298869200000</element>
-            <element>53.562866</element>
-         </element>
-         <element>
-            <element>1301544000000</element>
-            <element>54.108273</element>
-         </element>
-         <element>
-            <element>1304136000000</element>
-            <element>58.61819</element>
-         </element>
-         <element>
-            <element>1306814400000</element>
-            <element>56.806793</element>
-         </element>
-         <element>
-            <element>1309406400000</element>
-            <element>54.13548</element>
-         </element>
-         <element>
-            <element>1312084800000</element>
-            <element>50.73526</element>
-         </element>
-         <element>
-            <element>1314763200000</element>
-            <element>42.20817</element>
-         </element>
-         <element>
-            <element>1317355200000</element>
-            <element>31.617916</element>
-         </element>
-         <element>
-            <element>1320033600000</element>
-            <element>46.492004</element>
-         </element>
-         <element>
-            <element>1322629200000</element>
-            <element>46.203117</element>
-         </element>
-         <element>
-            <element>1325307600000</element>
-            <element>47.541428</element>
-         </element>
-         <element>
-            <element>1327986000000</element>
-            <element>54.518997</element>
-         </element>
-         <element>
-            <element>1330491600000</element>
-            <element>61.09972</element>
-         </element>
-      </values>
-   </element>
-</root>
+<?xml version="1.0" encoding="UTF-8"?><root><element><key>Series 1</key><values><element>      <element>1025409600000</element>      <element>0</element></element><element>      <element>1028088000000</element>      <element>-6.3382185140371</element></element><element>      <element>1030766400000</element>      <element>-5.9507873460847</element></element><element>      <element>1033358400000</element>      <element>-11.569146943813</element></element><element>      <element>1036040400000</element>      <element>-5.4767332317425</element></element><element>      <element>1038632400000</element>      <element>0.50794682203014</element></element><element>      <element>1041310800000</element>      <element>-5.5310285460542</element></element><element>      <element>1043989200000</element>      <element>-5.7838296963382</element></element><element>      <element>1046408400000</element>      <element>-7.3249341615649</element></element><element>      <element>1049086800000</element>      <element>-6.7078630712489</element></element><element>      <element>1051675200000</element>      <element>0.44227126150934</element></element><element>      <element>1054353600000</element>      <element>7.2481659343222</element></element><element>      <element>1056945600000</element>      <element>9.2512381306992</element></element><element>      <element>1059624000000</element>      <element>11.341210982529</element></element><element>      <element>1062302400000</element>      <element>14.73482040902</element></element><element>      <element>1064894400000</element>      <element>12.387148007542</element></element><element>      <element>1067576400000</element>      <element>18.436471461827</element></element><element>      <element>1070168400000</element>      <element>19.830742266977</element></element><element>      <element>1072846800000</element>      <element>22.643205829887</element></element><element>      <element>1075525200000</element>      <element>26.743156781239</element></element><element>      <element>1078030800000</element>      <element>29.597478802228</element></element><element>      <element>1080709200000</element>      <element>30.831697585341</element></element><element>      <element>1083297600000</element>      <element>28.054068024708</element></element><element>      <element>1085976000000</element>      <element>29.294079423832</element></element><element>      <element>1088568000000</element>      <element>30.269264061274</element></element><element>      <element>1091246400000</element>      <element>24.934526898906</element></element><element>      <element>1093924800000</element>      <element>24.265982759406</element></element><element>      <element>1096516800000</element>      <element>27.217794897473</element></element><element>      <element>1099195200000</element>      <element>30.802601992077</element></element><element>      <element>1101790800000</element>      <element>36.331003758254</element></element><element>      <element>1104469200000</element>      <element>43.14249870006</element></element><element>      <element>1107147600000</element>      <element>40.558263931958</element></element><element>      <element>1109566800000</element>      <element>42.5436223858</element></element><element>      <element>1112245200000</element>      <element>41.683584710331</element></element><element>      <element>1114833600000</element>      <element>36.375367302328</element></element><element>      <element>1117512000000</element>      <element>40.71968898073</element></element><element>      <element>1120104000000</element>      <element>43.897963036919</element></element><element>      <element>1122782400000</element>      <element>49.797033975368</element></element><element>      <element>1125460800000</element>      <element>47.085993935989</element></element><element>      <element>1128052800000</element>      <element>46.601972859745</element></element><element>      <element>1130734800000</element>      <element>41.567784572762</element></element><element>      <element>1133326800000</element>      <element>47.296923737245</element></element><element>      <element>1136005200000</element>      <element>47.64296961208</element></element><element>      <element>1138683600000</element>      <element>50.781515820954</element></element><element>      <element>1141102800000</element>      <element>52.600229204305</element></element><element>      <element>1143781200000</element>      <element>55.599684490628</element></element><element>      <element>1146369600000</element>      <element>57.920388436633</element></element><element>      <element>1149048000000</element>      <element>53.503593218971</element></element><element>      <element>1151640000000</element>      <element>53.522973979964</element></element><element>      <element>1154318400000</element>      <element>49.846822298548</element></element><element>      <element>1156996800000</element>      <element>54.72134161465</element></element><element>      <element>1159588800000</element>      <element>58.186236223191</element></element><element>      <element>1162270800000</element>      <element>63.908065540997</element></element><element>      <element>1164862800000</element>      <element>69.767285129367</element></element><element>      <element>1167541200000</element>      <element>72.534013373592</element></element><element>      <element>1170219600000</element>      <element>77.991819436573</element></element><element>      <element>1172638800000</element>      <element>78.14358440499</element></element><element>      <element>1175313600000</element>      <element>83.702398665233</element></element><element>      <element>1177905600000</element>      <element>91.140859312418</element></element><element>      <element>1180584000000</element>      <element>98.590960607028</element></element><element>      <element>1183176000000</element>      <element>96.245634754228</element></element><element>      <element>1185854400000</element>      <element>92.326364432615</element></element><element>      <element>1188532800000</element>      <element>97.06876533223</element></element><element>      <element>1191124800000</element>      <element>105.8102555626</element></element><element>      <element>1193803200000</element>      <element>114.38348777791</element></element><element>      <element>1196398800000</element>      <element>103.5960494981</element></element><element>      <element>1199077200000</element>      <element>101.72488429307</element></element><element>      <element>1201755600000</element>      <element>89.840147735028</element></element><element>      <element>1204261200000</element>      <element>86.963597532664</element></element><element>      <element>1206936000000</element>      <element>84.075505208491</element></element><element>      <element>1209528000000</element>      <element>93.170105645831</element></element><element>      <element>1212206400000</element>      <element>103.62838083121</element></element><element>      <element>1214798400000</element>      <element>87.458241365091</element></element><element>      <element>1217476800000</element>      <element>85.808374141319</element></element><element>      <element>1220155200000</element>      <element>93.158054469193</element></element><element>      <element>1222747200000</element>      <element>65.97325238236</element></element><element>      <element>1225425600000</element>      <element>44.580686638224</element></element><element>      <element>1228021200000</element>      <element>36.418977140128</element></element><element>      <element>1230699600000</element>      <element>38.727678144761</element></element><element>      <element>1233378000000</element>      <element>36.692674173387</element></element><element>      <element>1235797200000</element>      <element>30.03302280948</element></element><element>      <element>1238472000000</element>      <element>36.707532162718</element></element><element>      <element>1241064000000</element>      <element>52.191457688389</element></element><element>      <element>1243742400000</element>      <element>56.357883979735</element></element><element>      <element>1246334400000</element>      <element>57.629002180305</element></element><element>      <element>1249012800000</element>      <element>66.650985790166</element></element><element>      <element>1251691200000</element>      <element>70.839243432186</element></element><element>      <element>1254283200000</element>      <element>78.731998491499</element></element><element>      <element>1256961600000</element>      <element>72.375528540349</element></element><element>      <element>1259557200000</element>      <element>81.73838788163</element></element><element>      <element>1262235600000</element>      <element>87.539792394232</element></element><element>      <element>1264914000000</element>      <element>84.320762662273</element></element><element>      <element>1267333200000</element>      <element>90.621278391889</element></element><element>      <element>1270008000000</element>      <element>102.47144881651</element></element><element>      <element>1272600000000</element>      <element>102.79320353429</element></element><element>      <element>1275278400000</element>      <element>90.529736050479</element></element><element>      <element>1277870400000</element>      <element>76.580859994531</element></element><element>      <element>1280548800000</element>      <element>86.548979376972</element></element><element>      <element>1283227200000</element>      <element>81.879653334089</element></element><element>      <element>1285819200000</element>      <element>101.72550015956</element></element><element>      <element>1288497600000</element>      <element>107.9796485226</element></element><element>      <element>1291093200000</element>      <element>106.16240630785</element></element><element>      <element>1293771600000</element>      <element>114.84268599533</element></element><element>      <element>1296450000000</element>      <element>121.60793322282</element></element><element>      <element>1298869200000</element>      <element>133.41437346605</element></element><element>      <element>1301544000000</element>      <element>125.46646042904</element></element><element>      <element>1304136000000</element>      <element>129.76784954301</element></element><element>      <element>1306814400000</element>      <element>128.15798861044</element></element><element>      <element>1309406400000</element>      <element>121.92388706072</element></element><element>      <element>1312084800000</element>      <element>116.7003610087</element></element><element>      <element>1314763200000</element>      <element>88.367701837033</element></element><element>      <element>1317355200000</element>      <element>59.159665765725</element></element><element>      <element>1320033600000</element>      <element>79.793568139753</element></element><element>      <element>1322629200000</element>      <element>75.903834028417</element></element><element>      <element>1325307600000</element>      <element>72.704218209157</element></element><element>      <element>1327986000000</element>      <element>84.936990804097</element></element><element>      <element>1330491600000</element>      <element>93.388148670744</element></element></values></element><element><key>Series 2</key><values><element>      <element>1025409600000</element>      <element>0</element></element><element>      <element>1028088000000</element>      <element>0</element></element><element>      <element>1030766400000</element>      <element>0</element></element><element>      <element>1033358400000</element>      <element>0</element></element><element>      <element>1036040400000</element>      <element>0</element></element><element>      <element>1038632400000</element>      <element>0</element></element><element>      <element>1041310800000</element>      <element>0</element></element><element>      <element>1043989200000</element>      <element>0</element></element><element>      <element>1046408400000</element>      <element>0</element></element><element>      <element>1049086800000</element>      <element>0</element></element><element>      <element>1051675200000</element>      <element>0</element></element><element>      <element>1054353600000</element>      <element>0</element></element><element>      <element>1056945600000</element>      <element>0</element></element><element>      <element>1059624000000</element>      <element>0</element></element><element>      <element>1062302400000</element>      <element>0</element></element><element>      <element>1064894400000</element>      <element>0</element></element><element>      <element>1067576400000</element>      <element>0</element></element><element>      <element>1070168400000</element>      <element>0</element></element><element>      <element>1072846800000</element>      <element>0</element></element><element>      <element>1075525200000</element>      <element>-0.049184266875945</element></element><element>      <element>1078030800000</element>      <element>-0.10757569491991</element></element><element>      <element>1080709200000</element>      <element>-0.075601531307242</element></element><element>      <element>1083297600000</element>      <element>-0.061245277988149</element></element><element>      <element>1085976000000</element>      <element>-0.068227316401169</element></element><element>      <element>1088568000000</element>      <element>-0.11242758058502</element></element><element>      <element>1091246400000</element>      <element>-0.07484843940827</element></element><element>      <element>1093924800000</element>      <element>-0.11465623676497</element></element><element>      <element>1096516800000</element>      <element>-0.24370633342416</element></element><element>      <element>1099195200000</element>      <element>-0.21523268478893</element></element><element>      <element>1101790800000</element>      <element>-0.37859370911822</element></element><element>      <element>1104469200000</element>      <element>-0.41932884345151</element></element><element>      <element>1107147600000</element>      <element>-0.45393735984802</element></element><element>      <element>1109566800000</element>      <element>-0.50868179522598</element></element><element>      <element>1112245200000</element>      <element>-0.48164396881207</element></element><element>      <element>1114833600000</element>      <element>-0.41605962887194</element></element><element>      <element>1117512000000</element>      <element>-0.4849034849024</element></element><element>      <element>1120104000000</element>      <element>-0.55071036101311</element></element><element>      <element>1122782400000</element>      <element>-0.67489170505394</element></element><element>      <element>1125460800000</element>      <element>-0.74978070939342</element></element><element>      <element>1128052800000</element>      <element>-0.86395050745343</element></element><element>      <element>1130734800000</element>      <element>-0.78524898506764</element></element><element>      <element>1133326800000</element>      <element>-0.99800440950854</element></element><element>      <element>1136005200000</element>      <element>-1.1177951153878</element></element><element>      <element>1138683600000</element>      <element>-1.4119975432964</element></element><element>      <element>1141102800000</element>      <element>-1.2409959736465</element></element><element>      <element>1143781200000</element>      <element>-1.3088936375431</element></element><element>      <element>1146369600000</element>      <element>-1.5495785469683</element></element><element>      <element>1149048000000</element>      <element>-1.1563414981293</element></element><element>      <element>1151640000000</element>      <element>-0.87192471725994</element></element><element>      <element>1154318400000</element>      <element>-0.84073995183442</element></element><element>      <element>1156996800000</element>      <element>-0.8876189286737</element></element><element>      <element>1159588800000</element>      <element>-0.81748513917485</element></element><element>      <element>1162270800000</element>      <element>-1.2874081041274</element></element><element>      <element>1164862800000</element>      <element>-1.9234702981339</element></element><element>      <element>1167541200000</element>      <element>-1.8377768147648</element></element><element>      <element>1170219600000</element>      <element>-2.710765403183</element></element><element>      <element>1172638800000</element>      <element>-2.6493268125418</element></element><element>      <element>1175313600000</element>      <element>-3.0814553134551</element></element><element>      <element>1177905600000</element>      <element>-3.8509837783574</element></element><element>      <element>1180584000000</element>      <element>-5.2919167850718</element></element><element>      <element>1183176000000</element>      <element>-5.2297750650773</element></element><element>      <element>1185854400000</element>      <element>-3.9335668501451</element></element><element>      <element>1188532800000</element>      <element>-2.3695525190114</element></element><element>      <element>1191124800000</element>      <element>-2.3084243151854</element></element><element>      <element>1193803200000</element>      <element>-3.0753680726738</element></element><element>      <element>1196398800000</element>      <element>-2.2346609938962</element></element><element>      <element>1199077200000</element>      <element>-3.0598810361615</element></element><element>      <element>1201755600000</element>      <element>-1.8410154270386</element></element><element>      <element>1204261200000</element>      <element>-1.647944203862</element></element><element>      <element>1206936000000</element>      <element>-1.929385862278</element></element><element>      <element>1209528000000</element>      <element>-3.0769590460943</element></element><element>      <element>1212206400000</element>      <element>-4.2423933501421</element></element><element>      <element>1214798400000</element>      <element>-2.6951491617768</element></element><element>      <element>1217476800000</element>      <element>-2.8981825939957</element></element><element>      <element>1220155200000</element>      <element>-2.9662727940324</element></element><element>      <element>1222747200000</element>      <element>0.21556750497498</element></element><element>      <element>1225425600000</element>      <element>2.6784995167088</element></element><element>      <element>1228021200000</element>      <element>4.1296711248958</element></element><element>      <element>1230699600000</element>      <element>3.7311068218734</element></element><element>      <element>1233378000000</element>      <element>4.7695330866954</element></element><element>      <element>1235797200000</element>      <element>5.191913304099</element></element><element>      <element>1238472000000</element>      <element>4.102585604566</element></element><element>      <element>1241064000000</element>      <element>2.8498939666225</element></element><element>      <element>1243742400000</element>      <element>2.8106017222851</element></element><element>      <element>1246334400000</element>      <element>2.8456526669963</element></element><element>      <element>1249012800000</element>      <element>0.65563070754298</element></element><element>      <element>1251691200000</element>      <element>-0.30022343874633</element></element><element>      <element>1254283200000</element>      <element>-1.1600358228964</element></element><element>      <element>1256961600000</element>      <element>-0.26674408835052</element></element><element>      <element>1259557200000</element>      <element>-1.4693389757812</element></element><element>      <element>1262235600000</element>      <element>-2.7855421590594</element></element><element>      <element>1264914000000</element>      <element>-1.2668244065703</element></element><element>      <element>1267333200000</element>      <element>-2.5537804115548</element></element><element>      <element>1270008000000</element>      <element>-4.9144552474502</element></element><element>      <element>1272600000000</element>      <element>-6.0484408234831</element></element><element>      <element>1275278400000</element>      <element>-3.383434903375</element></element><element>      <element>1277870400000</element>      <element>-0.46752826932523</element></element><element>      <element>1280548800000</element>      <element>-1.8030186027963</element></element><element>      <element>1283227200000</element>      <element>-0.99623230097881</element></element><element>      <element>1285819200000</element>      <element>-3.3475370235594</element></element><element>      <element>1288497600000</element>      <element>-3.8187026520342</element></element><element>      <element>1291093200000</element>      <element>-4.2354146250353</element></element><element>      <element>1293771600000</element>      <element>-5.6795404292885</element></element><element>      <element>1296450000000</element>      <element>-6.2928665328172</element></element><element>      <element>1298869200000</element>      <element>-6.8549277434419</element></element><element>      <element>1301544000000</element>      <element>-6.9925308360918</element></element><element>      <element>1304136000000</element>      <element>-8.3216548655839</element></element><element>      <element>1306814400000</element>      <element>-7.7682867271435</element></element><element>      <element>1309406400000</element>      <element>-6.9244213301058</element></element><element>      <element>1312084800000</element>      <element>-5.7407624451404</element></element><element>      <element>1314763200000</element>      <element>-2.1813149077927</element></element><element>      <element>1317355200000</element>      <element>2.9407596325999</element></element><element>      <element>1320033600000</element>      <element>-1.1130607112134</element></element><element>      <element>1322629200000</element>      <element>-2.0274822307752</element></element><element>      <element>1325307600000</element>      <element>-1.8372559072154</element></element><element>      <element>1327986000000</element>      <element>-4.0732815531148</element></element><element>      <element>1330491600000</element>      <element>-6.4417038470291</element></element></values></element><element><key>Series 3</key><values><element>      <element>1025409600000</element>      <element>0</element></element><element>      <element>1028088000000</element>      <element>-6.3382185140371</element></element><element>      <element>1030766400000</element>      <element>-5.9507873460847</element></element><element>      <element>1033358400000</element>      <element>-11.569146943813</element></element><element>      <element>1036040400000</element>      <element>-5.4767332317425</element></element><element>      <element>1038632400000</element>      <element>0.50794682203014</element></element><element>      <element>1041310800000</element>      <element>-5.5310285460542</element></element><element>      <element>1043989200000</element>      <element>-5.7838296963382</element></element><element>      <element>1046408400000</element>      <element>-7.3249341615649</element></element><element>      <element>1049086800000</element>      <element>-6.7078630712489</element></element><element>      <element>1051675200000</element>      <element>0.44227126150934</element></element><element>      <element>1054353600000</element>      <element>7.2481659343222</element></element><element>      <element>1056945600000</element>      <element>9.2512381306992</element></element><element>      <element>1059624000000</element>      <element>11.341210982529</element></element><element>      <element>1062302400000</element>      <element>14.73482040902</element></element><element>      <element>1064894400000</element>      <element>12.387148007542</element></element><element>      <element>1067576400000</element>      <element>18.436471461827</element></element><element>      <element>1070168400000</element>      <element>19.830742266977</element></element><element>      <element>1072846800000</element>      <element>22.643205829887</element></element><element>      <element>1075525200000</element>      <element>26.693972514363</element></element><element>      <element>1078030800000</element>      <element>29.489903107308</element></element><element>      <element>1080709200000</element>      <element>30.756096054034</element></element><element>      <element>1083297600000</element>      <element>27.99282274672</element></element><element>      <element>1085976000000</element>      <element>29.225852107431</element></element><element>      <element>1088568000000</element>      <element>30.156836480689</element></element><element>      <element>1091246400000</element>      <element>24.859678459498</element></element><element>      <element>1093924800000</element>      <element>24.151326522641</element></element><element>      <element>1096516800000</element>      <element>26.974088564049</element></element><element>      <element>1099195200000</element>      <element>30.587369307288</element></element><element>      <element>1101790800000</element>      <element>35.952410049136</element></element><element>      <element>1104469200000</element>      <element>42.723169856608</element></element><element>      <element>1107147600000</element>      <element>40.10432657211</element></element><element>      <element>1109566800000</element>      <element>42.034940590574</element></element><element>      <element>1112245200000</element>      <element>41.201940741519</element></element><element>      <element>1114833600000</element>      <element>35.959307673456</element></element><element>      <element>1117512000000</element>      <element>40.234785495828</element></element><element>      <element>1120104000000</element>      <element>43.347252675906</element></element><element>      <element>1122782400000</element>      <element>49.122142270314</element></element><element>      <element>1125460800000</element>      <element>46.336213226596</element></element><element>      <element>1128052800000</element>      <element>45.738022352292</element></element><element>      <element>1130734800000</element>      <element>40.782535587694</element></element><element>      <element>1133326800000</element>      <element>46.298919327736</element></element><element>      <element>1136005200000</element>      <element>46.525174496692</element></element><element>      <element>1138683600000</element>      <element>49.369518277658</element></element><element>      <element>1141102800000</element>      <element>51.359233230659</element></element><element>      <element>1143781200000</element>      <element>54.290790853085</element></element><element>      <element>1146369600000</element>      <element>56.370809889665</element></element><element>      <element>1149048000000</element>      <element>52.347251720842</element></element><element>      <element>1151640000000</element>      <element>52.651049262704</element></element><element>      <element>1154318400000</element>      <element>49.006082346714</element></element><element>      <element>1156996800000</element>      <element>53.833722685976</element></element><element>      <element>1159588800000</element>      <element>57.368751084016</element></element><element>      <element>1162270800000</element>      <element>62.62065743687</element></element><element>      <element>1164862800000</element>      <element>67.843814831233</element></element><element>      <element>1167541200000</element>      <element>70.696236558827</element></element><element>      <element>1170219600000</element>      <element>75.28105403339</element></element><element>      <element>1172638800000</element>      <element>75.494257592448</element></element><element>      <element>1175313600000</element>      <element>80.620943351778</element></element><element>      <element>1177905600000</element>      <element>87.289875534061</element></element><element>      <element>1180584000000</element>      <element>93.299043821956</element></element><element>      <element>1183176000000</element>      <element>91.015859689151</element></element><element>      <element>1185854400000</element>      <element>88.39279758247</element></element><element>      <element>1188532800000</element>      <element>94.699212813219</element></element><element>      <element>1191124800000</element>      <element>103.50183124741</element></element><element>      <element>1193803200000</element>      <element>111.30811970524</element></element><element>      <element>1196398800000</element>      <element>101.3613885042</element></element><element>      <element>1199077200000</element>      <element>98.665003256909</element></element><element>      <element>1201755600000</element>      <element>87.999132307989</element></element><element>      <element>1204261200000</element>      <element>85.315653328802</element></element><element>      <element>1206936000000</element>      <element>82.146119346213</element></element><element>      <element>1209528000000</element>      <element>90.093146599737</element></element><element>      <element>1212206400000</element>      <element>99.385987481068</element></element><element>      <element>1214798400000</element>      <element>84.763092203314</element></element><element>      <element>1217476800000</element>      <element>82.910191547323</element></element><element>      <element>1220155200000</element>      <element>90.191781675161</element></element><element>      <element>1222747200000</element>      <element>66.188819887335</element></element><element>      <element>1225425600000</element>      <element>47.259186154933</element></element><element>      <element>1228021200000</element>      <element>40.548648265024</element></element><element>      <element>1230699600000</element>      <element>42.458784966634</element></element><element>      <element>1233378000000</element>      <element>41.462207260082</element></element><element>      <element>1235797200000</element>      <element>35.224936113579</element></element><element>      <element>1238472000000</element>      <element>40.810117767284</element></element><element>      <element>1241064000000</element>      <element>55.041351655012</element></element><element>      <element>1243742400000</element>      <element>59.16848570202</element></element><element>      <element>1246334400000</element>      <element>60.474654847301</element></element><element>      <element>1249012800000</element>      <element>67.306616497709</element></element><element>      <element>1251691200000</element>      <element>70.53901999344</element></element><element>      <element>1254283200000</element>      <element>77.571962668603</element></element><element>      <element>1256961600000</element>      <element>72.108784451998</element></element><element>      <element>1259557200000</element>      <element>80.269048905849</element></element><element>      <element>1262235600000</element>      <element>84.754250235173</element></element><element>      <element>1264914000000</element>      <element>83.053938255703</element></element><element>      <element>1267333200000</element>      <element>88.067497980334</element></element><element>      <element>1270008000000</element>      <element>97.55699356906</element></element><element>      <element>1272600000000</element>      <element>96.744762710807</element></element><element>      <element>1275278400000</element>      <element>87.146301147104</element></element><element>      <element>1277870400000</element>      <element>76.113331725206</element></element><element>      <element>1280548800000</element>      <element>84.745960774176</element></element><element>      <element>1283227200000</element>      <element>80.88342103311</element></element><element>      <element>1285819200000</element>      <element>98.377963136001</element></element><element>      <element>1288497600000</element>      <element>104.16094587057</element></element><element>      <element>1291093200000</element>      <element>101.92699168281</element></element><element>      <element>1293771600000</element>      <element>109.16314556604</element></element><element>      <element>1296450000000</element>      <element>115.31506669</element></element><element>      <element>1298869200000</element>      <element>126.55944572261</element></element><element>      <element>1301544000000</element>      <element>118.47392959295</element></element><element>      <element>1304136000000</element>      <element>121.44619467743</element></element><element>      <element>1306814400000</element>      <element>120.3897018833</element></element><element>      <element>1309406400000</element>      <element>114.99946573061</element></element><element>      <element>1312084800000</element>      <element>110.95959856356</element></element><element>      <element>1314763200000</element>      <element>86.18638692924</element></element><element>      <element>1317355200000</element>      <element>62.100425398325</element></element><element>      <element>1320033600000</element>      <element>78.68050742854</element></element><element>      <element>1322629200000</element>      <element>73.876351797642</element></element><element>      <element>1325307600000</element>      <element>70.866962301942</element></element><element>      <element>1327986000000</element>      <element>80.863709250982</element></element><element>      <element>1330491600000</element>      <element>86.946444823715</element></element></values></element><element><key>Series 4</key><values><element>      <element>1025409600000</element>      <element>-7.0674410638835</element></element><element>      <element>1028088000000</element>      <element>-14.663359292964</element></element><element>      <element>1030766400000</element>      <element>-14.10439306054</element></element><element>      <element>1033358400000</element>      <element>-23.114477037218</element></element><element>      <element>1036040400000</element>      <element>-16.774256687841</element></element><element>      <element>1038632400000</element>      <element>-11.902028464</element></element><element>      <element>1041310800000</element>      <element>-16.883038668422</element></element><element>      <element>1043989200000</element>      <element>-19.104223676831</element></element><element>      <element>1046408400000</element>      <element>-20.420523282736</element></element><element>      <element>1049086800000</element>      <element>-19.660555051587</element></element><element>      <element>1051675200000</element>      <element>-13.106911231646</element></element><element>      <element>1054353600000</element>      <element>-8.2448460302143</element></element><element>      <element>1056945600000</element>      <element>-7.0313058730976</element></element><element>      <element>1059624000000</element>      <element>-5.1485118700389</element></element><element>      <element>1062302400000</element>      <element>-3.0011028761469</element></element><element>      <element>1064894400000</element>      <element>-4.1367265281467</element></element><element>      <element>1067576400000</element>      <element>1.5425209565025</element></element><element>      <element>1070168400000</element>      <element>2.7673533607299</element></element><element>      <element>1072846800000</element>      <element>7.707711475536</element></element><element>      <element>1075525200000</element>      <element>9.7565015112434</element></element><element>      <element>1078030800000</element>      <element>11.396888609473</element></element><element>      <element>1080709200000</element>      <element>10.013964745578</element></element><element>      <element>1083297600000</element>      <element>8.0558890950562</element></element><element>      <element>1085976000000</element>      <element>9.6081966657458</element></element><element>      <element>1088568000000</element>      <element>11.918590426432</element></element><element>      <element>1091246400000</element>      <element>7.9945345523982</element></element><element>      <element>1093924800000</element>      <element>8.3201276776796</element></element><element>      <element>1096516800000</element>      <element>9.8283954846342</element></element><element>      <element>1099195200000</element>      <element>11.52712585965</element></element><element>      <element>1101790800000</element>      <element>16.413657596527</element></element><element>      <element>1104469200000</element>      <element>20.393798297928</element></element><element>      <element>1107147600000</element>      <element>17.456308413907</element></element><element>      <element>1109566800000</element>      <element>20.087778400999</element></element><element>      <element>1112245200000</element>      <element>17.988336990817</element></element><element>      <element>1114833600000</element>      <element>15.378490151331</element></element><element>      <element>1117512000000</element>      <element>19.47432293573</element></element><element>      <element>1120104000000</element>      <element>20.013851070354</element></element><element>      <element>1122782400000</element>      <element>24.749943726975</element></element><element>      <element>1125460800000</element>      <element>23.558710274826</element></element><element>      <element>1128052800000</element>      <element>24.558915040889</element></element><element>      <element>1130734800000</element>      <element>22.355860488034</element></element><element>      <element>1133326800000</element>      <element>27.138026265756</element></element><element>      <element>1136005200000</element>      <element>27.202220808591</element></element><element>      <element>1138683600000</element>      <element>31.219437344964</element></element><element>      <element>1141102800000</element>      <element>31.392355525125</element></element><element>      <element>1143781200000</element>      <element>33.373099232542</element></element><element>      <element>1146369600000</element>      <element>35.095277582309</element></element><element>      <element>1149048000000</element>      <element>30.923356507615</element></element><element>      <element>1151640000000</element>      <element>31.083717332561</element></element><element>      <element>1154318400000</element>      <element>31.290690671561</element></element><element>      <element>1156996800000</element>      <element>34.247769216679</element></element><element>      <element>1159588800000</element>      <element>37.41107317762</element></element><element>      <element>1162270800000</element>      <element>42.079177096411</element></element><element>      <element>1164862800000</element>      <element>44.978191659648</element></element><element>      <element>1167541200000</element>      <element>46.71327102531</element></element><element>      <element>1170219600000</element>      <element>49.203892437699</element></element><element>      <element>1172638800000</element>      <element>46.684723471826</element></element><element>      <element>1175313600000</element>      <element>48.3854589735</element></element><element>      <element>1177905600000</element>      <element>54.660197840305</element></element><element>      <element>1180584000000</element>      <element>60.311838415602</element></element><element>      <element>1183176000000</element>      <element>57.583282204682</element></element><element>      <element>1185854400000</element>      <element>52.425398898751</element></element><element>      <element>1188532800000</element>      <element>54.663538086985</element></element><element>      <element>1191124800000</element>      <element>60.181844325224</element></element><element>      <element>1193803200000</element>      <element>62.877219773621</element></element><element>      <element>1196398800000</element>      <element>55.760611512951</element></element><element>      <element>1199077200000</element>      <element>54.735280367784</element></element><element>      <element>1201755600000</element>      <element>45.495912959474</element></element><element>      <element>1204261200000</element>      <element>40.934919015876</element></element><element>      <element>1206936000000</element>      <element>40.303777633187</element></element><element>      <element>1209528000000</element>      <element>47.403740368773</element></element><element>      <element>1212206400000</element>      <element>49.951960898839</element></element><element>      <element>1214798400000</element>      <element>37.534590035098</element></element><element>      <element>1217476800000</element>      <element>36.405758293321</element></element><element>      <element>1220155200000</element>      <element>38.545373001858</element></element><element>      <element>1222747200000</element>      <element>26.106358664455</element></element><element>      <element>1225425600000</element>      <element>4.2658006768744</element></element><element>      <element>1228021200000</element>      <element>-3.5517839867557</element></element><element>      <element>1230699600000</element>      <element>-2.0878920761513</element></element><element>      <element>1233378000000</element>      <element>-10.408879093829</element></element><element>      <element>1235797200000</element>      <element>-19.924242196038</element></element><element>      <element>1238472000000</element>      <element>-12.906491912782</element></element><element>      <element>1241064000000</element>      <element>-3.9774866468346</element></element><element>      <element>1243742400000</element>      <element>1.0319171601402</element></element><element>      <element>1246334400000</element>      <element>1.3109350357718</element></element><element>      <element>1249012800000</element>      <element>9.1668309061935</element></element><element>      <element>1251691200000</element>      <element>13.121178985954</element></element><element>      <element>1254283200000</element>      <element>17.578680237511</element></element><element>      <element>1256961600000</element>      <element>14.971294355085</element></element><element>      <element>1259557200000</element>      <element>21.551327027338</element></element><element>      <element>1262235600000</element>      <element>24.592328423819</element></element><element>      <element>1264914000000</element>      <element>20.158087829555</element></element><element>      <element>1267333200000</element>      <element>24.135661929185</element></element><element>      <element>1270008000000</element>      <element>31.815205405903</element></element><element>      <element>1272600000000</element>      <element>34.389524768466</element></element><element>      <element>1275278400000</element>      <element>23.785555857522</element></element><element>      <element>1277870400000</element>      <element>17.082756649072</element></element><element>      <element>1280548800000</element>      <element>25.2480077271</element></element><element>      <element>1283227200000</element>      <element>19.415179069165</element></element><element>      <element>1285819200000</element>      <element>30.413636349327</element></element><element>      <element>1288497600000</element>      <element>35.35795296455</element></element><element>      <element>1291093200000</element>      <element>35.886413535859</element></element><element>      <element>1293771600000</element>      <element>45.003601951959</element></element><element>      <element>1296450000000</element>      <element>48.27489356402</element></element><element>      <element>1298869200000</element>      <element>53.562864914648</element></element><element>      <element>1301544000000</element>      <element>54.108274337412</element></element><element>      <element>1304136000000</element>      <element>58.618190111927</element></element><element>      <element>1306814400000</element>      <element>56.806793965598</element></element><element>      <element>1309406400000</element>      <element>54.135477252994</element></element><element>      <element>1312084800000</element>      <element>50.735258942442</element></element><element>      <element>1314763200000</element>      <element>42.208170945813</element></element><element>      <element>1317355200000</element>      <element>31.617916826724</element></element><element>      <element>1320033600000</element>      <element>46.492005006737</element></element><element>      <element>1322629200000</element>      <element>46.203116922145</element></element><element>      <element>1325307600000</element>      <element>47.541427643137</element></element><element>      <element>1327986000000</element>      <element>54.518998440993</element></element><element>      <element>1330491600000</element>      <element>61.099720234693</element></element></values></element></root>

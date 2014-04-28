@@ -1,983 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <root>
-   <element>
-      <key>Group 0</key>
-      <values>
-         <element>
-            <shape>circle</shape>
-            <size>0.8446762</size>
-            <x>-0.43333146</x>
-            <y>-1.066775</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.73066646</size>
-            <x>-0.6757561</x>
-            <y>0.76709116</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.61879617</size>
-            <x>-1.2338818</x>
-            <y>0.13609454</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.27888936</size>
-            <x>0.73288053</x>
-            <y>0.12703547</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9658321</size>
-            <x>1.2696542</x>
-            <y>1.0266116</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.1150238</size>
-            <x>-0.410078</x>
-            <y>0.47558215</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.42682183</size>
-            <x>1.2995722</x>
-            <y>0.49816546</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.06606617</size>
-            <x>0.23491716</x>
-            <y>-0.4288618</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.65688974</size>
-            <x>0.41673025</x>
-            <y>0.15677127</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3453408</size>
-            <x>0.72732943</x>
-            <y>0.075882964</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9175297</size>
-            <x>0.72351503</x>
-            <y>1.0948124</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.2282637</size>
-            <x>-2.992513</x>
-            <y>-1.6965436</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5123129</size>
-            <x>0.032646608</x>
-            <y>-1.1062139</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.24639468</size>
-            <x>0.3425038</x>
-            <y>-1.0671841</y>
-         </element>
-         <element>
-            <shape>triangle-up</shape>
-            <size>0.28993708</size>
-            <x>0.7401416</x>
-            <y>-0.63598996</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.29956937</size>
-            <x>-1.4663543</x>
-            <y>0.08163369</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3616758</size>
-            <x>0.5587962</x>
-            <y>0.40920272</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.52027893</size>
-            <x>-0.031077247</x>
-            <y>0.44866332</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7611844</size>
-            <x>0.8077815</x>
-            <y>0.06478896</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9012407</size>
-            <x>-0.078107625</x>
-            <y>0.5672282</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.26906374</size>
-            <x>0.41437182</x>
-            <y>-0.054593522</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.39124164</size>
-            <x>0.1247778</x>
-            <y>0.30725858</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.56720614</size>
-            <x>1.0342633</x>
-            <y>-0.11687608</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.53408206</size>
-            <x>0.6246612</x>
-            <y>0.84093016</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7520835</size>
-            <x>2.331172</x>
-            <y>0.1715128</y>
-         </element>
-         <element>
-            <shape>cross</shape>
-            <size>0.36016393</size>
-            <x>-0.5470184</x>
-            <y>-1.3766668</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.14146794</size>
-            <x>-0.33301935</x>
-            <y>0.4780848</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8566668</size>
-            <x>1.2853934</x>
-            <y>-0.14717846</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.48609975</size>
-            <x>-0.38575178</x>
-            <y>-1.657076</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.2682087</size>
-            <x>-1.1140556</x>
-            <y>0.40103313</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7578747</size>
-            <x>-0.67382693</x>
-            <y>0.30282703</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.2521203</size>
-            <x>0.20177034</x>
-            <y>0.6055104</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.37466964</size>
-            <x>-1.6560026</x>
-            <y>-1.6260673</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8332776</size>
-            <x>1.7211797</x>
-            <y>-0.29149583</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.20366935</size>
-            <x>-0.42706957</x>
-            <y>-0.85324335</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.89904684</size>
-            <x>1.1719059</x>
-            <y>0.594894</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.39322603</size>
-            <x>-1.2879807</x>
-            <y>-0.6802442</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.4910325</size>
-            <x>-0.9893601</x>
-            <y>-0.31933224</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9427415</size>
-            <x>-1.6071428</x>
-            <y>0.45047605</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8950313</size>
-            <x>-0.4143787</x>
-            <y>-0.37870306</y>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Group 1</key>
-      <values>
-         <element>
-            <shape>circle</shape>
-            <size>0.18129416</size>
-            <x>1.2785362</x>
-            <y>-0.8321401</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.91905385</size>
-            <x>1.6728504</x>
-            <y>-0.30116296</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.59320027</size>
-            <x>-0.1015806</x>
-            <y>0.32184178</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5293749</size>
-            <x>-0.28412428</x>
-            <y>3.522603</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6387334</size>
-            <x>1.0740368</x>
-            <y>0.44849738</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3231644</size>
-            <x>0.9572202</x>
-            <y>-0.45676962</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3473374</size>
-            <x>0.46884307</x>
-            <y>-0.30917382</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.075577654</size>
-            <x>-0.56755537</x>
-            <y>-1.2723196</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9225331</size>
-            <x>0.37409338</x>
-            <y>0.018145848</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.32833666</size>
-            <x>-0.11891001</x>
-            <y>-0.34366143</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.40196314</size>
-            <x>-0.67311007</x>
-            <y>0.1140898</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.07467677</size>
-            <x>-0.8053563</x>
-            <y>0.40825635</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.22912309</size>
-            <x>0.13544658</x>
-            <y>0.56797683</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.620173</size>
-            <x>1.09785</x>
-            <y>1.3607049</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7026777</size>
-            <x>0.50484383</x>
-            <y>-0.766044</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5009869</size>
-            <x>0.12425145</x>
-            <y>-0.09794617</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.037459284</size>
-            <x>-1.1500013</x>
-            <y>-0.07886308</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9035176</size>
-            <x>0.15544088</x>
-            <y>1.1554681</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.92317766</size>
-            <x>0.35703006</x>
-            <y>-1.3669686</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.55257374</size>
-            <x>-1.0299587</x>
-            <y>0.2550435</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.106088184</size>
-            <x>1.2036064</x>
-            <y>0.07227965</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.72893876</size>
-            <x>-0.0054943096</x>
-            <y>-0.04349298</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9343962</size>
-            <x>-0.41101053</x>
-            <y>-1.1106524</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.009430734</size>
-            <x>-1.6691209</x>
-            <y>1.3179518</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.07208042</size>
-            <x>0.058258023</x>
-            <y>-0.88058</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.57662034</size>
-            <x>-1.0431366</x>
-            <y>0.1809506</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8500328</size>
-            <x>0.2572095</x>
-            <y>-0.48191693</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.51252425</size>
-            <x>1.3452703</x>
-            <y>0.4887048</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.4085393</size>
-            <x>-0.27269804</x>
-            <y>1.5601022</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.84358424</size>
-            <x>2.353506</x>
-            <y>-0.33266187</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.119756244</size>
-            <x>0.04211756</x>
-            <y>1.5552007</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.84382033</size>
-            <x>-0.32101333</x>
-            <y>0.78641504</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.32216486</size>
-            <x>1.6057926</x>
-            <y>0.5163091</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8275151</size>
-            <x>1.9148763</x>
-            <y>-1.1194329</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3899846</size>
-            <x>0.09585222</x>
-            <y>-0.6958998</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6253504</size>
-            <x>0.40734947</x>
-            <y>-0.1182572</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.918093</size>
-            <x>-1.2288637</x>
-            <y>1.7054849</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.711481</size>
-            <x>-0.49648222</x>
-            <y>-2.3209996</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9411397</size>
-            <x>-0.4606212</x>
-            <y>-0.024184821</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.4073782</size>
-            <x>0.07870992</x>
-            <y>1.042053</y>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Group 2</key>
-      <values>
-         <element>
-            <shape>circle</shape>
-            <size>0.31684232</size>
-            <x>1.4141275</x>
-            <y>-1.359897</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.58484757</size>
-            <x>-0.94556546</x>
-            <y>-0.6770439</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.54982024</size>
-            <x>0.090752095</x>
-            <y>1.5821055</y>
-         </element>
-         <element>
-            <shape>triangle-down</shape>
-            <size>0.94476414</size>
-            <x>-1.6992724</x>
-            <y>0.66095483</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7079006</size>
-            <x>-1.304508</x>
-            <y>-0.4935516</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.21017398</size>
-            <x>-0.15787111</x>
-            <y>-0.088091165</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8700155</size>
-            <x>0.7737039</x>
-            <y>0.7227587</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.0696204</size>
-            <x>-0.67376024</x>
-            <y>-1.7382491</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.1881718</size>
-            <x>0.6417585</x>
-            <y>-0.84012496</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.51849854</size>
-            <x>-0.09098303</x>
-            <y>-0.08488888</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.91275203</size>
-            <x>1.9739783</x>
-            <y>-0.84267956</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5041944</size>
-            <x>1.8546051</x>
-            <y>-0.7672796</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.56936586</size>
-            <x>-1.2455264</x>
-            <y>1.1280788</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.2991194</size>
-            <x>-0.49714845</x>
-            <y>-1.5974905</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.29167956</size>
-            <x>0.6426619</x>
-            <y>0.26267138</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.0059046405</size>
-            <x>0.45693433</x>
-            <y>-1.0624225</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.43074405</size>
-            <x>0.4579633</x>
-            <y>0.23527327</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6632655</size>
-            <x>-1.7148843</x>
-            <y>-1.2382267</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.22678186</size>
-            <x>2.2221618</x>
-            <y>0.13454325</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.0028499358</size>
-            <x>-0.6727352</x>
-            <y>1.1444945</y>
-         </element>
-         <element>
-            <shape>triangle-up</shape>
-            <size>0.4552701</size>
-            <x>1.2980431</x>
-            <y>-0.42153126</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.3981103</size>
-            <x>0.24136019</x>
-            <y>-1.167947</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.77646136</size>
-            <x>0.25327456</x>
-            <y>0.9298532</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.04271145</size>
-            <x>-1.316555</x>
-            <y>1.2730988</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6156193</size>
-            <x>-0.049991596</x>
-            <y>-2.5570738</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.4705836</size>
-            <x>0.05695364</x>
-            <y>0.39251348</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.27549878</size>
-            <x>0.24428073</x>
-            <y>-2.1822834</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.22114575</size>
-            <x>-0.53269225</x>
-            <y>0.29973686</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9798664</size>
-            <x>-0.19608615</x>
-            <y>-0.4027526</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.67188734</size>
-            <x>-0.1023146</x>
-            <y>-1.1354015</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.041242763</size>
-            <x>1.0109138</x>
-            <y>-0.07327144</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.008999734</size>
-            <x>-1.19526</x>
-            <y>-0.11753655</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.78924537</size>
-            <x>-0.6786273</x>
-            <y>0.3505294</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.53660774</size>
-            <x>2.307729</x>
-            <y>0.0564946</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.10582213</size>
-            <x>0.766764</x>
-            <y>0.4574641</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5599076</size>
-            <x>-0.40845233</x>
-            <y>-0.46301362</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6577587</size>
-            <x>-1.8446093</x>
-            <y>0.5535114</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.35521814</size>
-            <x>0.5400445</x>
-            <y>-0.119642444</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.51767045</size>
-            <x>-0.63481706</x>
-            <y>-0.76877606</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8126851</size>
-            <x>-1.2048688</x>
-            <y>-0.36845717</y>
-         </element>
-      </values>
-   </element>
-   <element>
-      <key>Group 3</key>
-      <values>
-         <element>
-            <shape>circle</shape>
-            <size>0.1543424</size>
-            <x>-0.4287422</x>
-            <y>-1.0439811</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5836928</size>
-            <x>-1.2468855</x>
-            <y>-0.9202422</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.18957588</size>
-            <x>-0.04164245</x>
-            <y>-0.57374024</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.81658846</size>
-            <x>-0.027139336</x>
-            <y>-0.63641155</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6342156</size>
-            <x>-0.5675822</x>
-            <y>0.45563355</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6684239</size>
-            <x>0.63812566</x>
-            <y>0.23931894</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.36536613</size>
-            <x>-2.6277206</x>
-            <y>-1.0184102</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6753488</size>
-            <x>0.5661993</x>
-            <y>0.024320425</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.8395484</size>
-            <x>-0.26167664</x>
-            <y>-1.8546007</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.64981806</size>
-            <x>-1.5535687</x>
-            <y>1.1182699</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7202816</size>
-            <x>0.23340568</x>
-            <y>0.22419837</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.40177354</size>
-            <x>-0.47098994</x>
-            <y>-0.5839239</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7658562</size>
-            <x>-2.2172027</x>
-            <y>0.14444043</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.03954513</size>
-            <x>1.2065783</x>
-            <y>-0.514385</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.14058605</size>
-            <x>0.4871006</x>
-            <y>-0.47915682</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9198166</size>
-            <x>-0.17009743</x>
-            <y>0.6482411</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6808295</size>
-            <x>-0.9530486</x>
-            <y>0.88736266</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.2524345</size>
-            <x>-1.0665965</x>
-            <y>-0.99163204</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6677387</size>
-            <x>0.82629377</x>
-            <y>-1.9653928</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.44717714</size>
-            <x>0.8321459</x>
-            <y>-0.33650854</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.42954272</size>
-            <x>-0.92519766</x>
-            <y>1.4656202</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.85499483</size>
-            <x>0.2636515</x>
-            <y>0.040357765</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6114564</size>
-            <x>0.74818873</x>
-            <y>0.7889817</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.25400048</size>
-            <x>0.04380079</x>
-            <y>0.35375732</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.43290415</size>
-            <x>-0.27754825</x>
-            <y>1.076821</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.95835626</size>
-            <x>-0.38586202</x>
-            <y>0.17843845</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.7795465</size>
-            <x>0.717388</x>
-            <y>0.12933052</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5011114</size>
-            <x>-1.7540425</x>
-            <y>-0.3136552</y>
-         </element>
-         <element>
-            <shape>diamond</shape>
-            <size>0.14203086</size>
-            <x>0.2606747</x>
-            <y>0.48004976</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9690647</size>
-            <x>0.7432529</x>
-            <y>0.868408</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9146702</size>
-            <x>1.0009177</x>
-            <y>0.5009206</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.48853946</size>
-            <x>-0.49987224</x>
-            <y>0.84197766</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.9937069</size>
-            <x>-1.0893555</x>
-            <y>0.19750498</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5576161</size>
-            <x>1.2343241</x>
-            <y>0.4648924</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.5913525</size>
-            <x>0.92151624</x>
-            <y>0.35309345</y>
-         </element>
-         <element>
-            <shape>square</shape>
-            <size>0.89149904</size>
-            <x>0.1940748</x>
-            <y>0.4810911</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.06760699</size>
-            <x>-0.0878795</x>
-            <y>0.76743835</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6044553</size>
-            <x>0.5661167</x>
-            <y>0.082412116</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.6946554</size>
-            <x>0.33922803</x>
-            <y>0.15770665</y>
-         </element>
-         <element>
-            <shape>circle</shape>
-            <size>0.4610582</size>
-            <x>0.539178</x>
-            <y>-1.7256366</y>
-         </element>
-      </values>
-   </element>
-</root>
+<element>
+<key>Group 0</key>
+<values>
+  <element>    <x>-0.4333314503353994</x>    <y>-1.0667749902042278</y>    <size>0.8446761765517294</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6757560764300712</x>    <y>0.7670911699196254</y>    <size>0.7306664325296879</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.2338817835800249</x>    <y>0.1360945464364293</y>    <size>0.6187961604446173</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7328805608790112</x>    <y>0.12703547093906095</y>    <size>0.2788893668912351</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.2696541187534738</x>    <y>1.0266115640070144</y>    <size>0.9658321214374155</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.41007799765058495</x>    <y>0.47558216196358616</y>    <size>0.11502379714511335</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.2995722214279046</x>    <y>0.4981654544976931</y>    <size>0.426821825793013</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.23491716573117222</x>    <y>-0.4288618013305738</y>    <size>0.06606616894714534</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.4167302510384055</x>    <y>0.156771273068267</y>    <size>0.656889749225229</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7273294182681468</x>    <y>0.07588296388822661</y>    <size>0.34534078440628946</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7235150525943737</x>    <y>1.0948124478901258</y>    <size>0.9175297245383263</size>    <shape>circle</shape>  </element>
+  <element>    <x>-2.99251295861482</x>    <y>-1.6965435531383257</y>    <size>0.22826370247639716</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.03264660617224693</x>    <y>-1.1062139762653247</y>    <size>0.5123129179701209</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.34250378474334475</x>    <y>-1.067184036496637</y>    <size>0.24639467522501945</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7401415665427838</x>    <y>-0.6359899595165127</y>    <size>0.28993707546032965</size>    <shape>triangle-up</shape>  </element>
+  <element>    <x>-1.4663542553621634</x>    <y>0.08163368480375853</y>    <size>0.2995693681295961</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.5587962502217501</x>    <y>0.40920271259748864</y>    <size>0.3616757842246443</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.03107724631856286</x>    <y>0.44866332732589587</y>    <size>0.5202789278700948</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.8077814937147231</x>    <y>0.06478896185387836</y>    <size>0.7611843897029757</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.07810762319346523</x>    <y>0.5672282264244795</y>    <size>0.9012407194823027</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.4143718224989612</x>    <y>-0.054593522083477265</y>    <size>0.26906374376267195</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.12477780008685997</x>    <y>0.3072585855195155</y>    <size>0.3912416307721287</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.0342632391133437</x>    <y>-0.11687608198470184</y>    <size>0.5672061510849744</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.6246612124548329</x>    <y>0.8409301650460633</y>    <size>0.5340820425190032</size>    <shape>circle</shape>  </element>
+  <element>    <x>2.3311720575490025</x>    <y>0.17151279874530398</y>    <size>0.7520835092291236</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.5470184300998696</x>    <y>-1.3766668272720253</y>    <size>0.3601639298722148</size>    <shape>cross</shape>  </element>
+  <element>    <x>-0.33301934668523875</x>    <y>0.47808480076022686</y>    <size>0.14146795007400215</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.2853934053993235</x>    <y>-0.1471784582519707</y>    <size>0.8566667851991951</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.38575176979051384</x>    <y>-1.6570760228739043</y>    <size>0.4860997551586479</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.1140555978622169</x>    <y>0.40103312450685785</y>    <size>0.2682087083812803</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6738269122769108</x>    <y>0.3028270365587535</y>    <size>0.7578747302759439</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.20177033810355668</x>    <y>0.605510405198293</y>    <size>0.2521202713251114</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.6560026538687602</x>    <y>-1.6260673263447625</y>    <size>0.37466963822953403</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.7211797223308425</x>    <y>-0.2914958365245338</y>    <size>0.8332775696180761</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.427069567338477</x>    <y>-0.8532433482627323</y>    <size>0.2036693503614515</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.1719059196205421</x>    <y>0.5948940192558311</y>    <size>0.8990468680858612</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.2879807236172975</x>    <y>-0.6802441911826765</y>    <size>0.3932260179426521</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.9893600683694476</x>    <y>-0.31933223189503035</y>    <size>0.4910325240343809</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.6071427642986487</x>    <y>0.45047604480663</y>    <size>0.942741502309218</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.4143787058154518</x>    <y>-0.37870307043617674</y>    <size>0.8950312975794077</size>    <shape>circle</shape>  </element>
+
+</values>
+</element><element>
+<key>Group 1</key>
+<values>
+  <element>    <x>1.2785362415223398</x>    <y>-0.8321400779524755</y>    <size>0.18129416182637215</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.672850384373559</x>    <y>-0.30116296329486353</y>    <size>0.9190538732800633</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.10158059453772726</x>    <y>0.32184178131970365</y>    <size>0.5932002651970834</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.28412429585380455</x>    <y>3.522603007157022</y>    <size>0.5293749233242124</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.0740368708428207</x>    <y>0.4484973917739427</y>    <size>0.6387333658058196</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.9572201848853684</x>    <y>-0.4567696132122101</y>    <size>0.32316440949216485</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.4688430697957296</x>    <y>-0.30917382093000045</y>    <size>0.34733739704824984</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.5675553640140347</x>    <y>-1.272319607172261</y>    <size>0.07557765301316977</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.37409339317064144</x>    <y>0.018145847559959485</y>    <size>0.9225331244524568</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.11891000445358205</x>    <y>-0.3436614268994639</y>    <size>0.3283366449177265</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6731100917553073</x>    <y>0.11408979875353557</y>    <size>0.401963148964569</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.8053563486438265</x>    <y>0.40825635668762417</y>    <size>0.07467676629312336</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.13544657484440698</x>    <y>0.5679768447901314</y>    <size>0.2291230857372284</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.097849934124947</x>    <y>1.3607048600017355</y>    <size>0.6201729679014534</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.5048438140717569</x>    <y>-0.7660440032277865</y>    <size>0.7026776971761137</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.12425144921007684</x>    <y>-0.09794616656975227</y>    <size>0.5009868838824332</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.1500013329027738</x>    <y>-0.07886307419477129</y>    <size>0.03745928523130715</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.15544088061657008</x>    <y>1.155468163350492</y>    <size>0.9035176215693355</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.35703007147080434</x>    <y>-1.3669686202798892</y>    <size>0.923177681863308</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.0299587513186956</x>    <y>0.2550434950485051</y>    <size>0.5525737688876688</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.203606425403121</x>    <y>0.07227964368430986</y>    <size>0.10608818498440087</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.005494309725421005</x>    <y>-0.04349297953501012</y>    <size>0.7289387688506395</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.411010525865537</x>    <y>-1.110652409904504</y>    <size>0.934396187774837</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.669120962221058</x>    <y>1.3179517853635048</y>    <size>0.009430734673514962</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.05825802382582591</x>    <y>-0.8805799878523621</y>    <size>0.0720804154407233</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.043136585782389</x>    <y>0.18095059002319927</y>    <size>0.5766203172970563</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.2572095022823331</x>    <y>-0.48191692781934853</y>    <size>0.8500328122172505</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.3452702955283193</x>    <y>0.4887047949388488</y>    <size>0.5125242657959461</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.2726980454139892</x>    <y>1.5601022578949777</y>    <size>0.4085392956621945</size>    <shape>circle</shape>  </element>
+  <element>    <x>2.353506067204826</x>    <y>-0.33266185349071536</y>    <size>0.8435842590406537</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.04211755903806058</x>    <y>1.5552007191045063</y>    <size>0.1197562466841191</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.32101334283824223</x>    <y>0.7864150370019986</y>    <size>0.8438203560654074</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.605792650846286</x>    <y>0.5163090620365675</y>    <size>0.3221648605540395</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.9148763451261026</x>    <y>-1.119432935186998</y>    <size>0.8275151287671179</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.0958522202778259</x>    <y>-0.6958997786330413</y>    <size>0.3899846160784364</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.407349460805306</x>    <y>-0.11825720565824725</y>    <size>0.6253504252526909</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.2288637484454126</x>    <y>1.705484813904972</y>    <size>0.9180930270813406</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.4964822230821748</x>    <y>-2.3209995159846866</y>    <size>0.7114809586200863</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.4606212153823779</x>    <y>-0.02418482149080575</y>    <size>0.941139709437266</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.07870992033905354</x>    <y>1.0420530342320813</y>    <size>0.4073782020714134</size>    <shape>circle</shape>  </element>
+
+</values>
+</element><element>
+<key>Group 2</key>
+<values>
+  <element>    <x>1.4141274834681328</x>    <y>-1.3598969584359522</y>    <size>0.316842328524217</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.9455654542032339</x>    <y>-0.6770439272883484</y>    <size>0.5848475981038064</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.09075209469829136</x>    <y>1.5821054850914684</y>    <size>0.549820241285488</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.699272411720214</x>    <y>0.6609548380253218</y>    <size>0.9447641095612198</size>    <shape>triangle-down</shape>  </element>
+  <element>    <x>-1.3045079309913457</x>    <y>-0.4935516185476635</y>    <size>0.7079005662817508</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.15787111963860204</x>    <y>-0.08809116500653623</y>    <size>0.21017397614195943</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7737038512129346</x>    <y>0.7227587271901803</y>    <size>0.8700155087281018</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6737602367877142</x>    <y>-1.7382490110006878</y>    <size>0.06962040020152926</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.6417585185124443</x>    <y>-0.8401249664556008</y>    <size>0.1881718011572957</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.09098303202948486</x>    <y>-0.08488888410945271</y>    <size>0.518498566467315</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.9739782697487367</x>    <y>-0.8426795322905188</y>    <size>0.9127520411275327</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.8546051227749898</x>    <y>-0.7672795981066987</y>    <size>0.5041943525429815</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.2455264487083553</x>    <y>1.128078831082207</y>    <size>0.5693658732343465</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.49714846428573306</x>    <y>-1.5974905608666623</y>    <size>0.299119402654469</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.6426619246876684</x>    <y>0.26267139140006557</y>    <size>0.29167955135926604</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.4569343198820527</x>    <y>-1.0624225294188145</y>    <size>0.005904640769585967</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.4579632774322132</x>    <y>0.23527326904960003</y>    <size>0.430744037264958</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.7148842874061978</x>    <y>-1.2382266043071934</y>    <size>0.6632655011489987</size>    <shape>circle</shape>  </element>
+  <element>    <x>2.222161770376267</x>    <y>0.13454325087626917</y>    <size>0.22678186208941042</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6727351949057</x>    <y>1.1444945207437331</y>    <size>0.0028499357867985964</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.298043080785461</x>    <y>-0.4215312690062401</y>    <size>0.455270096892491</size>    <shape>triangle-up</shape>  </element>
+  <element>    <x>0.24136018153711886</x>    <y>-1.167947034874927</y>    <size>0.3981102977413684</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.2532745573892872</x>    <y>0.9298532064017637</y>    <size>0.7764613521285355</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.3165550374365502</x>    <y>1.2730988396053862</y>    <size>0.042711453046649694</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.04999159658933201</x>    <y>-2.557073829094992</y>    <size>0.6156193190254271</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.05695363822915767</x>    <y>0.392513483845856</y>    <size>0.4705835778731853</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.244280720024055</x>    <y>-2.1822834005811016</y>    <size>0.27549876901321113</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.532692232626617</x>    <y>0.2997368549419655</y>    <size>0.22114574210718274</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.19608615545109953</x>    <y>-0.40275259670285823</y>    <size>0.9798664064146578</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.10231459884396385</x>    <y>-1.1354015403424491</y>    <size>0.6718873635400087</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.0109138464730072</x>    <y>-0.07327143566334303</y>    <size>0.041242765029892325</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.1952600697428775</x>    <y>-0.11753655564946071</y>    <size>0.008999734418466687</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.6786273117752006</x>    <y>0.35052940974254093</y>    <size>0.7892453561071306</size>    <shape>circle</shape>  </element>
+  <element>    <x>2.307729044205514</x>    <y>0.05649460259809912</y>    <size>0.5366077343933284</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7667639695949955</x>    <y>0.4574641054934363</y>    <size>0.10582212754525244</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.40845231940934656</x>    <y>-0.4630136315130559</y>    <size>0.559907624265179</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.8446092860027565</x>    <y>0.553511388143735</y>    <size>0.6577587032224983</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.5400444618923255</x>    <y>-0.11964244094615469</y>    <size>0.35521813901141286</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.634817054444668</x>    <y>-0.7687760643924472</y>    <size>0.5176704281475395</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.204868842539765</x>    <y>-0.36845715883522107</y>    <size>0.8126850738190114</size>    <shape>circle</shape>  </element>
+
+</values>
+</element><element>
+<key>Group 3</key>
+<values>
+  <element>    <x>-0.428742204424889</x>    <y>-1.043981134270897</y>    <size>0.15434239339083433</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.2468855131138044</x>    <y>-0.9202421643011428</y>    <size>0.5836927921045572</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.0416424507288124</x>    <y>-0.5737402260789046</y>    <size>0.18957588775083423</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.02713933678037609</x>    <y>-0.6364115683559476</y>    <size>0.8165884832851589</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.5675821905495997</x>    <y>0.4556335525041803</y>    <size>0.6342155889142305</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.6381256835666697</x>    <y>0.23931894171360235</y>    <size>0.6684238982852548</size>    <shape>circle</shape>  </element>
+  <element>    <x>-2.627720705775825</x>    <y>-1.0184102369281094</y>    <size>0.3653661236166954</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.566199306650293</x>    <y>0.024320425308357076</y>    <size>0.6753487957175821</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.2616766345073188</x>    <y>-1.8546006625848122</y>    <size>0.8395484052598476</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.5535687293333287</x>    <y>1.1182699260557778</y>    <size>0.6498180839698762</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.2334056810019736</x>    <y>0.22419836638897167</y>    <size>0.7202816153876483</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.47098994126289373</x>    <y>-0.5839239012195463</y>    <size>0.4017735307570547</size>    <shape>circle</shape>  </element>
+  <element>    <x>-2.217202751341015</x>    <y>0.14444042687505795</y>    <size>0.765856180107221</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.2065782928183515</x>    <y>-0.5143849748081651</y>    <size>0.03954512858763337</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.48710060467861</x>    <y>-0.4791568296906768</y>    <size>0.14058604300953448</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.1700974211635203</x>    <y>0.6482411072889727</y>    <size>0.9198165996931493</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.9530486073151898</x>    <y>0.8873626393422452</y>    <size>0.6808295510709286</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.0665965484286668</x>    <y>-0.9916320429681634</y>    <size>0.2524344786070287</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.8262937500905273</x>    <y>-1.9653928579571631</y>    <size>0.6677386977244169</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.8321459161666487</x>    <y>-0.3365085312100508</y>    <size>0.4471771433018148</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.9251976891628371</x>    <y>1.4656201375040336</y>    <size>0.4295427289325744</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.263651486484387</x>    <y>0.040357763372205764</y>    <size>0.8549948497675359</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7481887379720737</x>    <y>0.7889816912259778</y>    <size>0.6114563897717744</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.043800789831250346</x>    <y>0.3537573324780418</y>    <size>0.2540004854090512</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.27754824989030025</x>    <y>1.0768209276993561</y>    <size>0.43290415266528726</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.38586201812956383</x>    <y>0.17843846154181045</y>    <size>0.9583562684711069</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.7173879937670893</x>    <y>0.1293305208824538</y>    <size>0.7795464762020856</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.7540425374432362</x>    <y>-0.31365520089295373</y>    <size>0.5011113816872239</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.2606746893296845</x>    <y>0.4800497470566221</y>    <size>0.14203086495399475</size>    <shape>diamond</shape>  </element>
+  <element>    <x>0.7432528875716883</x>    <y>0.8684080248451754</y>    <size>0.9690647078678012</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.0009176912150595</x>    <y>0.5009205846314537</y>    <size>0.9146702082362026</size>    <shape>circle</shape>  </element>
+  <element>    <x>-0.4998722466546374</x>    <y>0.8419776585502866</y>    <size>0.4885394424200058</size>    <shape>circle</shape>  </element>
+  <element>    <x>-1.089355432032279</x>    <y>0.19750498866054195</y>    <size>0.993706903187558</size>    <shape>circle</shape>  </element>
+  <element>    <x>1.2343241347108542</x>    <y>0.4648923763651678</y>    <size>0.5576160985510796</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.9215162170412666</x>    <y>0.35309344227170864</y>    <size>0.5913525354117155</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.19407479585645845</x>    <y>0.4810911032477096</y>    <size>0.8914990508928895</size>    <shape>square</shape>  </element>
+  <element>    <x>-0.08787949822958069</x>    <y>0.7674383500916686</y>    <size>0.0676069906912744</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.5661166958576238</x>    <y>0.08241211483403776</y>    <size>0.6044553038664162</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.3392280253258168</x>    <y>0.1577066485946516</y>    <size>0.6946554183959961</size>    <shape>circle</shape>  </element>
+  <element>    <x>0.5391780083973348</x>    <y>-1.7256365900322723</y>    <size>0.46105820615775883</size>    <shape>circle</shape>  </element>
+
+</values>
+</element>
+</root>
