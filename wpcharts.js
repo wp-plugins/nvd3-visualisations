@@ -90,8 +90,9 @@ function demoShows(id, data, type, options) {
 	var pp = rootpath+'../postchart.php?new=';
 	var ctype = '&type='+type;
 	var filepath = '&filepath='+demos[type];
-	var args1 = '<a href="'+pp+'post'+ctype+filepath+'" target="_blank">[New Post]</a>';
-	var args2 = '<a href="'+pp+'page'+ctype+filepath+'" target="_blank">[New Page]</a>';
+	var tt = 'Clone data set from this example into new draft';
+	var args1 = '<a href="'+pp+'post'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Post]</a>';
+	var args2 = '<a href="'+pp+'page'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Page]</a>';
 
 	var shortmsg = '<br />Add this into: <b class="title_nvd3">'+args1+' | '+args2+'</b>';
 	var xmlmsg = '<br />Shortcode: [jsChart type="'+type+'" options="{ xmldemo: true }"]';

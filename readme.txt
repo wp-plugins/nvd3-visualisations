@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,10 @@ Here:
 
 == Changelog ==
 
+= 1.3.1 =
+Version 1.3.1 -
+Automatic cloning of data sets into blog's root folder when creating new charts from gallery.
+
 = 1.3.0 =
 Version 1.3.0 - 
 NEW: Charts gallery becomes an automatic chart generating tool for a new post/page. Most gallery demos in XML + perfect functions to convert data between JSON and XML formats.
@@ -118,7 +122,7 @@ Demo charts into 2x6 grid for better room to dislay all with some narrow themes.
 
 = 1.2.3 =
 Version 1.2.3 - 
-More pretty & helpfull demo charts with titles. New examples how to use XML input files. Tested with WP v3.9.
+More pretty & helpfull demo charts with titles. New examples how to use XML input files. Tested with the newest WordPress 3.9.
 
 = 1.2.2 =
 Version 1.2.2 - 

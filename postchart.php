@@ -60,12 +60,16 @@ if (! $rightsok)  { // High enough role for edit pages
 	return;
 }
 
-$shortcodes = "[loadNVD3] [jsChart type='".$ctype."' js=0 datafile='".$dataset."' ] ";
-$datalink = '<br />Data File: <b>'.$_GET['filepath'].'</b>';
+$owndata = copyEx($dataset, $_GET['filepath']);
+
+// New Post/Page content from up -> down
+$msg = '<p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
+$shortcodes = "[loadNVD3] [jsChart type='".$ctype."' datafile='".$owndata."' ] ";
+$datalink = '<br />Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
 
 $my_post = array(
   'post_title'    => 'NVD3 Chart',
-  'post_content'  => '<p>Here is your new chart created by NVD3 Visualisations: edit, publish & enjoy it!</p> '.$shortcodes.$datalink, 
+  'post_content'  => $msg.$shortcodes.$datalink, 
   'post_status'   => 'draft', 
   'post_type'     => $posttype, // page
   'tags_input'    => array('NVD3', 'charts', 'SVG')
@@ -74,9 +78,41 @@ $my_post = array(
 // Insert the post into the database
 $error = wp_insert_post( $my_post );
 if ($error == 0)
-	echo 'You were denied to publish NVD3 chart !';
+	echo 'You were denied to publish NVD3 chart - contact admin of blog !';
 else
 	echo 'Done! You move next to see chart in a few secs (if not click here: ' . move2js($error, $posttype).')';
+
+return;
+
+function copyEx($dataset, $filename) {
+
+$dirname = '../../../charts_nvd3/';  // root folder of blog
+
+if (!file_exists($dirname)) {
+    mkdir($dirname, 0777);
+}
+$data = file_get_contents('data/' . $filename);
+// Test that filename is not existing yet
+$addon = '';
+if ( file_exists($dirname . $filename) ) // Add random part 2 new file name
+	$addon = uniqFile($dirname, $filename);
+
+$fpath = $dirname . $addon . $filename; 
+file_put_contents($fpath, $data);
+
+return 'charts_nvd3/' . $addon . $filename;
+}
+// Find unique data file name
+function uniqFile($dirname, $filename) {
+	$max = 1000; // Make this bigger if more data sets needed
+	for ($i=1; $i<2*$max; $i++) { // Fast Guess
+		$addon = mt_rand(1,$max); 
+		if (! file_exists($dirname . $addon . $filename) )
+			return $addon;
+	}
+
+	return 0;
+}
 
 function move2js($post, $type) {
 
