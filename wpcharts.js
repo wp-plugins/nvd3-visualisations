@@ -1,128 +1,159 @@
-
-charts = new Array();
-bootup = 1;
 
-// API component to draw charts directly on WP page by one JS call
-
-function jsChart(id, infile, type, dims, options) {
-
-	if (bootup) {
-		bootup = 0;
-		checkJQ();
-	}
-
-	// Default size of chart: VGA screen
-	var height = '480';
-	var width = ' width:640px; ';
-	if (dims) {
-		height = dims['height'];
-		width = ' width:'+dims['width']+'px; ';
-	}
+charts = new Array();
+bootup = 1;
+
+// API component to draw charts directly on WP page by one JS call
+
+function jsChart(id, infile, type, dims, options) {
+
+	if (bootup) {
+		bootup = 0;
+		checkJQ();
+	}
+
+	// Default size of chart: VGA screen
+	var height = '480';
+	var width = ' width:640px; ';
+	if (dims) {
+		height = dims['height'];
+		width = ' width:'+dims['width']+'px; ';
+	}
 
 	if (!options)
 		options = new Object(); 
 
 	// console.info(height); // {height:'200', width:'350'}
-
-	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+"'/>";
-	jQuery('#chart'+id).empty();
-	jQuery('#chart'+id).html(svg);
-
+
+	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+"'/>";
+	jQuery('#chart'+id).empty();
+	jQuery('#chart'+id).html(svg);
+
 	// svgChart(id);
-	type = type.toLowerCase();
-	dataRead(infile, id, type, options);
+	type = type.toLowerCase();
+	dataRead(infile, id, type, options);
 }
 
 // Data reader from different sources: demos / own file / function's output 
 function dataRead(infile, id, type, options) {
-
+
 	// console.info(infile);
 
-	if (infile == '')
-		demoShows(id, '', type, options);
+	if (infile == '')
+		demoShows(id, '', type, options);
 	else if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		// console.info(data);
 		chartSelector(id, data, type, options);
 	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) { // d3.xml has parsing problems
-//		data = buildXML(data);
+	else if (infile.indexOf('.xml') > 0)
+	d3.text(infile,function(error,data) { // d3.xml has parsing problems
+//		data = buildXML(data);
 		data = xml2json(data, ' ');
 		chartSelector(id, data, type, options); 
-	});
-	else if (typeof infile == 'object') // Direct input of data set
-		chartSelector(id, infile, type, options);
-/* TODO
+	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
+		data = parseJSON(data,'multibar');
 		// console.info(data);
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.csv') > 0)
 	d3.csv(infile,function(error,data) {
+		// console.info(data);
+		data = parseJSON(data,'multibar');
 		chartSelector(id, data, type, options);
 	});
-
-	else
-		demoShows(id, '', type, options);
+	else if (typeof infile == 'object') // Direct input of data set by variable
+		chartSelector(id, infile, type, options);
+/* TODO
+
 */
-}
-
-function demoShows(id, data, type, options) {
-
-	// Demo data sets for gallery
-	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
-
-	if (options.xmldemo)
-		demos[type] = demos[type].replace(/json/g, 'xml');
-
-	// Home dir of demo data sets
-	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
-	if (rootpath) // Global URL of root set by shortcode of WP
-		 infile = rootpath + demos[type];
-
-	var desc = 'Demo from file: data/'+demos[type];
-	var subs = '<sup> ?</sup>';
-	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
-	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
-
-	var pp = rootpath+'../postchart.php?new=';
-	var ctype = '&type='+type;
-	var filepath = '&filepath='+demos[type];
-	var tt = 'Clone data set from this example into new draft';
-	var args1 = '<a href="'+pp+'post'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Post]</a>';
-	var args2 = '<a href="'+pp+'page'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Page]</a>';
-
-	var shortmsg = '<br />Add this into: <b class="title_nvd3">'+args1+' | '+args2+'</b>';
-	var xmlmsg = '<br />Shortcode: [jsChart type="'+type+'" options="{ xmldemo: true }"]';
-//	console.info(infile);
-
-	if (infile.indexOf(".json") > 0)
-	d3.json(infile,function(error,data) {
-
-//	Testing code: json -> xml -> json valid results
-/*
-var o = json22xml(data,'  ');
-// console.info(xml22json(o,''));
-data = xml2json(o,'');
-// console.info(data);
-*/
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
-		jQuery("#chart"+id).append(msg+shortmsg);
-		
-	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) { // d3.xml has parsing problems
-//		data = buildXML(data);
-		data = xml2json(data, '  ');
-		// console.info(data);
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
-		jQuery("#chart"+id).append(msg+xmlmsg);
-	});
-}
+}
+function parseJSON(data, chart) {
+
+	if (chart == 'multibar') {
+		var lines = new Array();
+		var titles = new Array();
+		for (line=0; line<data.length; line++) {
+			var colss = new Array();
+			for (label in data[line]) {
+				colss.push(data[line][label]);
+				if (line == 0) titles.push(label);
+			}
+			lines.push(colss);
+		}
+		var res = new Array();
+		for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
+			res.push(new Object( { "key":titles[t], "values":getCol(t,lines) } ));
+
+		return res;
+	}
+	return data;
+}
+function getCol(colname, lines) {
+	var out = new Array();
+	for (i=0; i<lines.length; i++) { // Note: forcing numerical value out
+		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
+		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );
+		out.push( cell );
+	}
+	return out;
+}
+
+function demoShows(id, data, type, options) {
+
+	// Demo data sets for gallery
+	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
+
+	if (options.xmldemo)
+		demos[type] = demos[type].replace(/json/g, 'xml');
+
+	// Home dir of demo data sets
+	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
+	if (rootpath) // Global URL of root set by shortcode of WP
+		 infile = rootpath + demos[type];
+
+	var desc = 'Demo from file: data/'+demos[type];
+	var subs = '<sup> ?</sup>';
+	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
+	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
+
+	var pp = rootpath+'../postchart.php?new=';
+	var ctype = '&type='+type;
+	var filepath = '&filepath='+demos[type];
+	var tt = 'Clone data set from this example into new draft';
+	var args1 = '<a href="'+pp+'post'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Post]</a>';
+	var args2 = '<a href="'+pp+'page'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Page]</a>';
+
+	var shortmsg = '<br />Add this into: <b class="title_nvd3">'+args1+' | '+args2+'</b>';
+	var xmlmsg = '<br />Shortcode: [jsChart type="'+type+'" options="{ xmldemo: true }"]';
+//	console.info(infile);
+
+	if (infile.indexOf(".json") > 0)
+	d3.json(infile,function(error,data) {
+
+//	Testing code: json -> xml -> json valid results
+/*
+var o = json22xml(data,'  ');
+// console.info(xml22json(o,''));
+data = xml2json(o,'');
+// console.info(data);
+*/
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
+		jQuery("#chart"+id).append(msg+shortmsg);
+		
+	});
+	else if (infile.indexOf('.xml') > 0)
+	d3.text(infile,function(error,data) { // d3.xml has parsing problems
+//		data = buildXML(data);
+		data = xml2json(data, '  ');
+		// console.info(data);
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
+		jQuery("#chart"+id).append(msg+xmlmsg);
+	});
+}
 
 function chartSelector(id, data, type, options) {
 
@@ -151,19 +182,19 @@ function chartSelector(id, data, type, options) {
 	else if (type == 'bullet')
 		Bullet(id, data, options);
 }
-// Axis should be time formatted with chart ?
-function timeStamp(x, options) {
-	if (options.xtime)
-			return d3.time.format('%x')(new Date(x))
-	else
-		return x
-}
+// Axis should be time formatted with chart ?
+function timeStamp(x, options) {
+	if (options.xtime)
+			return d3.time.format('%x')(new Date(x))
+	else
+		return x
+}
 
 /* ALL Supported NVD3 Chart Types: 1 function/type */
 
 // Drawing chart: linePlusBar
-function linePlusBar(chartID, data, options) {
- 
+function linePlusBar(chartID, data, options) {
+ 
   nv.addGraph(function() {
 	  var chart = nv.models.linePlusBarChart()
             .margin({top: 30, right: 90, bottom: 50, left: 90})
@@ -172,11 +203,12 @@ function linePlusBar(chartID, data, options) {
             .y(function(d,i) {return d[1] })
             ;
 
-	  chart.xAxis.tickFormat(function(d) {
-        var dx = data[0].values[d] && data[0].values[d][0] || 0;
-		return timeStamp(dx, options);
-      });
-
+	  chart.xAxis.tickFormat(function(d) {
+        var dx = data[0].values[d] && data[0].values[d][0] || 0;
+		console.info(dx);
+		return timeStamp(dx, options);
+      });
+
 /* Uncomment => original demo show
 	  chart.xAxis.tickFormat(function(d) {
         var dx = data[0].values[d] && data[0].values[d][0] || 0;
@@ -189,14 +221,14 @@ function linePlusBar(chartID, data, options) {
       chart.y2Axis
           .tickFormat(function(d) { return d3.format(',f')(d) });
 
-    chart.y1Axis
-		.axisLabel(data[0]['key']);
-    chart.y2Axis
-		.axisLabel(data[1]['key']);
-
-    chart.y1Axis
-        .tickFormat(d3.format(',.1%')); 
-*/
+    chart.y1Axis
+		.axisLabel(data[0]['key']);
+    chart.y2Axis
+		.axisLabel(data[1]['key']);
+
+    chart.y1Axis
+        .tickFormat(d3.format(',.1%')); 
+*/
 	chart.bars.forceY([0]);
 
 	chart.options(options);
@@ -378,13 +410,19 @@ nv.addGraph(function() {
       .rotateLabels(0)      //Angle to rotate x-axis labels.
       .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
       .groupSpacing(0.1)    //Distance between each group of bars.
+	  .x(function(d,i) { return i })
     ;
-
+/*
     chart.xAxis
         .tickFormat(d3.format(',f'));
+*/
+	chart.xAxis.tickFormat(function(d) {
+		var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
+		return timeStamp(dx, options);
+    });
 
     chart.yAxis
-        .tickFormat(d3.format(',.1f'));
+        .tickFormat(d3.format('.f'));
 //   console.info( JSON.stringify( exampleData() ) );
 
 	chart.options(options);
@@ -402,13 +440,20 @@ nv.addGraph(function() {
 function viewFinder(chartID, data, options) {
 
 nv.addGraph(function() {
-  var chart = nv.models.lineWithFocusChart();
-
+  var chart = nv.models.lineWithFocusChart()
+  .x(function(d,i) { return i })
+  ;
+/*
   chart.xAxis
       .tickFormat(d3.format(',f'));
+*/
+	chart.xAxis.tickFormat(function(d) {
+        var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
+		return timeStamp(dx, options);
+    });
 
   chart.yAxis
-      .tickFormat(d3.format(',.2f'));
+      .tickFormat(d3.format('.f'));
 
   chart.y2Axis
       .tickFormat(d3.format(',.2f'));
@@ -437,15 +482,21 @@ nv.addGraph(function() {
                 .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
                 .showYAxis(true)        //Show the y-axis
                 .showXAxis(true)        //Show the x-axis
+  .x(function(d,i) { return i })
   ;
 
+	chart.xAxis.tickFormat(function(d) {
+        var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
+		return timeStamp(dx, options);
+    });
+/*
   chart.xAxis     //Chart x-axis settings
-      .axisLabel('Time (ms)')
+      // .axisLabel('Time (ms)')
       .tickFormat(d3.format(',r'));
-
+*/
   chart.yAxis     //Chart y-axis settings
-      .axisLabel('Voltage (v)')
-      .tickFormat(d3.format('.02f'));
+      // .axisLabel('Voltage (v)')
+      .tickFormat(d3.format('.f'));
 
 //  var myData = sinAndCos();   //You need data...
 
@@ -520,62 +571,62 @@ nv.addGraph(function() {
 
   return chart;
 });
-}
-
-function checkJQ() {
-
-	if ('undefined' == typeof window.jQuery)
-		window.alert('Please, load jQuery to use NVD3 tools properly.');
-	else
-		console.info('jQuery: ok.');
-}
-
-// A test for WP shortcode's calls
-function svgChart(chartID, infile, type, dims, options) {
-
-charts.push(chartID+' ');
-
-nv.addGraph(function() {
-    var chart = nv.models.lineChart();
-
-    chart.xAxis
-        .axisLabel("X-axis Label");
-
-    chart.yAxis
-        .axisLabel("Y-axis Label")
-        .tickFormat(d3.format("d"))
-        ;
-
-	// var cID = charts.pop();
-	var cID = charts[charts.length-1];
-	d3.select("#chart"+cID+" svg")
-        .datum(myData())
-        .transition().duration(500).call(chart);
-
-    nv.utils.windowResize(
-            function() {
-                chart.update();
-            }
-        );
-	return chart;
-});
-
-};
-
-// Data set generator, original mychart.js example
-
-function myData() {
-    var series1 = [];
-    for(var i =1; i < 100; i ++) {
-        series1.push({
-            x: i, y: 100 / i
-        });
-    }
-    return [
-        {
-            key: "Series #1",
-            values: series1,
-            color: "#0000ff"
-        }
-    ];
+}
+
+function checkJQ() {
+
+	if ('undefined' == typeof window.jQuery)
+		window.alert('Please, load jQuery to use NVD3 tools properly.');
+	else
+		console.info('jQuery: ok.');
+}
+
+// A test for WP shortcode's calls
+function svgChart(chartID, infile, type, dims, options) {
+
+charts.push(chartID+' ');
+
+nv.addGraph(function() {
+    var chart = nv.models.lineChart();
+
+    chart.xAxis
+        .axisLabel("X-axis Label");
+
+    chart.yAxis
+        .axisLabel("Y-axis Label")
+        .tickFormat(d3.format("d"))
+        ;
+
+	// var cID = charts.pop();
+	var cID = charts[charts.length-1];
+	d3.select("#chart"+cID+" svg")
+        .datum(myData())
+        .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(
+            function() {
+                chart.update();
+            }
+        );
+	return chart;
+});
+
+};
+
+// Data set generator, original mychart.js example
+
+function myData() {
+    var series1 = [];
+    for(var i =1; i < 100; i ++) {
+        series1.push({
+            x: i, y: 100 / i
+        });
+    }
+    return [
+        {
+            key: "Series #1",
+            values: series1,
+            color: "#0000ff"
+        }
+    ];
 }
