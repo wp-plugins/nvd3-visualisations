@@ -110,7 +110,7 @@ Here:
 
 = 1.5.0 =
 Version 1.5.0 -
-Direct data editor for all created own charts automically from gallery that removes itself when you publish. New example from CSV & TSV charts generation calls.
+NEW: Direct data editor for all created own charts automically from gallery that removes itself when you publish. New example from CSV & TSV charts generation calls.
 
 = 1.4.0 =
 Version 1.4.0 -
