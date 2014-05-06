@@ -1,0 +1,17 @@
+<!-- Your very 1st test to show the gallery on WordPress
+
+     Simply, do these steps:
+
+		 1. Create new post / page normally on WP.
+		 2. Copy all all these lines inside it by editing it in html mode.
+		 3. Check that directory path to data files is correct from your blog's root.
+		 4. Save it, preview + enjoy a few CSV & TSV examples on your own blog 
+! -->
+
+[loadNVD3]
+
+<b>Chart from Excel type CSV data</b>
+[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/tallinn.csv' height=300 width=600]
+
+<b>Chart from basic TSV data</b>
+[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/tallinn.tsv' height=300 width=600]

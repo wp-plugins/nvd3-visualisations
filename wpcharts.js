@@ -37,6 +37,7 @@ function jsChart(id, infile, type, dims, options) {
 function dataRead(infile, id, type, options) {
 
 	// console.info(infile);
+	ginfile = infile; // make global
 
 	if (infile == '')
 		demoShows(id, '', type, options);
@@ -205,7 +206,6 @@ function linePlusBar(chartID, data, options) {
 
 	  chart.xAxis.tickFormat(function(d) {
         var dx = data[0].values[d] && data[0].values[d][0] || 0;
-		console.info(dx);
 		return timeStamp(dx, options);
       });
 
@@ -612,6 +612,20 @@ nv.addGraph(function() {
 });
 
 };
+function saveData(databox, filename) {
+
+	var mydata = encodeURIComponent( jQuery('#'+databox).val() );
+	// console.info(mydata);
+	// var rec = { infile: filename, data: mydata };
+	var query = 'http://www.tere-tech.eu/balticfinns/wp-content/plugins/nvd3-visualisations/updatechart.php';
+
+	jQuery.post( query, { infile: filename, indata: mydata }, function( data ) {
+		if (data)
+			location.reload();  // Ok, reload view on browser & chart(s)
+		else
+			alert('Data Set failed to write!');
+	}); //, "json");
+}
 
 // Data set generator, original mychart.js example
 
