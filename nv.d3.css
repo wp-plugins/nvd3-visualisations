@@ -3,6 +3,13 @@
  * HTML CSS
  */
 
+ .nvd3_editor {
+  background-color: #cccccc;
+  border-style: groove;
+  border-width: 2px;
+  border-color: #666666;
+  padding: 1px 10px;
+ }
 
 .chartWrap {
   margin: 0;

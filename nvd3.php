@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.0
+Version: 1.5.1
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -165,14 +165,27 @@ if (get_post_status() == 'publish')
 $owndata = $data["infile"];
 // $chart = $data["type"];
 
-$msg = '<p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
-// $datalink = 'Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
-$datatitle = 'Data File: '.$owndata;
-
 $chartdata = file_get_contents($owndata);
 
 $jscall = "saveData('dataset', '".$owndata."')";
 
+$syntax = '';
+$syntaxedit = '';
+if (strpos($owndata,'.json')) {
+	$syntaxedit = '<div class="nvd3_editor">Edit your data set here and check syntax of JSON.
+<iframe name="(c) 2013 Jos de Jong" src="http://www.jsoneditoronline.org/" width="100%" height="500"></iframe></div>';
+	$syntax='JSON Editor';
+}
+if (strpos($owndata,'.xml')) {
+	$syntaxedit = '<div class="nvd3_editor">Edit your data set here and check syntax of XML.
+<iframe src="http://www.freeformatter.com/xml-formatter.html" width="100%" height="500"></iframe></div>';
+	$syntax='XML Editor';
+}
+$msg = '<p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
+// $datalink = 'Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
+$datatitle = 'Data File: '.$owndata;
+
+// Return whole editor for a post/page
 return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <br />
@@ -182,19 +195,18 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
 <div id="tabs">
   <ul>
     <li><a href="#dataedit-1" title="'.$datatitle.'">Chart Data Set</a></li>
-    <li><a href="#dataedit-2">JSON Editor</a></li>
+    <li><a href="#dataedit-2">'.$syntax.'</a></li>
   </ul>
   <div id="dataedit-1">
 <div class="nvd3_editor">
 <button onclick="'.$jscall.'">Save & Refresh Chart</button><br />
-<textarea id="dataset" cols="40" rows="240">
+<textarea id="dataset" cols="70" rows="240">
 '.$chartdata.'
 </textarea>
 </div>
   </div>
   <div id="dataedit-2">
-    <div class="nvd3_editor">Edit your data set here and check syntax of JSON.
-<iframe name="(c) 2013 Jos de Jong" src="http://www.jsoneditoronline.org/" width="100%" height="500"></iframe></div>
+    '.$syntaxedit.'
   </div>
 </div>';
 

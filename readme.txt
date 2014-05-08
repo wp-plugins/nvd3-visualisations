@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,10 @@ Here:
 1. Charts gallery showing out neatly on the same page of WP's blog.
 
 == Changelog ==
+
+= 1.5.1 =
+Version 1.5.1 -
+Better security for data editor's updates of chart data. Expanding gallery to create XML, CSV & TSV based template charts for new posts easily. Automatic showing right data's syntax editor (json/xml). CSV&TSV data sets for multibar. Cooler look of data editor with its new styles.
 
 = 1.5.0 =
 Version 1.5.0 -
