@@ -28,14 +28,16 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Key Features**
 
-1. Full set of original NVD3's gallery charts (totally 12 types of charts).
-1. Super easy to illustrate your own data sets from blog's root directory.
+1. Full set of original NVD3's gallery charts (12 types of charts in gallery).
+1. Super easy to illustrate your own data sets by picking up template chart from any gallery's examples.
+1. Support of JSON/XML or CSV/TSV data inputs with direct data editor.
+1. Smart suggestion of online syntax editor from cloud based on data's type.
+1. Easy to scale charts in pixels.
+1. Accurate layout of each chart based on any valid HTML container tag.
 1. Many charts on the same page / post of WordPress from one API / shortcode call.
-1. Easy to scale them in pixels.
-1. Accurate layout of each chart based on any HTML container tag.
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
-1. Visual look of charts defined from the NVD3 library's original CSS style file to match your blog's theme.
+1. Visual look of charts defined from the NVD3 lib's original CSS style file to let you match blog's theme easily.
 .
 
 **Data input**
