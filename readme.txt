@@ -107,6 +107,7 @@ Here:
 == Screenshots ==
 
 1. Charts gallery showing out neatly on the same page of WP's blog.
+2. 4 Fast Steps of New Chart: Clone from Gallery, Edit Data, Edit Post/Page, and Publish It.
 
 == Changelog ==
 
