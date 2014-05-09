@@ -10,6 +10,12 @@
   border-color: #666666;
   padding: 1px 10px;
  }
+ 
+ .nvd3_editor_text {
+  font-size: 8px;
+  font-family: "courier";
+  color: navy;
+ }
 
 .chartWrap {
   margin: 0;

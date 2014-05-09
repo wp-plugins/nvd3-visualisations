@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,12 +29,13 @@ If you like it give us some stars on WP plugin site so that others can find it m
 **Key Features**
 
 1. Full set of original NVD3's gallery charts (12 types of charts in gallery).
-1. Super easy to illustrate your own data sets by picking up template chart from any gallery's examples.
-1. Support of JSON/XML or CSV/TSV data inputs with direct data editor.
+1. Super easy to illustrate your data sets by picking up template chart from any gallery's examples.
+1. WYSIWYG look of chart on front-end + data editor to populate own data.
+1. Support of JSON/XML or CSV/TSV data inputs.
 1. Smart suggestion of online syntax editor from cloud based on data's type.
 1. Easy to scale charts in pixels.
 1. Accurate layout of each chart based on any valid HTML container tag.
-1. Many charts on the same page / post of WordPress from one API / shortcode call.
+1. Many charts on the same page/post of WordPress from one API / shortcode call.
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
 1. Visual look of charts defined from the NVD3 lib's original CSS style file to let you match blog's theme easily.
@@ -65,14 +66,18 @@ Two WP standard ways to install the package.
 1. Write 'NVD3' to the search box + Search PlugIns.
 1. Select 'Install Now' under the result of 'NVD3 tools'.
 1. Activate the PlugIn on WordPress after its download.
-1. Go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and test them starting to read from read_me_1st.txt.
+1. Create a new page for charts selection gallery by calling [demosGallery] shortcode.
+1. View this page and start to clone your charts & edit them.
+1. More tips: go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and start to read from read_me_1st.txt.
 
 Or you may want to do it 'old traditional way'.
 
 1. Download `nvd3` folder into your local computer.
 1. Upload this folder next to the `/wp-content/plugins/` directory into your WordPress server side.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and test them starting to read from read_me_1st.txt.
+1. Create a new page for charts selection gallery by calling [demosGallery] shortcode.
+1. View this page and start to clone your charts & edit them.
+1. More tips: go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and start to read from read_me_1st.txt.
 
 == Frequently Asked Questions ==
 
@@ -110,6 +115,10 @@ Here:
 2. 4 Fast Steps of New Chart: Clone from Gallery, Edit Data, Edit Post/Page, and Publish It.
 
 == Changelog ==
+
+= 1.5.2 =
+Version 1.5.2 -
+Chart's dimensions & options visible for easy edit. Just publish it: 1-2-3-4 steps on screenshot.
 
 = 1.5.1 =
 Version 1.5.1 -
