@@ -66,9 +66,6 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (typeof infile == 'object') // Direct input of data set by variable
 		chartSelector(id, infile, type, options);
-/* TODO
-
-*/
 }
 function parseJSON(data, chart) {
 
@@ -114,7 +111,7 @@ function demoShows(id, data, type, options) {
 	if (rootpath) // Global URL of root set by shortcode of WP
 		 infile = rootpath + demos[type];
 
-	var desc = 'Demo from file: data/'+demos[type];
+	var desc = 'Data File: data/'+demos[type];
 	var subs = '<sup> ?</sup>';
 	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
 	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
@@ -122,28 +119,27 @@ function demoShows(id, data, type, options) {
 	var pp = rootpath+'../postchart.php?new=';
 	var ctype = '&type='+type;
 	var filepath = '&filepath='+demos[type];
-	var tt = 'Clone data set from this example into new draft';
-	var args1 = '<a href="'+pp+'post'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Post]</a>';
-	var args2 = '<a href="'+pp+'page'+ctype+filepath+'" target="_blank" title="'+tt+'">[New Page]</a>';
+	var tt = 'Clone data set from this example into your new draft on WordPress';
 
-	var shortmsg = '<br />Add this into: <b class="title_nvd3">'+args1+' | '+args2+'</b>';
-	var xmlmsg = '<br />Shortcode: [jsChart type="'+type+'" options="{ xmldemo: true }"]';
-//	console.info(infile);
+	var shortmsg = '<br />Add this into: ';
+
+	var idmenu = "gmenu"+id;
+	var mpostpage = '<select id='+idmenu+'><option value="post">New Post</option><option value="page">New Page</option></select>';
+
+	var idmenu2 = "gformat"+id;
+	var mformat = '<select id='+idmenu2+'><option value="json">JSON data</option><option value="xml">XML data</option><option value="csv">CSV data</option><option value="tsv">TSV data</option></select>';
+
+	var query = rootpath+"../postchart.php?type="+type;
+	var ctype = demos[type];
+	var mbutt = '<button style="cursor:pointer" onclick="newpost2('+sQuote(query)+', '+sQuote(ctype)+', '+sQuote(idmenu)+', '+sQuote(idmenu2)+')" title="'+tt+'">New Chart</button>'
+
+	var aform = shortmsg + mpostpage + ' in ' + mformat + mbutt;
 
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
-
-//	Testing code: json -> xml -> json valid results
-/*
-var o = json22xml(data,'  ');
-// console.info(xml22json(o,''));
-data = xml2json(o,'');
-// console.info(data);
-*/
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
-		jQuery("#chart"+id).append(msg+shortmsg);
-		
+		jQuery("#chart"+id).append(msg+aform);
 	});
 	else if (infile.indexOf('.xml') > 0)
 	d3.text(infile,function(error,data) { // d3.xml has parsing problems
@@ -152,8 +148,38 @@ data = xml2json(o,'');
 		// console.info(data);
 		chartSelector(id, data, type, options);
 		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
-		jQuery("#chart"+id).append(msg+xmlmsg);
+		jQuery("#chart"+id).append(msg+aform);
 	});
+}
+function sQuote(w) { return " '"+w+"' "; }
+
+function newpost(linkjson, linkxml, id) {
+
+	var choice = jQuery('#'+id).val();
+
+	if (choice == 'xmlpage' || choice == 'jsonpage') {
+		linkjson = linkjson.replace('new=post', 'new=page');
+		linkxml = linkxml.replace('new=post', 'new=page');
+	}
+
+	if (choice == 'jsonpost' || choice == 'jsonpage')
+		window.open(linkjson);
+	else if (choice == 'xmlpost'  || choice == 'xmlpage')
+		window.open(linkxml);
+}
+function newpost2(alink, afile, id, id2) {
+
+	var post_type = jQuery('#'+id).val();
+	var data_format = jQuery('#'+id2).val();
+
+	alink = alink + '&new=' + post_type;
+	if (data_format != 'json')
+		alink = alink + '&filepath='+afile.replace('json', data_format);
+	else
+		alink = alink + '&filepath='+afile;
+
+	console.info(alink);
+	window.open(alink);
 }
 
 function chartSelector(id, data, type, options) {
@@ -625,6 +651,24 @@ function saveData(databox, filename) {
 		else
 			alert('Data Set failed to write!');
 	}); //, "json");
+}
+/*	Testing code: json -> xml -> json: check valid results
+var o = json22xml(data,'  ');
+data = xml2json(o,'');
+*/
+// Converter between different data inputs
+function dataConvert(intype, input, output) {
+
+	var data = jQuery('#'+input).val();
+	var tab = '';
+	// console.info(jQuery.parseJSON(data));
+	if (intype == 'json')
+		data = json22xml(jQuery.parseJSON(data), tab, true);
+	else if (intype == 'xml')
+		data = xml2json(data, tab, true);
+	// console.info(data);
+	jQuery('#'+output).empty();
+	jQuery('#'+output).val(data);
 }
 
 // Data set generator, original mychart.js example

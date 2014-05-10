@@ -1,20 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-<element>
-<label>One</label><value>29.765957771107</value>
-</element><element>
-<label>Two</label><value>0</value>
-</element><element>
-<label>Three</label><value>32.807804682612</value>
-</element><element>
-<label>Four</label><value>196.45946739256</value>
-</element><element>
-<label>Five</label><value>0.19434030906893</value>
-</element><element>
-<label>Six</label><value>98.079782601442</value>
-</element><element>
-<label>Seven</label><value>13.925743130903</value>
-</element><element>
-<label>Eight</label><value>5.1387322875705</value>
-</element>
-</root>
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <element>
+    <label>One</label>
+    <value>29.765957771107</value>
+  </element>
+  <element>
+    <label>Two</label>
+    <value>0</value>
+  </element>
+  <element>
+    <label>Three</label>
+    <value>32.807804682612</value>
+  </element>
+  <element>
+    <label>Four</label>
+    <value>196.45946739256</value>
+  </element>
+  <element>
+    <label>Five</label>
+    <value>0.19434030906893</value>
+  </element>
+  <element>
+    <label>Six</label>
+    <value>98.079782601442</value>
+  </element>
+  <element>
+    <label>Seven</label>
+    <value>13.925743130903</value>
+  </element>
+  <element>
+    <label>Eight</label>
+    <value>5.1387322875705</value>
+  </element>
+</root>

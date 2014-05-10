@@ -63,8 +63,9 @@ if (! $rightsok)  { // High enough role for edit pages
 $owndata = copyEx($dataset, $_GET['filepath']);
 
 // New Post/Page content from up -> down
-$shortcodes = "[loadNVD3] [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 options='{showLegend: true, tooltips: true, showControls: true}' ] ";
-$editarea = '<br />[dataEditor infile="'.$owndata.'" type="'.$ctype.'"]'; 
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 options='{showLegend: true, tooltips: true, showControls: true}' ] ";
+
+$editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]'; 
 
 $my_post = array(
   'post_title'    => 'NVD3 Chart',
@@ -120,7 +121,7 @@ function move2js($post, $type) {
 	else
 		$post= 'page_id='.$post;
 
-	$link = 'http://www.tere-tech.eu/balticfinns/?'.$post.'&preview=true';
+	$link = '../../../?'.$post.'&preview=true';
 
 	echo '<script> window.location.href="' .$link. '"; </script>';
 	return '<a href="'.$link.'"> OPEN NEW CHART </a>';

@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,10 +111,14 @@ Here:
 
 == Screenshots ==
 
-1. Charts gallery showing out neatly on the same page of WP's blog.
+1. Charts gallery showing out neatly on the same page of WP's blog. 
 2. 4 Fast Steps of New Chart: Clone from Gallery, Edit Data, Edit Post/Page, and Publish It.
 
 == Changelog ==
+
+= 1.5.3 =
+Version 1.5.3 -
+Data converter between json and xml on data editor. More human readable data sets, prettified. Fixed ugly bug of url redirection in creating new chart from gallery.
 
 = 1.5.2 =
 Version 1.5.2 -

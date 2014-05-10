@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.2
+Version: 1.5.3
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -168,22 +168,30 @@ $owndata = $data["infile"];
 $chartdata = file_get_contents($owndata);
 
 $jscall = "saveData('dataset', '".$owndata."')";
+$json2xml = "dataConvert('json', 'jsonset', 'xmlset')";
+$xml2json = "dataConvert('xml', 'xmlset', 'jsonset')";
 
 $syntax = '';
 $syntaxedit = '';
 $converter = '';
 $convertbox = '';
+$jsondata = '';
+$xmldata = '';
 if (strpos($owndata,'.json')) {
 	$syntaxedit = '<div class="nvd3_editor">Edit your data set here and check syntax of JSON.
 <iframe name="(c) 2013 Jos de Jong" src="http://www.jsoneditoronline.org/" width="100%" height="500"></iframe></div>';
 	$syntax='JSON Editor';
-	$converter = 'Data converter';
+	
+	$converter = 'Data Converter';
+	$jsondata = $chartdata;
 }
 if (strpos($owndata,'.xml')) {
 	$syntaxedit = '<div class="nvd3_editor">Edit your data set here and check syntax of XML.
 <iframe src="http://www.freeformatter.com/xml-formatter.html" width="100%" height="500"></iframe></div>';
 	$syntax='XML Editor';
-	$converter = 'Data converter';
+
+	$converter = 'Data Converter</sup>';
+	$xmldata = $chartdata;
 }
 $msg = '<p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
 // $datalink = 'Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
@@ -207,7 +215,7 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
 
   <div id="dataedit-1">
 <div class="nvd3_editor">
-<button onclick="'.$jscall.'">Save & Refresh Chart</button><br />
+<button onclick="'.$jscall.'" style="cursor:pointer">Save & Refresh Chart</button><br />
 <textarea id="dataset" class="nvd3_editor_text" cols="70" rows="240">
 '.$chartdata.'
 </textarea>
@@ -217,11 +225,21 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
   <div id="dataedit-2">
     '.$syntaxedit.'
   </div>
-</div>
 
   <div id="dataedit-3">
-	'.$convertbox.'
+	<textarea id="jsonset" class="nvd3_editor_text" cols="40" rows="240">
+		'.$jsondata.'
+	</textarea>
+	<br />
+	<button onclick="'.$json2xml.'" style="cursor:pointer">JSON to XML</button>
+	<button onclick="'.$xml2json.'" style="cursor:pointer">XML to JSON</button>
+	<br />
+	<textarea id="xmlset" class="nvd3_editor_text" cols="40" rows="240">
+		'.$xmldata.'
+	</textarea>
   </div>
+  
+</div>
 	';
 }
 add_shortcode("dataEditor", "genEditor");
