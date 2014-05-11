@@ -44,6 +44,7 @@ function dataRead(infile, id, type, options) {
 	else if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		// console.info(data);
+		// jsonbody = data;
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.xml') > 0)
@@ -54,14 +55,15 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-		data = parseJSON(data,'multibar');
 		// console.info(data);
+		data = parseJSON(data,type);
+		console.info(data);
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.csv') > 0)
 	d3.csv(infile,function(error,data) {
 		// console.info(data);
-		data = parseJSON(data,'multibar');
+		data = parseJSON(data,type);
 		chartSelector(id, data, type, options);
 	});
 	else if (typeof infile == 'object') // Direct input of data set by variable
@@ -69,7 +71,7 @@ function dataRead(infile, id, type, options) {
 }
 function parseJSON(data, chart) {
 
-	if (chart == 'multibar') {
+	if (1==1) {  // chart == 'multibar') {
 		var lines = new Array();
 		var titles = new Array();
 		for (line=0; line<data.length; line++) {
@@ -80,16 +82,39 @@ function parseJSON(data, chart) {
 			}
 			lines.push(colss);
 		}
+		// console.info(titles);
+		// console.info(lines);
 		var res = new Array();
-		for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
-			res.push(new Object( { "key":titles[t], "values":getCol(t,lines) } ));
+		if (chart == 'pie' || chart == 'donut')
+			for (t=0; t<lines.length; t++)
+					res.push(new Object( { "label":lines[t][0], "value":+lines[t][1] } ));
+		else if (chart == 'discretebar')
+			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
+				res.push(new Object( { "key":titles[t], "values":forceNumb(lines) } ));
+		else // multibars etc
+			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
+				res.push(new Object( { "key":titles[t], "values":getCol(t,lines) } ));
 
+		// console.info(res);
 		return res;
 	}
 	return data;
 }
+function forceNumb(arr) {  // Name data points + force numbers type for values
+
+	for (i=0; i<arr.length; i++) {
+		arr[i]['label'] = arr[i][0];
+		if (+arr[i][1] || arr[i][1] == '0')
+			arr[i]['value'] = +arr[i][1];
+	}
+
+	return arr;
+
+}
+
 function getCol(colname, lines) {
 	var out = new Array();
+	console.info(lines);
 	for (i=0; i<lines.length; i++) { // Note: forcing numerical value out
 		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
 		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );
@@ -638,9 +663,10 @@ nv.addGraph(function() {
 });
 
 };
-function saveData(databox, filename) {
+function saveData(header, databox, filename) {
 
 	var mydata = encodeURIComponent( jQuery('#'+databox).val() );
+	mydata = jQuery('#'+header).html() + mydata;
 	// console.info(mydata);
 	// var rec = { infile: filename, data: mydata };
 	var query = 'http://www.tere-tech.eu/balticfinns/wp-content/plugins/nvd3-visualisations/updatechart.php';
@@ -652,23 +678,68 @@ function saveData(databox, filename) {
 			alert('Data Set failed to write!');
 	}); //, "json");
 }
-/*	Testing code: json -> xml -> json: check valid results
-var o = json22xml(data,'  ');
-data = xml2json(o,'');
-*/
+
 // Converter between different data inputs
 function dataConvert(intype, input, output) {
 
 	var data = jQuery('#'+input).val();
 	var tab = '';
-	// console.info(jQuery.parseJSON(data));
+
 	if (intype == 'json')
 		data = json22xml(jQuery.parseJSON(data), tab, true);
 	else if (intype == 'xml')
 		data = xml2json(data, tab, true);
-	// console.info(data);
+
 	jQuery('#'+output).empty();
 	jQuery('#'+output).val(data);
+}
+
+// Parse JSON data structure into TSV table
+function json2tsv(input) {
+
+	var data = jQuery('#'+input).val();
+	data = jQuery.parseJSON(data);
+	// console.info(data);
+	if (typeof data[0] == 'object' && !data[0].value)
+		data = data[0];
+
+	var keys = new Array();
+	var values = new Array();
+	var labels = new Array();
+
+	if (typeof data == 'object')
+	for (cell in data) {
+		if (cell == 'key')
+			keys.push(data[cell]);
+		if (cell == 'values')
+			for (i=0; i<data[cell].length ; i++) {
+				var dcell = data[cell][i];
+				if (dcell.label)
+					labels.push(dcell.label);
+				if (dcell.value || dcell.value=='0')
+					values.push(dcell.value);
+			}
+		// Simple case
+		if (+cell || cell == '0') { // Simple arr of tuples: [label,value]...[label,value]
+			labels.push(data[cell]['label']);
+			values.push(data[cell]['value']);
+		}
+	}
+	// console.info(keys);
+	// console.info(labels);
+	// console.info(values);
+
+	var tab = '	';
+	var newline = '\n';
+	var tsv = new Array();
+	var tsvstr = '';
+
+	tsv.push('keys'+tab+keys[0]);
+	tsvstr = 'keys'+tab+keys[0];
+	for (i=0; i<values.length; i++)
+		tsvstr += newline + labels[i]+tab+values[i];
+		// tsv.push(labels[i]+tab+values[i]);
+	console.info(tsvstr);
 }
 
 // Data set generator, original mychart.js example

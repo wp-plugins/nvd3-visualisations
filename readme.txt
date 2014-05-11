@@ -4,11 +4,11 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NVD3 visualisations gives you tools to generate impressive business quality charts based on the famous NV3D visualisation library.  
+NVD3 visualisations gives you tools to generate impressive business quality charts based on the famous NV3D visualisation library.
 
 == Description ==
 
@@ -112,9 +112,13 @@ Here:
 == Screenshots ==
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
-2. 4 Fast Steps of New Chart: Clone from Gallery, Edit Data, Edit Post/Page, and Publish It.
+2. 4 Fast Steps of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP, and 4)Publish It.
 
 == Changelog ==
+
+= 1.5.4 =
+Version 1.5.4 -
+Three new chart types accept TSV/CSV input formats (eq pie,donut, and discretebar) and clone from gallery. Better filtering of xml input on data editor.
 
 = 1.5.3 =
 Version 1.5.3 -
@@ -122,7 +126,7 @@ Data converter between json and xml on data editor. More human readable data set
 
 = 1.5.2 =
 Version 1.5.2 -
-Chart's dimensions & options visible for easy edit. Just publish it: 1-2-3-4 steps on screenshot.
+Chart's dimensions & options visible for easy edit on its created shortcodes. Just publish it: 1-2-3-4 steps on screenshot how to publish from charts gallery.
 
 = 1.5.1 =
 Version 1.5.1 -
