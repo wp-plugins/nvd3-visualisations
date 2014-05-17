@@ -63,7 +63,7 @@ if (! $rightsok)  { // High enough role for edit pages
 $owndata = copyEx($dataset, $_GET['filepath']);
 
 // New Post/Page content from up -> down
-$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 options='{showLegend: true, tooltips: true, showControls: true}' ] ";
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 float='none' options='{showLegend: true, tooltips: true, showControls: true}' ] ";
 
 $editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]'; 
 

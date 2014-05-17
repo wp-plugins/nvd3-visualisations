@@ -4,11 +4,11 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NVD3 visualisations gives you tools to generate impressive business quality charts based on the famous NV3D visualisation library.
+NVD3 visualisations give you tools to generate impressive business quality charts based on the famous NV3D charts library.
 
 == Description ==
 
@@ -115,6 +115,10 @@ Here:
 2. 4 Fast Steps of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP, and 4)Publish It.
 
 == Changelog ==
+
+= 1.5.5 =
+Version 1.5.5 -
+Three more chart types accept TSV/CSV input formats (eq cumulativeline, stackedarea, and lineplusbar) and clone from gallery's TSV examples. Support of standard style's float option for right/left placements of chart. 
 
 = 1.5.4 =
 Version 1.5.4 -

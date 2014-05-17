@@ -45,6 +45,7 @@ function dataRead(infile, id, type, options) {
 	d3.json(infile,function(error,data) {
 		// console.info(data);
 		// jsonbody = data;
+		// printLines(data);
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.xml') > 0)
@@ -69,9 +70,21 @@ function dataRead(infile, id, type, options) {
 	else if (typeof infile == 'object') // Direct input of data set by variable
 		chartSelector(id, infile, type, options);
 }
+function printLines(data) {
+	var tab = '	';
+	var newline = "\n";
+	var out = '';
+	for (line=0; line<data.length; line++) {
+		if (data[line].values)
+			for (line2=0; line2<data[line].values.length; line2++)
+				out += data[line].values[line2][0] +tab+ data[line].values[line2][1] +newline;
+		out += 'DATA SET'+newline;
+	}
+	console.info(out);
+}
+
 function parseJSON(data, chart) {
 
-	if (1==1) {  // chart == 'multibar') {
 		var lines = new Array();
 		var titles = new Array();
 		for (line=0; line<data.length; line++) {
@@ -90,31 +103,42 @@ function parseJSON(data, chart) {
 					res.push(new Object( { "label":lines[t][0], "value":+lines[t][1] } ));
 		else if (chart == 'discretebar')
 			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
-				res.push(new Object( { "key":titles[t], "values":forceNumb(lines) } ));
+				res.push(new Object( { "key":titles[t], "values":forceNumb(lines, t) } ));
+		else if (chart == 'stackedarea'  || chart == 'lineplusbar'  || chart == 'cumulativeline')
+			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
+				res.push(new Object( { "key":titles[t], "values":forceNumb2(lines, t) } ));
 		else // multibars etc
 			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
 				res.push(new Object( { "key":titles[t], "values":getCol(t,lines) } ));
 
 		// console.info(res);
 		return res;
-	}
+
 	return data;
 }
-function forceNumb(arr) {  // Name data points + force numbers type for values
+function forceNumb(arr, t) {  // Name data points + force numbers type for values 
 
 	for (i=0; i<arr.length; i++) {
 		arr[i]['label'] = arr[i][0];
 		if (+arr[i][1] || arr[i][1] == '0')
 			arr[i]['value'] = +arr[i][1];
 	}
-
 	return arr;
+}
 
+function forceNumb2(arr, t) {  // Name data points + force numbers type for values 
+
+	var out = new Array();
+	for (i=0; i<arr.length; i++) {
+		if (+arr[i][t] || arr[i][t] == '0')
+			out.push( new Array( +arr[i][0], +arr[i][t] ) );
+	}
+	return out;
 }
 
 function getCol(colname, lines) {
 	var out = new Array();
-	console.info(lines);
+	// console.info(lines);
 	for (i=0; i<lines.length; i++) { // Note: forcing numerical value out
 		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
 		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );

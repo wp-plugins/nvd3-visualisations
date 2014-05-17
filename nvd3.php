@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.4
+Version: 1.5.5
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -123,8 +123,8 @@ function newChart($data) {
 		$infile = $data['datafile'];
 
 	$container = 'span'; // Def.type of container
-	if ($data['type']) // User's choice
-		$container = $data['type'];
+	if ($data['container']) // User's choice
+		$container = $data['container'];
 
 	$height = '250'; // Def.height of chart (must exist)
 	if ($data['height']) // User's choice
@@ -132,6 +132,9 @@ function newChart($data) {
 	$width = ' width:450';  // Def. width
 	if ($data['width'])
 		$width = ' width:'.$data['width'];
+	$float = ' float:none; ';  // Embed on right/left
+	if ($data['float'])
+		$float = ' float:'.$data['float'];
 
 	$options = '';  // Def. options
 	if ($data['options'])
@@ -141,7 +144,7 @@ function newChart($data) {
 	if ($data['js'])
 		$jsfunc = 1;
 
-	$html = '<'.$container.' id="chart'.$id.'">';
+	$html = '<'.$container.' id="chart'.$id.'" style="'.$float.'">';
 	$html .= "<svg style='height:".$height."px;".$width."px;'/>";
 	$html .= "</".$container.">"; 
 
@@ -237,7 +240,7 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
 	<textarea id="jsonset" class="nvd3_editor_text" cols="40" rows="240">
 		'.$jsondata.'
 	</textarea>
-
+	<button onclick="'.$json2tsv.'" style="cursor:pointer">Clone TSV Chart</button>
 	<br />
 	<button onclick="'.$json2xml.'" style="cursor:pointer">JSON to XML</button>
 	<button onclick="'.$xml2json.'" style="cursor:pointer">XML to JSON</button>
