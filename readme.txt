@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,7 +43,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Data input**
 
-* Data's import from any valid JSON file or from customized data generating own JavaScript function.
+* Data's import from valid JSON/XML/CSV/TSV file or from own data generating JavaScript function.
 .
 
 **HAPPY CHARTING on WordPress !**
@@ -116,9 +116,13 @@ Here:
 == Screenshots ==
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
-2. 4 Fast Steps of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP, and 4)Publish It.
+2. 4 FAST STEPS of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP Normally, and 4)Publish It.
 
 == Changelog ==
+
+= 1.5.7 =
+Version 1.5.7 -
+Support of standard margin options for the chart itself and its external container from input options. The 1st primitive way to change chart's drawing svg styles: color of stroke, fill, opacity, etc. New example of margins use.
 
 = 1.5.6 =
 Version 1.5.6 -
