@@ -275,6 +275,7 @@ function chartSelector(id, data, type, options) {
 		Donut(id, data, options); 
 	else if (type == 'bullet')
 		Bullet(id, data, options);
+
 /*
 	nvd3Dump = JSON.stringify(data);
 //	xdata = "'data'";
@@ -285,9 +286,9 @@ function chartSelector(id, data, type, options) {
 // Axis should be time formatted with chart ?
 function timeStamp(x, options) {
 	if (options.xtime)
-			return d3.time.format('%x')(new Date(x))
-	else
-		return x
+		return d3.time.format('%x')(new Date(x));
+
+	return x;
 }
 
 /* ALL Supported NVD3 Chart Types: 1 function/type */
@@ -337,11 +338,13 @@ function linePlusBar(chartID, data, options) {
         .transition()
         .duration(500)
         .call(chart);
-
+/*
   if (options.style) { // TODO: better way to set different styles for 2 series
-	d3.selectAll('#svg'+chartID+' rect').style(options.style);
+	d3.selectAll('#svg'+chartID+' rect').style(options.style); 
 	d3.selectAll('#svg'+chartID+' path').style(options.style);
 	}
+*/
+	colorSegments('lineplusbar',options,chartID,data.length);
 
       nv.utils.windowResize(chart.update); 
 
@@ -353,7 +356,7 @@ function cumulativeLineData(chartID, data, options) {
  
   nv.addGraph(function() {
     var chart = nv.models.cumulativeLineChart()
-                  .margin(setMargin({left: 50, bottom: 50}, options))
+                  .margin(setMargin({left: 50, right: 50, bottom: 50}, options))
 				  .x(function(d) { return d[0] })
                   .y(function(d) { return d[1]/100 }) //adjusting, 100% is 1.00, not 100 as it is in the data
                   .color(d3.scale.category10().range())
@@ -363,19 +366,20 @@ function cumulativeLineData(chartID, data, options) {
     // console.info(data);
 
 	 chart.xAxis
-        .tickValues([1078030800000,1122782400000,1167541200000,1251691200000])
         .tickFormat(function(d) {
-            return d3.time.format('%x')(new Date(d))
+			return timeStamp(d, options)
           });
 
     chart.yAxis
-        .tickFormat(d3.format(',.1%')); 
+        .tickFormat(d3.format( setFormat(',.1%',options) ));
 
 	  chart.options(options);
 
 	  d3.select("#svg"+chartID)
         .datum(data)
         .call(chart);
+
+	colorSegments('cumulativeline',options,chartID,data.length);
 
     //TODO: Figure out a good way to do this automatically
     nv.utils.windowResize(chart.update); 
@@ -388,7 +392,7 @@ function stackedArea(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.stackedAreaChart()
-                  .margin(setMargin({right: 100, bottom: 50}, options))
+                  .margin(setMargin({right: 50, bottom: 50}, options))
                   .x(function(d) { return d[0] })   //We can modify the data accessor functions...
                   .y(function(d) { return d[1] })   //...in case your data is formatted differently.
                   .useInteractiveGuideline(true)    //Tooltips which show all data points. Very nice!
@@ -400,11 +404,11 @@ function stackedArea(chartID, data, options) {
     //Format x-axis labels with custom function.
     chart.xAxis
         .tickFormat(function(d) { 
-          return d3.time.format('%x')(new Date(d)) 
+			return timeStamp(d, options)
     });
 
     chart.yAxis
-        .tickFormat(d3.format(',.2f'));
+        .tickFormat(d3.format( setFormat(',.2r',options) ));
 
     chart.options(options);
 
@@ -412,8 +416,7 @@ function stackedArea(chartID, data, options) {
       .datum(data)
       .call(chart);
 
-  if (options.style)
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('stackedarea',options,chartID,data.length);
 
     nv.utils.windowResize(chart.update);
 
@@ -434,15 +437,17 @@ nv.addGraph(function() {
       .transitionDuration(350)
       ;
 
+    chart.yAxis
+        .tickFormat(d3.format( setFormat(',.2r',options) ));
+
     chart.options(options);
 
   d3.select("#svg"+chartID)
       .datum(data)
       .call(chart);
 
-  if (options.style)
-	d3.selectAll('#svg'+chartID+' rect').style(options.style);
- 
+ 	colorSegments('discretebar',options,chartID,data.length);
+
   nv.utils.windowResize(chart.update);
 
   return chart;
@@ -453,17 +458,16 @@ function horizontalMultiBar(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.multiBarHorizontalChart()
-        .margin(setMargin({left: 150, bottom: 50}, options))
+        .margin(setMargin({left: 70, bottom: 50}, options))
 		.x(function(d) { return d.label })
         .y(function(d) { return d.value })
-		.margin(setMargin({top: 30, right: 20, bottom: 50, left: 175}, options))
         .showValues(true)           //Show bar value next to each bar.
         .tooltips(true)             //Show tooltips on hover.
         .transitionDuration(350)
         .showControls(true);        //Allow user to switch between "Grouped" and "Stacked" mode.
 
     chart.yAxis
-        .tickFormat(d3.format(',.2f'));
+        .tickFormat(d3.format( setFormat(',.2r',options) ));
 
 	chart.options(options);
 
@@ -471,8 +475,7 @@ function horizontalMultiBar(chartID, data, options) {
         .datum(data)
         .call(chart);
   
-   if (options.style)
-	 d3.selectAll('#svg'+chartID+' rect').style(options.style);
+	colorSegments('horizontalmultibar',options,chartID,data.length);
 
     nv.utils.windowResize(chart.update);
 
@@ -497,8 +500,8 @@ nv.addGraph(function() {
   });
 
   //Axis settings
-  chart.xAxis.tickFormat(d3.format('.02f'));
-  chart.yAxis.tickFormat(d3.format('.02f'));
+  chart.xAxis.tickFormat(d3.format( setFormat('.02f',options) ));
+  chart.yAxis.tickFormat(d3.format( setFormat('.02f',options) ));
 
   //We want to show shapes other than circles.
   chart.scatter.onlyCircles(false);
@@ -512,8 +515,7 @@ nv.addGraph(function() {
       .datum(data)
       .call(chart);
 
-  if (options.style)
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('scatterbubble',options,chartID,data.length);
 
   nv.utils.windowResize(chart.update);
 
@@ -525,7 +527,7 @@ function MultiBar(chartID, data, options) {
 
 nv.addGraph(function() {
     var chart = nv.models.multiBarChart()
-      .margin(setMargin({left: 150, bottom: 50}, options))
+      .margin(setMargin({left: 50, bottom: 50}, options))
 	  .transitionDuration(350)
       .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
       .rotateLabels(0)      //Angle to rotate x-axis labels.
@@ -543,7 +545,7 @@ nv.addGraph(function() {
     });
 
     chart.yAxis
-        .tickFormat(d3.format('.f'));
+        .tickFormat(d3.format( setFormat('.2r',options) ));
 //   console.info( JSON.stringify( exampleData() ) );
 
 	chart.options(options);
@@ -552,8 +554,7 @@ nv.addGraph(function() {
         .datum(data)
         .call(chart);
 
-  if (options.style)
-	d3.selectAll('#svg'+chartID+' rect').style(options.style);
+	colorSegments('multibar',options,chartID,data.length);
 
     nv.utils.windowResize(chart.update);
 
@@ -565,7 +566,7 @@ function viewFinder(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.lineWithFocusChart()
-	.margin(setMargin({left: 150, bottom: 50}, options))
+	.margin(setMargin({left: 50, bottom: 50}, options))
 	.x(function(d,i) { return i })
   ;
 /*
@@ -575,13 +576,13 @@ nv.addGraph(function() {
 	chart.xAxis.tickFormat(function(d) {
         var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
 		return timeStamp(dx, options);
-    });
+    }); 
 
   chart.yAxis
-      .tickFormat(d3.format('.f'));
+      .tickFormat(d3.format('.2r'));
 
   chart.y2Axis
-      .tickFormat(d3.format(',.2f'));
+      .tickFormat(d3.format( setFormat(',.2r',options) ));
 
 	chart.options(options);
 
@@ -590,8 +591,7 @@ nv.addGraph(function() {
       .transition().duration(500)
       .call(chart);
 
-  if (options.style)
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('viewfinder',options,chartID,data.length);
 
   nv.utils.windowResize(chart.update);
 
@@ -604,7 +604,7 @@ function simpleLine(chartID, data, options) {
 /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
   var chart = nv.models.lineChart()
-                .margin(setMargin({left: 150, bottom: 50}, options))  //Adjust chart margin wider.
+                .margin(setMargin({left: 50, bottom: 50}, options))  //Adjust chart margin wider.
                 .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 .transitionDuration(350)  //how fast do you want the lines to transition?
                 .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
@@ -614,17 +614,17 @@ nv.addGraph(function() {
   ;
 
 	chart.xAxis.tickFormat(function(d) {
-        var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
+		var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
 		return timeStamp(dx, options);
     });
 /*
+var zero = d3.format("04d");
   chart.xAxis     //Chart x-axis settings
       // .axisLabel('Time (ms)')
       .tickFormat(d3.format(',r'));
 */
   chart.yAxis     //Chart y-axis settings
-      // .axisLabel('Voltage (v)')
-      .tickFormat(d3.format('.f'));
+      .tickFormat(d3.format( setFormat('.2r',options) )); 
 
 //  var myData = sinAndCos();   //You need data...
 
@@ -634,8 +634,7 @@ nv.addGraph(function() {
       .datum(data)         //Populate the <svg> element with chart data...
       .call(chart);          //Finally, render the chart!
 
-  if (options.style) // Example: {"stroke":"navy"}
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('simpleline',options,chartID,data.length);
 
   //Update the chart when window resizes.
   nv.utils.windowResize(function() { chart.update() });
@@ -660,8 +659,7 @@ nv.addGraph(function() {
         .transition().duration(350)
         .call(chart);
 
-  if (options.style) // Example: {"fill":"navy"}
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('pie',options,chartID,data.length);
 
   return chart;
 });
@@ -689,8 +687,7 @@ nv.addGraph(function() {
         .transition().duration(350)
         .call(chart);
 
-  if (options.style) // Example: {"fill":"navy"}
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
+	colorSegments('donut',options,chartID,data.length);
 
   return chart;
 });
@@ -713,10 +710,82 @@ nv.addGraph(function() {
 });
 }
 
+function colorSegments(type,options,chartID,size) {
+
+  initCB();
+
+  var classname = 0;
+  if (options.colorbrewer) if (options.colorbrewer.segment)
+		classname = options.colorbrewer.segment;
+
+  var action = 'fill';
+  if (!classname) {
+  if (type == 'pie' || type == 'donut')
+	classname = ' .nv-slice';
+	else if (type == 'horizontalmultibar' || type == 'discretebar' || type == 'multibar' || type == 'lineplusbar')
+		classname = ' .nv-bar';
+	else if (type == 'stackedarea')
+		classname = ' .nv-area';
+	else if (type == 'scatterbubble')
+		classname = ' .nv-group';
+	else if (type == 'simpleline'  || type == 'cumulativeline' || type == 'viewfinder') {
+		classname = ' .nv-group';
+		action = 'stroke';
+		}
+	}
+
+	var customs = false;
+	// Fixed palettes of colorbrewer.js
+	if (options.colorbrewer)
+	if (options.colorbrewer.palette)
+	if (colorbrewer[options.colorbrewer.palette]) {
+		var amount = size;
+		if (options.colorbrewer.amount)
+			amount = options.colorbrewer.amount;
+		if (amount < 3) amount = 3;
+		else if (amount > colorbrewer[options.colorbrewer.palette].max)
+			amount = colorbrewer[options.colorbrewer.palette].max;
+		var colors = d3.scale.ordinal().range(colorbrewer[options.colorbrewer.palette][amount]);
+		customs = true;
+	}
+	// Own custom colors (eq options.colors:'red,green,blue' etc)
+	if (options.colors) {
+		var colors = d3.scale.ordinal().range(options.colors.split(','));
+		customs = true;
+	}
+	if (customs) {
+		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
+		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
+		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("stroke", function(d, i) { return colors(i); });
+	} else
+	if (options.style) // Example: {"fill":"navy"}
+		d3.selectAll('#svg'+chartID+classname).style(options.style);
+}
+
+function recolor(type,chartID,i) { // TODO
+}
+
+function initCB() {
+	for (x in colorbrewer)
+	if (colorbrewer[x]['max'])
+		return;
+	else
+	for (j in colorbrewer[x]) {
+		colorbrewer[x]['max'] = colorbrewer[x][j].length;
+	}
+}
+
 function setMargin(m, options) {
 
   if (options.margin)
 	return options.margin;
+
+  return m;
+}
+function setFormat(m, options) {
+
+  if (options.format)
+	return options.format;
 
   return m;
 }

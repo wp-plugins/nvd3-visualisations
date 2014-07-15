@@ -9,9 +9,9 @@ jsChart(pcs, '', 'viewfinder', {height:'250', width:'300'}, { showLegend: true, 
 pcs--;
 jsChart(pcs, '', 'multibar', {height:'250', width:'300'}, { showLegend: false, xmldemo: xml  });
 pcs--;
-jsChart(pcs, '', 'cumulativeline', {height:'250', width:'300'}, { showLegend: false, xmldemo: xml  });
+jsChart(pcs, '', 'cumulativeline', {height:'250', width:'300'}, { showLegend: false, xmldemo: xml, xtime: true  });
 pcs--;
-jsChart(pcs, '', 'stackedarea', {height:'250', width:'300'}, { showLegend: false, xmldemo: xml  });
+jsChart(pcs, '', 'stackedarea', {height:'250', width:'300'}, { showLegend: false, xmldemo: xml, xtime: true  });
 pcs--;
 jsChart(pcs, '', 'discretebar', {height:'250', width:'300'}, { color: ['red','green','blue','orange','brown','navy','yellow','black'], xmldemo: xml  });
 pcs--;

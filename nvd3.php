@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.7
+Version: 1.5.8
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -24,9 +24,11 @@ function write_headers($rood_dir) {
 	echo '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment if you need to develope NVD3 core lib
 	// echo '<script src="'.$root.'nv.d3.js"></script>'; // & edit this source file + minimize when ready
 
-	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading (TODO)
-	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for XML data sets reading (TODO)
-	// NVD3 Visualisations
+	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading
+	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON/XML conversions
+	echo '<script src="'.$root.'colorbrewer.js"></script>'; // Predefined pretty coloring sets
+
+	// NVD3 Visualisations main routines
 	echo '<script src="'.$root.'wpcharts.js"></script>';
 
 	echo '<!-- End of NVD3 -->';

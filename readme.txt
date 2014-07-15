@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,7 +88,9 @@ Or you may want to do it 'old traditional way'.
 
 = I hate to learn JavaScript API etc, is there any just a simple way to draw charts? =
 
-Shortcode [jsChart] is your easy solution then: peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
+Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post.
+
+Also, peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
 
 = How can I find all available chart types & their calling names? =
 
@@ -101,6 +103,23 @@ Look at inside **chart_options.html** file and its comparisions table, please.
 = Where are my data sets stored and what happens for them if I remove chart's page/post or whole plugin? =
 
 Look at the blog's root and the folder called **charts_nvd3**. Data sets are stored there by random names and they stay there until you remove them by FTP client. If you create very many/big data sets it is a pretty good idea to clean this folder from time to time manually.
+
+= How can I change the margins around the chart bigger? =
+
+You have 2 choices here: outside of chart container (normally div/span element) or inside its svg element. Take a look at example **shortcode_margins_demo.txt** to learn more about these options, please.
+
+= How can I change the look of elements of chart from default (eq its lines, bars, etc)? =
+
+You can set custom colors for each chart separately.
+
+If you wish to set own custom palette, use **colors** option. 
+Example - options="{colors:'red,green,blue'}"
+
+If you wish to have fixed set of palettes, use **colorbrewer** option. 
+Example - options="{colorbrewer:{palette:'Blues'}}"
+
+Finally, there is an option **style** that feeds in all legal values to the chart's svg raw structure. 
+A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
 
 = Is it possible to have multiple charts on the same WP post or page? =
 
@@ -119,6 +138,10 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP Normally, and 4)Publish It.
 
 == Changelog ==
+
+= 1.5.8 =
+Version 1.5.8 -
+Expanding coloring for segments of charts: by **colorbrewer** option + palettes or own given set by **colors** option. Support of standard format of D3 on values axis of charts: **format** option. Removing x-axis time dependence from a few chart types. Better default margins for all demo charts.
 
 = 1.5.7 =
 Version 1.5.7 -
