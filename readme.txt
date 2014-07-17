@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.8
+Stable tag: 1.5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,16 +110,12 @@ You have 2 choices here: outside of chart container (normally div/span element) 
 
 = How can I change the look of elements of chart from default (eq its lines, bars, etc)? =
 
-You can set custom colors for each chart separately.
+You can set palette of custom colors for each chart (bars, etc) separately with the following ways:
 
-If you wish to set own custom palette, use **colors** option. 
-Example - options="{colors:'red,green,blue'}"
-
-If you wish to have fixed set of palettes, use **colorbrewer** option. 
-Example - options="{colorbrewer:{palette:'Blues'}}"
-
-Finally, there is an option **style** that feeds in all legal values to the chart's svg raw structure. 
-A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
+1. If you wish to set own custom palette, use **colors** option. Example - options="{colors:'red,green,blue'}"
+1. If you wish to have fixed set of palettes, use **colorbrewer** option. Example - options="{colorbrewer:{palette:'Blues'}}"
+1. If you wish to build colors smooth gradients. Example - options="{ colors:{startbar:'red', endbar:'lime'} }"
+1. Finally, there is an option **style** that feeds in all legal values to the chart's svg raw structure. A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
 
 = Is it possible to have multiple charts on the same WP post or page? =
 
@@ -135,9 +131,13 @@ Here:
 == Screenshots ==
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
-2. 4 FAST STEPS of New Chart: 1)Clone from Gallery, 2)Feed in Own Data, 3)Edit Post/Page of WP Normally, and 4)Publish It.
+2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 
 == Changelog ==
+
+= 1.5.9 =
+Version 1.5.9 -
+Coloring option **colors** accepts & generates smooth gradients between given start & end colors (by Lab color model). Examples about how to set custom colors and format of axis.
 
 = 1.5.8 =
 Version 1.5.8 -
