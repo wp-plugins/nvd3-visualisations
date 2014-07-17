@@ -11,7 +11,7 @@
 [loadNVD3]
 
 <b>Chart from Excel type CSV data</b>
-[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/tallinn.csv' height=300 width=600]
+[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/multiData.csv' height=300 width=600]
 
 <b>Chart from basic TSV data</b>
-[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/tallinn.tsv' height=300 width=600]
+[jsChart type='multibar' datafile='wp-content/plugins/nvd3-visualisations/data/multiData.tsv' height=300 width=600]

@@ -617,16 +617,9 @@ nv.addGraph(function() {
 		var dx = data[0].values[d] && data[0].values[d]["x"] || 0;
 		return timeStamp(dx, options);
     });
-/*
-var zero = d3.format("04d");
-  chart.xAxis     //Chart x-axis settings
-      // .axisLabel('Time (ms)')
-      .tickFormat(d3.format(',r'));
-*/
-  chart.yAxis     //Chart y-axis settings
-      .tickFormat(d3.format( setFormat('.2r',options) )); 
 
-//  var myData = sinAndCos();   //You need data...
+  chart.yAxis     //Chart y-axis settings
+      .tickFormat(d3.format( setFormat('.2r',options) ));
 
 	chart.options(options);
 
@@ -748,11 +741,17 @@ function colorSegments(type,options,chartID,size) {
 		var colors = d3.scale.ordinal().range(colorbrewer[options.colorbrewer.palette][amount]);
 		customs = true;
 	}
-	// Own custom colors (eq options.colors:'red,green,blue' etc)
-	if (options.colors) {
-		var colors = d3.scale.ordinal().range(options.colors.split(','));
-		customs = true;
-	}
+	// Own custom colors (eq options.colors:'red,green,blue' or options.colors:{startbar:'red', endbar:'lime'} )
+	if (options.colors)
+		if (typeof options.colors == 'string')  {
+			var colors = d3.scale.ordinal().range(options.colors.split(','));
+			customs = true;
+	}	 else { // Object => interpolating of colours 
+			if (options.colors.startbar && options.colors.endbar)
+				var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
+			customs = true;
+		}
+
 	if (customs) {
 		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
@@ -773,6 +772,65 @@ function initCB() {
 	for (j in colorbrewer[x]) {
 		colorbrewer[x]['max'] = colorbrewer[x][j].length;
 	}
+}
+
+// Generates smooth colors based on given starting and ending colors and returns its HTML color codes
+function gradientColors(startColor, steps, endColor) {
+
+if (startColor && endColor) { // && !args2js.colors && args2js.colors.length != args2js.data.length)
+
+	var colors = new Array();
+	if (!startColor.length)  // We give up coloring task for the CSS declarations over here
+		return '';
+
+	var csteps = 0;
+	if (!endColor) {
+		var acolor = d3.hsl(startColor);
+		// Defining proper lightness change step
+		if (acolor.l > 0.5) { // Starting color is over 50% from all lightness => going to darken it
+			csteps = acolor.l / (steps); // Target range: (startColor lightness ... black/0)
+			ssteps = acolor.s / steps;
+		} else {  // ... or brighten up
+			csteps = (1-acolor.l) / (steps); // Target range: (startColor lightness ... white/1)
+			ssteps = (1-acolor.s) / steps;
+		}
+		// Generating colors (without endColor given)
+		var thecolor = acolor;
+		for (i=0; i<steps; i++) {
+			colors.push(thecolor.toString());
+			// console.info(acolor.l);
+			// thecolor = d3.hsl(d3.hsl(thecolor).h, d3.lab(thecolor).s+ssteps, d3.lab(thecolor).l+csteps);
+			if (acolor.l > 0.49)
+				thecolor = thecolor.darker(csteps*4);
+			else
+				thecolor = thecolor.brighter(csteps*4);
+		}
+	} else {  
+		// Here we have start and end color traveling from => to by using steps of given color changes
+		// We encode start and end colors by using Lab's color model's components from HTML's color strings
+		var startColor = d3.lab(startColor);
+		var Lab_start = new Array(startColor.l, startColor.a, startColor.b);
+		var endColor = d3.lab(endColor);
+		var Lab_end = new Array(endColor.l, endColor.a, endColor.b);
+
+		steps = steps - 1;
+		// Time to define (L,a,b) linear steps for each components change and build result
+		var L_step = (-Lab_start[0]+Lab_end[0]) / steps;
+		var a_step = (-Lab_start[1]+Lab_end[1]) / steps;
+		var b_step = (-Lab_start[2]+Lab_end[2]) / steps;
+		// Generating color ramp by using these steps together from start to end color
+		var thecolor = startColor;
+		for (i=0; i<steps+1; i++) {
+			colors.push(thecolor.toString());
+			thecolor = d3.lab(d3.lab(thecolor).l+L_step, d3.lab(thecolor).a+a_step, d3.lab(thecolor).b+b_step);
+		}
+		// Why use D3's Lab (vs HSL) model here: 'father of all humans coloring models :-)':
+		// *** http://www.photozone.de/colorimetric-systems-and-color-models
+	}
+
+	return colors;
+} else
+	return new Array(); // empty array
 }
 
 function setMargin(m, options) {

@@ -1,0 +1,23 @@
+<!-- Your very 1st shortcode's charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & enjoy new pretty charts on the blog 
+! -->
+
+<h3>Coloring Chart's Data</h3>
+
+[loadNVD3]
+<p>
+
+Own Named Colors
+[jsChart type="Pie" options="{ colors:'red,green,blue,#FFFF00' }" backgroundcolor='darkgray']
+ 
+</p><p>
+
+Own Colors from Colorbrewer's Palettes
+[jsChart type="Pie" options="{ colorbrewer:{palette:'Blues'} }" backgroundcolor='darkgray']
+</p><p>Own Smooth Gradient Colors[jsChart type="Pie" options="{ colors:{startbar:'red', endbar:'lime'} }" backgroundcolor='darkgray']
+</p>
