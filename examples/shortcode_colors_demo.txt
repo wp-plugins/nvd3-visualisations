@@ -1,4 +1,4 @@
-<!-- Your very 1st shortcode's charts on post / page of WordPress
+<!-- Your charts on post / page of WordPress
 
      Simply, do these steps:
 
@@ -18,6 +18,29 @@ Own Named Colors
 </p><p>
 
 Own Colors from Colorbrewer's Palettes
-[jsChart type="Pie" options="{ colorbrewer:{palette:'Blues'} }" backgroundcolor='darkgray']
+[jsChart type="Pie" options="{ colorbrewer:{palette:'Blues'},  showLegend: true, shadows:'black' }" backgroundcolor='darkgray']
 </p><p>Own Smooth Gradient Colors[jsChart type="Pie" options="{ colors:{startbar:'red', endbar:'lime'} }" backgroundcolor='darkgray']
+</p><p>
+
+Chart with Background's Picture for Infographics
+
+[jsChart type="stackedarea" options="{ xtime:true,   backgroundimage: 'wp-content/plugins/nvd3-visualisations/backgrounds/continents1.jpg', showLegend: false }" backgroundcolor='darkgray' height=250 width=300]
+
+Note: your area of picture is limited by svg's height & width on this way (250 x 300, in this case).
+
+</p><p>
+
+Chart with Background Colors
+
+[jsChart type="stackedarea" options="{ xtime:true, backgroundcolor:'skyblue', showLegend: false }" backgroundcolor='darkgray' height=250 width=300]
+
+Note: your area of picture is limited by svg's height & width on this way (250 x 300 px, in this case).
+
+</p><p>
+
+Chart with Black Shadows Turned on
+
+[jsChart type="simpleline" options="{ shadows:'black' height=250 width=300]
+
+
 </p>

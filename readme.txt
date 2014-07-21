@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: Jouni Santara, TERE-tech ltd
 Donate link: http://www.tere-tech.eu/
-Tags: nvd3, d3, visualisation, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
+Tags: nvd3, d3, visualisation, infographics, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.9
+Stable tag: 1.5.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,12 +28,12 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Key Features**
 
-1. Full set of original NVD3's gallery charts (12 types of charts in gallery).
+1. Special effects for infographics: embedding picts, smooth gradients of colors, and shadows.
+1. Full set of all original NVD3's gallery charts (12 types of charts in gallery).
 1. Super easy to illustrate your data sets by picking up template chart from any gallery's examples.
 1. WYSIWYG look of chart on front-end + data editor to populate own data.
 1. Support of JSON/XML or CSV/TSV data formats.
 1. Smart suggestion of online syntax editor from cloud based on data's type.
-1. Easy to scale charts in pixels.
 1. Accurate layout of each chart based on any valid HTML container tag.
 1. Many charts on the same page/post of WordPress from one API / shortcode call.
 1. Many fancy options available to change chart's look & behavior.
@@ -134,6 +134,10 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 
 == Changelog ==
+
+= 1.5.10 =
+Version 1.5.10 -
+More spices & impressive effects for infographics. Let there be **shadows** and there is the option for that. How about **background-image** or **background-color** ? No problem, there they are. Examples of coloring improved to document it all better & gallery looks more interesting, too. 
 
 = 1.5.9 =
 Version 1.5.9 -

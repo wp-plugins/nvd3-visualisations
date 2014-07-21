@@ -332,6 +332,7 @@ function linePlusBar(chartID, data, options) {
 	chart.bars.forceY([0]);
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
 	  d3.select("#svg"+chartID)
         .datum(data)
@@ -374,6 +375,7 @@ function cumulativeLineData(chartID, data, options) {
         .tickFormat(d3.format( setFormat(',.1%',options) ));
 
 	  chart.options(options);
+	shadowEffects(chartID, options);
 
 	  d3.select("#svg"+chartID)
         .datum(data)
@@ -411,6 +413,7 @@ function stackedArea(chartID, data, options) {
         .tickFormat(d3.format( setFormat(',.2r',options) ));
 
     chart.options(options);
+	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
       .datum(data)
@@ -441,6 +444,7 @@ nv.addGraph(function() {
         .tickFormat(d3.format( setFormat(',.2r',options) ));
 
     chart.options(options);
+	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID)
       .datum(data)
@@ -470,6 +474,7 @@ function horizontalMultiBar(chartID, data, options) {
         .tickFormat(d3.format( setFormat(',.2r',options) ));
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
         .datum(data)
@@ -510,6 +515,7 @@ nv.addGraph(function() {
   // console.info( JSON.stringify(myData) );
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID)
       .datum(data)
@@ -549,6 +555,7 @@ nv.addGraph(function() {
 //   console.info( JSON.stringify( exampleData() ) );
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
     d3.select("#svg"+chartID)
         .datum(data)
@@ -585,6 +592,7 @@ nv.addGraph(function() {
       .tickFormat(d3.format( setFormat(',.2r',options) ));
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
     d3.select("#svg"+chartID)
       .datum(data)
@@ -622,6 +630,7 @@ nv.addGraph(function() {
       .tickFormat(d3.format( setFormat('.2r',options) ));
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID) 
       .datum(data)         //Populate the <svg> element with chart data...
@@ -646,6 +655,7 @@ nv.addGraph(function() {
       .showLabels(true);
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
         .datum(data)
@@ -674,6 +684,7 @@ nv.addGraph(function() {
       ;
 
 	chart.options(options);
+	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
         .datum(data)
@@ -715,11 +726,11 @@ function colorSegments(type,options,chartID,size) {
   if (!classname) {
   if (type == 'pie' || type == 'donut')
 	classname = ' .nv-slice';
-	else if (type == 'horizontalmultibar' || type == 'discretebar' || type == 'multibar' || type == 'lineplusbar')
+	else if (type == 'horizontalmultibar' || type == 'discretebar')
 		classname = ' .nv-bar';
 	else if (type == 'stackedarea')
 		classname = ' .nv-area';
-	else if (type == 'scatterbubble')
+	else if (type == 'scatterbubble' || type == 'lineplusbar' || type == 'multibar')
 		classname = ' .nv-group';
 	else if (type == 'simpleline'  || type == 'cumulativeline' || type == 'viewfinder') {
 		classname = ' .nv-group';
@@ -752,13 +763,17 @@ function colorSegments(type,options,chartID,size) {
 			customs = true;
 		}
 
-	if (customs) {
+	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of blocked types
 		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
+		// Legend's coloring
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("stroke", function(d, i) { return colors(i); });
 	} else
 	if (options.style) // Example: {"fill":"navy"}
 		d3.selectAll('#svg'+chartID+classname).style(options.style);
+
+	if (options.shadows)
+		d3.selectAll('#svg'+chartID+classname).style( { filter:"url(#blackshadows)" } );
 }
 
 function recolor(type,chartID,i) { // TODO
@@ -832,6 +847,67 @@ if (startColor && endColor) { // && !args2js.colors && args2js.colors.length != 
 } else
 	return new Array(); // empty array
 }
+
+function shadowEffects(chartID, options) {
+
+if (options.shadows) {
+	// filters go in defs element
+	var svg = d3.select("#svg"+chartID);
+	var defs = svg.append("defs");
+ 
+	// create filter with id #drop-shadow
+	// height=130% so that the shadow is not clipped
+	var filter = defs.append("filter")
+		.attr("id", "blackshadows")
+		.attr("height", "130%");
+ 
+	// SourceAlpha refers to opacity of graphic that this filter will be applied to
+	// convolve that with a Gaussian with standard deviation 3 and store result
+	// in blur
+	filter.append("feGaussianBlur")
+		.attr("in", "SourceAlpha")
+		.attr("stdDeviation", 5)
+		.attr("result", "blur");
+ 
+	// translate output of Gaussian blur to the right and downwards with 2px
+	// store result in offsetBlur
+	filter.append("feOffset")
+		.attr("in", "blur")
+		.attr("dx", 5)
+		.attr("dy", 5)
+		.attr("result", "offsetBlur");
+ 
+	// overlay original SourceGraphic over translated blurred opacity by using
+	// feMerge filter. Order of specifying inputs is important!
+	var feMerge = filter.append("feMerge");
+ 
+	feMerge.append("feMergeNode")
+		.attr("in", "offsetBlur")
+	feMerge.append("feMergeNode")
+		.attr("in", "SourceGraphic");
+}
+// Background's coloring
+if (options)
+	if (options['background-image'] || options['backgroundimage']) {
+		if (options['backgroundimage'])
+			options['background-image'] = options['backgroundimage'];
+		var svg = d3.selectAll('#svg'+chartID);
+		svg.append("svg:image")
+		.attr("xlink:href", options['background-image'])
+			.attr("width", options.width)
+			.attr("height", options.height);
+} else if (options['background-color'] || options['backgroundcolor']) {
+			if (options['backgroundcolor'])
+				options['background-color'] = options['backgroundcolor'];
+			var svg = d3.selectAll('#svg'+chartID);
+			svg.append("rect")
+				.attr("fill", options['background-color'])
+				.attr("width", options.width)
+				.attr("height", options.height);
+}
+}
+
+// End of coloring funcs
 
 function setMargin(m, options) {
 
