@@ -135,9 +135,13 @@ Here:
 
 == Changelog ==
 
+= 1.5.11 =
+Version 1.5.11 -
+Support of very simple direct input of data by **values**, **labels**, and **series** options (similar than in D3 simplecharts plugin) for all chart types. Renaming of some functions to remove conflicts with D3 simplecharts. Short examples how to call direct data for a few chart types.
+
 = 1.5.10 =
 Version 1.5.10 -
-More spices & impressive effects for infographics. Let there be **shadows** and there is the option for that. How about **background-image** or **background-color** ? No problem, there they are. Examples of coloring improved to document it all better & gallery looks more interesting, too. 
+More spices & impressive effects for infographics. Let there be **shadows** and there is the option for that. How about **background-image** or **background-color** ? No problem, there they are. Examples of coloring improved to document it all better & gallery looks more attractive, too. 
 
 = 1.5.9 =
 Version 1.5.9 -

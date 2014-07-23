@@ -1,0 +1,16 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & enjoy new pretty charts on the blog 
+! -->
+
+[loadNVD3]
+
+[jsChart type='discretebar' values='(7,12,5)' labels='("cats", "dogs", "rabbits")'  series='("My Pets")'  backgroundcolor='darkgray']
+
+[jsChart type='donut' values='(7,12,5)' labels='("cats", "dogs", "rabbits")'  series='("My Pets")'  backgroundcolor='darkgray']
+
+[jsChart type='viewfinder' values='(7,12,5,33)' labels='("cats", "dogs", "rabbits","spiders")'  series='("My Pets")'  backgroundcolor='darkgray' options='{ shadows:"black" }']

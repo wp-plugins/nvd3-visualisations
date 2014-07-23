@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.10
+Version: 1.5.11
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -124,6 +124,26 @@ function newChart($data) {
 	if ($data['datafile'])
 		$infile = $data['datafile'];
 
+	$values = '';
+	if ($data['values']) {
+		$infile = 'foo'; // special flag of direct simple input
+		$values = str_replace("("," ",$data['values']);
+		$values = str_replace(")"," ",$values);
+		$values = ' values:[' . $values . '] ';
+		if ($data['labels']) {
+			$x = str_replace("("," ",$data['labels']);
+			$x = str_replace(")"," ",$x);
+			$x = ' labels:[' . $x . '] ';
+			$values = $values . ', ' . $x;
+		}
+		if ($data['series']) {
+			$x = str_replace("("," ",$data['series']);
+			$x = str_replace(")"," ",$x);
+			$x = ' series:[' . $x . '] ';
+			$values = $values . ', ' . $x;
+		}
+	}
+
 	$container = 'div'; // Def.type of container
 	if ($data['container']) // User's choice
 		$container = $data['container'];
@@ -140,10 +160,14 @@ function newChart($data) {
 		$bgcolor = ' background-color:'.$data['backgroundcolor']. ';';
 	$border = '';  // Border style around
 	if ($data['border'])
-		$border = ' border:'.$data['border']. ';';
-	$options = '';  // Def. options
-	if ($data['options'])
-		$options = ', '.$data['options'];
+		$border = ' border:'.$data['border']. ';'; 
+
+	$options = '';  // Def. options for charts
+	if ($data['options']) {
+		$options = ', ###'.trim($data['options']);
+		$options = str_replace('###{', '{'.$values.', ', $options);
+	} else if ($infile = 'foo' && $values)
+		$options = ', { ' . $values . ' }';
 
 	$float = ' float:none; ';  
 	if ($data['float']) // Embed on right/left

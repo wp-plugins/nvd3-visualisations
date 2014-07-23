@@ -57,6 +57,8 @@ function dataRead(infile, id, type, options) {
 	// console.info(infile);
 	ginfile = infile; // make global
 
+//	options.values = [7,9,11];
+//	options.labels = ['cats','dogs','mouses'];
 	if (infile == '')
 		demoShows(id, '', type, options);
 	else if (infile.indexOf(".json") > 0)
@@ -74,9 +76,10 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-		// console.info(data);
+		console.info(data);
 		data = parseJSON(data,type);
 		console.info(data);
+		console.info(options);
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.csv') > 0)
@@ -85,7 +88,28 @@ function dataRead(infile, id, type, options) {
 		data = parseJSON(data,type);
 		chartSelector(id, data, type, options);
 	});
-	else if (typeof infile == 'object') // Direct input of data set by variable
+	else if (options.values) { // Direct input from shortcode (like D3 simplecharts plugin has)
+//		console.info(options);
+		var titles = ['Keys','DataSet1'];
+		if (options.series) {  // Name of data's columns given
+			var arr = ['Keys'];
+			titles = arr.concat(options.series);
+		}
+		var out = new Array();
+		for (i=0; i<options.values.length; i++) {
+			var o = new Object();
+			if (options.labels)
+				o[ titles[0] ] = options.labels[i];
+			else
+				o[ titles[0] ] = i+1;
+			o[ titles[1] ] = options.values[i];
+			out.push(o);
+		}
+//		console.info(out);
+		var data = parseJSON(out, type);
+		chartSelector(id, data, type, options);
+	}
+	else if (typeof infile == 'object') // Direct input of data set by JSON variable (= formats of JSON demo examples)
 		chartSelector(id, infile, type, options);
 }
 function printLines(data) {
@@ -252,29 +276,29 @@ function newpost2(alink, afile, id, id2) {
 function chartSelector(id, data, type, options) {
 
 	if (type == 'lineplusbar')
-		linePlusBar(id, data, options);
+		NVD3linePlusBar(id, data, options);
 	else if (type == 'simpleline')
-		simpleLine(id, data, options);
+		NVD3simpleLine(id, data, options);
 	else if (type == 'scatterbubble')
-		ScatterBubble(id, data, options);
+		NVD3ScatterBubble(id, data, options);
 	else if (type == 'viewfinder')
-		viewFinder(id, data, options)
+		NVD3viewFinder(id, data, options)
 	else if (type == 'multibar')
-		MultiBar(id, data, options);
+		NVD3MultiBar(id, data, options);
 	else if (type == 'cumulativeline')
-		cumulativeLineData(id, data, options);
+		NVD3cumulativeLineData(id, data, options);
 	else if (type == 'stackedarea')
-		stackedArea(id, data, options);
+		NVD3stackedArea(id, data, options);
 	else if (type == 'discretebar')
-		discreteBar(id, data, options);
+		NVD3discreteBar(id, data, options);
 	else if (type == 'horizontalmultibar')
-		horizontalMultiBar(id, data, options);
+		NVD3horizontalMultiBar(id, data, options);
 	else if (type == 'pie')
-		Pie(id, data, options);
+		NVD3Pie(id, data, options);
 	else if (type == 'donut')
-		Donut(id, data, options); 
+		NVD3Donut(id, data, options); 
 	else if (type == 'bullet')
-		Bullet(id, data, options);
+		NVD3Bullet(id, data, options);
 
 /*
 	nvd3Dump = JSON.stringify(data);
@@ -294,7 +318,7 @@ function timeStamp(x, options) {
 /* ALL Supported NVD3 Chart Types: 1 function/type */
 
 // Drawing chart: linePlusBar
-function linePlusBar(chartID, data, options) {
+function NVD3linePlusBar(chartID, data, options) {
 
   nv.addGraph(function() {
 	  var chart = nv.models.linePlusBarChart()
@@ -353,7 +377,7 @@ function linePlusBar(chartID, data, options) {
   });
 }
 // Drawing chart: cumulativeLineData
-function cumulativeLineData(chartID, data, options) {
+function NVD3cumulativeLineData(chartID, data, options) {
  
   nv.addGraph(function() {
     var chart = nv.models.cumulativeLineChart()
@@ -390,7 +414,7 @@ function cumulativeLineData(chartID, data, options) {
   });
 }
 // Drawing chart: stackedArea
-function stackedArea(chartID, data, options) {
+function NVD3stackedArea(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.stackedAreaChart()
@@ -427,7 +451,7 @@ function stackedArea(chartID, data, options) {
   });
 }
 // Drawing chart: discreteBar
-function discreteBar(chartID, data, options) {
+function NVD3discreteBar(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.discreteBarChart()
@@ -458,7 +482,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: horizontalMultiBar
-function horizontalMultiBar(chartID, data, options) {
+function NVD3horizontalMultiBar(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.multiBarHorizontalChart()
@@ -489,7 +513,7 @@ function horizontalMultiBar(chartID, data, options) {
 
 }
 // Drawing chart: ScatterBubble
-function ScatterBubble(chartID, data, options) {
+function NVD3ScatterBubble(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.scatterChart()
@@ -529,7 +553,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: MultiBar
-function MultiBar(chartID, data, options) {
+function NVD3MultiBar(chartID, data, options) {
 
 nv.addGraph(function() {
     var chart = nv.models.multiBarChart()
@@ -569,7 +593,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: viewFinder
-function viewFinder(chartID, data, options) {
+function NVD3viewFinder(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.lineWithFocusChart()
@@ -607,7 +631,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: simpleLine
-function simpleLine(chartID, data, options) { 
+function NVD3simpleLine(chartID, data, options) { 
 
 /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
@@ -644,7 +668,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: Pie
-function Pie(chartID, data, options) {
+function NVD3Pie(chartID, data, options) {
 
 //Regular pie chart example
 nv.addGraph(function() {
@@ -668,7 +692,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: Donut
-function Donut(chartID, data, options) {
+function NVD3Donut(chartID, data, options) {
 
 //Donut chart example
 nv.addGraph(function() {
@@ -697,7 +721,7 @@ nv.addGraph(function() {
 });
 }
 // Drawing chart: Bullet
-function Bullet(chartID, data, options) {
+function NVD3Bullet(chartID, data, options) {
 
 nv.addGraph(function() {  
   var chart = nv.models.bulletChart()
