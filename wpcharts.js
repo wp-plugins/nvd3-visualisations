@@ -69,10 +69,10 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-		console.info(data);
+//		console.info(data);
 		data = parseJSON(data,type);
-		console.info(data);
-		console.info(options);
+//		console.info(data);
+//		console.info(options);
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.csv') > 0)
