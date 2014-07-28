@@ -26,9 +26,17 @@ Chart with Background's Picture for Infographics
 
 [jsChart type="stackedarea" options="{ xtime:true,   backgroundimage: 'wp-content/plugins/nvd3-visualisations/backgrounds/continents1.jpg', showLegend: false }" backgroundcolor='darkgray' height=250 width=300]
 
-Note: your area of picture is limited by svg's height & width on this way (250 x 300, in this case).
+Note: your area of picture is limited by svg's height & width always (250 x 300, in this case).
 
-</p><p>
+</p><p><p>
+
+Chart with Random Background's Pictures
+
+[jsChart type="stackedarea" options="{ xtime:true,   backgroundimage: 'wp-content/plugins/nvd3-visualisations/backgrounds/continents1.jpg, wp-content/plugins/nvd3-visualisations/backgrounds/continents11.jpg', showLegend: false }" backgroundcolor='darkgray' height=250 width=300]
+
+Note: a random image is picked out automatically each time a new chart is loaded.
+
+</p>
 
 Chart with Background Colors
 

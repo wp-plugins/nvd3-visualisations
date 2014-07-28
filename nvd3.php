@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.5.11
+Version: 1.5.12
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -21,8 +21,8 @@ function write_headers($rood_dir) {
 	// NVD3.js lib
 	echo '<link href="'.$root.'nv.d3.css" rel="stylesheet" type="text/css">';
 
-	echo '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment if you need to develope NVD3 core lib
-	// echo '<script src="'.$root.'nv.d3.js"></script>'; // & edit this source file + minimize when ready
+	// echo '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment if you need to develope NVD3 core lib
+	echo '<script src="'.$root.'nv.d3.js"></script>'; // activate & edit this source file + minimize when ready
 
 	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading
 	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON/XML conversions
@@ -120,16 +120,14 @@ function newChart($data) {
 	if ($data['type'])
 		$ctype = $data['type'];
 
-	$infile = '';  // Input data file name / rel.path
-	if ($data['datafile'])
-		$infile = $data['datafile'];
-
+// *** Direct input values turns to options of input data
 	$values = '';
-	if ($data['values']) {
+	if ($data['values']) {		// Input format: (1,2,3, ...) OR ((1,2,3),(11,22,33), ...)
 		$infile = 'foo'; // special flag of direct simple input
-		$values = str_replace("("," ",$data['values']);
-		$values = str_replace(")"," ",$values);
-		$values = ' values:[' . $values . '] ';
+		$x = trim($data['values']);
+		$x = str_replace("("," ",$x);
+		$x = str_replace(")"," ",$x);
+		$values = ' values:[' . $x . '] ';
 		if ($data['labels']) {
 			$x = str_replace("("," ",$data['labels']);
 			$x = str_replace(")"," ",$x);
@@ -143,6 +141,21 @@ function newChart($data) {
 			$values = $values . ', ' . $x;
 		}
 	}
+
+	$options = '';  // Def. options for charts
+	if ($data['options']) {
+		$options = ', ###'.trim($data['options']);
+		if ($values != '')
+			$values = $values.',';
+		$options = str_replace('###{', '{'.$values.' ', $options);
+	} else if ($infile = 'foo' && $values)
+		$options = ', { ' . $values . ' }';
+// ***
+
+  // Input data file name / rel.path
+	if (! $infile)
+	if ($data['datafile'])
+		$infile = $data['datafile'];
 
 	$container = 'div'; // Def.type of container
 	if ($data['container']) // User's choice
@@ -161,13 +174,6 @@ function newChart($data) {
 	$border = '';  // Border style around
 	if ($data['border'])
 		$border = ' border:'.$data['border']. ';'; 
-
-	$options = '';  // Def. options for charts
-	if ($data['options']) {
-		$options = ', ###'.trim($data['options']);
-		$options = str_replace('###{', '{'.$values.', ', $options);
-	} else if ($infile = 'foo' && $values)
-		$options = ', { ' . $values . ' }';
 
 	$float = ' float:none; ';  
 	if ($data['float']) // Embed on right/left
@@ -192,10 +198,8 @@ function newChart($data) {
 
 	if ($jsfunc == 0)  // File name to ext.data file
 	  	$infile = "'" . $infile . "'";
-/* TODO
-	else if ($data['values'])
-		$infile = buildTSV($data);
-*/
+
+
 	$js = "jsChart('".$id."', ".$infile.", '".$ctype."', {height:'".$height."', ".$width."} ".$options." );";
 
 	$jsCall = "<script>".$js."</script>";

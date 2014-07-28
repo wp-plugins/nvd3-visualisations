@@ -44,21 +44,14 @@ function jsChart(id, infile, type, dims, options) {
 	// svgChart(id);
 	type = type.toLowerCase();
 	dataRead(infile, id, type, options);
-	/*
-	if (typeof options.class)
-		jQuery('.'+options.class.name).css(options.class);
-		d3.selectAll('#svg888 .nv-point-paths').style({'stroke':'navy'})
-	*/
 }
 
-// Data reader from different sources: demos / own file / function's output 
+// Data reader from different sources: demos / own file / direct input options / JSON 
 function dataRead(infile, id, type, options) {
 
 	// console.info(infile);
 	ginfile = infile; // make global
 
-//	options.values = [7,9,11];
-//	options.labels = ['cats','dogs','mouses'];
 	if (infile == '')
 		demoShows(id, '', type, options);
 	else if (infile.indexOf(".json") > 0)
@@ -414,11 +407,11 @@ function NVD3cumulativeLineData(chartID, data, options) {
   });
 }
 // Drawing chart: stackedArea
-function NVD3stackedArea(chartID, data, options) {
+function NVD3stackedArea(chartID, data, options) { 
 
   nv.addGraph(function() {
     var chart = nv.models.stackedAreaChart()
-                  .margin(setMargin({right: 50, bottom: 50}, options))
+                  .margin(setMargin({left:50, right: 50, bottom: 50}, options))
                   .x(function(d) { return d[0] })   //We can modify the data accessor functions...
                   .y(function(d) { return d[1] })   //...in case your data is formatted differently.
                   .useInteractiveGuideline(true)    //Tooltips which show all data points. Very nice!
@@ -467,7 +460,6 @@ nv.addGraph(function() {
     chart.yAxis
         .tickFormat(d3.format( setFormat(',.2r',options) ));
 
-    chart.options(options);
 	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID)
@@ -678,12 +670,13 @@ nv.addGraph(function() {
       .y(function(d) { return d.value })
       .showLabels(true);
 
-	chart.options(options);
+	chart.valueFormat = d3.format( setFormat('.2r',options) );
+
 	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
         .datum(data)
-        .transition().duration(350)
+        .transition().duration(700)
         .call(chart);
 
 	colorSegments('pie',options,chartID,data.length);
@@ -702,17 +695,19 @@ nv.addGraph(function() {
       .y(function(d) { return d.value })
       .showLabels(true)     //Display pie labels
       .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+      .labelType("percent") //Configure what type of data to show in the label: "key", "value" or "percent"
+      .donut(true)          //Turn on Donut mode. Makes pie chart looks tasty!
       .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
       ;
+
+	chart.valueFormat = d3.format( setFormat('.2r',options) );
 
 	chart.options(options);
 	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
         .datum(data)
-        .transition().duration(350)
+        .transition().duration(700)
         .call(chart);
 
 	colorSegments('donut',options,chartID,data.length);
@@ -910,17 +905,24 @@ if (options.shadows) {
 	feMerge.append("feMergeNode")
 		.attr("in", "SourceGraphic");
 }
-// Background's coloring
+// Background's coloring / picts
 if (options)
 	if (options['background-image'] || options['backgroundimage']) {
 		if (options['backgroundimage'])
 			options['background-image'] = options['backgroundimage'];
+		var pict = options['background-image'];
+		if (pict.indexOf(',')) {  // An array of picts given => make a random choice from them
+			pict = pict.replace(/ /g, '');	// Trim off all white spaces
+			pict = pict.replace(/\t/g, '');
+			var picts = pict.split(',');
+			pict = picts[ Math.floor(Math.random() * picts.length) ];
+		}
 		var svg = d3.selectAll('#svg'+chartID);
 		svg.append("svg:image")
-		.attr("xlink:href", options['background-image'])
+		.attr("xlink:href", pict)
 			.attr("width", options.width)
 			.attr("height", options.height);
-} else if (options['background-color'] || options['backgroundcolor']) {
+	} else if (options['background-color'] || options['backgroundcolor']) {
 			if (options['backgroundcolor'])
 				options['background-color'] = options['backgroundcolor'];
 			var svg = d3.selectAll('#svg'+chartID);
@@ -1023,7 +1025,7 @@ function dataConvert(intype, input, output) {
 	var header = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> ';
 	var svgstyle = jQuery("#svg"+svgid).attr("style");
 	var viewbox = ' viewBox="0 0 '+options.width+' '+options.height+'" ';
-	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + $('#svg'+svgid).html() + '</svg>'; // height="100%" width="100%"
+	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; // height="100%" width="100%"
 
 	var css = rootpath+"../nv.d3.css"; 
 	css = '<link rel="stylesheet" href="'+css+'" type="text/css" media="all"/> ';
@@ -1067,26 +1069,26 @@ function svgscaler(svgid, dir) {
 	var svgW = parseInt(jQuery('#chart'+svgid).attr('width'));
 
 	// Resize of it
-	$('svg').attr('height',svgH + dir*Math.round(svgH*sizer));
-	$('svg').attr('width',svgW + dir*Math.round(svgW*sizer));
+	jQuery('svg').attr('height',svgH + dir*Math.round(svgH*sizer));
+	jQuery('svg').attr('width',svgW + dir*Math.round(svgW*sizer));
 	// console.info(svgW);
 
 	// Resize of chart itself
 	var svgG = '.g'+svgid; // Group of svg objects
-	var oldT = $(svgG).attr('transform');
+	var oldT = jQuery(svgG).attr('transform');
 	// Magic of resizing svg chart
 	var diffW = Math.round(svgW*(1+sizer)/2);
 	var diffH = Math.round(svgH*(1+sizer)/2);
-	console.info(svgW);
-	console.info(diffW);
+//	console.info(svgW);
+//	console.info(diffW);
 
 	if (diffW == diffH) { // For Pies: its center must move when scaled down/up too
 		var moveC = ' translate('+diffW+','+diffH+') ';
 		sizer = 1+2*sizer;
-		$(svgG).attr('transform', moveC+' scale('+ sizer +') '); 
+		jQuery(svgG).attr('transform', moveC+' scale('+ sizer +') '); 
 	} else {
 		sizer = 1+sizer;
-		$(svgG).attr('transform', oldT+' scale('+ sizer +') '); 
+		jQuery(svgG).attr('transform', oldT+' scale('+ sizer +') '); 
 	}
 	// Scaling window size around a chart
 	var w=parseInt(window.innerWidth);

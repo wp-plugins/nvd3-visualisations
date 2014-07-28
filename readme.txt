@@ -43,7 +43,8 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Data input**
 
-* Data's import from valid JSON/XML/CSV/TSV file or from own data generating JavaScript function.
+1. Data's import from valid JSON/XML/CSV/TSV file.
+1. Fast & short input from options of shortcode + JavaScript API.
 .
 
 **HAPPY CHARTING on WordPress !**
@@ -92,6 +93,10 @@ Shortcode [jsChart] is your easy solution then: first create charts gallery by [
 
 Also, peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
 
+= I just want a quick way to show my data and not to edit any files. Can I do it?
+
+There are direct data options for that. Take a look at **shortcode_direct_data.txt** on examples, please.
+
 = How can I find all available chart types & their calling names? =
 
 Look at inside **gallery.js** file on examples dir, please. 
@@ -134,6 +139,10 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 
 == Changelog ==
+
+= 1.5.12 =
+Version 1.5.12 -
+More support of infographics: **background-image** supports also now a list of picts + their file names (eq random backgrounds) as its input. Format support for data values of Pie and Donut chart types added.
 
 = 1.5.11 =
 Version 1.5.11 -
