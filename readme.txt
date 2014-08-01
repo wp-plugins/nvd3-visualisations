@@ -137,6 +137,7 @@ Here:
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
+3. Same Data Set on 4 Different Ways by Using Chart's Picker
 
 == Changelog ==
 
