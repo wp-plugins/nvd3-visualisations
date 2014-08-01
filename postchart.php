@@ -65,7 +65,7 @@ $owndata = copyEx($dataset, $_GET['filepath']);
 // New Post/Page content from up -> down
 $title = '"Own Data Chart"';
 $scolor = ' "Black", ';
-$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{shadows:".$scolor." showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title."}' ] ";
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{shadows:".$scolor." showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true }' ] ";
 
 $editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]'; 
 

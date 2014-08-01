@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, infographics, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.5.10
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,10 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 
 == Changelog ==
+
+= 1.6.0 =
+Version 1.6.0 -
+NEW: Uniform interactive comparing of the data set by chart's picker buttons on all popup windows called by new option **chartpicker**. This supports CSV/TSV inputs (max 9 chart's types) and direct data (max 6 chart's types). Better titles for popup's charts from options.
 
 = 1.5.12 =
 Version 1.5.12 -

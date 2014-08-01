@@ -13,30 +13,38 @@ function jsChart(id, infile, type, dims, options) {
 
 	// Default size of chart: VGA screen
 	var height = '480';
-	var width = ' width:640px; ';
-	if (dims) {
+	var width = ' width:640'; //px; ';
+	if (options.height && options.width) {
+		height = options.height;
+		width = ' width:'+options.width; //+'px; ';
+	} else if (dims) {
 		height = dims['height'];
-		width = ' width:'+dims['width']+'px; ';
+		width = ' width:'+dims['width']; //+'px; ';
 	}
 
 	if (!options)
-		options = new Object(); 
+		options = new Object();
 
 	// console.info(height); // {height:'200', width:'350'}
 
-	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+" '/>";
+	var svg = "<svg id='svg"+id+"' style='height:"+height+"px; "+width+"px; '/>";
 	jQuery('#chart'+id).empty();
 
 	if (typeof options.noPopup)
 	if (! options.noPopup ) {
 		if (!options.title)
 			options.title = 'My ('+type+') chart';
-		options.height = +dims['height'];
-		options.width = +dims['width'];
+		if (!options.height && !options.width) {
+			options.height = +dims['height'];
+			options.width = +dims['width'];
+		}
 //	var svg = '<svg id="svg'+id+'" style="height:'+height+'px; '+width+'"/>";
-		var popup = '<img src="'+rootpath+'../icons/newindow.png" style="float:left"><br />';
+		var popup = '';
+		if (!options.inPopup)
+			popup = '<img src="'+rootpath+'../icons/newindow.png" style="float:left"><br />';
 		var inopts = '<script> opts=new Object('+JSON.stringify(options)+'); </script>';
-		popup = inopts+'<a onclick="svg2Win('+id+', opts)" style="cursor:pointer" >'+popup+'</a>';
+		var strid = "'"+id+"' ";
+		popup = inopts+'<a onclick="svg2Win('+strid+', opts)" style="cursor:pointer" >'+popup+'</a>';
 		jQuery('#chart'+id).append(popup);
 	}
 	jQuery('#chart'+id).append(svg);
@@ -74,19 +82,39 @@ function dataRead(infile, id, type, options) {
 //		console.info(data);
 //		console.info(options);
 		chartSelector(id, data, type, options);
+
+	options.datatype = 'tsv';
+	options.infile = infile;
+	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+		if (typeof chartData == 'undefined')
+			chartData = new Array();
+		if (!chartData[id])
+			chartData[id] = new Object( options );
+	}
 	});
 	else if (infile.indexOf('.csv') > 0)
 	d3.csv(infile,function(error,data) {
 		// console.info(data);
 		data = parseJSON(data,type);
 		chartSelector(id, data, type, options);
+
+	options.datatype = 'csv';
+	options.infile = infile;
+	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+		if (typeof chartData == 'undefined')
+			chartData = new Array();
+		if (!chartData[id])
+			chartData[id] = new Object( options );
+	}
 	});
-	else if (options.values) { // Direct input from shortcode (like D3 simplecharts plugin has)
+	else if (options.values) { // Direct input (like D3 simplecharts plugin has)
 //		console.info(options);
-		var titles = ['Keys','DataSet1'];
-		if (options.series) {  // Name of data's columns given
-			var arr = ['Keys'];
+		var titles = ['Labels','DataSet1','DataSet2','DataSet3'];
+		if (options.series)  // Name of data's columns given
+		if (!options.inPopup && options.series != 'Labels') {
+			var arr = ['Labels'];
 			titles = arr.concat(options.series);
+			options.series = titles;
 		}
 		var out = new Array();
 		for (i=0; i<options.values.length; i++) {
@@ -101,10 +129,24 @@ function dataRead(infile, id, type, options) {
 //		console.info(out);
 		var data = parseJSON(out, type);
 		chartSelector(id, data, type, options);
+
+	options.datatype = 'direct';
+	options.infile = 'foo';
+	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+		if (typeof chartData == 'undefined')
+			chartData = new Array();
+		if (!chartData[id])
+			chartData[id] = new Object( options );
 	}
-	else if (typeof infile == 'object') // Direct input of data set by JSON variable (= formats of JSON demo examples)
+	}
+	else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
 		chartSelector(id, infile, type, options);
 }
+function recordOptions(options) {
+
+
+}
+
 function printLines(data) {
 	var tab = '	';
 	var newline = "\n";
@@ -1022,13 +1064,32 @@ function dataConvert(intype, input, output) {
 // A function to show SVG element in a new window
   function svg2Win(svgid, options) {
 
+	if (typeof chartData != 'undefined')
+	if (chartData[svgid])
+		if (chartData[svgid]['exports'] || chartData[svgid]['chartpicker'])
+			options = chartData[svgid];
+ 
+	var drawButts = false;
+	if (typeof chartData == 'object')
+		if (chartData[svgid])
+		if (chartData[svgid]['chartpicker'])
+			drawButts = true;
+
 	var header = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> ';
 	var svgstyle = jQuery("#svg"+svgid).attr("style");
 	var viewbox = ' viewBox="0 0 '+options.width+' '+options.height+'" ';
-	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; // height="100%" width="100%"
+	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; 
+	// height="100%" width="100%"
 
 	var css = rootpath+"../nv.d3.css"; 
 	css = '<link rel="stylesheet" href="'+css+'" type="text/css" media="all"/> ';
+
+	if (options['exports']  || drawButts) {
+		var jQ = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> ';
+		var cb = '<script src="'+rootpath+'../colorbrewer.js"></script> ';
+		css = jQ + cb + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
+	}
+
 /* TODO: resize buttons of chart
 	var smallerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', -1)"> « </button> ';
 	var biggerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', +1)"> » </button> ';
@@ -1039,10 +1100,20 @@ function dataConvert(intype, input, output) {
 	var title = "D3 Chart";
 	if (typeof options.title != 'undefined')
 		title = options.title;
-	var html = header+' <html><head><title> '+title+' </title>'+css+'</head> ';
-	html = html + '<body>';
+	var html = header+' <html><head> <title> '+title+' </title> ' +css+'</head> ';
+
+	html = html + '<body>'; // + css;
+	if (typeof chartData == 'object')
+	if (chartData[svgid])
+	if (chartData[svgid]['exports']  || drawButts) {
+		html = html + '<script>chartData = ' + JSON.stringify(chartData[svgid]) + '; chartData.inPopup=true; rootpath="'+ rootpath +'"; function getChartData() { return chartData; } </script>';
+	}
+
 	html = html + '<table class="svgtable" >';
 	html = html + '<tr><td>';
+	if (typeof options.title != 'undefined')
+			html = html + '<b>' + options.title + '</b>';
+
 //	html = html + '<p style="float:right">' + smallerB + biggerB + '</p>';
 	var cid = "'chart"+svgid+"'";
 	var sid = "'svg"+svgid+"'";
@@ -1050,14 +1121,54 @@ function dataConvert(intype, input, output) {
 	if (typeof options.noResize != 'undefined')
 	if (options.noResize)
 		resize = '';
+
+	var pickers = ''; // Charts picker's butts
+	if (drawButts) {
+		// All legal chart types (TODO: horizontalmultibar, scatterbubble, add)
+		var types = { 'lineplusbar':1, 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'horizontalmultibar':1, 'pie':1, 'donut':1, 'bullet':1, 'scatterbubble':1, 'multibar':1, 'viewfinder':1 };
+		var typesTSV = { 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'pie':1, 'donut':1, 'multibar':1, 'viewfinder':1 };
+
+		options.inPopup = true;
+		if (options.datatype == 'direct')
+			pickers = '<td>'+popButt('pie',svgid, options, types)+popButt('donut',svgid, options, types)+popButt('discretebar',svgid, options, types)+popButt('multibar',svgid, options, types)+popButt('simpleline',svgid, options, types)+popButt('viewfinder',svgid, options, types)+'</td>'
+		else if (options.datatype == 'tsv' || options.datatype == 'csv') {
+			var pickers = '';
+			for (t in typesTSV)
+				pickers = pickers + popButt(t, svgid, options, types);
+			pickers = '<td>'+pickers+'</td>';
+		}
+	}
+
 	html = html + '</td></tr><tr><td class="svgchart" ><div id="chart'+svgid+'" style="'+svgstyle+resize+' " onmouseup="document.getElementById('+sid+').style.height = document.getElementById('+cid+').style.height; document.getElementById('+sid+').style.width = document.getElementById('+cid+').style.width;">';
-	html = html + svg + '</div><br />'+printB;
-	html = html + '</td></tr></table></body></html>';
+	html = html + svg + '</div>';
+	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+'</td><tr></table></body></html>';
+
 	var cwidth = 100 + parseInt(options.width);
 	var cheight = 100 + parseInt(options.height);
 	myWindow=window.open('','','location=0,status=0,menubar=0,width='+cwidth+',height='+cheight);
-	myWindow.document.writeln(html);
+
+	myWindow.document.write(html);
    }
+   
+ function popButt(atype,id,ops,types) {
+ 
+if (! types[atype])
+		return '';
+
+if (typeof ops['chartpicker'] == 'string') { // chartpicker is a list of valid types: 'pie,multibar' etc
+	var asks = ops['chartpicker'].split(',');
+	if (asks.indexOf(atype) == -1)
+		return '';
+	}
+
+ // if (ops.exports) ops.exports = false;
+ // ops.inPopup = true;
+// ops.title = atype;
+
+ var jsCall = " jsChart('" +id+ "','"+ops.infile+"','" +atype+ "',{}, getChartData() ); ";
+ 
+ return '<button onclick="'+jsCall+'" title="'+atype+' chart"><img src="'+rootpath+'../icons/'+atype+'.png"></button><br />'
+ }
 
 // Resizing of a chart on its popup window
 function svgscaler(svgid, dir) {

@@ -1,0 +1,32 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & enjoy new pretty charts on the blog 
+! -->
+
+[loadNVD3]
+
+You can click new window icon at left-top corner to open and see chart's picker buttons to appear.
+
+<p>
+Chart's Picker on Popup Windows with Direct Data Input
+
+[jsChart type='donut' width=450 values='(1564,1636,2078,1786)' labels='("Gift 1", "Gift 2", "Gift 3", "Gift 4")'  series='("My Own Price Data of Gifts")' options='{ shadows:"black", chartpicker:true }']
+
+Note: all possible chart types set active.
+</p><p>
+Chart's Picker on Popup Windows from TSV file
+
+[jsChart type='multibar' datafile='charts_nvd3/790multiData.tsv' options="{ chartpicker:true, shadows:'black', backgroundcolor:'darkgray' }"]
+
+Note: you need to copy clone multibar chart from gallery at first (in TSV) and replace 790multiData.tsv with its given name above. Or you may copy multiData.tsv from examples/ into your blog's root + replace file name above.
+</p><p>
+Chart's Picker on Popup Windows with Limited Set of Charts
+
+[jsChart type='stackedarea' datafile='charts_nvd3/790multiData.tsv' options="{ chartpicker:'multibar,stackedarea', shadows:'black' }"]
+
+Note: your selected chart types are listed as one string to work properly.
+</p>
