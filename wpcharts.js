@@ -88,8 +88,7 @@ function dataRead(infile, id, type, options) {
 	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
 		if (typeof chartData == 'undefined')
 			chartData = new Array();
-		if (!chartData[id])
-			chartData[id] = new Object( options );
+		chartData[id] = new Object( options );
 	}
 	});
 	else if (infile.indexOf('.csv') > 0)
@@ -103,8 +102,7 @@ function dataRead(infile, id, type, options) {
 	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
 		if (typeof chartData == 'undefined')
 			chartData = new Array();
-		if (!chartData[id])
-			chartData[id] = new Object( options );
+		chartData[id] = new Object( options );
 	}
 	});
 	else if (options.values) { // Direct input (like D3 simplecharts plugin has)
@@ -135,8 +133,7 @@ function dataRead(infile, id, type, options) {
 	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
 		if (typeof chartData == 'undefined')
 			chartData = new Array();
-		if (!chartData[id])
-			chartData[id] = new Object( options );
+		chartData[id] = new Object( options );
 	}
 	}
 	else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
@@ -215,8 +212,8 @@ function forceNumb2(arr, t) {  // Name data points + force numbers type for valu
 
 function getCol(colname, lines) {
 	var out = new Array();
-	// console.info(lines);
-	for (i=0; i<lines.length; i++) { // Note: forcing numerical value out
+	for (i=0; i<lines.length; i++) // Note: forcing numerical value out
+		if (lines[i][colname]) {
 		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
 		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );
 		out.push( cell );
@@ -500,8 +497,9 @@ nv.addGraph(function() {
       ;
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat(',.2r',options) ));
+        .tickFormat(d3.format( setFormat('.3r',options) ));
 
+	chart.options(options);
 	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID)
@@ -714,6 +712,7 @@ nv.addGraph(function() {
 
 	chart.valueFormat = d3.format( setFormat('.2r',options) );
 
+	chart.options(options);
 	shadowEffects(chartID, options);
 
 	d3.select("#svg"+chartID)
@@ -953,6 +952,16 @@ if (options)
 		if (options['backgroundimage'])
 			options['background-image'] = options['backgroundimage'];
 		var pict = options['background-image'];
+		var xloc = 0;
+		var yloc = 0;
+		if (typeof pict == 'object') {
+			console.info(typeof pict.x);
+			if (typeof pict.x == 'number')
+				xloc = pict.x;
+			if (typeof pict.y == 'number')
+				yloc = pict.y;
+			pict = pict['backgroundimage'];
+		}
 		if (pict.indexOf(',')) {  // An array of picts given => make a random choice from them
 			pict = pict.replace(/ /g, '');	// Trim off all white spaces
 			pict = pict.replace(/\t/g, '');
@@ -963,7 +972,9 @@ if (options)
 		svg.append("svg:image")
 		.attr("xlink:href", pict)
 			.attr("width", options.width)
-			.attr("height", options.height);
+			.attr("height", options.height)
+			.attr("x", xloc)
+			.attr("y", yloc);
 	} else if (options['background-color'] || options['backgroundcolor']) {
 			if (options['backgroundcolor'])
 				options['background-color'] = options['backgroundcolor'];
@@ -1095,7 +1106,18 @@ function dataConvert(intype, input, output) {
 	var biggerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', +1)"> » </button> ';
 */
 	var printIco = '<img src="'+rootpath+'../icons/print.gif">';
-	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()">'+printIco+'</button> ';
+	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()" title="Print This Chart on Paper">'+printIco+'</button> ';
+
+//	options.exports = 1;
+	var expB = ''; var svgB = '';
+	if (options.exports) {
+		expB = '<img src="'+rootpath+'../icons/excel.png">';
+		var expID = "'svg"+svgid+"'";
+		expB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'csv\')" title="Export Data into Excel or Other Spreadsheets Software">'+expB+'</button> ';
+		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
+		var expID = "'chart"+svgid+"'";
+		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
+	}
 
 	var title = "D3 Chart";
 	if (typeof options.title != 'undefined')
@@ -1141,7 +1163,7 @@ function dataConvert(intype, input, output) {
 
 	html = html + '</td></tr><tr><td class="svgchart" ><div id="chart'+svgid+'" style="'+svgstyle+resize+' " onmouseup="document.getElementById('+sid+').style.height = document.getElementById('+cid+').style.height; document.getElementById('+sid+').style.width = document.getElementById('+cid+').style.width;">';
 	html = html + svg + '</div>';
-	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+'</td><tr></table></body></html>';
+	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+expB+svgB+'</td><tr><tr><td id="databuffer" style="color:gray"></td></tr></table></body></html>';
 
 	var cwidth = 100 + parseInt(options.width);
 	var cheight = 100 + parseInt(options.height);
@@ -1239,10 +1261,6 @@ function json2tsv(input) {
 			values.push(data[cell]['value']);
 		}
 	}
-	// console.info(keys);
-	// console.info(labels);
-	// console.info(values);
-
 	var tab = '	';
 	var newline = '\n';
 	var tsv = new Array();
@@ -1255,11 +1273,61 @@ function json2tsv(input) {
 		// tsv.push(labels[i]+tab+values[i]);
 	console.info(tsvstr);
 }
-
+/*
 function copyToClipboard() { // copyToClipboard(cdata)
 //  console.info(field);
   window.prompt("Copy chart's data: Ctrl+C", JSON.stringify(nvd3Dump));
 //  window.alert(JSON.stringify(nvd3Dump));
+}
+*/
+// Exporting all types of chart's data
+function exportData(id, format) {
+
+	// Building temp file's download name (up to 100 diff. files)
+//	var filename = 'tmp_' + id +'_'+Math.floor((Math.random()*100)+1);	
+	// Download link
+//	var icon = '<img src="'+rootpath+'../icons/excel.png'+'" />';
+//	var link = '<button title="Export Chart in Excel format"><a href="'+rootpath+'../tmp/'+filename+'.'+format+'">'+icon+'</a></button>';
+
+	var closeMe = '<button style="float:right; font-size:xx-small" title="Close" onclick="removeMe(\'databuff\')"> [X] </button><br />';
+
+	var data = chartData;
+	if (format == 'csv') { 
+		var dataout = data.series[0]+';'+data.title+"\n";
+		var cols = dataout.length;
+		if (data.labels.length == data.values.length && data.datatype == 'direct')
+		for (line in data.labels) 
+			if (data.values[line]) {
+				var line = data.labels[line] + ';' + data.values[line] +"\n";
+				dataout = dataout + line;
+				if (line.length > cols)
+					cols = line.length; 
+		}
+		var inBox = 'Data<br /><textarea id="databuff" rows="20" cols="'+cols+'" style="color:darkgray">'+dataout+'</textarea>';
+		jQuery("#databuffer").html(closeMe+inBox); 
+	} else if(format == 'svg') {
+		console.info(id);
+		var svgX = document.getElementById(id).innerHTML;  // Fetch chart's all svg
+		// console.info(svgX);
+		var inBox = 'SVG Chart<br /><textarea id="databuff" rows="20" cols="30" style="color:darkgray">'+svgX+'</textarea>';
+		jQuery("#databuffer").html(closeMe+inBox);
+		// console.info(query);
+	} 
+	/* else { // TODO: csv & tsv files processing part here
+		var jdata = ' "points":' + JSON.stringify(dataout); // 'data = ' + 
+		if (data.title)
+			jdata = '"title":"'+ data.title +'", '+jdata;
+		jdata = 'data = { ' + jdata + ' }';
+
+		$.post(query, { fname: filename, svg: jdata, type:ext })
+			.done(function() {
+			console.info('download ready!');	
+		});
+	}
+	*/
+}
+function removeMe(obj) {
+	$('#'+obj).remove();
 }
 
 // Data set generator, original mychart.js example

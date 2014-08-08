@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, infographics, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Full set of all original NVD3's gallery charts (12 types of charts in gallery).
 1. Super easy to illustrate your data sets by picking up template chart from any gallery's examples.
 1. WYSIWYG look of chart on front-end + data editor to populate own data.
+1. Chart's picker gives your users many views of same data set.
 1. Support of JSON/XML or CSV/TSV data formats.
 1. Smart suggestion of online syntax editor from cloud based on data's type.
 1. Accurate layout of each chart based on any valid HTML container tag.
@@ -41,10 +42,11 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Visual preview of charts from the NVD3 lib's original CSS style file to let you match blog's theme easily.
 .
 
-**Data input**
+**Data Input**
 
-1. Data's import from valid JSON/XML/CSV/TSV file.
-1. Fast & short input from options of shortcode + JavaScript API.
+1. Fast & short input from intuitive fast options (values, labels, and series).
+1. Data's import from valid JSON/XML/CSV/TSV file formats.
+1. Dynamic D3's JSON inputs from any JavaScript functions.
 .
 
 **HAPPY CHARTING on WordPress !**
@@ -71,7 +73,7 @@ Two WP standard ways to install the package.
 1. View + bookmark this page and start to clone your charts & edit them.
 1. More tips: go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and start to read from read_me_1st.txt.
 
-Or you may want to do it 'old traditional way'.
+Or you may want to do it: 'old traditional way'.
 
 1. Download `nvd3` folder into your local computer.
 1. Upload this folder next to the `/wp-content/plugins/` directory into your WordPress server side.
@@ -137,13 +139,17 @@ Here:
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
-3. Same Data Set on 4 Different Ways by Using Chart's Picker 
+3. Same Data Set on 4 Different Ways by Using Chart's Picker
 
 == Changelog ==
 
+= 1.6.1 =
+Version 1.6.1 -
+Exporting buttons (Excel & SVG edit) on popup windows:exporting of data set by option **exports** in Excel's CSV and in Illustrator's SVG formats. Positioning of background image by accepting x and y coordinates (eq **backgroundimage** can be JSON object too) based on SVG element W3C standards. Quite afew bugs removed.
+
 = 1.6.0 =
 Version 1.6.0 -
-NEW: Uniform interactive comparing of the data set by chart's picker buttons on all popup windows called by new option **chartpicker**. This supports CSV/TSV inputs (max 9 chart's types) and direct data (max 6 chart's types). Better titles for popup's charts from options.
+NEW: Uniform interactive comparing of the data set by chart's picker buttons on all popup windows called by new option **chartpicker**. This supports CSV/TSV inputs (max 8 chart's types) and direct data (max 6 chart's types). Better titles for popup's charts from options.
 
 = 1.5.12 =
 Version 1.5.12 -
