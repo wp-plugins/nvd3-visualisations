@@ -145,7 +145,7 @@ Here:
 
 = 1.6.1 =
 Version 1.6.1 -
-Exporting buttons (Excel & SVG edit) on popup windows:exporting of data set by option **exports** in Excel's CSV and in Illustrator's SVG formats. Positioning of background image by accepting x and y coordinates (eq **backgroundimage** can be JSON object too) based on SVG element W3C standards. Quite afew bugs removed.
+Exporting buttons (Excel & SVG edit) on popup windows:exporting of data set by option **exports** in Excel's CSV and in Illustrator's SVG formats (exports:false = by default). Positioning of background image by accepting x and y coordinates (eq **backgroundimage** can be JSON object too) based on SVG element W3C standards. Quite afew bugs removed.
 
 = 1.6.0 =
 Version 1.6.0 -
