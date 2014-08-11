@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: Jouni Santara, TERE-tech ltd
 Donate link: http://www.tere-tech.eu/
-Tags: nvd3, d3, visualisation, infographics, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
+Tags: nvd3, d3, visualisation, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,18 +28,19 @@ If you like it give us some stars on WP plugin site so that others can find it m
 
 **Key Features**
 
-1. Special effects for infographics: embedding picts, smooth gradients of colors, and shadows.
+1. Special effects for infographic: embedding background's picts, smooth gradients of colors for data, and shadows.
 1. Full set of all original NVD3's gallery charts (12 types of charts in gallery).
 1. Super easy to illustrate your data sets by picking up template chart from any gallery's examples.
 1. WYSIWYG look of chart on front-end + data editor to populate own data.
 1. Chart's picker gives your users many views of same data set.
-1. Support of JSON/XML or CSV/TSV data formats.
+1. Support of JSON/XML or CSV/TSV data input formats.
 1. Smart suggestion of online syntax editor from cloud based on data's type.
 1. Accurate layout of each chart based on any valid HTML container tag.
 1. Many charts on the same page/post of WordPress from one API / shortcode call.
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
 1. Visual preview of charts from the NVD3 lib's original CSS style file to let you match blog's theme easily.
+1. Optional export of real data / vector graphics of chart for all your blog's visitors.
 .
 
 **Data Input**
@@ -139,13 +140,17 @@ Here:
 
 1. Charts gallery showing out neatly on the same page of WP's blog. 
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
-3. Same Data Set on 4 Different Ways by Using Chart's Picker
+3. Same Data Set on 4 Different Ways by Using Chart's Picker 
 
 == Changelog ==
 
+= 1.6.2 =
+Version 1.6.2 -
+More cool shadows for all you infographic fans out there (try discretebar chart). Fixing smooth gradients coloring to work for discretebar's data set. Option **exports** of data supports also CSV and TSV file's input formats if turned on (default is  **exports:false** eq no exports allowed).
+
 = 1.6.1 =
 Version 1.6.1 -
-Exporting buttons (Excel & SVG edit) on popup windows:exporting of data set by option **exports** in Excel's CSV and in Illustrator's SVG formats (exports:false = by default). Positioning of background image by accepting x and y coordinates (eq **backgroundimage** can be JSON object too) based on SVG element W3C standards. Quite afew bugs removed.
+Exporting buttons (Excel & SVG edit) on popup windows:exporting of data set by option **exports** in Excel's CSV and in Illustrator's SVG formats. Positioning of background image by x and y coordinates (eq **backgroundimage** can be JSON object too) based on SVG element W3C standards. Quite afew bugs removed.
 
 = 1.6.0 =
 Version 1.6.0 -

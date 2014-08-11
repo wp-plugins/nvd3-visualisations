@@ -506,7 +506,9 @@ nv.addGraph(function() {
       .datum(data)
       .call(chart);
 
- 	colorSegments('discretebar',options,chartID,data.length);
+ 	if (data[0])
+	if (data[0].values)
+		colorSegments('discretebar',options,chartID, data[0].values.length);
 
   nv.utils.windowResize(chart.update);
 
@@ -820,10 +822,12 @@ function colorSegments(type,options,chartID,size) {
 	}	 else { // Object => interpolating of colours 
 			if (options.colors.startbar && options.colors.endbar)
 				var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
-			customs = true;
+				console.info(gradientColors(options.colors.startbar, size, options.colors.endbar));
+				console.info(size);
+			customs = true; 
 		}
 
-	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of blocked types
+	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of these blocked chart types
 		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
 		// Legend's coloring
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
@@ -832,8 +836,10 @@ function colorSegments(type,options,chartID,size) {
 	if (options.style) // Example: {"fill":"navy"}
 		d3.selectAll('#svg'+chartID+classname).style(options.style);
 
-	if (options.shadows)
+	if (options.shadows) {
 		d3.selectAll('#svg'+chartID+classname).style( { filter:"url(#blackshadows)" } );
+		d3.selectAll('#svg'+chartID+classname+' text').style( { filter:"url(#blackshadows)" } );
+	}
 }
 
 function recolor(type,chartID,i) { // TODO
@@ -955,7 +961,6 @@ if (options)
 		var xloc = 0;
 		var yloc = 0;
 		if (typeof pict == 'object') {
-			console.info(typeof pict.x);
 			if (typeof pict.x == 'number')
 				xloc = pict.x;
 			if (typeof pict.y == 'number')
@@ -1108,15 +1113,14 @@ function dataConvert(intype, input, output) {
 	var printIco = '<img src="'+rootpath+'../icons/print.gif">';
 	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()" title="Print This Chart on Paper">'+printIco+'</button> ';
 
-//	options.exports = 1;
+	console.info(options);
 	var expB = ''; var svgB = '';
 	if (options.exports) {
 		expB = '<img src="'+rootpath+'../icons/excel.png">';
 		var expID = "'svg"+svgid+"'";
-		expB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'csv\')" title="Export Data into Excel or Other Spreadsheets Software">'+expB+'</button> ';
+		expB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'csv\',\''+rootpath+'\')" title="Export Data into Excel or Other Spreadsheets Software">'+expB+'</button> ';
 		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
-		var expID = "'chart"+svgid+"'";
-		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
+		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\',\''+rootpath+'\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
 	}
 
 	var title = "D3 Chart";
@@ -1281,18 +1285,23 @@ function copyToClipboard() { // copyToClipboard(cdata)
 }
 */
 // Exporting all types of chart's data
-function exportData(id, format) {
+function exportData(id, format, root) {
 
-	// Building temp file's download name (up to 100 diff. files)
-//	var filename = 'tmp_' + id +'_'+Math.floor((Math.random()*100)+1);	
-	// Download link
-//	var icon = '<img src="'+rootpath+'../icons/excel.png'+'" />';
-//	var link = '<button title="Export Chart in Excel format"><a href="'+rootpath+'../tmp/'+filename+'.'+format+'">'+icon+'</a></button>';
+	var data = '';
+//	if (! data.infile)
+	if (typeof chartData != 'undefined')
+		data = chartData;
+	else
+		return;
 
 	var closeMe = '<button style="float:right; font-size:xx-small" title="Close" onclick="removeMe(\'databuff\')"> [X] </button><br />';
 
-	var data = chartData;
-	if (format == 'csv') { 
+	if (format == 'csv') {
+		if (typeof data.infile != 'foo') {
+			var link = '<button title="Export Chart Data from File"><a href="'+root+'../../../../'+data.infile+'">Download Data of Chart</a></button>';
+
+			jQuery("#databuffer").html(closeMe+link);
+		} else {
 		var dataout = data.series[0]+';'+data.title+"\n";
 		var cols = dataout.length;
 		if (data.labels.length == data.values.length && data.datatype == 'direct')
@@ -1304,10 +1313,11 @@ function exportData(id, format) {
 					cols = line.length; 
 		}
 		var inBox = 'Data<br /><textarea id="databuff" rows="20" cols="'+cols+'" style="color:darkgray">'+dataout+'</textarea>';
-		jQuery("#databuffer").html(closeMe+inBox); 
-	} else if(format == 'svg') {
-		console.info(id);
-		var svgX = document.getElementById(id).innerHTML;  // Fetch chart's all svg
+		jQuery("#databuffer").html(closeMe+inBox);
+//		}
+	} } else if(format == 'svg') {
+//		console.info(id);
+		var svgX = document.getElementById(id).outerHTML;  // Fetch chart's all svg
 		// console.info(svgX);
 		var inBox = 'SVG Chart<br /><textarea id="databuff" rows="20" cols="30" style="color:darkgray">'+svgX+'</textarea>';
 		jQuery("#databuffer").html(closeMe+inBox);
