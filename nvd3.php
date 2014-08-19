@@ -156,7 +156,6 @@ function newChart($data) {
 	} else if ($infile = 'foo' && $values)
 		$options = ', { ' . $values . ' }';
 
-	var_dump($options);
 // ***
 
   // Input data file name / rel.path
