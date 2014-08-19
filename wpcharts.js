@@ -124,7 +124,6 @@ function dataRead(infile, id, type, options) {
 			o[ titles[1] ] = options.values[i];
 			out.push(o);
 		}
-//		console.info(out);
 		var data = parseJSON(out, type);
 		chartSelector(id, data, type, options);
 
@@ -136,7 +135,43 @@ function dataRead(infile, id, type, options) {
 		chartData[id] = new Object( options );
 	}
 	}
-	else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
+	else if (options.class) { // Data set is embedded into document all over its tags
+//		console.info(options);
+		jQuery(document).ready(function() {
+			var values = new Array();
+			var set = d3.selectAll('.'+options.class);
+//			console.info(set);
+			var label = 1;
+			var cname = options.class;
+			if (set[0])
+			for (d in set[0])
+				if (+set[0][d]['innerHTML']) {
+						if (set[0][d]['attributes'])
+						if (set[0][d]['attributes']['id']) {
+							var rec = {'Labels':set[0][d]['attributes']['id']['value']};
+							rec[options.class] = +set[0][d]['innerHTML'];
+							values.push(rec);
+						} else {
+							var rec = { 'Labels':label };
+							rec[options.class] = +set[0][d]['innerHTML'];
+							values.push(rec);
+//							values['Labels'] = label;
+//							values[options.class] = +set[0][d]['innerHTML'];
+						}
+						label++;
+				}
+			var data = parseJSON(values, type);
+			chartSelector(id, data, type, options);
+
+			options.datatype = 'direct';
+			options.infile = 'foo';
+			if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+				if (typeof chartData == 'undefined')
+					chartData = new Array();
+			chartData[id] = new Object( options );
+	}
+		});
+	} else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
 		chartSelector(id, infile, type, options);
 }
 function recordOptions(options) {
@@ -499,6 +534,8 @@ nv.addGraph(function() {
     chart.yAxis
         .tickFormat(d3.format( setFormat('.3r',options) ));
 
+		chart.valueFormat = d3.format( setFormat('.2r',options) );
+
 	chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -822,8 +859,8 @@ function colorSegments(type,options,chartID,size) {
 	}	 else { // Object => interpolating of colours 
 			if (options.colors.startbar && options.colors.endbar)
 				var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
-				console.info(gradientColors(options.colors.startbar, size, options.colors.endbar));
-				console.info(size);
+//				console.info(gradientColors(options.colors.startbar, size, options.colors.endbar));
+//				console.info(size);
 			customs = true; 
 		}
 
@@ -1113,7 +1150,7 @@ function dataConvert(intype, input, output) {
 	var printIco = '<img src="'+rootpath+'../icons/print.gif">';
 	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()" title="Print This Chart on Paper">'+printIco+'</button> ';
 
-	console.info(options);
+//	console.info(options);
 	var expB = ''; var svgB = '';
 	if (options.exports) {
 		expB = '<img src="'+rootpath+'../icons/excel.png">';
@@ -1297,12 +1334,15 @@ function exportData(id, format, root) {
 	var closeMe = '<button style="float:right; font-size:xx-small" title="Close" onclick="removeMe(\'databuff\')"> [X] </button><br />';
 
 	if (format == 'csv') {
-		if (typeof data.infile != 'foo') {
+		if (typeof chartData.infile != 'undefined') 
+		if (chartData.infile != 'foo') {
 			var link = '<button title="Export Chart Data from File"><a href="'+root+'../../../../'+data.infile+'">Download Data of Chart</a></button>';
 
 			jQuery("#databuffer").html(closeMe+link);
 		} else {
-		var dataout = data.series[0]+';'+data.title+"\n";
+		var dataout = 'Labels;'+data.title+"\n";
+		if (data.series)
+			dataout = data.series[1]+';'+data.title+"\n";
 		var cols = dataout.length;
 		if (data.labels.length == data.values.length && data.datatype == 'direct')
 		for (line in data.labels) 

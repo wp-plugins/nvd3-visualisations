@@ -1,0 +1,33 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & enjoy new pretty charts on the blog 
+! -->
+
+<h3>Direct Data from Document (eq Page/Post)</h3>
+
+By using "class" option you can generate the chart from the any independent cells of open page/post. You group a set of data together by using unique name of class for it. This can be just enough for simple and fast news blogs that you like to spice up with cool graphics and when its data is a part of article itself.
+
+Benefits: you only need to maintain (small) data set + its chart(s) in one place together where you can see everything at once.
+
+[loadNVD3]
+<p>
+Simple data set from class "mypets"
+
+[jsChart type='discretebar' class="mypets" backgroundcolor='darkgray']
+
+I have <span class="mypets">14</span> cats and <span class="mypets">2</span> cows plus <span class="mypets">11</span> birds at my home as pets !
+
+NOTE: Labels of charts are numbered starting from 1 automatically on the chart here.
+</p><p>
+Better way: data set from class "mypets" + its labels from IDs
+
+[jsChart type='donut' class="mypets" backgroundcolor='darkgray']
+
+I have <span id="Cats" class="mypets">14</span> cats and <span id="Cows" class="mypets">2</span> cows plus <span id="Birds" class="mypets">11</span> birds at my home as pets !
+
+NOTE: Labels of charts are freely selected by adding ID name for each tag (typically <span>) of input values.
+</p><p>

@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.6.2
+Version: 1.6.3
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -14,7 +14,9 @@ License: GPL2
 function write_headers($rood_dir) {  
 	echo '<!-- Start of NVD3 -->'; 
 
-	$root = 'wp-content/plugins/'.$rood_dir.'/';
+	$root = plugins_url().'/'.$rood_dir.'/'; 	// Single, MU-site, and SSL setups of WP
+												// http://codex.wordpress.org/Function_Reference/plugins_url
+
 	// D3.js lib
 	// echo '<script src="'.$root.'d3.v3.1.5.js"></script>'; // Uncomment if problems with new d3 v3.4.6 below
 	echo '<script src="'.$root.'d3.min.js"></script>';
@@ -48,10 +50,10 @@ add_shortcode("loadNVD3", "myroot");
 function setRootDir($rood_dir) {  
 ?>
 <script>
-	rootpath = '<?php echo WP_PLUGIN_URL.'/'.$rood_dir.'/data/' ?>';
+	rootpath = '<?php echo plugins_url().'/'.$rood_dir.'/data/' ?>';
 </script>
 <?php
-	return WP_PLUGIN_URL . '/'.$rood_dir.'/';
+	return plugins_url() . '/'.$rood_dir.'/';
 }
 
 // Nice demo gallery for the most of NVD3 chart types - START
@@ -140,6 +142,9 @@ function newChart($data) {
 			$x = ' series:[' . $x . '] ';
 			$values = $values . ', ' . $x;
 		}
+	} else if ($data['class'])  { // Direct data coming from class (& ID's) of tags
+		$values = ' class:"' . $data['class'] . '" ';
+		$infile = 'foo'; // special flag of direct simple input
 	}
 
 	$options = '';  // Def. options for charts
@@ -150,6 +155,8 @@ function newChart($data) {
 		$options = str_replace('###{', '{'.$values.' ', $options);
 	} else if ($infile = 'foo' && $values)
 		$options = ', { ' . $values . ' }';
+
+	var_dump($options);
 // ***
 
   // Input data file name / rel.path

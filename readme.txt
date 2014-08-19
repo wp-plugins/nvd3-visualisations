@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: Jouni Santara, TERE-tech ltd
 Donate link: http://www.tere-tech.eu/
-Tags: nvd3, d3, visualisation, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
+Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Dynamic & direct illustration of any JavaScript function results.
 1. Visual preview of charts from the NVD3 lib's original CSS style file to let you match blog's theme easily.
 1. Optional export of real data / vector graphics of chart for all your blog's visitors.
+1. WordPress multisite & SSL compatible plugin. 
 .
 
 **Data Input**
@@ -144,6 +145,10 @@ Here:
 4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
 
 == Changelog ==
+
+= 1.6.3 =
+Version 1.6.3 -
+Direct input method accepts HTML tags of Page/Post: data values are picked from the contents of same class & chart's labels from ID attributes (if existing). Fixing multisite/SSL root directory issue + other small bugs. Examples/ how to use **class** option.
 
 = 1.6.2 =
 Version 1.6.2 -
