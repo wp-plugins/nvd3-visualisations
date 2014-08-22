@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,6 +145,10 @@ Here:
 4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
 
 == Changelog ==
+
+= 1.6.4 =
+Version 1.6.4 -
+Opening fast copy & paste way of creating charts from OpenOffice tables with minimum efforts. Allowing HTLM tags of document to containg character + special characters and still accepted as input data. Examples/ how to use **class** option with OpenOffice tables.
 
 = 1.6.3 =
 Version 1.6.3 -

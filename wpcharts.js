@@ -137,28 +137,36 @@ function dataRead(infile, id, type, options) {
 	}
 	else if (options.class) { // Data set is embedded into document all over its tags
 //		console.info(options);
-		jQuery(document).ready(function() {
+		jQuery(document).ready(function() { // Wait until DOM is ready
 			var values = new Array();
-			var set = d3.selectAll('.'+options.class);
-//			console.info(set);
+			var set = '';
+			if (typeof options.class == 'string')
+				set = d3.selectAll('.'+options.class);
+			else if (typeof options.class == 'object') {
+				if (options.class.id && options.class.bgcolor)
+					set = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.bgcolor+'"]');
+			}
 			var label = 1;
 			var cname = options.class;
+//			console.info(set);
 			if (set[0])
 			for (d in set[0])
-				if (+set[0][d]['innerHTML']) {
+				if (set[0][d]['innerText']) {
+						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
+						if (+nro && (+d || d==0)) { // value must be number && its arr index too
+						nro = +nro;
 						if (set[0][d]['attributes'])
 						if (set[0][d]['attributes']['id']) {
 							var rec = {'Labels':set[0][d]['attributes']['id']['value']};
-							rec[options.class] = +set[0][d]['innerHTML'];
+							rec[options.class] = nro;
 							values.push(rec);
 						} else {
 							var rec = { 'Labels':label };
-							rec[options.class] = +set[0][d]['innerHTML'];
+							rec[options.class] = nro;
 							values.push(rec);
-//							values['Labels'] = label;
-//							values[options.class] = +set[0][d]['innerHTML'];
 						}
 						label++;
+						}
 				}
 			var data = parseJSON(values, type);
 			chartSelector(id, data, type, options);
