@@ -12,17 +12,15 @@
 By using "class" option you can generate the chart from the tables of OpenOffice easily too.
 
 To do this:
-* you can mark input data values with some background color on OpenOffice. 
+* you can mark input data values on cells with same background color with OpenOffice Calc. 
 * Next, you normally copy & paste whole table into WordPress page/post.
-* Finally, you just name your table wiht ID tag and its by shortcode.
+* Finally, you just name your table with own ID tag and call it by shortcode.
 
-Benefits: you edit table's values and chart updates at once automatically for it.
-
-[loadNVD3]
+Benefits: you edit table's values directly and chart updates at once automatically to show them out.
 
 Simple data set from OpenOffice Calc
 
-Typically, short table after copy & paste on WP side ...
+Typically, short table after copy & paste on WP side when data values have background color "#FFFF99" (eq Yellow by OpenOffice palette) ...
 
 <table border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
 <tbody>
@@ -43,25 +41,24 @@ You just add ID "mypets' for this table ...
 
 <table id="mypets" border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" />
 
-[jsChart type='discretebar' class="mypets" backgroundcolor='darkgray']
-
 And call it with id + bgcolor for values ...
 
-[jsChart type='discretebar' class='{id:"mypets", bgcolor:"#FFFF99"}' backgroundcolor='darkgray']
+[loadNVD3]
+[jsChart type='discretebar' class='{id:"mypets", bgcolor:"#FFFF99"}']
 
 <h3>Adding Own Labels</h3>
 
-In order to get own labels into chart you just add ids for each cells of table...
+In order to get own labels into chart you just add IDs also for each cells of table...
 
 <td id="Cats" align="RIGHT" bgcolor="#FFFF99" height="17">7</td>
 <td id="Cows" align="RIGHT" bgcolor="#FFFF99">2</td>
 <td id="Birds" align="RIGHT" bgcolor="#FFFF99">12</td>
 
-And shortcode stays the same ...
+And shortcode call stays the same ...
 
-[jsChart type='discretebar' class='{id:"mypets", bgcolor:"#FFFF99"}' backgroundcolor='darkgray']
+[loadNVD3]
+[jsChart type='discretebar' class='{id:"mypets", bgcolor:"#FFFF99"}']
 
 That is all - enjoy it !
-
 
 
