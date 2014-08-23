@@ -135,36 +135,40 @@ function dataRead(infile, id, type, options) {
 		chartData[id] = new Object( options );
 	}
 	}
-	else if (options.class) { // Data set is embedded into document all over its tags
+	else if (options.class) { // Data set is embedded into document all over its HTML tags / table
 //		console.info(options);
 		jQuery(document).ready(function() { // Wait until DOM is ready
 			var values = new Array();
-			var set = '';
+			var set = ''; var labels = new Array();
 			if (typeof options.class == 'string')
 				set = d3.selectAll('.'+options.class);
 			else if (typeof options.class == 'object') {
 				if (options.class.id && options.class.bgcolor)
 					set = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.bgcolor+'"]');
+				if (options.class.id && options.class.titlecolor) {
+					var stack = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.titlecolor+'"]');
+					for (c=0; c<stack[0].length; c++) // Bg.colored labels from stack
+						labels.push( jQuery(stack[0][c]).text() );
+				}
 			}
 			var label = 1;
 			var cname = options.class;
-//			console.info(set);
 			if (set[0])
-			for (d in set[0])
+			for (d=0; d<set[0].length; d++)
 				if (set[0][d]['innerText']) {
 						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
-						if (+nro && (+d || d==0)) { // value must be number && its arr index too
-						nro = +nro;
+						if (+nro) { // value must be number && its arr index too
 						if (set[0][d]['attributes'])
-						if (set[0][d]['attributes']['id']) {
+						if (set[0][d]['attributes']['id']) { // Labels from each cell's ID
 							var rec = {'Labels':set[0][d]['attributes']['id']['value']};
-							rec[options.class] = nro;
-							values.push(rec);
-						} else {
+							rec[options.class] = +nro;
+						} else { // Labels autonumbered or from colored row/columns of table
 							var rec = { 'Labels':label };
-							rec[options.class] = nro;
-							values.push(rec);
+							if (labels[label-1])
+								rec = { 'Labels':labels[label-1] };
+							rec[options.class] = +nro;
 						}
+						values.push(rec);
 						label++;
 						}
 				}

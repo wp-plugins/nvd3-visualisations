@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,6 +145,10 @@ Here:
 4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
 
 == Changelog ==
+
+= 1.6.5 =
+Version 1.6.5 -
+Chart's labels generated automatically from OpenOffice tables too with new option **titlecolor**. Better examples how to call & show up OpenOffice tables.
 
 = 1.6.4 =
 Version 1.6.4 -

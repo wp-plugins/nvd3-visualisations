@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.6.4
+Version: 1.6.5
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -148,6 +148,7 @@ function newChart($data) {
 			$values = ' class:' . $data['class'] . ' ';
 		$infile = 'foo'; // special flag of direct simple input
 	}
+
 	$options = '';  // Def. options for charts
 	if ($data['options']) {
 		$options = ', ###'.trim($data['options']);
