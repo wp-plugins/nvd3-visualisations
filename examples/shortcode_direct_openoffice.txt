@@ -1,13 +1,12 @@
 <!-- Your charts on post / page of WordPress
 
      Simply, do these steps:
-
          1. Create new post / page normally on WP.
          2. Copy all lines below inside it (using HTML writing mode). 
-         3. Save it, preview & enjoy new OpenOffice table based charts on the blog.
+         3. Save it, preview & enjoy new pretty charts on the blog 
 ! -->
 
-<h3>Data Input from OpenOffice Calc tables</h3> 
+<h3>Data Input from OpenOffice Calc Tables</h3>
 
 By using "class" option you can generate the chart from the tables of OpenOffice easily too.
 
@@ -20,11 +19,12 @@ Benefits: you edit table's values directly and the chart updates automatically t
 
 Basically, all you need to do is copy&paste table in visual mode, add its own ID tag in html mode, and call its drawing with the right class option. Below is whole story.
 
-<b>Simple data set from OpenOffice Calc</b>
+<b>Simple data Set from OpenOffice Calc</b>
 
-Typically, short table after copy & paste on WP side when data values have background color "#FFFF99" (eq Yellow by OpenOffice palette) ...
+Typically, short table from OpenOffice after copy & paste on WordPress side when data values have background color "#FFFF99" (eq Yellow by OpenOffice palette) is like this ...
 
-<table border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
+<table border="0" frame="VOID" rules="NONE" cellspacing="0">
+<colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
 <tbody>
 <tr>
 <td align="LEFT" width="86" height="17">Cats</td>
@@ -41,7 +41,8 @@ Typically, short table after copy & paste on WP side when data values have backg
 
 You just add ID "mypets' for this table ...
 
-<table id="mypets" border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
+<table id="mypets" border="0" frame="VOID" rules="NONE" cellspacing="0">
+<colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
 <tbody>
 <tr>
 <td align="LEFT" width="86" height="17">Cats</td>
@@ -56,18 +57,19 @@ You just add ID "mypets' for this table ...
 </tbody>
 </table>
 
-And call it with id + bgcolor for values ...
+... And call it with id + bgcolor for showing its values ...
 
 [loadNVD3]
 [jsChart type='discretebar' class='{id:"mypets", bgcolor:"#FFFF99"}']
 
-Not so good since labels are numbers, huh? So here we go...
+Not so good since labels are still numbers, huh? So ...
 
 <b>Values + Labels from OpenOffice Calc Automatically</b>
 
-Generating your labels of chart is as easy too: you just mark the different background color for them on OpenOffice side. Here is the same table after copy & paste (in visual mode!) + added another ID for it ...
+Generating your labels of chart is as easy too: you just mark the different background color for them on OpenOffice side. Here is the same table after copy & paste (in visual mode!) + added another ID "mypets2" for it ...
 
-<table id="mypets2" border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
+<table id="mypets2" border="0" frame="VOID" rules="NONE" cellspacing="0">
+<colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
 <tbody>
 <tr>
 <td align="LEFT" bgcolor="#66CC99" width="86" height="17">Cats</td>
@@ -82,12 +84,44 @@ Generating your labels of chart is as easy too: you just mark the different back
 </tbody>
 </table>
 
-And call it again but adding now "titlecolor" option ...
+And call it again as before but adding now "titlecolor" option to find those labels ...
 
 [loadNVD3]
 [jsChart type='discretebar' class='{id:"mypets2", bgcolor:"#FFFF99", titlecolor:"#66CC99"}']
 
-Note: labels of chart may come freely from one row / column of OpenOffice table as long as you just mark their bgcolor properly.
+Note: labels of chart may come freely from one row / column of OpenOffice table on this way as long as you just mark their bgcolor properly.
+
+<b>Multidimensional Data Sets from OpenOffice</b>
+
+You can also bring in data from many data sets and show them out with 'multibar' chart type. The principle is the same as above: you pick up for labels & different data sets own background color and paste them into WP document.
+
+Here is an example table.
+
+<table id="mypets4" border="0" frame="VOID" rules="NONE" cellspacing="0"><colgroup><col width="86" /><col width="86" /><col width="86" /></colgroup>
+<tbody>
+<tr>
+<td align="LEFT" bgcolor="#66CC99" width="86" height="17">Cats</td>
+<td align="RIGHT" bgcolor="#FFFF99" width="86">7</td>
+<td align="RIGHT" bgcolor="#FF9900" width="86">18</td>
+</tr>
+<tr>
+<td align="LEFT" bgcolor="#66CC99" height="17">Cows</td>
+<td align="RIGHT" bgcolor="#FFFF99">2</td>
+<td align="RIGHT" bgcolor="#FF9900">9</td>
+</tr>
+<tr>
+<td align="LEFT" bgcolor="#66CC99" height="17">Birds</td>
+<td align="RIGHT" bgcolor="#FFFF99">12</td>
+<td align="RIGHT" bgcolor="#FF9900">4</td>
+</tr>
+</tbody>
+</table>
+
+Only difference is that you call the chart up by having a list of colors for the background of data cells, instead of just one color:
+
+[jsChart type='multibar' class='{id:"mypets4", bgcolor:"#FFFF99,#FF9900", titlecolor:"#66CC99"}']
+
+Note: here is just 2 data sets but you copy&paste from **shortcode_direct_openoffice.ods** example table bigger data set and play around with it easily and see how it is unlimited.
 
 <b>Adding Own Custom Labels - Cell by Cell to Each Value</b>
 
@@ -104,7 +138,8 @@ And shortcode call stays the same ...
 [loadNVD3]
 [jsChart type='discretebar' class='{id:"mypets3", bgcolor:"#FFFF99"}']
 
+This is slow and time-consuming way to generate them but now you have exact control of each label that appears with your chart.
+
 <b>
 That is all folks - enjoy it with OpenOffice for all your tables !
 </b>
-

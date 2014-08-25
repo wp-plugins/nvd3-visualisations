@@ -138,41 +138,40 @@ function dataRead(infile, id, type, options) {
 	else if (options.class) { // Data set is embedded into document all over its HTML tags / table
 //		console.info(options);
 		jQuery(document).ready(function() { // Wait until DOM is ready
-			var values = new Array();
-			var set = ''; var labels = new Array();
-			if (typeof options.class == 'string')
-				set = d3.selectAll('.'+options.class);
-			else if (typeof options.class == 'object') {
-				if (options.class.id && options.class.bgcolor)
-					set = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.bgcolor+'"]');
+			var dataid=0;
+			var set = new Array(); var labels = new Array();
+			if (typeof options.class == 'string') {
+				set.push( d3.selectAll('.'+options.class) );
+				dataid = options.class;
+			} else if (typeof options.class == 'object') {
+				dataid = options.class.id;
+				if (options.class.id && options.class.bgcolor && typeof options.class.bgcolor == 'string')
+					var bgcolor = options.class.bgcolor;
+					if (options.class.coloring)
+						options.colors = options.class.bgcolor;
+					if (bgcolor.indexOf(",") == -1)
+						set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+bgcolor+'"]') );
+					else {	 // Multi series data case
+						var stack = bgcolor.split(",");
+						for (i=0; i<stack.length; i++)
+							set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+stack[i]+'"]') );
+					}
 				if (options.class.id && options.class.titlecolor) {
 					var stack = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.titlecolor+'"]');
 					for (c=0; c<stack[0].length; c++) // Bg.colored labels from stack
 						labels.push( jQuery(stack[0][c]).text() );
+					var setlength = set[0][0].length*set.length;
+					if (setlength > labels.length) {
+						var repeat = 0;
+						var inf = 100000;
+						while (labels.length < setlength && labels.length<inf) { 
+							labels.push( labels[repeat] );
+							repeat++;
+						}
+					}
 				}
 			}
-			var label = 1;
-			var cname = options.class;
-			if (set[0])
-			for (d=0; d<set[0].length; d++)
-				if (set[0][d]['innerText']) {
-						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
-						if (+nro) { // value must be number && its arr index too
-						if (set[0][d]['attributes'])
-						if (set[0][d]['attributes']['id']) { // Labels from each cell's ID
-							var rec = {'Labels':set[0][d]['attributes']['id']['value']};
-							rec[options.class] = +nro;
-						} else { // Labels autonumbered or from colored row/columns of table
-							var rec = { 'Labels':label };
-							if (labels[label-1])
-								rec = { 'Labels':labels[label-1] };
-							rec[options.class] = +nro;
-						}
-						values.push(rec);
-						label++;
-						}
-				}
-			var data = parseJSON(values, type);
+			var data = parseJSON(set2values(set, labels, options), type);
 			chartSelector(id, data, type, options);
 
 			options.datatype = 'direct';
@@ -186,6 +185,47 @@ function dataRead(infile, id, type, options) {
 	} else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
 		chartSelector(id, infile, type, options);
 }
+function set2values(aset, labels, options) {
+			var label_c = 1;
+			var values = new Array();
+//			var cname = options.class;
+			// TODO: a loop to get multidim sets - set by set ...
+		var backtrack = new Array();
+		for (s=0; s<aset.length; s++) {
+			var set = aset[s];
+
+			var all_labels = new Array();
+			if (set[0])
+			for (d=0; d<set[0].length; d++)
+				if (set[0][d]['innerText']) {
+						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
+						var stitles = 'Data '+(s+1);
+						if (+nro) { // value must be number && its arr index too
+						if (set[0][d]['attributes'])
+						if (set[0][d]['attributes']['id']) { // Labels from each cell's ID
+							var alabel = set[0][d]['attributes']['id']['value'];
+							var rec = {'Labels':alabel};
+							rec[stitles] = +nro;
+						} else { // Labels autonumbered or from colored row/columns of table
+							var alabel = label_c;
+							if (labels[label_c-1])
+								alabel = labels[label_c-1];
+							var rec = { 'Labels':alabel };
+							rec[stitles] = +nro;
+						}
+						if (!backtrack[alabel] && backtrack[alabel] != 0) {
+							values.push(rec);
+							backtrack[alabel] = values.length-1;
+						} else
+							values[ backtrack[alabel] ][stitles] = +nro;
+						label_c++;
+						}
+				}
+		}
+//		console.info(values);
+		return values;
+}
+
 function recordOptions(options) {
 
 
@@ -876,7 +916,7 @@ function colorSegments(type,options,chartID,size) {
 			customs = true; 
 		}
 
-	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of these blocked chart types
+	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of these blocked chart types active
 		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
 		// Legend's coloring
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
