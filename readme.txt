@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,8 +143,13 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 3. Same Data Set on 4 Different Ways by Using Chart's Picker 
 4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
+5. Automatically updated charts fast from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.6.7 =
+Version 1.6.7 -
+The best option **table** that lets you build from OpenOffice tables automatically updating charts real fast & have their colors copied to elements of chart too (look at screenshot nr 5). This works with all chart types which have TSV file on examples/ folder. Adding **seriescolor** option for **class** to let you name time series etc. Starting to restructure code more like real OOPS package.
 
 = 1.6.6 =
 Version 1.6.6 -

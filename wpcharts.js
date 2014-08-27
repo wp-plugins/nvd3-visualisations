@@ -3,7 +3,6 @@ charts = new Array();
 bootup = 1;
 
 // API component to draw charts directly on WP page by one JS call
-
 function jsChart(id, infile, type, dims, options) {
 
 	if (bootup) {
@@ -14,6 +13,7 @@ function jsChart(id, infile, type, dims, options) {
 	// Default size of chart: VGA screen
 	var height = '480';
 	var width = ' width:640'; //px; ';
+	if (typeof options != 'undefined')
 	if (options.height && options.width) {
 		height = options.height;
 		width = ' width:'+options.width; //+'px; ';
@@ -52,7 +52,6 @@ function jsChart(id, infile, type, dims, options) {
 	// svgChart(id);
 	type = type.toLowerCase();
 	dataRead(infile, id, type, options);
-}
 
 // Data reader from different sources: demos / own file / direct input options / JSON 
 function dataRead(infile, id, type, options) {
@@ -77,10 +76,10 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-//		console.info(data);
+		console.info(data);
 		data = parseJSON(data,type);
 //		console.info(data);
-//		console.info(options);
+		console.info(options);
 		chartSelector(id, data, type, options);
 
 	options.datatype = 'tsv';
@@ -135,43 +134,44 @@ function dataRead(infile, id, type, options) {
 		chartData[id] = new Object( options );
 	}
 	}
+	else if (options.table) { // ID of table exists
+		// Parsing OpenOffice table as automagically as possible
+		var idtable = options.table;
+		if (typeof options.nocoloring == 'undefined')
+			options.colors = colColors( idtable );
+		else if (options.table.id)
+			idtable = options.table.id;
+
+		var data = new Array();
+		var dataset = d3.selectAll('#'+idtable+' tr');
+		for (s=0; s<dataset[0].length; s++)
+			data.push( dataset[0][s].innerText.split("\t") );
+		var series = new Array();
+		for (i=0; i<data[0].length; i++)
+			series.push(data[0][i]);
+
+		var out = new Array();
+		for (i=1; i<data.length; i++) {
+			var alabel = data[i][0];
+			var values = new Array();
+			values[ 'keys' ] = alabel;
+			for (s=1; s<data[i].length; s++)
+				if (+data[i][s])
+					values[ series[s-1] ] = data[i][s];
+			out.push(values);
+		}
+		options.datatype = 'tsv';
+		options.infile = infile+'.tsv';
+
+		var data = parseJSON(out,type);
+		console.info(id);
+		chartSelector(id, data, type, options);
+	}
 	else if (options.class) { // Data set is embedded into document all over its HTML tags / table
 //		console.info(options);
-		jQuery(document).ready(function() { // Wait until DOM is ready
-			var dataid=0;
-			var set = new Array(); var labels = new Array();
-			if (typeof options.class == 'string') {
-				set.push( d3.selectAll('.'+options.class) );
-				dataid = options.class;
-			} else if (typeof options.class == 'object') {
-				dataid = options.class.id;
-				if (options.class.id && options.class.bgcolor && typeof options.class.bgcolor == 'string')
-					var bgcolor = options.class.bgcolor;
-					if (options.class.coloring)
-						options.colors = options.class.bgcolor;
-					if (bgcolor.indexOf(",") == -1)
-						set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+bgcolor+'"]') );
-					else {	 // Multi series data case
-						var stack = bgcolor.split(",");
-						for (i=0; i<stack.length; i++)
-							set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+stack[i]+'"]') );
-					}
-				if (options.class.id && options.class.titlecolor) {
-					var stack = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.titlecolor+'"]');
-					for (c=0; c<stack[0].length; c++) // Bg.colored labels from stack
-						labels.push( jQuery(stack[0][c]).text() );
-					var setlength = set[0][0].length*set.length;
-					if (setlength > labels.length) {
-						var repeat = 0;
-						var inf = 100000;
-						while (labels.length < setlength && labels.length<inf) { 
-							labels.push( labels[repeat] );
-							repeat++;
-						}
-					}
-				}
-			}
-			var data = parseJSON(set2values(set, labels, options), type);
+		jQuery(document).ready(function() { // Wait until DOM is ready for input
+			// var data = parseJSON(set2values(set, labels, series, options), type);
+			var data = parseJSON(cells2set(), type);
 			chartSelector(id, data, type, options);
 
 			options.datatype = 'direct';
@@ -182,10 +182,64 @@ function dataRead(infile, id, type, options) {
 			chartData[id] = new Object( options );
 	}
 		});
-	} else if (typeof infile == 'object') // Direct data set by JSON variable (= formats on examples folder)
+	} else if (typeof infile == 'object') // Pure raw data set by JSON variable (= formats on examples/ folder's JSONs)
 		chartSelector(id, infile, type, options);
+
+function colColors(id) {
+
+	var cells = d3.selectAll('#'+id).selectAll('tbody tr').selectAll('td');
+	cells = cells[1]; // Pick 2nd line of table
+
+	var bgcolors = new Array();
+	for (col=1; col<cells.length; col++)
+		// console.info(cells[col]['attributes']['bgcolor']['value']);
+		bgcolors.push(cells[col]['attributes']['bgcolor']['value']);
+
+	return bgcolors.join();
 }
-function set2values(aset, labels, options) {
+
+function cells2set() {
+
+	var set = new Array(); var labels = new Array(); var series = new Array();
+			if (typeof options.class == 'string') {
+				set.push( d3.selectAll('.'+options.class) );
+			} else if (typeof options.class == 'object') {
+				if (options.class.id && options.class.bgcolor && typeof options.class.bgcolor == 'string')
+					var bgcolor = options.class.bgcolor;
+					if (options.class.coloring)
+						options.colors = options.class.bgcolor;
+					if (bgcolor.indexOf(",") == -1)
+						set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+bgcolor+'"]') );
+					else {	 // Multi series data case
+						var stack = bgcolor.split(",");
+						// console.info( d3.selectAll('#'+options.class.id+' [bgcolor="'+stack[1]+'"]').style("background-color") );
+						for (i=0; i<stack.length; i++)
+							set.push( d3.selectAll('#'+options.class.id+' [bgcolor="'+stack[i]+'"]') );
+					}
+				if (options.class.id && options.class.titlecolor) {
+					var stack = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.titlecolor+'"]');
+					for (c=0; c<stack[0].length; c++) // Bg.colored labels from stack
+						labels.push( jQuery(stack[0][c]).text() );
+					var setlength = set[0][0].length*set.length;
+					if (setlength > labels.length) { // Less labels than data points
+						var repeat = 0;
+						var inf = 100000;
+						while (labels.length < setlength && labels.length<inf) { 
+							labels.push( labels[repeat] );
+							repeat++;
+						}
+					}
+				}
+				if (options.class.id && options.class.seriescolor) {
+					var stack = d3.selectAll('#'+options.class.id+' [bgcolor="'+options.class.seriescolor+'"]');
+					for (c=0; c<stack[0].length; c++) // Bg.colored labels from stack
+						series.push( jQuery(stack[0][c]).text() );
+				}
+			}
+			return set2values(set, labels, series, options);
+}
+
+function set2values(aset, labels, series, options) {
 			var label_c = 1;
 			var values = new Array();
 //			var cname = options.class;
@@ -198,15 +252,17 @@ function set2values(aset, labels, options) {
 			if (set[0])
 			for (d=0; d<set[0].length; d++)
 				if (set[0][d]['innerText']) {
-						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
 						var stitles = 'Data '+(s+1);
+						if (series.length)
+							stitles = series[s];
+						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
 						if (+nro) { // value must be number && its arr index too
 						if (set[0][d]['attributes'])
 						if (set[0][d]['attributes']['id']) { // Labels from each cell's ID
 							var alabel = set[0][d]['attributes']['id']['value'];
 							var rec = {'Labels':alabel};
 							rec[stitles] = +nro;
-						} else { // Labels autonumbered or from colored row/columns of table
+						} else { // Labels autonumbered or from 1 row/column of table
 							var alabel = label_c;
 							if (labels[label_c-1])
 								alabel = labels[label_c-1];
@@ -214,8 +270,8 @@ function set2values(aset, labels, options) {
 							rec[stitles] = +nro;
 						}
 						if (!backtrack[alabel] && backtrack[alabel] != 0) {
+							backtrack[alabel] = values.length;
 							values.push(rec);
-							backtrack[alabel] = values.length-1;
 						} else
 							values[ backtrack[alabel] ][stitles] = +nro;
 						label_c++;
@@ -226,10 +282,8 @@ function set2values(aset, labels, options) {
 		return values;
 }
 
-function recordOptions(options) {
-
-
-}
+} // dataRead
+} // jsChart
 
 function printLines(data) {
 	var tab = '	';
@@ -252,7 +306,8 @@ function parseJSON(data, chart) {
 			var colss = new Array();
 			for (label in data[line]) {
 				colss.push(data[line][label]);
-				if (line == 0) titles.push(label);
+				if (line == 0 && label != 'max' && label != 'min' && label != 'numericSortReverse') 
+					titles.push(label);
 			}
 			lines.push(colss);
 		}
@@ -276,7 +331,7 @@ function parseJSON(data, chart) {
 		return res;
 
 	return data;
-}
+
 function forceNumb(arr, t) {  // Name data points + force numbers type for values 
 
 	for (i=0; i<arr.length; i++) {
@@ -299,14 +354,16 @@ function forceNumb2(arr, t) {  // Name data points + force numbers type for valu
 
 function getCol(colname, lines) {
 	var out = new Array();
-	for (i=0; i<lines.length; i++) // Note: forcing numerical value out
-		if (lines[i][colname]) {
-		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
+	for (i=0; i<lines.length; i++) // Note: forcing numerical values output
+		if (lines[i][colname] && +lines[i][colname]) {
+//		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
 		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );
 		out.push( cell );
 	}
 	return out;
 }
+
+} // parseJSON
 
 function demoShows(id, data, type, options) {
 
@@ -348,7 +405,7 @@ function demoShows(id, data, type, options) {
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
 		chartSelector(id, data, type, options);
-		console.info('Drawing chart demo "'+type+'" from a file: data/'+demos[type]);
+		console.info('Drawing chart "'+type+'" from a file: data/'+demos[type]);
 		jQuery("#chart"+id).append(msg+aform);
 	});
 	else if (infile.indexOf('.xml') > 0)
@@ -357,11 +414,12 @@ function demoShows(id, data, type, options) {
 		data = xml2json(data, '  ');
 		// console.info(data);
 		chartSelector(id, data, type, options);
-		console.info('Drawing chart demo "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
+		console.info('Drawing chart "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
 		jQuery("#chart"+id).append(msg+aform);
 	});
-}
+
 function sQuote(w) { return " '"+w+"' "; }
+}
 
 function newpost(linkjson, linkxml, id) {
 
@@ -434,7 +492,7 @@ function timeStamp(x, options) {
 	return x;
 }
 
-/* ALL Supported NVD3 Chart Types: 1 function/type */
+/* ALL Supported NVD3 Chart Types: 1 function / chart's type */
 
 // Drawing chart: linePlusBar
 function NVD3linePlusBar(chartID, data, options) {
