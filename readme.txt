@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.7
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,10 +31,12 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Special effects for infographic: embedding background's picts, smooth gradients of colors for data, and shadows.
 1. Full set of all original NVD3's gallery charts (12 types of charts in gallery).
 1. Super easy to illustrate your data sets by picking up template chart from any gallery's examples.
-1. WYSIWYG look of chart on front-end + data editor to populate own data.
-1. Chart's picker gives your users many views of same data set.
+1. WYSIWYG look of chart on front-end + data editor to populate own data from files.
+1. Chart's picker gives your users many views of the same data set.
 1. Support of JSON/XML or CSV/TSV data input formats.
 1. Smart suggestion of online syntax editor from cloud based on data's type.
+1. Copy&paste data input table from OpenOffice Calc to the automatically updated chart.
+1. Tag any pieces of open page/post and build a new chart for them.
 1. Accurate layout of each chart based on any valid HTML container tag.
 1. Many charts on the same page/post of WordPress from one API / shortcode call.
 1. Many fancy options available to change chart's look & behavior.
@@ -146,6 +148,10 @@ Here:
 5. Automatically updated charts fast from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.6.8 =
+Version 1.6.8 -
+Option **table** supports data **exports** and **chartpicker** on popup window. Restructuring of code for OOPS package continues.
 
 = 1.6.7 =
 Version 1.6.7 -

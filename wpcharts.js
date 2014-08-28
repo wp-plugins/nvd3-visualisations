@@ -52,7 +52,15 @@ function jsChart(id, infile, type, dims, options) {
 	// svgChart(id);
 	type = type.toLowerCase();
 	dataRead(infile, id, type, options);
+	return; // jsChart
 
+function checkJQ() {
+
+	if ('undefined' == typeof window.jQuery)
+		window.alert('Please, load jQuery to use NVD3 visualisations properly.');
+	else
+		console.info('jQuery: %ok%');
+}
 // Data reader from different sources: demos / own file / direct input options / JSON 
 function dataRead(infile, id, type, options) {
 
@@ -137,50 +145,62 @@ function dataRead(infile, id, type, options) {
 	else if (options.table) { // ID of table exists
 		// Parsing OpenOffice table as automagically as possible
 		var idtable = options.table;
-		if (typeof options.nocoloring == 'undefined')
+		if (typeof options.autocoloring == 'undefined')
 			options.colors = colColors( idtable );
-		else if (options.table.id)
+		else if (options.table.id) {
 			idtable = options.table.id;
+			// TODO: test 2 modes of autocoloring - table 2 chart and its opposite
+		}
 
 		var data = new Array();
 		var dataset = d3.selectAll('#'+idtable+' tr');
 		for (s=0; s<dataset[0].length; s++)
 			data.push( dataset[0][s].innerText.split("\t") );
-		var series = new Array();
+
+		var series = new Array(); // Titles of Cols & Series
 		for (i=0; i<data[0].length; i++)
 			series.push(data[0][i]);
 
-		var out = new Array();
+		options.labels = new Array();
+		options.values = new Array();
+		options.series = ('Keys,'+series.join()).split(',');
+		var out = new Array();  // Labels + Their Data Points
+
 		for (i=1; i<data.length; i++) {
 			var alabel = data[i][0];
+			options.labels.push(alabel);
 			var values = new Array();
 			values[ 'keys' ] = alabel;
 			for (s=1; s<data[i].length; s++)
-				if (+data[i][s])
+				if (+data[i][s]) {
 					values[ series[s-1] ] = data[i][s];
+					if (s == 1)
+						options.values.push( data[i][s] );
+					else
+						options.values[options.values.length-1] = options.values[options.values.length-1]+';'+data[i][s];
+				}
 			out.push(values);
 		}
 		options.datatype = 'tsv';
 		options.infile = infile+'.tsv';
 
 		var data = parseJSON(out,type);
-		console.info(id);
-		chartSelector(id, data, type, options);
+		chartSelector(id, data, type, options); 
+
+		recordDOM(options);
 	}
 	else if (options.class) { // Data set is embedded into document all over its HTML tags / table
 //		console.info(options);
 		jQuery(document).ready(function() { // Wait until DOM is ready for input
-			// var data = parseJSON(set2values(set, labels, series, options), type);
-			var data = parseJSON(cells2set(), type);
+			var data = parseJSON(cells2set(options), type);
 			chartSelector(id, data, type, options);
-
-			options.datatype = 'direct';
-			options.infile = 'foo';
-			if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
-				if (typeof chartData == 'undefined')
-					chartData = new Array();
-			chartData[id] = new Object( options );
-	}
+			/*
+			options.series = series;
+			options.labels = labels;
+			options.values = datapoints;
+			*/
+			// TODO: extract data sets above for popup win
+			recordDOM(options);
 		});
 	} else if (typeof infile == 'object') // Pure raw data set by JSON variable (= formats on examples/ folder's JSONs)
 		chartSelector(id, infile, type, options);
@@ -197,8 +217,19 @@ function colColors(id) {
 
 	return bgcolors.join();
 }
+function recordDOM(options) {
 
-function cells2set() {
+//		console.info(options);
+		options.datatype = 'direct';
+		options.infile = 'foo';
+		if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+			if (typeof chartData == 'undefined')
+				chartData = new Array();
+			chartData[id] = new Object( options );
+		}
+}
+
+function cells2set(options) {
 
 	var set = new Array(); var labels = new Array(); var series = new Array();
 			if (typeof options.class == 'string') {
@@ -282,10 +313,165 @@ function set2values(aset, labels, series, options) {
 		return values;
 }
 
+function demoShows(id, data, type, options) {
+
+	// Demo data sets for gallery
+	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
+
+	if (options.xmldemo)
+		demos[type] = demos[type].replace(/json/g, 'xml');
+
+	// Home dir of demo data sets
+	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
+	if (rootpath) // Global URL of root set by shortcode of WP
+		 infile = rootpath + demos[type];
+
+	var desc = 'Data File: data/'+demos[type];
+	var subs = '<sup> ?</sup>';
+	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
+	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
+
+	var pp = rootpath+'../postchart.php?new=';
+	var ctype = '&type='+type;
+	var filepath = '&filepath='+demos[type];
+	var tt = 'Clone data set from this example into your new draft on WordPress';
+
+	var shortmsg = '<br />Add this into: ';
+
+	var idmenu = "gmenu"+id;
+	var mpostpage = '<select id='+idmenu+'><option value="post">New Post</option><option value="page">New Page</option></select>';
+
+	var idmenu2 = "gformat"+id;
+	var mformat = '<select id='+idmenu2+'><option value="json">JSON data</option><option value="xml">XML data</option><option value="csv">CSV data</option><option value="tsv">TSV data</option></select>';
+
+	var query = rootpath+"../postchart.php?type="+type;
+	var ctype = demos[type];
+	var mbutt = '<button style="cursor:pointer" onclick="newpost2('+sQuote(query)+', '+sQuote(ctype)+', '+sQuote(idmenu)+', '+sQuote(idmenu2)+')" title="'+tt+'">New Chart</button>'
+
+	var aform = shortmsg + mpostpage + ' in ' + mformat + mbutt;
+
+	if (infile.indexOf(".json") > 0)
+	d3.json(infile,function(error,data) {
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart "'+type+'" from a file: data/'+demos[type]);
+		jQuery("#chart"+id).append(msg+aform);
+	});
+	else if (infile.indexOf('.xml') > 0)
+	d3.text(infile,function(error,data) { // d3.xml has parsing problems
+//		data = buildXML(data);
+		data = xml2json(data, '  ');
+		// console.info(data);
+		chartSelector(id, data, type, options);
+		console.info('Drawing chart "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
+		jQuery("#chart"+id).append(msg+aform);
+	});
+
+function sQuote(w) { return " '"+w+"' "; }
+} // demoShows 
+
 } // dataRead
 } // jsChart
 
-function printLines(data) {
+// A function to show SVG element in a new window
+  function svg2Win(svgid, options) {
+
+	if (typeof chartData != 'undefined')
+	if (chartData[svgid])
+		if (chartData[svgid]['exports'] || chartData[svgid]['chartpicker'])
+			options = chartData[svgid];
+ 
+	var drawButts = false;
+	if (typeof chartData == 'object')
+		if (chartData[svgid])
+		if (chartData[svgid]['chartpicker'])
+			drawButts = true;
+
+	var header = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> ';
+	var svgstyle = jQuery("#svg"+svgid).attr("style");
+	var viewbox = ' viewBox="0 0 '+options.width+' '+options.height+'" ';
+	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; 
+	// height="100%" width="100%"
+
+	var css = rootpath+"../nv.d3.css"; 
+	css = '<link rel="stylesheet" href="'+css+'" type="text/css" media="all"/> ';
+
+	if (options['exports']  || drawButts) {
+		var jQ = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> ';
+		var cb = '<script src="'+rootpath+'../colorbrewer.js"></script> ';
+		css = jQ + cb + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
+	}
+
+/* TODO: resize buttons of chart
+	var smallerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', -1)"> « </button> ';
+	var biggerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', +1)"> » </button> ';
+*/
+	var printIco = '<img src="'+rootpath+'../icons/print.gif">';
+	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()" title="Print This Chart on Paper">'+printIco+'</button> ';
+
+//	console.info(options);
+	var expB = ''; var svgB = '';
+	if (options.exports) {
+		expB = '<img src="'+rootpath+'../icons/excel.png">';
+		var expID = "'svg"+svgid+"'";
+		expB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'csv\',\''+rootpath+'\')" title="Export Data into Excel or Other Spreadsheets Software">'+expB+'</button> ';
+		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
+		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\',\''+rootpath+'\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
+	}
+
+	var title = "D3 Chart";
+	if (typeof options.title != 'undefined')
+		title = options.title;
+	var html = header+' <html><head> <title> '+title+' </title> ' +css+'</head> ';
+
+	html = html + '<body>'; // + css;
+	if (typeof chartData == 'object')
+	if (chartData[svgid])
+	if (chartData[svgid]['exports']  || drawButts) {
+		html = html + '<script>chartData = ' + JSON.stringify(chartData[svgid]) + '; chartData.inPopup=true; rootpath="'+ rootpath +'"; function getChartData() { return chartData; } </script>';
+	}
+
+	html = html + '<table class="svgtable" >';
+	html = html + '<tr><td>';
+	if (typeof options.title != 'undefined')
+			html = html + '<b>' + options.title + '</b>';
+
+//	html = html + '<p style="float:right">' + smallerB + biggerB + '</p>';
+	var cid = "'chart"+svgid+"'";
+	var sid = "'svg"+svgid+"'";
+	var resize = ' resize:both; overflow:auto; ';
+	if (typeof options.noResize != 'undefined')
+	if (options.noResize)
+		resize = '';
+
+	var pickers = ''; // Charts picker's butts
+	if (drawButts) {
+		// All legal chart types (TODO: horizontalmultibar, scatterbubble, add)
+		var types = { 'lineplusbar':1, 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'horizontalmultibar':1, 'pie':1, 'donut':1, 'bullet':1, 'scatterbubble':1, 'multibar':1, 'viewfinder':1 };
+		var typesTSV = { 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'pie':1, 'donut':1, 'multibar':1, 'viewfinder':1 };
+
+		options.inPopup = true;
+		if (options.datatype == 'direct')
+			pickers = '<td>'+popButt('pie',svgid, options, types)+popButt('donut',svgid, options, types)+popButt('discretebar',svgid, options, types)+popButt('multibar',svgid, options, types)+popButt('simpleline',svgid, options, types)+popButt('viewfinder',svgid, options, types)+'</td>'
+		else if (options.datatype == 'tsv' || options.datatype == 'csv') {
+			var pickers = '';
+			for (t in typesTSV)
+				pickers = pickers + popButt(t, svgid, options, types);
+			pickers = '<td>'+pickers+'</td>';
+		}
+	}
+
+	html = html + '</td></tr><tr><td class="svgchart" ><div id="chart'+svgid+'" style="'+svgstyle+resize+' " onmouseup="document.getElementById('+sid+').style.height = document.getElementById('+cid+').style.height; document.getElementById('+sid+').style.width = document.getElementById('+cid+').style.width;">';
+	html = html + svg + '</div>';
+	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+expB+svgB+'</td><tr><tr><td id="databuffer" style="color:gray"></td></tr></table></body></html>';
+
+	var cwidth = 100 + parseInt(options.width);
+	var cheight = 100 + parseInt(options.height);
+	myWindow=window.open('','','location=0,status=0,menubar=0,width='+cwidth+',height='+cheight);
+
+	myWindow.document.write(html);
+   } // svg2Win
+
+function printLines(data) { // debug prints
 	var tab = '	';
 	var newline = "\n";
 	var out = '';
@@ -298,6 +484,7 @@ function printLines(data) {
 	console.info(out);
 }
 
+// Parses TSV based input data into JSON based on chart's type
 function parseJSON(data, chart) {
 
 		var lines = new Array();
@@ -365,62 +552,6 @@ function getCol(colname, lines) {
 
 } // parseJSON
 
-function demoShows(id, data, type, options) {
-
-	// Demo data sets for gallery
-	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
-
-	if (options.xmldemo)
-		demos[type] = demos[type].replace(/json/g, 'xml');
-
-	// Home dir of demo data sets
-	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
-	if (rootpath) // Global URL of root set by shortcode of WP
-		 infile = rootpath + demos[type];
-
-	var desc = 'Data File: data/'+demos[type];
-	var subs = '<sup> ?</sup>';
-	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
-	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
-
-	var pp = rootpath+'../postchart.php?new=';
-	var ctype = '&type='+type;
-	var filepath = '&filepath='+demos[type];
-	var tt = 'Clone data set from this example into your new draft on WordPress';
-
-	var shortmsg = '<br />Add this into: ';
-
-	var idmenu = "gmenu"+id;
-	var mpostpage = '<select id='+idmenu+'><option value="post">New Post</option><option value="page">New Page</option></select>';
-
-	var idmenu2 = "gformat"+id;
-	var mformat = '<select id='+idmenu2+'><option value="json">JSON data</option><option value="xml">XML data</option><option value="csv">CSV data</option><option value="tsv">TSV data</option></select>';
-
-	var query = rootpath+"../postchart.php?type="+type;
-	var ctype = demos[type];
-	var mbutt = '<button style="cursor:pointer" onclick="newpost2('+sQuote(query)+', '+sQuote(ctype)+', '+sQuote(idmenu)+', '+sQuote(idmenu2)+')" title="'+tt+'">New Chart</button>'
-
-	var aform = shortmsg + mpostpage + ' in ' + mformat + mbutt;
-
-	if (infile.indexOf(".json") > 0)
-	d3.json(infile,function(error,data) {
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart "'+type+'" from a file: data/'+demos[type]);
-		jQuery("#chart"+id).append(msg+aform);
-	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) { // d3.xml has parsing problems
-//		data = buildXML(data);
-		data = xml2json(data, '  ');
-		// console.info(data);
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
-		jQuery("#chart"+id).append(msg+aform);
-	});
-
-function sQuote(w) { return " '"+w+"' "; }
-}
-
 function newpost(linkjson, linkxml, id) {
 
 	var choice = jQuery('#'+id).val();
@@ -476,15 +607,8 @@ function chartSelector(id, data, type, options) {
 		NVD3Donut(id, data, options); 
 	else if (type == 'bullet')
 		NVD3Bullet(id, data, options);
-
-/*
-	nvd3Dump = JSON.stringify(data);
-//	xdata = "'data'";
-	var cbutt = '<br /><button onclick="copyToClipboard()">Copy Data</button>';
-	jQuery("#chart"+id).append(cbutt);
-*/
 }
-// Axis should be time formatted with chart ?
+// Axis should be date formatted with a chart?
 function timeStamp(x, options) {
 	if (options.xtime)
 		return d3.time.format('%x')(new Date(x));
@@ -632,7 +756,7 @@ function NVD3discreteBar(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.discreteBarChart()
-      .margin(setMargin({left: 50, bottom: 50}, options))
+      .margin(setMargin({left: 50, bottom: 50, right: 50}, options))
 	  .x(function(d) { return d.label })    //Specify the data accessors.
       .y(function(d) { return d.value })
       .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
@@ -667,7 +791,7 @@ function NVD3horizontalMultiBar(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.multiBarHorizontalChart()
-        .margin(setMargin({left: 70, bottom: 50}, options))
+        .margin(setMargin({left: 70, bottom: 50, right: 50}, options))
 		.x(function(d) { return d.label })
         .y(function(d) { return d.value })
         .showValues(true)           //Show bar value next to each bar.
@@ -698,7 +822,7 @@ function NVD3ScatterBubble(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.scatterChart()
-                .margin(setMargin({left: 50, bottom: 50}, options))
+                .margin(setMargin({left: 50, bottom: 50, right: 50}, options))
 				.showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                 .showDistY(true)
                 .transitionDuration(350)
@@ -738,7 +862,7 @@ function NVD3MultiBar(chartID, data, options) {
 
 nv.addGraph(function() {
     var chart = nv.models.multiBarChart()
-      .margin(setMargin({left: 50, bottom: 50}, options))
+      .margin(setMargin({left: 50, bottom: 50, right: 50}, options))
 	  .transitionDuration(350)
       .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
       .rotateLabels(0)      //Angle to rotate x-axis labels.
@@ -778,7 +902,7 @@ function NVD3viewFinder(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.lineWithFocusChart()
-	.margin(setMargin({left: 50, bottom: 50}, options))
+	.margin(setMargin({left: 50, bottom: 50, right: 50}, options))
 	.x(function(d,i) { return i })
   ;
 /*
@@ -817,7 +941,7 @@ function NVD3simpleLine(chartID, data, options) {
 /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
   var chart = nv.models.lineChart()
-                .margin(setMargin({left: 50, bottom: 50}, options))  //Adjust chart margin wider.
+                .margin(setMargin({left: 50, bottom: 50, right: 50}, options))  //Adjust chart margin wider.
                 .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 .transitionDuration(350)  //how fast do you want the lines to transition?
                 .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
@@ -926,7 +1050,6 @@ nv.addGraph(function() {
 function colorSegments(type,options,chartID,size) {
 
   initCB();
-
   var classname = 0;
   if (options.colorbrewer) if (options.colorbrewer.segment)
 		classname = options.colorbrewer.segment;
@@ -987,20 +1110,6 @@ function colorSegments(type,options,chartID,size) {
 		d3.selectAll('#svg'+chartID+classname).style( { filter:"url(#blackshadows)" } );
 		d3.selectAll('#svg'+chartID+classname+' text').style( { filter:"url(#blackshadows)" } );
 	}
-}
-
-function recolor(type,chartID,i) { // TODO
-}
-
-function initCB() {
-	for (x in colorbrewer)
-	if (colorbrewer[x]['max'])
-		return;
-	else
-	for (j in colorbrewer[x]) {
-		colorbrewer[x]['max'] = colorbrewer[x][j].length;
-	}
-}
 
 // Generates smooth colors based on given starting and ending colors and returns its HTML color codes
 function gradientColors(startColor, steps, endColor) {
@@ -1059,7 +1168,19 @@ if (startColor && endColor) { // && !args2js.colors && args2js.colors.length != 
 	return colors;
 } else
 	return new Array(); // empty array
-}
+}  // gradientColors
+
+function initCB() {
+	for (x in colorbrewer)
+	if (colorbrewer[x]['max'])
+		return;
+	else
+	for (j in colorbrewer[x]) {
+		colorbrewer[x]['max'] = colorbrewer[x][j].length;
+	}
+}  // initCB
+
+}  // colorSegments
 
 function shadowEffects(chartID, options) {
 
@@ -1137,8 +1258,7 @@ if (options)
 				.attr("height", options.height);
 }
 }
-
-// End of coloring funcs
+// End of all coloring funcs
 
 function setMargin(m, options) {
 
@@ -1155,14 +1275,7 @@ function setFormat(m, options) {
   return m;
 }
 
-function checkJQ() {
-
-	if ('undefined' == typeof window.jQuery)
-		window.alert('Please, load jQuery to use NVD3 visualisations properly.');
-	else
-		console.info('jQuery: %ok%');
-}
-
+/*
 // A test for WP shortcode's calls
 function svgChart(chartID, infile, type, dims, options) {
 
@@ -1193,7 +1306,24 @@ nv.addGraph(function() {
 	return chart;
 });
 
+// Data set generator, original mychart.js example
+function myData() {
+    var series1 = [];
+    for(var i =1; i < 100; i ++) {
+        series1.push({
+            x: i, y: 100 / i
+        });
+    }
+    return [
+        {
+            key: "Series #1",
+            values: series1,
+            color: "#0000ff"
+        }
+    ];
+}
 };
+*/
 function saveData(header, databox, filename) {
 
 	var mydata = encodeURIComponent( jQuery('#'+databox).val() );
@@ -1224,104 +1354,6 @@ function dataConvert(intype, input, output) {
 	jQuery('#'+output).empty();
 	jQuery('#'+output).val(data);
 }
-// A function to show SVG element in a new window
-  function svg2Win(svgid, options) {
-
-	if (typeof chartData != 'undefined')
-	if (chartData[svgid])
-		if (chartData[svgid]['exports'] || chartData[svgid]['chartpicker'])
-			options = chartData[svgid];
- 
-	var drawButts = false;
-	if (typeof chartData == 'object')
-		if (chartData[svgid])
-		if (chartData[svgid]['chartpicker'])
-			drawButts = true;
-
-	var header = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> ';
-	var svgstyle = jQuery("#svg"+svgid).attr("style");
-	var viewbox = ' viewBox="0 0 '+options.width+' '+options.height+'" ';
-	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; 
-	// height="100%" width="100%"
-
-	var css = rootpath+"../nv.d3.css"; 
-	css = '<link rel="stylesheet" href="'+css+'" type="text/css" media="all"/> ';
-
-	if (options['exports']  || drawButts) {
-		var jQ = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> ';
-		var cb = '<script src="'+rootpath+'../colorbrewer.js"></script> ';
-		css = jQ + cb + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
-	}
-
-/* TODO: resize buttons of chart
-	var smallerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', -1)"> « </button> ';
-	var biggerB = '<button style="font-size:xx-small" onClick="svgscaler('+svgid+', +1)"> » </button> ';
-*/
-	var printIco = '<img src="'+rootpath+'../icons/print.gif">';
-	var printB = '<button style="float:right; cursor:pointer;" onClick="window.print()" title="Print This Chart on Paper">'+printIco+'</button> ';
-
-//	console.info(options);
-	var expB = ''; var svgB = '';
-	if (options.exports) {
-		expB = '<img src="'+rootpath+'../icons/excel.png">';
-		var expID = "'svg"+svgid+"'";
-		expB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'csv\',\''+rootpath+'\')" title="Export Data into Excel or Other Spreadsheets Software">'+expB+'</button> ';
-		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
-		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\',\''+rootpath+'\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
-	}
-
-	var title = "D3 Chart";
-	if (typeof options.title != 'undefined')
-		title = options.title;
-	var html = header+' <html><head> <title> '+title+' </title> ' +css+'</head> ';
-
-	html = html + '<body>'; // + css;
-	if (typeof chartData == 'object')
-	if (chartData[svgid])
-	if (chartData[svgid]['exports']  || drawButts) {
-		html = html + '<script>chartData = ' + JSON.stringify(chartData[svgid]) + '; chartData.inPopup=true; rootpath="'+ rootpath +'"; function getChartData() { return chartData; } </script>';
-	}
-
-	html = html + '<table class="svgtable" >';
-	html = html + '<tr><td>';
-	if (typeof options.title != 'undefined')
-			html = html + '<b>' + options.title + '</b>';
-
-//	html = html + '<p style="float:right">' + smallerB + biggerB + '</p>';
-	var cid = "'chart"+svgid+"'";
-	var sid = "'svg"+svgid+"'";
-	var resize = ' resize:both; overflow:auto; ';
-	if (typeof options.noResize != 'undefined')
-	if (options.noResize)
-		resize = '';
-
-	var pickers = ''; // Charts picker's butts
-	if (drawButts) {
-		// All legal chart types (TODO: horizontalmultibar, scatterbubble, add)
-		var types = { 'lineplusbar':1, 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'horizontalmultibar':1, 'pie':1, 'donut':1, 'bullet':1, 'scatterbubble':1, 'multibar':1, 'viewfinder':1 };
-		var typesTSV = { 'simpleline':1, 'cumulativeline':1, 'stackedarea':1, 'discretebar':1,'pie':1, 'donut':1, 'multibar':1, 'viewfinder':1 };
-
-		options.inPopup = true;
-		if (options.datatype == 'direct')
-			pickers = '<td>'+popButt('pie',svgid, options, types)+popButt('donut',svgid, options, types)+popButt('discretebar',svgid, options, types)+popButt('multibar',svgid, options, types)+popButt('simpleline',svgid, options, types)+popButt('viewfinder',svgid, options, types)+'</td>'
-		else if (options.datatype == 'tsv' || options.datatype == 'csv') {
-			var pickers = '';
-			for (t in typesTSV)
-				pickers = pickers + popButt(t, svgid, options, types);
-			pickers = '<td>'+pickers+'</td>';
-		}
-	}
-
-	html = html + '</td></tr><tr><td class="svgchart" ><div id="chart'+svgid+'" style="'+svgstyle+resize+' " onmouseup="document.getElementById('+sid+').style.height = document.getElementById('+cid+').style.height; document.getElementById('+sid+').style.width = document.getElementById('+cid+').style.width;">';
-	html = html + svg + '</div>';
-	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+expB+svgB+'</td><tr><tr><td id="databuffer" style="color:gray"></td></tr></table></body></html>';
-
-	var cwidth = 100 + parseInt(options.width);
-	var cheight = 100 + parseInt(options.height);
-	myWindow=window.open('','','location=0,status=0,menubar=0,width='+cwidth+',height='+cheight);
-
-	myWindow.document.write(html);
-   }
    
  function popButt(atype,id,ops,types) {
  
@@ -1342,7 +1374,7 @@ if (typeof ops['chartpicker'] == 'string') { // chartpicker is a list of valid t
  
  return '<button onclick="'+jsCall+'" title="'+atype+' chart"><img src="'+rootpath+'../icons/'+atype+'.png"></button><br />'
  }
-
+/*
 // Resizing of a chart on its popup window
 function svgscaler(svgid, dir) {
 
@@ -1380,7 +1412,7 @@ function svgscaler(svgid, dir) {
 	window.innerWidth = Math.round(w*sizer);
 	window.innerHeight = Math.round(h*sizer);
 }
-
+*/
 // Parse JSON data structure into TSV table
 function json2tsv(input) {
 
@@ -1422,15 +1454,9 @@ function json2tsv(input) {
 	for (i=0; i<values.length; i++)
 		tsvstr += newline + labels[i]+tab+values[i];
 		// tsv.push(labels[i]+tab+values[i]);
-	console.info(tsvstr);
+//	console.info(tsvstr);
 }
-/*
-function copyToClipboard() { // copyToClipboard(cdata)
-//  console.info(field);
-  window.prompt("Copy chart's data: Ctrl+C", JSON.stringify(nvd3Dump));
-//  window.alert(JSON.stringify(nvd3Dump));
-}
-*/
+
 // Exporting all types of chart's data
 function exportData(id, format, root) {
 
@@ -1452,7 +1478,8 @@ function exportData(id, format, root) {
 		} else {
 		var dataout = 'Labels;'+data.title+"\n";
 		if (data.series)
-			dataout = data.series[1]+';'+data.title+"\n";
+			// dataout = data.series[1]+';'+data.title+"\n";
+			dataout = data.series.join().replace(/,/g, ';')+"\n";
 		var cols = dataout.length;
 		if (data.labels.length == data.values.length && data.datatype == 'direct')
 		for (line in data.labels) 
@@ -1488,22 +1515,4 @@ function exportData(id, format, root) {
 }
 function removeMe(obj) {
 	$('#'+obj).remove();
-}
-
-// Data set generator, original mychart.js example
-
-function myData() {
-    var series1 = [];
-    for(var i =1; i < 100; i ++) {
-        series1.push({
-            x: i, y: 100 / i
-        });
-    }
-    return [
-        {
-            key: "Series #1",
-            values: series1,
-            color: "#0000ff"
-        }
-    ];
 }
