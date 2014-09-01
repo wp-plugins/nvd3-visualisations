@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.8
+Stable tag: 1.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,10 @@ Here:
 5. Automatically updated charts fast from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.6.9 =
+Version 1.6.9 -
+Popup chart/window gets full screen viewing mode & its buttons. Better code to parse tables (2-dimensional: multibar, etc) into chart and export on popup window. New option **autocoloring** supports cloning the colors from table to chart & vice versa.
 
 = 1.6.8 =
 Version 1.6.8 -

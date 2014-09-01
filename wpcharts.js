@@ -67,6 +67,9 @@ function dataRead(infile, id, type, options) {
 	// console.info(infile);
 	ginfile = infile; // make global
 
+	if (typeof chartData == 'undefined')
+		chartData = new Array();
+
 	if (infile == '')
 		demoShows(id, '', type, options);
 	else if (infile.indexOf(".json") > 0)
@@ -86,8 +89,8 @@ function dataRead(infile, id, type, options) {
 	d3.tsv(infile,function(error,data) { 
 		console.info(data);
 		data = parseJSON(data,type);
-//		console.info(data);
-		console.info(options);
+		console.info(data);
+//		console.info(options);
 		chartSelector(id, data, type, options);
 
 	options.datatype = 'tsv';
@@ -112,8 +115,8 @@ function dataRead(infile, id, type, options) {
 		chartData[id] = new Object( options );
 	}
 	});
-	else if (options.values) { // Direct input (like D3 simplecharts plugin has)
-//		console.info(options);
+	else if (options.values && !options.tsv) { // Direct input (like D3 simplecharts plugin has)
+		console.info('direct!');
 		var titles = ['Labels','DataSet1','DataSet2','DataSet3'];
 		if (options.series)  // Name of data's columns given
 		if (!options.inPopup && options.series != 'Labels') {
@@ -136,7 +139,8 @@ function dataRead(infile, id, type, options) {
 
 	options.datatype = 'direct';
 	options.infile = 'foo';
-	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+	// if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+	if (!options.inPopup) {
 		if (typeof chartData == 'undefined')
 			chartData = new Array();
 		chartData[id] = new Object( options );
@@ -145,47 +149,35 @@ function dataRead(infile, id, type, options) {
 	else if (options.table) { // ID of table exists
 		// Parsing OpenOffice table as automagically as possible
 		var idtable = options.table;
-		if (typeof options.autocoloring == 'undefined')
-			options.colors = colColors( idtable );
-		else if (options.table.id) {
-			idtable = options.table.id;
-			// TODO: test 2 modes of autocoloring - table 2 chart and its opposite
+		if (typeof options.inPopup == 'undefined' || !options.inPopup) {
+			var colors = colColors( idtable );
+			if (typeof options.autocoloring == "undefined")
+				options.colors = colors;	// table => chart coloring
+			else {
+				if (options.autocoloring == 'table')
+					options.autocoloring = colors;	// chart => table coloring
+				else if (options.autocoloring == 'chart' || options.autocoloring == true)
+					options.colors = colors;
+			}
 		}
-
-		var data = new Array();
-		var dataset = d3.selectAll('#'+idtable+' tr');
-		for (s=0; s<dataset[0].length; s++)
-			data.push( dataset[0][s].innerText.split("\t") );
-
-		var series = new Array(); // Titles of Cols & Series
-		for (i=0; i<data[0].length; i++)
-			series.push(data[0][i]);
-
-		options.labels = new Array();
-		options.values = new Array();
-		options.series = ('Keys,'+series.join()).split(',');
-		var out = new Array();  // Labels + Their Data Points
-
-		for (i=1; i<data.length; i++) {
-			var alabel = data[i][0];
-			options.labels.push(alabel);
-			var values = new Array();
-			values[ 'keys' ] = alabel;
-			for (s=1; s<data[i].length; s++)
-				if (+data[i][s]) {
-					values[ series[s-1] ] = data[i][s];
-					if (s == 1)
-						options.values.push( data[i][s] );
-					else
-						options.values[options.values.length-1] = options.values[options.values.length-1]+';'+data[i][s];
+	  if (!options.tsv) {
+		var dataset2 = d3.selectAll('#'+idtable+' tr').selectAll('td');
+		var tsv = "key\t";
+		for (row=0; row<dataset2.length; row++) {
+			for (cols=0; cols<dataset2[row].length; cols++)
+				if (dataset2[row][cols].innerText) {
+					var acell = dataset2[row][cols].innerText;
+					tsv = tsv + acell;
+					if (cols != dataset2[row].length-1)
+						tsv = tsv + "\t";
 				}
-			out.push(values);
+			tsv = tsv + "\n";
 		}
-		options.datatype = 'tsv';
-		options.infile = infile+'.tsv';
-
-		var data = parseJSON(out,type);
-		chartSelector(id, data, type, options); 
+		options.tsv = tsv;
+	  }
+		var out = d3.tsv.parse(options.tsv);
+		var datax = parseJSON(out,type);
+		chartSelector(id, datax, type, options);
 
 		recordDOM(options);
 	}
@@ -208,18 +200,21 @@ function dataRead(infile, id, type, options) {
 function colColors(id) {
 
 	var cells = d3.selectAll('#'+id).selectAll('tbody tr').selectAll('td');
-	cells = cells[1]; // Pick 2nd line of table
+	if (cells.length > 1)
+		cells = cells[1]; // Pick 2nd line of data table
+	else
+		cells = cells[0];
 
 	var bgcolors = new Array();
 	for (col=1; col<cells.length; col++)
-		// console.info(cells[col]['attributes']['bgcolor']['value']);
 		bgcolors.push(cells[col]['attributes']['bgcolor']['value']);
 
 	return bgcolors.join();
 }
+
 function recordDOM(options) {
 
-//		console.info(options);
+		console.info(options);
 		options.datatype = 'direct';
 		options.infile = 'foo';
 		if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
@@ -391,6 +386,11 @@ function sQuote(w) { return " '"+w+"' "; }
 	var viewbox = ' viewBox="0 0 '+options.width+' '+options.height+'" ';
 	var svg = '<svg id="svg'+svgid+'" '+viewbox+' >' + jQuery('#svg'+svgid).html() + '</svg>'; 
 	// height="100%" width="100%"
+	
+	var resize = ' resize:both; overflow:auto; ';
+	if (typeof options.noResize != 'undefined')
+	if (options.noResize)
+		resize = '';
 
 	var css = rootpath+"../nv.d3.css"; 
 	css = '<link rel="stylesheet" href="'+css+'" type="text/css" media="all"/> ';
@@ -417,13 +417,14 @@ function sQuote(w) { return " '"+w+"' "; }
 		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
 		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\',\''+rootpath+'\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
 	}
+	var zoomButt = '<span style="float:right"><button title="Full Screen Chart" onclick="resizeWin(100, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoomin.gif"></button><button title="Original Sized Chart" onclick="resizeWin(0, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoomout.gif"></button></span><br />';
 
 	var title = "D3 Chart";
 	if (typeof options.title != 'undefined')
 		title = options.title;
 	var html = header+' <html><head> <title> '+title+' </title> ' +css+'</head> ';
 
-	html = html + '<body>'; // + css;
+	html = html + '<body>'+zoomButt; // + css;
 	if (typeof chartData == 'object')
 	if (chartData[svgid])
 	if (chartData[svgid]['exports']  || drawButts) {
@@ -438,10 +439,6 @@ function sQuote(w) { return " '"+w+"' "; }
 //	html = html + '<p style="float:right">' + smallerB + biggerB + '</p>';
 	var cid = "'chart"+svgid+"'";
 	var sid = "'svg"+svgid+"'";
-	var resize = ' resize:both; overflow:auto; ';
-	if (typeof options.noResize != 'undefined')
-	if (options.noResize)
-		resize = '';
 
 	var pickers = ''; // Charts picker's butts
 	if (drawButts) {
@@ -470,6 +467,30 @@ function sQuote(w) { return " '"+w+"' "; }
 
 	myWindow.document.write(html);
    } // svg2Win
+
+function resizeWin(percent, svgid, resizeopts, oldw, oldh) {
+    oldwinsize=' width:'+(+100+oldw)+'px; height:'+(+100+oldh)+'px; ';
+
+	var w = oldw+100;
+	var h = oldh+100;
+	if (percent>0) {
+		w = window.screen.availWidth *  Math.round(percent/100);
+		h = window.screen.availHeight * Math.round(percent/100);
+	}
+	window.self.resizeTo(w, h);
+	svgx = svgid; // write id into global of this win
+	resize = resizeopts;
+	chartData.height=h-200;
+	chartData.width=w-200;
+
+window.onresize = function(event) {
+//	console.info(event);
+    console.info(oldwinsize);
+	var newsize = 'height:'+(h-160)+'px; width:'+(w-160)+'px; '+resize;
+	jQuery('#chart'+svgx).attr('style', newsize);
+	jQuery('#svg'+svgx).attr('style', newsize);
+};
+}
 
 function printLines(data) { // debug prints
 	var tab = '	';
@@ -583,6 +604,7 @@ function newpost2(alink, afile, id, id2) {
 
 function chartSelector(id, data, type, options) {
 
+	options.type = type.toLowerCase();
 	if (type == 'lineplusbar')
 		NVD3linePlusBar(id, data, options);
 	else if (type == 'simpleline')
@@ -664,13 +686,8 @@ function NVD3linePlusBar(chartID, data, options) {
         .transition()
         .duration(500)
         .call(chart);
-/*
-  if (options.style) { // TODO: better way to set different styles for 2 series
-	d3.selectAll('#svg'+chartID+' rect').style(options.style); 
-	d3.selectAll('#svg'+chartID+' path').style(options.style);
-	}
-*/
-	colorSegments('lineplusbar',options,chartID,data.length);
+
+	colorSegments(options,chartID,data.length);
 
       nv.utils.windowResize(chart.update); 
 
@@ -706,7 +723,8 @@ function NVD3cumulativeLineData(chartID, data, options) {
         .datum(data)
         .call(chart);
 
-	colorSegments('cumulativeline',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+//	colorTable(options, chartID);
 
     //TODO: Figure out a good way to do this automatically
     nv.utils.windowResize(chart.update); 
@@ -744,7 +762,8 @@ function NVD3stackedArea(chartID, data, options) {
       .datum(data)
       .call(chart);
 
-	colorSegments('stackedarea',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+//	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
 
@@ -779,9 +798,10 @@ nv.addGraph(function() {
 
  	if (data[0])
 	if (data[0].values)
-		colorSegments('discretebar',options,chartID, data[0].values.length);
+		colorSegments(options,chartID, data[0].values.length);
 
   nv.utils.windowResize(chart.update);
+  colorTable(options, chartID);
 
   return chart;
 });
@@ -809,7 +829,8 @@ function NVD3horizontalMultiBar(chartID, data, options) {
         .datum(data)
         .call(chart);
   
-	colorSegments('horizontalmultibar',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
 
@@ -850,7 +871,7 @@ nv.addGraph(function() {
       .datum(data)
       .call(chart);
 
-	colorSegments('scatterbubble',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
 
   nv.utils.windowResize(chart.update);
 
@@ -890,7 +911,8 @@ nv.addGraph(function() {
         .datum(data)
         .call(chart);
 
-	colorSegments('multibar',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
 
@@ -928,7 +950,8 @@ nv.addGraph(function() {
       .transition().duration(500)
       .call(chart);
 
-	colorSegments('viewfinder',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
   nv.utils.windowResize(chart.update);
 
@@ -965,13 +988,57 @@ nv.addGraph(function() {
       .datum(data)         //Populate the <svg> element with chart data...
       .call(chart);          //Finally, render the chart!
 
-	colorSegments('simpleline',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
   //Update the chart when window resizes.
   nv.utils.windowResize(function() { chart.update() });
   return chart;
 });
 }
+function colorTable( options, id ) {
+if (typeof options.autocoloring == 'string' && !options.inPopup) {
+	var element = '.nv-group';
+	var multiseries = true;
+	if (options.type == 'pie' || options.type == 'donut')
+		element = '.nv-slice';
+	else if (options.type == 'discretebar')
+		element = '.nv-bar';
+	if (element != '.nv-group')
+		multiseries = false;
+
+	var gcolors = d3.select("#svg"+id).selectAll(element);
+	xcolors = gcolors;
+	var cstack = new Array();
+	for (c=0; c<gcolors[0].length; c++)
+		if (gcolors[0][c]['style']['fill']  || gcolors[0][c].getAttribute('fill'))
+			if (element == '.nv-slice')
+				cstack.push( gcolors[0][c].getAttribute('fill') );
+			else
+				cstack.push( gcolors[0][c]['style']['fill'] );
+
+	var idtable = chartData[id].table;
+	var colors = options.autocoloring.split(",");
+	if (multiseries)
+	for (c=0; c<colors.length; c++) {
+			var cells = d3.selectAll('#'+idtable+' [bgcolor="'+colors[c]+'"]');
+			cells.attr('bgcolor','').attr('style','background-color:'+cstack[c]);
+	} else {
+			var cells = d3.selectAll('#'+idtable+' [bgcolor="'+colors[0]+'"]');
+			xcells = cells;
+			if (cstack.length+1 == cells[0].length)  // 1. row = title of column
+			for (c=0; c<cstack.length; c++) {
+				var acell = cells[0][c+1];
+				acell.setAttribute('bgcolor','')
+				acell.setAttribute('style','background-color:'+cstack[c]);
+			}
+//			acell['attributes']['bgcolor']['value'] = '';
+//			acell['attributes']['style'] = 'background-color:'+cstack[1];	
+//			acell.attr('bgcolor','').attr('style','background-color:'+cstack[c]);
+		}
+	}
+}
+
 // Drawing chart: Pie
 function NVD3Pie(chartID, data, options) {
 
@@ -993,7 +1060,8 @@ nv.addGraph(function() {
         .transition().duration(700)
         .call(chart);
 
-	colorSegments('pie',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
   return chart;
 });
@@ -1024,7 +1092,8 @@ nv.addGraph(function() {
         .transition().duration(700)
         .call(chart);
 
-	colorSegments('donut',options,chartID,data.length);
+	colorSegments(options,chartID,data.length);
+	colorTable(options, chartID);
 
   return chart;
 });
@@ -1047,7 +1116,7 @@ nv.addGraph(function() {
 });
 }
 
-function colorSegments(type,options,chartID,size) {
+function colorSegments(options,chartID,size) {
 
   initCB();
   var classname = 0;
@@ -1055,6 +1124,7 @@ function colorSegments(type,options,chartID,size) {
 		classname = options.colorbrewer.segment;
 
   var action = 'fill';
+  var type = options.type;
   if (!classname) {
   if (type == 'pie' || type == 'donut')
 	classname = ' .nv-slice';
@@ -1467,21 +1537,23 @@ function exportData(id, format, root) {
 	else
 		return;
 
-	var closeMe = '<button style="float:right; font-size:xx-small" title="Close" onclick="removeMe(\'databuff\')"> [X] </button><br />';
-
 	if (format == 'csv') {
-		if (typeof chartData.infile != 'undefined') 
+	  if (typeof chartData.infile != 'undefined') 
 		if (chartData.infile != 'foo') {
 			var link = '<button title="Export Chart Data from File"><a href="'+root+'../../../../'+data.infile+'">Download Data of Chart</a></button>';
 
-			jQuery("#databuffer").html(closeMe+link);
-		} else {
+//			jQuery("#databuffer").html(closeMe+link);
+	  } else {
 		var dataout = 'Labels;'+data.title+"\n";
 		if (data.series)
 			// dataout = data.series[1]+';'+data.title+"\n";
 			dataout = data.series.join().replace(/,/g, ';')+"\n";
+//		console.info(dataout);
 		var cols = dataout.length;
-		if (data.labels.length == data.values.length && data.datatype == 'direct')
+		if (data.tsv) {
+			dataout = data.tsv.replace(/\t/g, ';');
+			cols = dataout.indexOf("\n")+1;
+		} else if (data.labels.length == data.values.length && data.datatype == 'direct')
 		for (line in data.labels) 
 			if (data.values[line]) {
 				var line = data.labels[line] + ';' + data.values[line] +"\n";
@@ -1489,29 +1561,17 @@ function exportData(id, format, root) {
 				if (line.length > cols)
 					cols = line.length; 
 		}
-		var inBox = 'Data<br /><textarea id="databuff" rows="20" cols="'+cols+'" style="color:darkgray">'+dataout+'</textarea>';
-		jQuery("#databuffer").html(closeMe+inBox);
-//		}
-	} } else if(format == 'svg') {
-//		console.info(id);
-		var svgX = document.getElementById(id).outerHTML;  // Fetch chart's all svg
-		// console.info(svgX);
-		var inBox = 'SVG Chart<br /><textarea id="databuff" rows="20" cols="30" style="color:darkgray">'+svgX+'</textarea>';
-		jQuery("#databuffer").html(closeMe+inBox);
-		// console.info(query);
-	} 
-	/* else { // TODO: csv & tsv files processing part here
-		var jdata = ' "points":' + JSON.stringify(dataout); // 'data = ' + 
-		if (data.title)
-			jdata = '"title":"'+ data.title +'", '+jdata;
-		jdata = 'data = { ' + jdata + ' }';
+		writeBuffer('Data', cols, dataout);
 
-		$.post(query, { fname: filename, svg: jdata, type:ext })
-			.done(function() {
-			console.info('download ready!');	
-		});
-	}
-	*/
+	  } } else if(format == 'svg') {
+			var svgX = document.getElementById(id).outerHTML;  // Fetch chart's all svg elements
+			writeBuffer('SVG Chart', 40, svgX);
+		}
+function writeBuffer(title, cols, dataout) {
+		var closeMe = '<button style="float:right; font-size:xx-small" title="Close" onclick="removeMe(\'databuff\')"> [X] </button><br />';
+		var inBox = '<span id="databuff">'+closeMe+title+'<br /><textarea rows="20" cols="'+cols+'" style="color:darkgray">'+dataout+'</textarea></span>';
+		jQuery("#databuffer").html(inBox);
+}
 }
 function removeMe(obj) {
 	$('#'+obj).remove();
