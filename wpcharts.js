@@ -10,6 +10,9 @@ function jsChart(id, infile, type, dims, options) {
 		checkJQ();
 	}
 
+	// All localisation settings active
+	myLocale(detectBrowser(false));
+
 	// Default size of chart: VGA screen
 	var height = '480';
 	var width = ' width:640'; //px; ';
@@ -61,10 +64,76 @@ function checkJQ() {
 	else
 		console.info('jQuery: %ok%');
 }
+/*
+function myLocale(code) {
+
+var fi_FI = d3.locale({
+  "decimal": ",",
+  "thousands": " ",
+  "grouping": [3],
+  "currency": ["", "€"],
+  "dateTime": "%a %b %e %X %Y",
+  "date": "%d.%m.%Y",
+  "time": "%H:%M:%S",
+  "periods": ["", ""],
+  "days": ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
+  "shortDays": ["SU", "MA", "TI", "KE", "TO", "PE", "LA"],
+  "months": ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesakuu", "Heinakuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"],
+  "shortMonths": ["Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesa", "Heina", "Elo", "Syys", "Loka", "Marras", "Joulu"]
+});
+
+var en_US = d3.locale({
+  "decimal": ".",
+  "thousands": ",",
+  "grouping": [3],
+  "currency": ["$", ""],
+  "dateTime": "%a %b %e %X %Y",
+  "date": "%m/%d/%Y",
+  "time": "%H:%M:%S",
+  "periods": ["AM", "PM"],
+  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+});
+
+var ru_RU = d3.locale({
+  "decimal": ",",
+  "thousands": "\xa0",
+  "grouping": [3],
+  "currency": ["", " руб."],
+  "dateTime": "%A, %e %B %Y г. %X",
+  "date": "%d.%m.%Y",
+  "time": "%H:%M:%S",
+  "periods": ["AM", "PM"],
+  "days": ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"],
+  "shortDays": ["вс", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "months": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
+  "shortMonths": ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
+});
+
+if (code.indexOf('FI') > -1) {
+	d3.time.format 	= fi_FI.timeFormat;
+	d3.format 		= fi_FI.numberFormat;
+	return;
+}
+if (code.indexOf('US') > -1) {
+	d3.time.format 	= en_US.timeFormat;
+	d3.format 		= en_US.numberFormat;
+	return;
+}
+if (code.indexOf('RU') > -1) {
+	d3.time.format 	= ru_RU.timeFormat;
+	d3.format 		= ru_RU.numberFormat;
+	return;
+}
+
+}
+*/
 // Data reader from different sources: demos / own file / direct input options / JSON 
 function dataRead(infile, id, type, options) {
 
-	// console.info(infile);
+//	console.info(options);
 	ginfile = infile; // make global
 
 	if (typeof chartData == 'undefined')
@@ -87,9 +156,9 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-		console.info(data);
+//		console.info(data);
 		data = parseJSON(data,type);
-		console.info(data);
+//		console.info(data);
 //		console.info(options);
 		chartSelector(id, data, type, options);
 
@@ -117,6 +186,7 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (options.values && !options.tsv) { // Direct input (like D3 simplecharts plugin has)
 		console.info('direct!');
+//		console.info(options);
 		var titles = ['Labels','DataSet1','DataSet2','DataSet3'];
 		if (options.series)  // Name of data's columns given
 		if (!options.inPopup && options.series != 'Labels') {
@@ -214,7 +284,7 @@ function colColors(id) {
 
 function recordDOM(options) {
 
-		console.info(options);
+//		console.info(options);
 		options.datatype = 'direct';
 		options.infile = 'foo';
 		if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
@@ -398,7 +468,8 @@ function sQuote(w) { return " '"+w+"' "; }
 	if (options['exports']  || drawButts) {
 		var jQ = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> ';
 		var cb = '<script src="'+rootpath+'../colorbrewer.js"></script> ';
-		css = jQ + cb + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
+		var locale = '<script src="'+rootpath+'../locale.js"></script> ';
+		css = jQ + cb + locale + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
 	}
 
 /* TODO: resize buttons of chart
@@ -417,7 +488,7 @@ function sQuote(w) { return " '"+w+"' "; }
 		svgB = '<img src="'+rootpath+'../icons/svgedit.png">';
 		svgB = '<button style="float:right; cursor:pointer;" onClick="exportData('+expID+',\'svg\',\''+rootpath+'\')" title="Export Chart into Illustrator or SVG Editor Software">'+svgB+'</button> ';
 	}
-	var zoomButt = '<span style="float:right"><button title="Full Screen Chart" onclick="resizeWin(100, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoomin.gif"></button><button title="Original Sized Chart" onclick="resizeWin(0, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoomout.gif"></button></span><br />';
+	var zoomButt = '<span style="float:right"><button title="Full Screen Chart" onclick="resizeWin(100, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoooomin.gif"></button><button title="Original Sized Chart" onclick="resizeWin(0, \''+svgid+'\', \''+resize+'\', '+options.width+', '+options.height+' );"><img src="'+rootpath+'../icons/zoooomout.gif"></button></span><br />';
 
 	var title = "D3 Chart";
 	if (typeof options.title != 'undefined')
@@ -485,7 +556,7 @@ function resizeWin(percent, svgid, resizeopts, oldw, oldh) {
 
 window.onresize = function(event) {
 //	console.info(event);
-    console.info(oldwinsize);
+//  console.info(oldwinsize);
 	var newsize = 'height:'+(h-160)+'px; width:'+(w-160)+'px; '+resize;
 	jQuery('#chart'+svgx).attr('style', newsize);
 	jQuery('#svg'+svgx).attr('style', newsize);
@@ -524,7 +595,7 @@ function parseJSON(data, chart) {
 		var res = new Array();
 		if (chart == 'pie' || chart == 'donut')
 			for (t=0; t<lines.length; t++)
-					res.push(new Object( { "label":lines[t][0], "value":+lines[t][1] } ));
+					res.push(new Object( { "label":lines[t][0], "value":operator(+lines[t][1]) } ));
 		else if (chart == 'discretebar')
 			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
 				res.push(new Object( { "key":titles[t], "values":forceNumb(lines, t) } ));
@@ -535,17 +606,17 @@ function parseJSON(data, chart) {
 			for (t=1; t<titles.length; t++)  // 1st column passed (eq t=0)
 				res.push(new Object( { "key":titles[t], "values":getCol(t,lines) } ));
 
-		// console.info(res);
+//		console.info(res);
 		return res;
 
-	return data;
+//	return data;
 
 function forceNumb(arr, t) {  // Name data points + force numbers type for values 
 
 	for (i=0; i<arr.length; i++) {
 		arr[i]['label'] = arr[i][0];
 		if (+arr[i][1] || arr[i][1] == '0')
-			arr[i]['value'] = +arr[i][1];
+			arr[i]['value'] = operator(+arr[i][1]);
 	}
 	return arr;
 }
@@ -555,7 +626,7 @@ function forceNumb2(arr, t) {  // Name data points + force numbers type for valu
 	var out = new Array();
 	for (i=0; i<arr.length; i++) {
 		if (+arr[i][t] || arr[i][t] == '0')
-			out.push( new Array( +arr[i][0], +arr[i][t] ) );
+			out.push( new Array( +arr[i][0], operator(+arr[i][t]) ) );
 	}
 	return out;
 }
@@ -565,10 +636,26 @@ function getCol(colname, lines) {
 	for (i=0; i<lines.length; i++) // Note: forcing numerical values output
 		if (lines[i][colname] && +lines[i][colname]) {
 //		if (! +lines[i][colname]) console.warning( 'Illegal value on input:'+lines[i][colname] );
-		var cell = new Object( {"y": (+lines[i][colname]), "x":lines[i][0]  } );
+		var cell = new Object( {"y": (operator(+lines[i][colname])), "x":lines[i][0]  } );
 		out.push( cell );
 	}
 	return out;
+}
+
+function operator(x) {
+
+	if (typeof NVD3calcme != 'undefined') {
+		var scaler = chartData[NVD3calcme].modifier;
+		if (scaler)
+			// EU compatible decimal points ","
+			if (scaler.indexOf(",")>0)
+				scaler = scaler.replace(",",".");
+			if (typeof x == 'number')
+				return eval(x.toString() + scaler); 
+			else if (typeof x == 'string')
+				return eval(x + scaler);
+	}
+	return x;
 }
 
 } // parseJSON
@@ -598,7 +685,7 @@ function newpost2(alink, afile, id, id2) {
 	else
 		alink = alink + '&filepath='+afile;
 
-	console.info(alink);
+//	console.info(alink);
 	window.open(alink);
 }
 
@@ -629,7 +716,41 @@ function chartSelector(id, data, type, options) {
 		NVD3Donut(id, data, options); 
 	else if (type == 'bullet')
 		NVD3Bullet(id, data, options);
+
+if (typeof inPopUp == 'undefined')
+	if (options.calculator) {
+		var title = '';
+		if (typeof options.calculatortitle == 'string')
+			title = options.calculatortitle;
+		var unit = '';
+		if (typeof options.calculatorunit == 'string')
+			unit = options.calculatorunit;
+		var lockme = '';
+		if (options.calculatorlock) if (options.calculatorlock == true)
+			lockme = ' disabled ';
+		scaler4Chart(id, options.calculator, title, unit, lockme); 
+	}
+
+function scaler4Chart(id, op, title, unit, lock) {
+	if ((typeof op == 'boolean' && op) || op == 1)
+		op = '*1';
+	if (chartData[id]) if (chartData[id].modifier)
+		op = chartData[id].modifier;
+	var ico = '<img src="'+rootpath+'../icons/calculator.png">';
+	var nrobox = '<input size="6" style="font-size:16px" value="'+op+'" type="text" id="scaler'+id+'" title="Change data points of chart on this way & amount" '+lock+'>';
+	var inbox = '<br /> <span style="float:right; background-color:darkgray; border: 3px outset gray;"><b> '+title+' </b>'+nrobox+unit+' <button onclick="rescaleChart(\''+id+'\')" title="Rebuild chart" style="cursor:pointer;"> '+ico+' </button></span> ';
+	jQuery("#chart"+id).append(inbox);
 }
+}
+function rescaleChart(id) {
+
+	NVD3calcme = id; // remember me in global +
+	chartData[id].modifier = jQuery('#scaler'+id).val();  // Data's modifier value
+
+	var dims = { height:chartData[id].height,  width:chartData[id].width };
+	jsChart(id, chartData[id].infile, chartData[id].type, dims, chartData[id]);
+}
+
 // Axis should be date formatted with a chart?
 function timeStamp(x, options) {
 	if (options.xtime)
@@ -714,7 +835,7 @@ function NVD3cumulativeLineData(chartID, data, options) {
           });
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat(',.1%',options) ));
+        .tickFormat(setFormat2(',.1%',options));
 
 	  chart.options(options);
 	shadowEffects(chartID, options);
@@ -753,7 +874,7 @@ function NVD3stackedArea(chartID, data, options) {
     });
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat(',.2r',options) ));
+        .tickFormat(setFormat2(',.2r',options));
 
     chart.options(options);
 	shadowEffects(chartID, options);
@@ -785,9 +906,9 @@ nv.addGraph(function() {
       ;
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat('.3r',options) ));
+        .tickFormat( setFormat2('.3r',options) ); // d3.format(
 
-		chart.valueFormat = d3.format( setFormat('.2r',options) );
+//		chart.valueFormat = d3.format( setFormat('.2r',options) );
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -820,7 +941,7 @@ function NVD3horizontalMultiBar(chartID, data, options) {
         .showControls(true);        //Allow user to switch between "Grouped" and "Stacked" mode.
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat(',.2r',options) ));
+        .tickFormat(setFormat2(',.2r',options)); // setFormat(
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -855,8 +976,8 @@ nv.addGraph(function() {
   });
 
   //Axis settings
-  chart.xAxis.tickFormat(d3.format( setFormat('.02f',options) ));
-  chart.yAxis.tickFormat(d3.format( setFormat('.02f',options) ));
+  chart.xAxis.tickFormat(setFormat2('.02f',options));
+  chart.yAxis.tickFormat(setFormat2('.02f',options));
 
   //We want to show shapes other than circles.
   chart.scatter.onlyCircles(false);
@@ -901,7 +1022,7 @@ nv.addGraph(function() {
     });
 
     chart.yAxis
-        .tickFormat(d3.format( setFormat('.2r',options) ));
+        .tickFormat( setFormat2('.2r',options) ); // d3.format
 //   console.info( JSON.stringify( exampleData() ) );
 
 	chart.options(options);
@@ -937,10 +1058,10 @@ nv.addGraph(function() {
     }); 
 
   chart.yAxis
-      .tickFormat(d3.format('.2r'));
+      .tickFormat( setFormat2(',.2r',options) );
 
   chart.y2Axis
-      .tickFormat(d3.format( setFormat(',.2r',options) ));
+      .tickFormat( setFormat2(',.2r',options) );
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -979,7 +1100,7 @@ nv.addGraph(function() {
     });
 
   chart.yAxis     //Chart y-axis settings
-      .tickFormat(d3.format( setFormat('.2r',options) ));
+      .tickFormat( setFormat2('.2r',options) );
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1050,7 +1171,7 @@ nv.addGraph(function() {
       .y(function(d) { return d.value })
       .showLabels(true);
 
-	chart.valueFormat = d3.format( setFormat('.2r',options) );
+	chart.valueFormat = setFormat2('.2r',options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1082,7 +1203,7 @@ nv.addGraph(function() {
       .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
       ;
 
-	chart.valueFormat = d3.format( setFormat('.2r',options) );
+	chart.valueFormat = setFormat2('.2r',options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1098,6 +1219,7 @@ nv.addGraph(function() {
   return chart;
 });
 }
+
 // Drawing chart: Bullet
 function NVD3Bullet(chartID, data, options) {
 
@@ -1155,16 +1277,15 @@ function colorSegments(options,chartID,size) {
 		customs = true;
 	}
 	// Own custom colors (eq options.colors:'red,green,blue' or options.colors:{startbar:'red', endbar:'lime'} )
-	if (options.colors)
-		if (typeof options.colors == 'string')  {
+	if (options.colors) 
+		if (typeof options.colors == 'string')  { // as a list of colors
 			var colors = d3.scale.ordinal().range(options.colors.split(','));
 			customs = true;
 	}	 else { // Object => interpolating of colours 
-			if (options.colors.startbar && options.colors.endbar)
+			if (options.colors.startbar && options.colors.endbar) {
 				var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
-//				console.info(gradientColors(options.colors.startbar, size, options.colors.endbar));
-//				console.info(size);
-			customs = true; 
+				customs = true;
+				}
 		}
 
 	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of these blocked chart types active
@@ -1337,12 +1458,21 @@ function setMargin(m, options) {
 
   return m;
 }
+/*
 function setFormat(m, options) {
 
   if (options.format)
-	return options.format;
+	m = options.format;
 
   return m;
+ }
+*/
+function setFormat2(m, options) {
+
+  if (options.format)
+	m = options.format;
+
+  return d3.format(m);
 }
 
 /*

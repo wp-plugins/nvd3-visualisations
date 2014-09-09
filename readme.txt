@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.6.9
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,9 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Many fancy options available to change chart's look & behavior.
 1. Dynamic & direct illustration of any JavaScript function results.
 1. Visual preview of charts from the NVD3 lib's original CSS style file to let you match blog's theme easily.
-1. Optional export of real data / vector graphics of chart for all your blog's visitors.
+1. Handy calculator letting users to modify chart fast by any basic math formulas.
+1. Localized presentation formats for currency, date, time, etc.
+1. Optional export of data / vector graphics of chart.
 1. WordPress multisite & SSL compatible plugin. 
 .
 
@@ -148,6 +150,10 @@ Here:
 5. Automatically updated charts fast from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.7.0 =
+Version 1.7.0 -
+NEW: handy interactive calculator for the chart. By setting **calculator** option you give your readers freedom to scale visually the chart as they wish (eq + - * / operators). Two other options help this - **calculatortitle** and **calculatorunit** - which let you tell what questions calculator solves with each chart. Support of locale for country specific data formats. Some new designs of icons. Fixing minor bugs.
 
 = 1.6.9 =
 Version 1.6.9 -
