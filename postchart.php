@@ -60,18 +60,40 @@ if (! $rightsok)  { // High enough role for edit pages
 	return;
 }
 
-$owndata = copyEx($dataset, $_GET['filepath']);
+$direct = '';
+if ($_GET['filepath'])
+	$owndata = copyEx($dataset, $_GET['filepath']);
+else if ($_GET['template']) { // Direct input or from Document cells
+	$direct = genTemplate($_GET['template']);
+	$owndata = '';
+	}
 
 // New Post/Page content from up -> down
 $title = '"Own Data Chart"';
-$scolor = ' "Black", '; 
-$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor." showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true }' ] ";
+$scolor = ' "Black" ';
+$scaler = '"*1"';
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' ".$direct." height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor.", showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true, calculator:".$scaler.", calculatorlock:false }' ] ";
 
-$editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]';  
+$datacells = '';
+$editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]';
+if ($direct) { // No file editor for templates inside doc
+	$editarea = '';
+	
+	if ($_GET['template'] == 'table')  // Template of table with its id (TODO: autocoloring fix)
+		$datacells = getArray('mypets');
+
+	if ($_GET['template'] == 'table2')  // Template of 2x2 table with its id
+		$datacells = getBigArray('mypets');
+
+	if ($_GET['template'] == 'cells')  // Template of separate doc's data cells with their class & id tags.
+		$datacells = 'I have <span id="Cats" class="mypets">14</span> cats and <span id="Cows" class="mypets">2</span> cows plus <span id="Birds" class="mypets">11</span> birds at my home as pets !';
+
+	$datacells .= '<br />';
+}
 
 $my_post = array(
   'post_title'    => 'NVD3 Chart',
-  'post_content'  => $shortcodes.$editarea, // .$editor, 
+  'post_content'  => $datacells.$shortcodes.$editarea, // .$editor, 
   'post_status'   => 'draft', 
   'post_type'     => $posttype, // page
   'tags_input'    => array('NVD3', 'charts', 'SVG')
@@ -127,5 +149,83 @@ function move2js($post, $type) {
 
 	echo '<script> window.location.href="' .$link. '"; </script>';
 	return '<a href="'.$link.'"> OPEN NEW CHART </a>';
+}
+
+// Segments of templates for jsChart call
+function genTemplate($type) {
+
+	if ($type == 'direct') {
+		$values = ' values="(177,77,17)" ';
+		$labels = ' labels="(cats,dogs,birds)" ';
+		$series = ' series="(Pets)" ';
+		return $values.$labels.$series; 
+	}
+	if ($type == 'table' || $type == 'table2') {
+		return ' table="mypets" '; 
+	}
+	if ($type == 'cells') {
+		return ' class="mypets" '; 
+	}
+}
+
+function getArray($id) {
+
+return '
+<table id="'.$id.'">
+<tbody>
+<tr>
+<td></td>
+<td align="LEFT" bgcolor="#C5000B">Cats</td>
+</tr>
+<tr>
+<td align="LEFT" bgcolor="#66CC99">Year 2000</td>
+<td align="RIGHT" bgcolor="#C5000B">7</td>
+</tr>
+<tr>
+<td align="LEFT" bgcolor="#66CC99">Year 2005</td>
+<td align="RIGHT" bgcolor="#C5000B">2</td>
+</tr>
+<tr>
+<td align="LEFT" bgcolor="#66CC99">Year 2010</td>
+<td align="RIGHT" bgcolor="#C5000B">12</td>
+</tr>
+</tbody>
+</table>
+';
+
+}
+
+function getBigArray($id) {  // 2x2 html array back
+
+return '
+<table id="'.$id.'">
+<tbody>
+<tr>
+<td height="17"></td>
+<td bgcolor="yellow">Cats</td>
+<td bgcolor="lime">Cows</td>
+<td bgcolor="blue">Birds</td>
+</tr>
+<tr>
+<td bgcolor="pink" height="17">Year 2000</td>
+<td bgcolor="yellow">7</td>
+<td bgcolor="lime">18</td>
+<td bgcolor="blue">1</td>
+</tr>
+<tr>
+<td bgcolor="pink" height="17">Year 2005</td>
+<td bgcolor="yellow">2</td>
+<td bgcolor="lime">9</td>
+<td bgcolor="blue">2</td>
+</tr>
+<tr>
+<td bgcolor="pink" height="17">Year 2010</td>
+<td bgcolor="yellow">12</td>
+<td bgcolor="lime">4</td>
+<td bgcolor="blue">3</td>
+</tr>
+</tbody>
+</table>
+';
 }
 ?>

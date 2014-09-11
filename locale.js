@@ -1,7 +1,7 @@
 
 // All national dependent definitions how to format numbers, currencies, dates, etc.
 
-myCountry = "US";  // Update this based on your blog's readers country / language + add new locale desc below
+myCountry = "US";  // Update this (US/FI/RU) based on your blog's readers: add new locale's block below
 
 function detectBrowser(wanted) { // Optional if you want to support multinational audience
 
@@ -10,18 +10,20 @@ function detectBrowser(wanted) { // Optional if you want to support multinationa
 	return 0;
 }
 
-function myLocale(code) {
+function myLocale(code) {  
 
 if (!code)
 	code = myCountry;
 
-// Each new country needs one d3.locale block as below
-	
+// Each new country needs one d3.locale block as below, use example format:
+// xx_XX where XX is your country's locale and xx its language.
+
+// Finland
 var fi_FI = d3.locale({
   "decimal": ",",
   "thousands": " ",
   "grouping": [3],
-  "currency": ["", "€"],
+  "currency": ["", " €"],
   "dateTime": "%a %b %e %X %Y",
   "date": "%d.%m.%Y",
   "time": "%H:%M:%S",
@@ -32,6 +34,7 @@ var fi_FI = d3.locale({
   "shortMonths": ["Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesa", "Heina", "Elo", "Syys", "Loka", "Marras", "Joulu"]
 });
 
+// USA
 var en_US = d3.locale({
   "decimal": ".",
   "thousands": ",",
@@ -47,6 +50,7 @@ var en_US = d3.locale({
   "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 });
 
+// Russian
 var ru_RU = d3.locale({
   "decimal": ",",
   "thousands": "\xa0",
@@ -62,7 +66,7 @@ var ru_RU = d3.locale({
   "shortMonths": ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
 });
 
-// Changing default funcs of d3 to follow national rules
+// Changing default funcs of d3 to follow selected national rules: 
 
 code = code.toUpperCase();
 if (code.indexOf('FI') > -1) {
@@ -80,5 +84,4 @@ if (code.indexOf('RU') > -1) {
 	d3.format 		= ru_RU.numberFormat;
 	return;
 }
-
 }

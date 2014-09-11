@@ -10,7 +10,8 @@ function jsChart(id, infile, type, dims, options) {
 		checkJQ();
 	}
 
-	// All localisation settings active
+	// All localisation settings active: 
+	// go and edit locale.js to match your country
 	myLocale(detectBrowser(false));
 
 	// Default size of chart: VGA screen
@@ -64,72 +65,7 @@ function checkJQ() {
 	else
 		console.info('jQuery: %ok%');
 }
-/*
-function myLocale(code) {
 
-var fi_FI = d3.locale({
-  "decimal": ",",
-  "thousands": " ",
-  "grouping": [3],
-  "currency": ["", "€"],
-  "dateTime": "%a %b %e %X %Y",
-  "date": "%d.%m.%Y",
-  "time": "%H:%M:%S",
-  "periods": ["", ""],
-  "days": ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
-  "shortDays": ["SU", "MA", "TI", "KE", "TO", "PE", "LA"],
-  "months": ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesakuu", "Heinakuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"],
-  "shortMonths": ["Tammi", "Helmi", "Maalis", "Huhti", "Touko", "Kesa", "Heina", "Elo", "Syys", "Loka", "Marras", "Joulu"]
-});
-
-var en_US = d3.locale({
-  "decimal": ".",
-  "thousands": ",",
-  "grouping": [3],
-  "currency": ["$", ""],
-  "dateTime": "%a %b %e %X %Y",
-  "date": "%m/%d/%Y",
-  "time": "%H:%M:%S",
-  "periods": ["AM", "PM"],
-  "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-  "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-});
-
-var ru_RU = d3.locale({
-  "decimal": ",",
-  "thousands": "\xa0",
-  "grouping": [3],
-  "currency": ["", " руб."],
-  "dateTime": "%A, %e %B %Y г. %X",
-  "date": "%d.%m.%Y",
-  "time": "%H:%M:%S",
-  "periods": ["AM", "PM"],
-  "days": ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"],
-  "shortDays": ["вс", "пн", "вт", "ср", "чт", "пт", "сб"],
-  "months": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
-  "shortMonths": ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
-});
-
-if (code.indexOf('FI') > -1) {
-	d3.time.format 	= fi_FI.timeFormat;
-	d3.format 		= fi_FI.numberFormat;
-	return;
-}
-if (code.indexOf('US') > -1) {
-	d3.time.format 	= en_US.timeFormat;
-	d3.format 		= en_US.numberFormat;
-	return;
-}
-if (code.indexOf('RU') > -1) {
-	d3.time.format 	= ru_RU.timeFormat;
-	d3.format 		= ru_RU.numberFormat;
-	return;
-}
-
-}
-*/
 // Data reader from different sources: demos / own file / direct input options / JSON 
 function dataRead(infile, id, type, options) {
 
@@ -227,7 +163,7 @@ function dataRead(infile, id, type, options) {
 				if (options.autocoloring == 'table')
 					options.autocoloring = colors;	// chart => table coloring
 				else if (options.autocoloring == 'chart' || options.autocoloring == true)
-					options.colors = colors;
+					options.colors = colors;	// table => chart coloring
 			}
 		}
 	  if (!options.tsv) {
@@ -406,8 +342,17 @@ function demoShows(id, data, type, options) {
 	var idmenu = "gmenu"+id;
 	var mpostpage = '<select id='+idmenu+'><option value="post">New Post</option><option value="page">New Page</option></select>';
 
+	var helps = new Array();
+	helps.push('Data input from ext. JSON file');
+	helps.push('Data input from ext. XML file');
+	helps.push('Data input from ext. CSV file');
+	helps.push('Data input from ext. TSV file');
+	helps.push('Data input from HTML tags of page/post');
+	helps.push('Data input from shortcode: values, labels, series');
+	helps.push('Data input from simple table (OpenOffice)');
+	helps.push('Data input from 2x2 dim. table (OpenOffice)');
 	var idmenu2 = "gformat"+id;
-	var mformat = '<select id='+idmenu2+'><option value="json">JSON data</option><option value="xml">XML data</option><option value="csv">CSV data</option><option value="tsv">TSV data</option></select>';
+	var mformat = '<select id='+idmenu2+'><option value="json" title="'+helps[0]+'">JSON data</option><option value="xml" title="'+helps[1]+'">XML data</option><option value="csv" title="'+helps[2]+'">CSV data</option><option value="tsv" title="'+helps[3]+'">TSV data</option><option value="cells" title="'+helps[4]+'">Document cells</option><option value="direct" title="'+helps[5]+'">Direct input</option><option value="table" title="'+helps[6]+'">Document TABLE</option><option value="table2" title="'+helps[7]+'">TABLE (2x2 dim.)</option></select>';
 
 	var query = rootpath+"../postchart.php?type="+type;
 	var ctype = demos[type];
@@ -468,8 +413,11 @@ function sQuote(w) { return " '"+w+"' "; }
 	if (options['exports']  || drawButts) {
 		var jQ = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> ';
 		var cb = '<script src="'+rootpath+'../colorbrewer.js"></script> ';
-		var locale = '<script src="'+rootpath+'../locale.js"></script> ';
-		css = jQ + cb + locale + css + '<script src="'+rootpath+'../d3.min.js"></script> ' + '<script src="'+rootpath+'../nv.d3.min.js"></script> ' + '<script src="'+rootpath+'../wpcharts.js"></script> ';
+		var locale2 = '<script src="'+rootpath+'../locale.js"></script> ';
+		var d3 = '<script src="'+rootpath+'../d3.min.js"></script> ';
+		var nvd3 = '<script src="'+rootpath+'../nv.d3.min.js"></script> ';
+		var core = '<script src="'+rootpath+'../wpcharts.js"></script> ';
+		css = jQ + cb + locale2 + css + d3 + nvd3 + core;
 	}
 
 /* TODO: resize buttons of chart
@@ -650,10 +598,12 @@ function operator(x) {
 			// EU compatible decimal points ","
 			if (scaler.indexOf(",")>0)
 				scaler = scaler.replace(",",".");
+			if (scaler) {
 			if (typeof x == 'number')
 				return eval(x.toString() + scaler); 
 			else if (typeof x == 'string')
 				return eval(x + scaler);
+			}
 	}
 	return x;
 }
@@ -678,9 +628,12 @@ function newpost2(alink, afile, id, id2) {
 
 	var post_type = jQuery('#'+id).val();
 	var data_format = jQuery('#'+id2).val();
+	console.info(data_format);
 
 	alink = alink + '&new=' + post_type;
-	if (data_format != 'json')
+	if (data_format == 'table' || data_format == 'cells' || data_format == 'direct' || data_format == 'table2')
+		alink = alink + '&template='+data_format;
+	else if (data_format != 'json')  // File data inputs left
 		alink = alink + '&filepath='+afile.replace('json', data_format);
 	else
 		alink = alink + '&filepath='+afile;
@@ -777,17 +730,14 @@ function NVD3linePlusBar(chartID, data, options) {
 		return timeStamp(dx, options);
       });
 
-/* Uncomment => original demo show
-	  chart.xAxis.tickFormat(function(d) {
-        var dx = data[0].values[d] && data[0].values[d][0] || 0;
-        return d3.time.format('%x')(new Date(dx))
-      });
-
       chart.y1Axis
-          .tickFormat(d3.format(',f'));
-
+		  .tickFormat(setFormat2(',.2r',options));
+/*
       chart.y2Axis
-          .tickFormat(function(d) { return d3.format(',f')(d) });
+          .tickFormat(setFormat2(',.2r',options));
+		  // .tickFormat(function(d) { return d3.format(',f')(d) });
+*/
+/* Uncomment => original demo show
 
     chart.y1Axis
 		.axisLabel(data[0]['key']);
@@ -858,7 +808,7 @@ function NVD3stackedArea(chartID, data, options) {
 
   nv.addGraph(function() {
     var chart = nv.models.stackedAreaChart()
-                  .margin(setMargin({left:50, right: 50, bottom: 50}, options))
+                  .margin(setMargin({left:70, right: 50, bottom: 50}, options))
                   .x(function(d) { return d[0] })   //We can modify the data accessor functions...
                   .y(function(d) { return d[1] })   //...in case your data is formatted differently.
                   .useInteractiveGuideline(true)    //Tooltips which show all data points. Very nice!
@@ -896,7 +846,7 @@ function NVD3discreteBar(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.discreteBarChart()
-      .margin(setMargin({left: 50, bottom: 50, right: 50}, options))
+      .margin(setMargin({left: 70, bottom: 50, right: 50}, options))
 	  .x(function(d) { return d.label })    //Specify the data accessors.
       .y(function(d) { return d.value })
       .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
@@ -1004,7 +954,7 @@ function NVD3MultiBar(chartID, data, options) {
 
 nv.addGraph(function() {
     var chart = nv.models.multiBarChart()
-      .margin(setMargin({left: 50, bottom: 50, right: 50}, options))
+      .margin(setMargin({left: 70, bottom: 50, right: 50}, options))
 	  .transitionDuration(350)
       .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
       .rotateLabels(0)      //Angle to rotate x-axis labels.
@@ -1023,7 +973,6 @@ nv.addGraph(function() {
 
     chart.yAxis
         .tickFormat( setFormat2('.2r',options) ); // d3.format
-//   console.info( JSON.stringify( exampleData() ) );
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1045,7 +994,7 @@ function NVD3viewFinder(chartID, data, options) {
 
 nv.addGraph(function() {
   var chart = nv.models.lineWithFocusChart()
-	.margin(setMargin({left: 50, bottom: 50, right: 50}, options))
+	.margin(setMargin({left: 70, bottom: 50, right: 50}, options))
 	.x(function(d,i) { return i })
   ;
 /*
@@ -1085,7 +1034,7 @@ function NVD3simpleLine(chartID, data, options) {
 /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
 nv.addGraph(function() {
   var chart = nv.models.lineChart()
-                .margin(setMargin({left: 50, bottom: 50, right: 50}, options))  //Adjust chart margin wider.
+                .margin(setMargin({left: 70, bottom: 50, right: 50}, options))  //Adjust chart margin wider.
                 .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 .transitionDuration(350)  //how fast do you want the lines to transition?
                 .showLegend(true)       //Show the legend, allowing users to turn on/off line series.

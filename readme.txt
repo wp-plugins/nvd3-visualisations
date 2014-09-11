@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,10 @@ Here:
 5. Automatically updated charts fast from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.7.1 =
+Version 1.7.1 -
+Fast input examples direcly from charts gallery for the data sources: direct shortcode's input, document's cells, and imported tables (of OpenOffice). More flexible direct input formats from shortcode.
 
 = 1.7.0 =
 Version 1.7.0 -

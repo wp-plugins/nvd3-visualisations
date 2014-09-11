@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.7.0
+Version: 1.7.1
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -112,6 +112,24 @@ function demoContainers() {
 }
 // Demos - END
 
+function filterIn($x, $name, $quotes) {
+
+	$x = trim($x);
+	$sep = ",";
+	if (strpos($x, "\t") > -1)	// tab => ","
+		$x = str_replace("\t", $sep, $x);
+	if (strpos($x, ";") > -1)  // ";" => ","
+		$x = str_replace(";", $sep, $x);
+	if ($quotes && strpos($x, "'") === false && strpos($x, '"') === false) // Automatic quotes: "x","y" ...
+		$x = '"' . str_replace($sep, '"'.$sep.'"', $x) . '"';
+	$x = str_replace("(", " ", $x);
+	$x = str_replace(")" ," ", $x);
+	
+	// Build JS array ready
+	$x = ' '.$name.':[' . $x . '] ';
+	return $x;
+}
+
 // API for the shortcode [jsChart] on WP
 function newChart($data) { 
 
@@ -126,22 +144,13 @@ function newChart($data) {
 // *** Direct input values turns to options of input data
 	$values = '';
 	if ($data['values']) {		// Input format: (1,2,3, ...) OR ((1,2,3),(11,22,33), ...)
-		$infile = 'foo'; // special flag of direct simple input
-		$x = trim($data['values']);
-		$x = str_replace("("," ",$x);
-		$x = str_replace(")"," ",$x);
-		$values = ' values:[' . $x . '] ';
+		$infile = 'foo'; 		// special flag of direct simple input set
+		$values = filterIn($data['values'], 'values', false);
 		if ($data['labels']) {
-			$x = str_replace("("," ",$data['labels']);
-			$x = str_replace(")"," ",$x);
-			$x = ' labels:[' . $x . '] ';
-			$values = $values . ', ' . $x;
+			$values = $values . ', ' .filterIn($data['labels'], 'labels', true);
 		}
 		if ($data['series']) {
-			$x = str_replace("("," ",$data['series']);
-			$x = str_replace(")"," ",$x);
-			$x = ' series:[' . $x . '] ';
-			$values = $values . ', ' . $x;
+			$values = $values . ', ' .filterIn($data['series'], 'series', true);
 		}
 	} else if ($data['class'])  { // Direct data coming from class (& ID's) of tags
 		$values = ' class:"' . $data['class'] . '" ';
