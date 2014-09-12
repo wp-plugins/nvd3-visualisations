@@ -1,7 +1,7 @@
 
 // All national dependent definitions how to format numbers, currencies, dates, etc.
 
-myCountry = "US";  // Update this (US/FI/RU) based on your blog's readers: add new locale's block below
+myCountry = "FI";  // Update this (US/FI/RU) based on your blog's readers: add new locale's block below
 
 function detectBrowser(wanted) { // Optional if you want to support multinational audience
 
@@ -50,7 +50,8 @@ var en_US = d3.locale({
   "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 });
 
-// Russian
+// Russian - uncomment if you need RU
+
 var ru_RU = d3.locale({
   "decimal": ",",
   "thousands": "\xa0",

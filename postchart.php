@@ -72,21 +72,26 @@ else if ($_GET['template']) { // Direct input or from Document cells
 $title = '"Own Data Chart"';
 $scolor = ' "Black" ';
 $scaler = '"*1"';
-$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' ".$direct." height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor.", showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true, calculator:".$scaler.", calculatorlock:false }' ] ";
+$ctitle = '"Calculate:"';
+$cunit = '"unit"';
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' ".$direct." height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor.", showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true, calculator:".$scaler.", calculatorlock:false, calculatorhide:false, calculatortitle:".$ctitle.", calculatorunit:".$cunit." }' ] ";
 
 $datacells = '';
 $editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]';
-if ($direct) { // No file editor for templates inside doc
-	$editarea = '';
+if ($direct) { 
+	$editarea = ''; // No file editor for templates inside doc
 	
 	if ($_GET['template'] == 'table')  // Template of table with its id (TODO: autocoloring fix)
-		$datacells = getArray('mypets');
+		$datacells = getHelp('table') . '<p><b>Example Array</b><br />' . getArray('mypets') . '</p>';
 
 	if ($_GET['template'] == 'table2')  // Template of 2x2 table with its id
-		$datacells = getBigArray('mypets');
+		$datacells = getHelp('table2') . '<p><b>Example Array</b><br />' . getBigArray('mypets') . '</p>';
 
 	if ($_GET['template'] == 'cells')  // Template of separate doc's data cells with their class & id tags.
-		$datacells = 'I have <span id="Cats" class="mypets">14</span> cats and <span id="Cows" class="mypets">2</span> cows plus <span id="Birds" class="mypets">11</span> birds at my home as pets !';
+		$datacells = getHelp('cells') . '<p><b>Example Sentence + its Live Data</b><br />I have <span id="Cats" class="mypets">14</span> cats and <span id="Cows" class="mypets">2</span> cows plus <span id="Birds" class="mypets">11</span> birds at my home as pets.</p>';
+
+	if ($_GET['template'] == 'direct')  // Template of separate doc's data cells with their class & id tags.
+		$datacells = getHelp('direct');
 
 	$datacells .= '<br />';
 }
@@ -227,5 +232,21 @@ return '
 </tbody>
 </table>
 ';
+}
+
+function getHelp($type) {
+
+	$t = '<b>Steps for Your Own Data</b><br />';
+
+	$h = '';
+	if ($type == 'table'  || $type == 'table2')
+		$h = $t.'<ol><li>Copy & Paste your table from <b>OpenOffice Calc</b> here.</li><li>Go HTML mode and copy ID of tiny example table below for your imported new table.</li><li>Remove example table & this text.</li><li>Check: that 2nd row colors of background of table are copied to chart properly.</li><li>Refine the look by <b>autocoloring</b> option & edit rest of document normally ready + publish.</li></ol><br />';
+	if ($type == 'cells')
+		$h = $t.'<ol><li>Write / copy your text content normally into this page.</li><li>Move to HTML mode and copy <b>span tag</b> from one number of example below.</li><li>Use this html to mark your own embedded numbers.</li><li>Update each ID to name your data cell as you wish.</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
+	if ($type == 'direct')
+		$h = $t.'<ol><li>Move to HTML mode and check call of shortcode for its chart below.</li><li>Copy & paste your own data into between "(" and ")" brackets of values, labels, and series.</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
+
+	$style = ' style="background-color:darkgray; color:navy; border: 3px outset gray " ';
+	return '<div '.$style.'>' . $h . '</div>';
 }
 ?>

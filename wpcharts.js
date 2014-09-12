@@ -11,8 +11,11 @@ function jsChart(id, infile, type, dims, options) {
 	}
 
 	// All localisation settings active: 
-	// go and edit locale.js to match your country
-	myLocale(detectBrowser(false));
+	// go and edit locale.js to match your country for default
+	if (options.locale)
+		myLocale(options.locale);
+	else
+		myLocale(detectBrowser(false));
 
 	// Default size of chart: VGA screen
 	var height = '480';
@@ -62,8 +65,13 @@ function checkJQ() {
 
 	if ('undefined' == typeof window.jQuery)
 		window.alert('Please, load jQuery to use NVD3 visualisations properly.');
-	else
+	else {
 		console.info('jQuery: %ok%');
+		if (jQuery.ui)
+			console.info('jQuery UI: %ok%');
+		else
+			console.warn('jQuery UI is not loaded yet.');
+	}
 }
 
 // Data reader from different sources: demos / own file / direct input options / JSON 
@@ -681,16 +689,20 @@ if (typeof inPopUp == 'undefined')
 		var lockme = '';
 		if (options.calculatorlock) if (options.calculatorlock == true)
 			lockme = ' disabled ';
-		scaler4Chart(id, options.calculator, title, unit, lockme); 
+		var hideme = 'text'; // def type of input field
+		if (options.calculatorhide) if (options.calculatorhide == true)
+			hideme = 'hidden';
+		scaler4Chart(id, options.calculator, title, unit, lockme, hideme); 
 	}
 
-function scaler4Chart(id, op, title, unit, lock) {
+function scaler4Chart(id, op, title, unit, lock, hidden) {
 	if ((typeof op == 'boolean' && op) || op == 1)
 		op = '*1';
 	if (chartData[id]) if (chartData[id].modifier)
 		op = chartData[id].modifier;
 	var ico = '<img src="'+rootpath+'../icons/calculator.png">';
-	var nrobox = '<input size="6" style="font-size:16px" value="'+op+'" type="text" id="scaler'+id+'" title="Change data points of chart on this way & amount" '+lock+'>';
+	console.info(hidden);
+	var nrobox = '<input size="6" style="font-size:16px" value="'+op+'" type="'+hidden+'" id="scaler'+id+'" title="Change data points of chart on this way & amount" '+lock+'>';
 	var inbox = '<br /> <span style="float:right; background-color:darkgray; border: 3px outset gray;"><b> '+title+' </b>'+nrobox+unit+' <button onclick="rescaleChart(\''+id+'\')" title="Rebuild chart" style="cursor:pointer;"> '+ico+' </button></span> ';
 	jQuery("#chart"+id).append(inbox);
 }
