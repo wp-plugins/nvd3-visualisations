@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,9 +147,13 @@ Here:
 2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
 3. Same Data Set on 4 Different Ways by Using Chart's Picker 
 4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
-5. Automatically updated charts fast from OpenOffice by **table** option
+5. Automatically updated charts: fast import from OpenOffice by **table** option
 
 == Changelog ==
+
+= 1.7.3 =
+Version 1.7.3 -
+Smooth gradient coloring for chart's elements based on data value by use of option **colors:{values:true, startbar:"lime", endbar:"red"}** that works similar fashion than with d3-simplechart plugin (eq **gradient:"values"** there). Automatic and manual rescaling of Y-axis  (eq values) with new **domain** option. Negative values charted correctly for direct cells input of document (eq an issue of non-numeric filter fixed).
 
 = 1.7.2 =
 Version 1.7.2 -
@@ -157,11 +161,11 @@ Short online helps generated for some gallery's cloned chart's input types to us
 
 = 1.7.1 =
 Version 1.7.1 -
-Fast input examples direcly from charts gallery for the data sources: direct shortcode's input, document's cells, and imported tables (of OpenOffice). More flexible direct input formats from shortcode.
+Fast input examples direcly from charts gallery for these data sources: direct shortcode's input, document's cells, and imported tables (of OpenOffice Calc). More flexible & faster direct input format is available from shortcode.
 
 = 1.7.0 =
 Version 1.7.0 -
-NEW: handy interactive calculator for the chart. By setting **calculator** option you give your readers freedom to scale visually the chart as they wish (eq + - * / operators). Two other options help this - **calculatortitle** and **calculatorunit** - which let you tell what questions calculator solves with each chart. Support of locale for country specific data formats. Some new designs of icons. Fixing minor bugs.
+NEW: handy interactive calculator for the chart. By setting **calculator** option you give your readers freedom to scale visually the chart as they wish (eq formulas by + - * / operators). Two other options help this - **calculatortitle** and **calculatorunit** - which let you tell what questions calculator solves with each chart. Support of locale for country specific data formats. Some new designs of icons. Fixing minor bugs.
 
 = 1.6.9 =
 Version 1.6.9 -

@@ -130,7 +130,6 @@ function dataRead(infile, id, type, options) {
 	});
 	else if (options.values && !options.tsv) { // Direct input (like D3 simplecharts plugin has)
 		console.info('direct!');
-//		console.info(options);
 		var titles = ['Labels','DataSet1','DataSet2','DataSet3'];
 		if (options.series)  // Name of data's columns given
 		if (!options.inPopup && options.series != 'Labels') {
@@ -199,6 +198,8 @@ function dataRead(infile, id, type, options) {
 //		console.info(options);
 		jQuery(document).ready(function() { // Wait until DOM is ready for input
 			var data = parseJSON(cells2set(options), type);
+			// console.info(cells2set(options));
+			// console.info(data);
 			chartSelector(id, data, type, options);
 			/*
 			options.series = series;
@@ -276,6 +277,7 @@ function cells2set(options) {
 						series.push( jQuery(stack[0][c]).text() );
 				}
 			}
+			// console.info(set);
 			return set2values(set, labels, series, options);
 }
 
@@ -295,7 +297,7 @@ function set2values(aset, labels, series, options) {
 						var stitles = 'Data '+(s+1);
 						if (series.length)
 							stitles = series[s];
-						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,]+/g, "");
+						var nro = set[0][d]['innerText'].replace(/[^0-9^.^,^-]+/g, "");
 						if (+nro) { // value must be number && its arr index too
 						if (set[0][d]['attributes'])
 						if (set[0][d]['attributes']['id']) { // Labels from each cell's ID
@@ -366,7 +368,7 @@ function demoShows(id, data, type, options) {
 	var ctype = demos[type];
 	var mbutt = '<button style="cursor:pointer" onclick="newpost2('+sQuote(query)+', '+sQuote(ctype)+', '+sQuote(idmenu)+', '+sQuote(idmenu2)+')" title="'+tt+'">New Chart</button>'
 
-	var aform = shortmsg + mpostpage + ' in ' + mformat + mbutt;
+	var aform = shortmsg + mpostpage + ' from ' + mformat + mbutt;
 
 	if (infile.indexOf(".json") > 0)
 	d3.json(infile,function(error,data) {
@@ -636,7 +638,7 @@ function newpost2(alink, afile, id, id2) {
 
 	var post_type = jQuery('#'+id).val();
 	var data_format = jQuery('#'+id2).val();
-	console.info(data_format);
+	// console.info(data_format);
 
 	alink = alink + '&new=' + post_type;
 	if (data_format == 'table' || data_format == 'cells' || data_format == 'direct' || data_format == 'table2')
@@ -652,7 +654,8 @@ function newpost2(alink, afile, id, id2) {
 
 function chartSelector(id, data, type, options) {
 
-	options.type = type.toLowerCase();
+	options.type = type.toLowerCase(); 
+
 	if (type == 'lineplusbar')
 		NVD3linePlusBar(id, data, options);
 	else if (type == 'simpleline')
@@ -701,7 +704,7 @@ function scaler4Chart(id, op, title, unit, lock, hidden) {
 	if (chartData[id]) if (chartData[id].modifier)
 		op = chartData[id].modifier;
 	var ico = '<img src="'+rootpath+'../icons/calculator.png">';
-	console.info(hidden);
+	// console.info(hidden);
 	var nrobox = '<input size="6" style="font-size:16px" value="'+op+'" type="'+hidden+'" id="scaler'+id+'" title="Change data points of chart on this way & amount" '+lock+'>';
 	var inbox = '<br /> <span style="float:right; background-color:darkgray; border: 3px outset gray;"><b> '+title+' </b>'+nrobox+unit+' <button onclick="rescaleChart(\''+id+'\')" title="Rebuild chart" style="cursor:pointer;"> '+ico+' </button></span> ';
 	jQuery("#chart"+id).append(inbox);
@@ -726,6 +729,20 @@ function timeStamp(x, options) {
 
 /* ALL Supported NVD3 Chart Types: 1 function / chart's type */
 
+function NVD3axisScale(chart, options) {
+
+	if (options.minY && options.maxY) {
+		chart.forceY([options.minY, options.maxY]);
+		return;
+	}
+	var diff = 0.00000000001;
+	if (options.minY)
+		chart.forceY([options.minY, options.minY+diff]);
+	if (options.maxY)
+		chart.forceY([options.maxY-diff, options.maxY]);
+	// var domX = chart.yAxis.domain();
+}
+
 // Drawing chart: linePlusBar
 function NVD3linePlusBar(chartID, data, options) {
 
@@ -744,6 +761,7 @@ function NVD3linePlusBar(chartID, data, options) {
 
       chart.y1Axis
 		  .tickFormat(setFormat2(',.2r',options));
+//	NVD3axisScale(chart, options);
 /*
       chart.y2Axis
           .tickFormat(setFormat2(',.2r',options));
@@ -770,7 +788,7 @@ function NVD3linePlusBar(chartID, data, options) {
         .duration(500)
         .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 
       nv.utils.windowResize(chart.update); 
 
@@ -798,6 +816,7 @@ function NVD3cumulativeLineData(chartID, data, options) {
 
     chart.yAxis
         .tickFormat(setFormat2(',.1%',options));
+	NVD3axisScale(chart, options);
 
 	  chart.options(options);
 	shadowEffects(chartID, options);
@@ -806,7 +825,7 @@ function NVD3cumulativeLineData(chartID, data, options) {
         .datum(data)
         .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
 
     //TODO: Figure out a good way to do this automatically
@@ -837,6 +856,7 @@ function NVD3stackedArea(chartID, data, options) {
 
     chart.yAxis
         .tickFormat(setFormat2(',.2r',options));
+	NVD3axisScale(chart, options);
 
     chart.options(options);
 	shadowEffects(chartID, options);
@@ -845,7 +865,7 @@ function NVD3stackedArea(chartID, data, options) {
       .datum(data)
       .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
@@ -867,10 +887,9 @@ nv.addGraph(function() {
       .transitionDuration(350)
       ;
 
-    chart.yAxis
-        .tickFormat( setFormat2('.3r',options) ); // d3.format(
-
-//		chart.valueFormat = d3.format( setFormat('.2r',options) );
+	chart.yAxis
+        .tickFormat( setFormat2('.3r',options) );
+	NVD3axisScale(chart, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -881,7 +900,7 @@ nv.addGraph(function() {
 
  	if (data[0])
 	if (data[0].values)
-		colorSegments(options,chartID, data[0].values.length);
+		colorSegments(options,chartID, data[0].values);
 
   nv.utils.windowResize(chart.update);
   colorTable(options, chartID);
@@ -904,6 +923,7 @@ function NVD3horizontalMultiBar(chartID, data, options) {
 
     chart.yAxis
         .tickFormat(setFormat2(',.2r',options)); // setFormat(
+	NVD3axisScale(chart, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -912,7 +932,7 @@ function NVD3horizontalMultiBar(chartID, data, options) {
         .datum(data)
         .call(chart);
   
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
@@ -944,8 +964,7 @@ nv.addGraph(function() {
   //We want to show shapes other than circles.
   chart.scatter.onlyCircles(false);
 
-  // var myData = randomData(4,40);
-  // console.info( JSON.stringify(myData) );
+	NVD3axisScale(chart, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -954,7 +973,7 @@ nv.addGraph(function() {
       .datum(data)
       .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 
   nv.utils.windowResize(chart.update);
 
@@ -985,6 +1004,7 @@ nv.addGraph(function() {
 
     chart.yAxis
         .tickFormat( setFormat2('.2r',options) ); // d3.format
+	NVD3axisScale(chart, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -993,7 +1013,7 @@ nv.addGraph(function() {
         .datum(data)
         .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
     nv.utils.windowResize(chart.update);
@@ -1024,6 +1044,8 @@ nv.addGraph(function() {
   chart.y2Axis
       .tickFormat( setFormat2(',.2r',options) );
 
+	NVD3axisScale(chart, options);
+
 	chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -1032,7 +1054,7 @@ nv.addGraph(function() {
       .transition().duration(500)
       .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
   nv.utils.windowResize(chart.update);
@@ -1062,6 +1084,7 @@ nv.addGraph(function() {
 
   chart.yAxis     //Chart y-axis settings
       .tickFormat( setFormat2('.2r',options) );
+	NVD3axisScale(chart, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1070,7 +1093,7 @@ nv.addGraph(function() {
       .datum(data)         //Populate the <svg> element with chart data...
       .call(chart);          //Finally, render the chart!
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
   //Update the chart when window resizes.
@@ -1142,7 +1165,7 @@ nv.addGraph(function() {
         .transition().duration(700)
         .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
   return chart;
@@ -1174,7 +1197,7 @@ nv.addGraph(function() {
         .transition().duration(700)
         .call(chart);
 
-	colorSegments(options,chartID,data.length);
+	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
   return chart;
@@ -1199,8 +1222,9 @@ nv.addGraph(function() {
 });
 }
 
-function colorSegments(options,chartID,size) {
+function colorSegments(options,chartID,data) {
 
+  var size = data.length;
   initCB();
   var classname = 0;
   if (options.colorbrewer) if (options.colorbrewer.segment)
@@ -1244,12 +1268,27 @@ function colorSegments(options,chartID,size) {
 			customs = true;
 	}	 else { // Object => interpolating of colours 
 			if (options.colors.startbar && options.colors.endbar) {
-				var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
+				if (options.colors.values) {
+					var min = '';
+					var max = '';
+					for (c in data) {
+						if (min > data[c].value || min == '')
+							min = data[c].value;
+						if (max < data[c].value || max == '')
+							max = data[c].value;
+					}  // Setting new domain to range desc for data values based coloring
+					var colors = d3.scale.linear().domain([min,max]).range([options.colors.startbar,options.colors.endbar]);
+				} else
+					var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
+					// console.info(colors);
 				customs = true;
-				}
+			}
 		}
 
 	if (customs && type != 'lineplusbar' && type != 'multibar') { // TODO: colors of these blocked chart types active
+		if (options.colors.values)
+		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(d.value); });
+		else
 		d3.selectAll('#svg'+chartID+classname).style(action, function(d, i) { return colors(i); });
 		// Legend's coloring
 		d3.selectAll('#svg'+chartID+' .nv-legend-symbol').style("fill", function(d, i) { return colors(i); });
