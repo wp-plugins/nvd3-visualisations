@@ -731,15 +731,22 @@ function timeStamp(x, options) {
 
 function NVD3axisScale(chart, options) {
 
-	if (options.minY && options.maxY) {
-		chart.forceY([options.minY, options.maxY]);
+	var minY = options.minY;
+	var maxY = options.maxY;
+	if (!minY && options.domain)
+		minY = options.domain.minY;
+	if (!maxY && options.domain)
+		maxY = options.domain.maxY;
+
+	if (minY && maxY) {
+		chart.forceY([minY, maxY]);
 		return;
 	}
-	var diff = 0.00000000001;
-	if (options.minY)
-		chart.forceY([options.minY, options.minY+diff]);
-	if (options.maxY)
-		chart.forceY([options.maxY-diff, options.maxY]);
+	var diff = 0.00000000001; 
+	if (minY)
+		chart.forceY([minY, minY+diff]);
+	if (maxY) 
+		chart.forceY([maxY-diff, maxY]);
 	// var domX = chart.yAxis.domain();
 }
 

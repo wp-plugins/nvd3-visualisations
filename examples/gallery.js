@@ -1,7 +1,7 @@
 
 function nvd3Demos(pcs, xmldemo) { // pcs = nro of html containers where charts appearvar xml = false;if (xmldemo)  // XML versions of demos asked	xml = true;// All valid names of chart types// ******************************// simpleline	linePlusBar	scatterbubble	viewfinder	multibar	multibar	// cumulativeline	stackedarea	discretebar	horizontalmultibar	donut	pie	bulletjsChart(pcs, '', 'linePlusBar', {height:'200', width:'350'}, { showLegend: true, tooltips: true, transitionDuration: 3000, useInteractiveGuideline: true, xtime: true, xmldemo: xml, shadows:'black', backgroundcolor:'SandyBrown' });
 pcs--;// minY:1000000jsChart(pcs, '', 'bullet', {height:'250', width:'300'}, { showLegend: true, xmldemo: xml });pcs--;
-jsChart(pcs, '', 'simpleline', {height:'250', width:'300'}, { showLegend: false, transitionDuration:3000, xmldemo: xml, shadows:'black', minY:-1.5, maxY:1.5 });
+jsChart(pcs, '', 'simpleline', {height:'250', width:'300'}, { showLegend: false, transitionDuration:3000, xmldemo: xml, shadows:'black', domain:{minY:-1.5, maxY:2} });
 pcs--;
 jsChart(pcs, '', 'scatterbubble', {height:'250', width:'300'}, { showLegend: true, xmldemo: xml, shadows:'black' });
 pcs--; 
