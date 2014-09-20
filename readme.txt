@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.7.3
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,14 +45,16 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Handy calculator letting users to modify chart fast by any basic math formulas.
 1. Localized presentation formats for currency, date, time, etc.
 1. Optional export of data / vector graphics of chart.
+1. Works best with Chrome & Firefox browsers. 
 1. WordPress multisite & SSL compatible plugin. 
 .
 
 **Data Input**
 
 1. Fast & short input from intuitive fast options (values, labels, and series).
+1. Direct data input from the html tags of document (eq page/post).
 1. Data's import from valid JSON/XML/CSV/TSV file formats.
-1. Dynamic D3's JSON inputs from any JavaScript functions.
+1. Dynamic JSON inputs from any own JavaScript functions.
 .
 
 **HAPPY CHARTING on WordPress !**
@@ -92,30 +94,17 @@ Or you may want to do it: 'old traditional way'.
 
 = How can I visualize my own data set? =
 
-1. You just check at first the gallery's data folder's input file structure and then you can use any tool to create similar data sets on the blog's root folder. If you open console when demo loads in you can also see what chart type connects to which input file.
-1. Next, you may also want to write own custom function from which you directly call on the fly JavaScript API when data set is ready to show out.
+1. You just create your charts gallery by its shortcode [demosGallery] and pick up the right style of chart there for the task.
+1. Next, you choose if you want this new chart into page / post of WordPress.
+1. Before creating new chart by button you select from 8 different sources where your data is coming from.
+1. New chart button takes you to the 2nd step where you actually populate your own data in.
+1. Rest of publishing follows normal standard work flow of WordPress: just edit, preview & publish it.
 
-= I hate to learn JavaScript API etc, is there any just a simple way to draw charts? =
+= I just want a quick way to show my small data set and not to edit any external files. Can I do this?
 
-Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post.
+Sure, go to the charts library and select data input method **Direct Input**, press new chart button, and follow its further online help.
 
-Also, peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
-
-= I just want a quick way to show my data and not to edit any files. Can I do it?
-
-There are direct data options for that. Take a look at **shortcode_direct_data.txt** on examples, please.
-
-= How can I find all available chart types & their calling names? =
-
-Look at inside **gallery.js** file on examples dir, please. 
-
-= How do I know which options work together with the chart type that I use? =
-
-Look at inside **chart_options.html** file and its comparisions table, please.
-
-= Where are my data sets stored and what happens for them if I remove chart's page/post or whole plugin? =
-
-Look at the blog's root and the folder called **charts_nvd3**. Data sets are stored there by random names and they stay there until you remove them by FTP client. If you create very many/big data sets it is a pretty good idea to clean this folder from time to time manually.
+Also, you migt like to take a look at **shortcode_direct_data.txt** on examples folder, please.
 
 = How can I change the margins around the chart bigger? =
 
@@ -130,11 +119,27 @@ You can set palette of custom colors for each chart (bars, etc) separately with 
 1. If you wish to build colors smooth gradients. Example - options="{ colors:{startbar:'red', endbar:'lime'} }"
 1. Finally, there is an option **style** that feeds in all legal values to the chart's svg raw structure. A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
 
+= Where are my data sets (of files) stored and what happens for them if I remove chart's page/post or whole plugin? =
+
+Look at the blog's root and the folder called **charts_nvd3**. Data sets are stored there by random names and they stay there until you remove them by FTP client manually. If you create very many/big data sets it is a pretty good idea to clean this folder from time to time.
+
 = Is it possible to have multiple charts on the same WP post or page? =
 
-Good point & question !
+Good point & question here !
 
 YES indeed, the software is design so that it transparently creates and draws many charts on the same page and gives you exact control where you like to show them.
+
+= I am not a tech guru & I hate to learn JavaScript API etc, is there any - just a simple way - to draw charts? =
+
+Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post. Each cloning of new chart creates you full example call of [jsChart] shortcode with a lot of options for it that you can try to turn on and off. All this happens safely in preview mode of WordPress before you are ready to publish it.
+
+Note: since ver.1.8.0 charts gallery is improved to new visual form. If you need/prefer the old (table) type of look, you just call it by [demosGallery_old] shortcode. 
+
+Also, peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
+
+= How do I know which options work together with the chart type that I use? =
+
+Look at inside **chart_options.html** file and its comparisions table, please.
 
 = Where is open source if I want to improve it? =
 
@@ -151,9 +156,13 @@ Here:
 
 == Changelog ==
 
+= 1.8.0 =
+Version 1.8.0 -
+NEW: graphics UX rocks U2, yes!!? Charts gallery gets its visual UI tabs for each bigger chart. Data editor has a converter from CSV/TSV -> JSON formats on front-end side. Examples of coloring charts by data values. 
+
 = 1.7.3 =
 Version 1.7.3 -
-Smooth gradient coloring for chart's elements based on data value by use of option **colors:{values:true, startbar:"lime", endbar:"red"}** that works similar fashion than with d3-simplechart plugin (eq **gradient:"values"** there). Automatic and manual rescaling of Y-axis  (eq values) with new **domain** option. Negative values charted correctly for direct cells input of document (eq an issue of non-numeric filter fixed).
+Smooth gradient coloring for chart's elements based on data value by use of option **colors:{values:true, startbar:"lime", endbar:"red"}** that works similar fashion than with d3-simplechart plugin (eq gradient:"values" over there). Automatic and manual rescaling of Y-axis  (eq values) with new **domain** option. Negative values charted correctly for direct cells input of document (eq an issue of non-numeric filter fixed).
 
 = 1.7.2 =
 Version 1.7.2 -

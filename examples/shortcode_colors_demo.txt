@@ -20,6 +20,10 @@ Own Named Colors
 Own Colors from Colorbrewer's Palettes
 [jsChart type="Pie" options="{ colorbrewer:{palette:'Blues'},  showLegend: true, shadows:'black' }" backgroundcolor='darkgray']
 </p><p>Own Smooth Gradient Colors[jsChart type="Pie" options="{ colors:{startbar:'red', endbar:'lime'} }" backgroundcolor='darkgray']
+Smooth Gradient Colors by Data Values
+
+[jsChart type="discretebar" options="{ colors:{values:true, startbar:'red', endbar:'lime'} }" backgroundcolor='darkgray']
+
 </p><p>
 
 Chart with Background's Picture for Infographics

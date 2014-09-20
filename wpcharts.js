@@ -534,6 +534,18 @@ function printLines(data) { // debug prints
 	console.info(out);
 }
 
+tsvtest = "key	Cats	Birds	Dogs"	+"\n";
+tsvtest = tsvtest + "2010	10	15	7"	+"\n";
+tsvtest = tsvtest + "2011	1	2	3"	+"\n";
+tsvtest = tsvtest + "2012	7	2	11"	+"\n";
+tsvtest = tsvtest + "2014	5	1	4"	+"\n";
+
+csvtest = "key;Cats;Birds;Dogs"		+"\n";
+csvtest = csvtest + "2010;10;15;7"	+"\n";
+csvtest = csvtest + "2011;1;2;3"	+"\n";
+csvtest = csvtest + "2012;7;2;11"	+"\n";
+csvtest = csvtest + "2014;5;1;4"	+"\n"; 
+
 // Parses TSV based input data into JSON based on chart's type
 function parseJSON(data, chart) {
 
@@ -1548,7 +1560,7 @@ function saveData(header, databox, filename) {
 }
 
 // Converter between different data inputs
-function dataConvert(intype, input, output) {
+function dataConvert(intype, input, output, ctype) {
 
 	var data = jQuery('#'+input).val();
 	var tab = '';
@@ -1557,6 +1569,10 @@ function dataConvert(intype, input, output) {
 		data = json22xml(jQuery.parseJSON(data), tab, true);
 	else if (intype == 'xml')
 		data = xml2json(data, tab, true);
+	else if (intype == 'tsv')
+		data = tsv2json(data, '', ctype); 
+	else if (intype == 'csv')
+		data = tsv2json('', data, ctype);
 
 	jQuery('#'+output).empty();
 	jQuery('#'+output).val(data);

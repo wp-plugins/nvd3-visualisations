@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.7.3
+Version: 1.8.0
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -27,7 +27,9 @@ function write_headers($rood_dir) {
 	// echo '<script src="'.$root.'nv.d3.js"></script>'; // activate & edit this source file + minimize when ready
 
 	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading
-	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON/XML conversions
+	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON -> XML conversions
+	echo '<script src="'.$root.'tsv2json.js"></script>';  // Used for TSV -> JSON converting tool
+
 	echo '<script src="'.$root.'colorbrewer.js"></script>'; // Predefined pretty coloring sets
 
 	// NVD3 Visualisations main routines
@@ -57,6 +59,28 @@ function setRootDir($rood_dir) {
 	return plugins_url() . '/'.$rood_dir.'/';
 }
 
+function templatePicker($data) {
+
+	myroot();
+
+	// Libs for UX
+	echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">';
+	echo '<script src="//code.jquery.com/jquery-1.10.2.js"></script>';
+	echo '<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>';
+
+	$rood_dir='nvd3-visualisations';
+	$root = setRootDir($rood_dir);
+	echo '<script src="'.$root.'examples/gallery.js"></script>';
+
+//	$buildTabs = ' jQuery(function() { jQuery( "#tabs" ).tabs(); }); ';
+//	echo '<div id="tabs"></div>';
+//	echo '<script>'.$buildTabs.' jQuery( "#tabs" ).html( nvd3Charter() ); </script>';
+	echo '<span id="mycharts"></span>';
+	echo '<script> nvd3Charter("mycharts"); </script>';
+}
+add_shortcode("NVD3Picker", "templatePicker");
+add_shortcode("demosGallery", "templatePicker");
+
 // Nice demo gallery for the most of NVD3 chart types - START
 function demoCharts($data) {
 
@@ -75,7 +99,7 @@ function demoCharts($data) {
 
 	return $skeleton["places"] . '<script> nvd3Demos('.$count.', '.$xmldemo.'); </script>';
 }
-add_shortcode("demosGallery", "demoCharts"); 
+add_shortcode("demosGallery_old", "demoCharts");
 
 function demoContainers() { 
 
@@ -254,11 +278,15 @@ if (get_post_status() == 'publish')
 $owndata = $data["infile"];
 // $chart = $data["type"];
 
+$ctype = $data["type"];
+
 $chartdata = file_get_contents($owndata);
 
 $jscall = "saveData('xmlheader', 'dataset', '".$owndata."')";
-$json2xml = "dataConvert('json', 'jsonset', 'xmlset')";
-$xml2json = "dataConvert('xml', 'xmlset', 'jsonset')";
+$json2xml = "dataConvert('json', 'jsonset', 'xmlset', '".$ctype."')";
+$xml2json = "dataConvert('xml', 'xmlset', 'jsonset', '".$ctype."')";
+$tsv2json = "dataConvert('tsv', 'jsonset', 'xmlset', '".$ctype."')";
+$csv2json = "dataConvert('csv', 'jsonset', 'xmlset', '".$ctype."')";
 $json2tsv = "json2tsv('jsonset')";
 
 $syntax = '';
@@ -268,13 +296,13 @@ $convertbox = '';
 $jsondata = '';
 $xmldata = '';
 $header = '';
-if (strpos($owndata,'.json')) {
+if (strpos($owndata,'.json') || strpos($owndata,'.tsv') || strpos($owndata,'.csv')) {
 	$syntaxedit = '<div class="nvd3_editor">Edit your data set here and check syntax of JSON.
 <iframe name="(c) 2013 Jos de Jong" src="http://www.jsoneditoronline.org/" width="100%" height="500"></iframe></div>';
 	$syntax='JSON Editor';
 	
 	$converter = 'Data Converter';
-	$jsondata = $chartdata;
+	$jsondata = $chartdata; 
 }
 if (strpos($owndata,'.xml')) {
 	$header = explode("<root>", $chartdata);
@@ -288,7 +316,7 @@ if (strpos($owndata,'.xml')) {
 	$converter = 'Data Converter</sup>';
 	$xmldata = $chartdata;
 }
-$msg = '<p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
+$msg = '<br /><p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
 // $datalink = 'Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
 $datatitle = 'Data File: '.$owndata;
 
@@ -326,10 +354,12 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
 	<textarea id="jsonset" class="nvd3_editor_text" cols="40" rows="240">
 		'.$jsondata.'
 	</textarea>
-	<button onclick="'.$json2tsv.'" style="cursor:pointer">Clone TSV Chart</button>
 	<br />
 	<button onclick="'.$json2xml.'" style="cursor:pointer">JSON to XML</button>
 	<button onclick="'.$xml2json.'" style="cursor:pointer">XML to JSON</button>
+	<br />
+	<button onclick="'.$tsv2json.'" style="cursor:pointer" title="Data columns separated by TABs">TSV to JSON</button>
+	<button onclick="'.$csv2json.'" style="cursor:pointer" title="Data columns separated by ; or , letters">CSV to JSON</button>
 	<br />
 	<textarea id="xmlset" class="nvd3_editor_text" cols="40" rows="240">
 		'.$xmldata.'

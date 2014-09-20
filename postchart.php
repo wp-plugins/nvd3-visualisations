@@ -240,7 +240,7 @@ function getHelp($type) {
 
 	$h = '';
 	if ($type == 'table'  || $type == 'table2')
-		$h = $t.'<ol><li>Copy & Paste your table from <b>OpenOffice Calc</b> here.</li><li>Go HTML mode and copy ID of tiny example table below for your imported new table.</li><li>Remove example table & this text.</li><li>Check: that 2nd row colors of background of table are copied to chart properly.</li><li>Refine the look by <b>autocoloring</b> option & edit rest of document normally ready + publish.</li></ol><br />';
+		$h = $t.'<ol><li>Copy & Paste your table from <b>OpenOffice Calc</b> here.</li><li>Go HTML mode and copy ID of tiny example table below for your imported new table.</li><li>Remove example table & this text.</li><li>Check: that 2nd row colors of background of table are copied to chart properly from your table.</li><li>Refine the look by <b>autocoloring</b> option & edit rest of document normally ready + publish.</li></ol><br />';
 	if ($type == 'cells')
 		$h = $t.'<ol><li>Write / copy your text content normally into this page.</li><li>Move to HTML mode and copy <b>span tag</b> from one number of example below.</li><li>Use this html to mark your own embedded numbers.</li><li>Update each ID to name your data cell as you wish.</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
 	if ($type == 'direct')
