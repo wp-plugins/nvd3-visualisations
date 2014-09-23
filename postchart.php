@@ -74,7 +74,10 @@ $scolor = ' "Black" ';
 $scaler = '"*1"';
 $ctitle = '"Calculate:"';
 $cunit = '"unit"';
-$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' ".$direct." height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor.", showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true, calculator:".$scaler.", calculatorlock:false, calculatorhide:false, calculatortitle:".$ctitle.", calculatorunit:".$cunit." }' ] ";
+$xaxis = ' xaxis:{ hide:false, labels:[] } ';
+$labels = '"A,B,C"';
+
+$shortcodes = "[loadNVD3] <br /> [jsChart type='".$ctype."' datafile='".$owndata."' ".$direct." height=250  width=450 float='none' border='3px outset gray' backgroundcolor='darkgray' options='{ shadows:".$scolor.", showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: ".$title.", chartpicker:true, exports:false, autocoloring:true, calculator:".$scaler.", calculatorlock:false, calculatorhide:false, calculatortitle:".$ctitle.", calculatorunit:".$cunit.",  xaxis:{ hide:false, style:\"font-size:10px; fill:navy\" }, yaxis:{ style:\"font-size:12px; fill:blue\" }  }' ] ";
 
 $datacells = '';
 $editarea = '<br />[dataEditor type="'.$ctype.'" infile="'.$owndata.'"]';

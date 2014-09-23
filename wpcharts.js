@@ -762,6 +762,20 @@ function NVD3axisScale(chart, options) {
 	// var domX = chart.yAxis.domain();
 }
 
+// Axis removal or manual labeling
+function labelAxis(axis, opts) { 
+	// Empty labels of axis
+	if (opts.xaxis) if (opts.xaxis.hide)
+		axis.tickFormat("");
+	if (opts.yaxis) if (opts.yaxis.hide)
+		axis.tickFormat("");
+	// Relabeling axis
+	if (opts.xaxis) if (!opts.xaxis.hide) if (opts.xaxis.labels)
+		axis.tickValues(opts.xaxis.labels);
+	if (opts.yaxis) if (!opts.yaxis.hide) if (opts.yaxis.labels)
+		axis.tickValues(opts.yaxis.labels);
+}
+
 // Drawing chart: linePlusBar
 function NVD3linePlusBar(chartID, data, options) {
 
@@ -781,6 +795,9 @@ function NVD3linePlusBar(chartID, data, options) {
       chart.y1Axis
 		  .tickFormat(setFormat2(',.2r',options));
 //	NVD3axisScale(chart, options);
+
+	labelAxis(chart.xAxis, options);
+
 /*
       chart.y2Axis
           .tickFormat(setFormat2(',.2r',options));
@@ -807,9 +824,13 @@ function NVD3linePlusBar(chartID, data, options) {
         .duration(500)
         .call(chart);
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y1", options, "yaxis");
+	formatAxis(".nv-y2", options, "yaxis");
+
 	colorSegments(options,chartID,data);
 
-      nv.utils.windowResize(chart.update); 
+//      nv.utils.windowResize(chart.update); 
 
       return chart;
   });
@@ -837,6 +858,8 @@ function NVD3cumulativeLineData(chartID, data, options) {
         .tickFormat(setFormat2(',.1%',options));
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+
 	  chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -844,11 +867,14 @@ function NVD3cumulativeLineData(chartID, data, options) {
         .datum(data)
         .call(chart);
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+
 	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
 
     //TODO: Figure out a good way to do this automatically
-    nv.utils.windowResize(chart.update); 
+//    nv.utils.windowResize(chart.update); 
 
 	return chart;
   });
@@ -877,6 +903,8 @@ function NVD3stackedArea(chartID, data, options) {
         .tickFormat(setFormat2(',.2r',options));
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+	
     chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -884,14 +912,26 @@ function NVD3stackedArea(chartID, data, options) {
       .datum(data)
       .call(chart);
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+
 	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
 
-    nv.utils.windowResize(chart.update);
+//    nv.utils.windowResize(chart.update);
 
     return chart;
   });
+} 
+
+// Access to format axis appearence by CSS/SVG text attributes
+function formatAxis(axisClass, opts, optax) {
+
+	var olds = jQuery(axisClass+' .tick text').attr("style");
+	if (opts[optax]) if (opts[optax].style)
+		jQuery(axisClass+' .tick text').attr("style", opts[optax].style+'; '+olds);
 }
+
 // Drawing chart: discreteBar
 function NVD3discreteBar(chartID, data, options) {
 
@@ -904,11 +944,13 @@ nv.addGraph(function() {
       .tooltips(false)        //Don't show tooltips
       .showValues(true)       //...instead, show the bar value right on top of each bar.
       .transitionDuration(350)
-      ;
+      ; 
 
 	chart.yAxis
         .tickFormat( setFormat2('.3r',options) );
-	NVD3axisScale(chart, options);
+	NVD3axisScale(chart, options); 
+
+	labelAxis(chart.xAxis, options); 
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -917,11 +959,23 @@ nv.addGraph(function() {
       .datum(data)
       .call(chart);
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+
+	myaxis = chart.xAxis;
+
+	/*
+	console.info(myaxis.tickValues()); 
+	var d = myaxis.domain()
+	myaxis.tickValues( d[1] );
+	mydomain = myaxis.domain();
+	*/
+
  	if (data[0])
 	if (data[0].values)
 		colorSegments(options,chartID, data[0].values);
 
-  nv.utils.windowResize(chart.update);
+//  nv.utils.windowResize(chart.update);
   colorTable(options, chartID);
 
   return chart;
@@ -944,6 +998,8 @@ function NVD3horizontalMultiBar(chartID, data, options) {
         .tickFormat(setFormat2(',.2r',options)); // setFormat(
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+	
 	chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -951,10 +1007,13 @@ function NVD3horizontalMultiBar(chartID, data, options) {
         .datum(data)
         .call(chart);
   
+  	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+ 
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
-    nv.utils.windowResize(chart.update);
+//    nv.utils.windowResize(chart.update);
 
     return chart;
   });
@@ -985,16 +1044,21 @@ nv.addGraph(function() {
 
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+	
 	chart.options(options);
 	shadowEffects(chartID, options);
 
   d3.select("#svg"+chartID)
       .datum(data)
       .call(chart);
-
+	  
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+	
 	colorSegments(options,chartID,data);
 
-  nv.utils.windowResize(chart.update);
+//  nv.utils.windowResize(chart.update);
 
   return chart;
 });
@@ -1025,6 +1089,8 @@ nv.addGraph(function() {
         .tickFormat( setFormat2('.2r',options) ); // d3.format
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+	
 	chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -1032,10 +1098,13 @@ nv.addGraph(function() {
         .datum(data)
         .call(chart);
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
-    nv.utils.windowResize(chart.update);
+//    nv.utils.windowResize(chart.update);
 
     return chart;
 });
@@ -1065,6 +1134,8 @@ nv.addGraph(function() {
 
 	NVD3axisScale(chart, options);
 
+	labelAxis(chart.xAxis, options);
+	
 	chart.options(options);
 	shadowEffects(chartID, options);
 
@@ -1076,7 +1147,7 @@ nv.addGraph(function() {
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
-  nv.utils.windowResize(chart.update);
+//  nv.utils.windowResize(chart.update);
 
   return chart;
 });
@@ -1101,9 +1172,11 @@ nv.addGraph(function() {
 		return timeStamp(dx, options);
     });
 
-  chart.yAxis     //Chart y-axis settings
+	chart.yAxis     //Chart y-axis settings
       .tickFormat( setFormat2('.2r',options) );
 	NVD3axisScale(chart, options);
+
+	labelAxis(chart.xAxis, options);
 
 	chart.options(options);
 	shadowEffects(chartID, options);
@@ -1112,11 +1185,14 @@ nv.addGraph(function() {
       .datum(data)         //Populate the <svg> element with chart data...
       .call(chart);          //Finally, render the chart!
 
+	formatAxis(".nv-x", options, "xaxis");
+	formatAxis(".nv-y", options, "yaxis");
+
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
   //Update the chart when window resizes.
-  nv.utils.windowResize(function() { chart.update() });
+//  nv.utils.windowResize(function() { chart.update() });
   return chart;
 });
 }

@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,7 +100,7 @@ Or you may want to do it: 'old traditional way'.
 1. New chart button takes you to the 2nd step where you actually populate your own data in.
 1. Rest of publishing follows normal standard work flow of WordPress: just edit, preview & publish it.
 
-= I just want a quick way to show my small data set and not to edit any external files. Can I do this?
+= I just want a quick way to show my small data set and not to edit any external files. Can I do this? =
 
 Sure, go to the charts library and select data input method **Direct Input**, press new chart button, and follow its further online help.
 
@@ -133,7 +133,7 @@ YES indeed, the software is design so that it transparently creates and draws ma
 
 Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post. Each cloning of new chart creates you full example call of [jsChart] shortcode with a lot of options for it that you can try to turn on and off. All this happens safely in preview mode of WordPress before you are ready to publish it.
 
-Note: since ver.1.8.0 charts gallery is improved to new visual form. If you need/prefer the old (table) type of look, you just call it by [demosGallery_old] shortcode. 
+**Note:** since ver.1.8.0 charts gallery is improved to new visual form. If you need/prefer the old (table) type of look, you just call it by [demosGallery_old] shortcode. 
 
 Also, peek into **examples** folder of plugin and start to test shortcodes demos there with your blog.
 
@@ -148,13 +148,18 @@ Here:
 
 == Screenshots ==
 
-1. Charts gallery showing out neatly on the same page of WP's blog. 
-2. 4 FAST STEPS of New Chart: 1)CLONE from Gallery, 2)FEED IN Own Data, 3)EDIT Post/Page of WP Normally, and 4)PUBLISH It.
-3. Same Data Set on 4 Different Ways by Using Chart's Picker 
-4. Optional Exports Buttons & Chart's Data Turned on for Public Readers (eq **exports:true**)
-5. Automatically updated charts: fast import from OpenOffice by **table** option
+1. Chart Picker Helps to Decide which Visualization to Use.
+2. 4 FAST STEPS of New Chart: 1)CLONE from Picker, 2)FEED IN Own Data, 3)EDIT Draft of Post/Page Normally, 4)PUBLISH It.
+3. Same Data Set on 4 Different Ways by Using Chart's Picker.
+4. Exporting for Chart & Its Data Turned on for Public Readers (eq **exports** Option).
+5. Automatically Updated Charts + Fast Import from OpenOffice by **table** Option.
+6. Old Charts Gallery Showing Out on The Same Page of WP's Blog. 
 
 == Changelog ==
+
+= 1.8.1 =
+Version 1.8.1 -
+Relabelling or removal of all labels on X-axis is available now by calling easy **xaxis** option for most of the chart types. Support of standard style attribute with **xaxis** and **yaxis** options that let you format appearence of each axis by all CSS + extended features of SVG chart by chart. Resizing of window does not redraw charts automatically since that was resetting own color's settings away.
 
 = 1.8.0 =
 Version 1.8.0 -
