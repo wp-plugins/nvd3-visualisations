@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.8.1
+Version: 1.8.2
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -12,7 +12,7 @@ License: GPL2
 
 // All included ext.files
 function write_headers($rood_dir) {
-	echo '<!-- Start of NVD3 -->'; 
+	echo '<!-- Start of NVD3 -->';
 
 	$root = plugins_url().'/'.$rood_dir.'/'; 	// Single, MU-site, and SSL setups of WP
 												// http://codex.wordpress.org/Function_Reference/plugins_url
@@ -136,7 +136,7 @@ function demoContainers() {
 }
 // Demos - END
 
-function filterIn($x, $name, $quotes) {
+function filterIn($x, $name, $quotes) { 
 
 	$x = trim($x);
 	$sep = ",";
@@ -149,7 +149,7 @@ function filterIn($x, $name, $quotes) {
 	$x = str_replace("(", " ", $x);
 	$x = str_replace(")" ," ", $x);
 	
-	// Build JS array ready
+	// Build valid JS array ready
 	$x = ' '.$name.':[' . $x . '] ';
 	return $x;
 }
@@ -167,7 +167,7 @@ function newChart($data) {
 
 // *** Direct input values turns to options of input data
 	$values = '';
-	if ($data['values']) {		// Input format: (1,2,3, ...) OR ((1,2,3),(11,22,33), ...)
+	if ($data['values']) {		// Input format: (1,2,3, ...) OR TODO: ((1,2,3),(11,22,33), ...)
 		$infile = 'foo'; 		// special flag of direct simple input set
 		$values = filterIn($data['values'], 'values', false);
 		if ($data['labels']) {
@@ -176,6 +176,8 @@ function newChart($data) {
 		if ($data['series']) {
 			$values = $values . ', ' .filterIn($data['series'], 'series', true);
 		}
+		if ($data['links'])
+			$values = $values . ', ' .filterIn($data['links'], 'links', true);
 	} else if ($data['class'])  { // Direct data coming from class (& ID's) of tags
 		$values = ' class:"' . $data['class'] . '" ';
 		if (strpos($data['class'],'id:') > 0) // Object input: {id:"mytable", bgcolor:"blue"}
