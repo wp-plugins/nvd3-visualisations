@@ -734,7 +734,7 @@ function rescaleChart(id) {
 // Axis should be date formatted with a chart?
 function timeStamp(x, options) {
 	if (options.xtime)
-		return d3.time.format('%x')(new Date(x));
+		return d3.time.format('%x')(new Date(x)); 
 
 	return x;
 }
@@ -827,6 +827,8 @@ function NVD3linePlusBar(chartID, data, options) {
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y1", options, "yaxis");
 	formatAxis(".nv-y2", options, "yaxis");
+	
+	xlinks(chartID, options);
 
 	colorSegments(options,chartID,data);
 
@@ -869,6 +871,8 @@ function NVD3cumulativeLineData(chartID, data, options) {
 
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
+	
+	xlinks(chartID, options);
 
 	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
@@ -914,6 +918,8 @@ function NVD3stackedArea(chartID, data, options) {
 
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
+	
+	xlinks(chartID, options);
 
 	colorSegments(options,chartID,data);
 //	colorTable(options, chartID);
@@ -927,9 +933,47 @@ function NVD3stackedArea(chartID, data, options) {
 // Access to format axis appearence by CSS/SVG text attributes
 function formatAxis(axisClass, opts, optax) {
 
+	console.info(opts);
 	var olds = jQuery(axisClass+' .tick text').attr("style");
-	if (opts[optax]) if (opts[optax].style)
+	if (opts[optax]) {
+	if (opts[optax].style)
 		jQuery(axisClass+' .tick text').attr("style", opts[optax].style+'; '+olds);
+	if (opts[optax].transform)
+		jQuery(axisClass+' .tick text').attr("transform", opts[optax].transform);
+	}
+}
+
+// Building ext. links for chart's visual elements
+function xlinks(id, opts) {
+
+	// Chart types that do not work with web links, yet
+	if (opts.type == 'scatterbubble')
+		return;
+
+	var bars2 = jQuery("#svg"+id+getElement(opts.type) );
+	if (! opts.links) 			// || opts.links.length >= bars2.length)
+		return;
+
+	for (h in bars2)
+		if (+h || h == 0) {
+			bars2[h].setAttribute('onclick','window.open(\''+opts.links[h]+'\')');
+			var oldie = bars2[h].getAttribute('style');
+			bars2[h].setAttribute('style','cursor:pointer; '+oldie);
+		}
+//	console.info(bars2);
+
+	return;
+
+function getElement(ctype) {
+
+	var element = ' .nv-group';
+	if (ctype == 'pie' || ctype == 'donut')
+		element = ' .nv-slice';
+	else if (ctype == 'discretebar')
+		element = ' .nv-group g';
+
+	return element;
+}
 }
 
 // Drawing chart: discreteBar
@@ -961,15 +1005,8 @@ nv.addGraph(function() {
 
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
-
-	myaxis = chart.xAxis;
-
-	/*
-	console.info(myaxis.tickValues()); 
-	var d = myaxis.domain()
-	myaxis.tickValues( d[1] );
-	mydomain = myaxis.domain();
-	*/
+	
+	xlinks(chartID, options);
 
  	if (data[0])
 	if (data[0].values)
@@ -1009,6 +1046,8 @@ function NVD3horizontalMultiBar(chartID, data, options) {
   
   	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
+	
+	xlinks(chartID, options);
  
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
@@ -1056,6 +1095,8 @@ nv.addGraph(function() {
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
 	
+	xlinks(chartID, options);
+	
 	colorSegments(options,chartID,data);
 
 //  nv.utils.windowResize(chart.update);
@@ -1100,6 +1141,8 @@ nv.addGraph(function() {
 
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
+	
+	xlinks(chartID, options);
 
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
@@ -1143,7 +1186,9 @@ nv.addGraph(function() {
       .datum(data)
       .transition().duration(500)
       .call(chart);
-
+  
+	xlinks(chartID, options);
+	
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
 
@@ -1187,6 +1232,8 @@ nv.addGraph(function() {
 
 	formatAxis(".nv-x", options, "xaxis");
 	formatAxis(".nv-y", options, "yaxis");
+	
+	xlinks(chartID, options);
 
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
@@ -1262,6 +1309,7 @@ nv.addGraph(function() {
 
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
+	xlinks(chartID, options);
 
   return chart;
 });
@@ -1294,6 +1342,7 @@ nv.addGraph(function() {
 
 	colorSegments(options,chartID,data);
 	colorTable(options, chartID);
+	xlinks(chartID, options);
 
   return chart;
 });
@@ -1361,7 +1410,7 @@ function colorSegments(options,chartID,data) {
 		if (typeof options.colors == 'string')  { // as a list of colors
 			var colors = d3.scale.ordinal().range(options.colors.split(','));
 			customs = true;
-	}	 else { // Object => interpolating of colours 
+	}	 else { // Object => interpolating of colours for smooth gradient
 			if (options.colors.startbar && options.colors.endbar) {
 				if (options.colors.values) {
 					var min = '';
@@ -1371,9 +1420,9 @@ function colorSegments(options,chartID,data) {
 							min = data[c].value;
 						if (max < data[c].value || max == '')
 							max = data[c].value;
-					}  // Setting new domain to range desc for data values based coloring
+					}  // Setting new domain to range relation for data values based coloring
 					var colors = d3.scale.linear().domain([min,max]).range([options.colors.startbar,options.colors.endbar]);
-				} else
+				} else  // Setting domain by the order of labels from right to left / from smaller to larger
 					var colors = d3.scale.ordinal().range(gradientColors(options.colors.startbar, size, options.colors.endbar));
 					// console.info(colors);
 				customs = true;
