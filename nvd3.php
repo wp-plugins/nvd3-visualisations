@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.8.2
+Version: 1.8.3
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
@@ -146,9 +146,11 @@ function filterIn($x, $name, $quotes) {
 		$x = str_replace(";", $sep, $x);
 	if ($quotes && strpos($x, "'") === false && strpos($x, '"') === false) // Automatic quotes: "x","y" ...
 		$x = '"' . str_replace($sep, '"'.$sep.'"', $x) . '"';
-	$x = str_replace("(", " ", $x);
-	$x = str_replace(")" ," ", $x);
-	
+	if (! strpos($x, "javascript:")) {
+		$x = str_replace("(", " ", $x);
+		$x = str_replace(")" ," ", $x);
+	}
+
 	// Build valid JS array ready
 	$x = ' '.$name.':[' . $x . '] ';
 	return $x;

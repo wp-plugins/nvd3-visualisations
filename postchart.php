@@ -162,12 +162,12 @@ function move2js($post, $type) {
 // Segments of templates for jsChart call
 function genTemplate($type) {
 
-	if ($type == 'direct') {
+	if ($type == 'direct') { 
 		$values = ' values="(177,77,17)" ';
-		$labels = ' labels="(cats,dogs,birds)" ';
+		$labels = ' labels="(cats,dogs,birds)" '; 
 		$series = ' series="(Pets)" ';
-		$links = ' links="(http://en.wikipedia.org/wiki/Cat,http://en.wikipedia.org/wiki/Dog,http://en.wikipedia.org/wiki/Bird)" ';
-		// or local files: 'cats.htm,dogs.htm,birds.htm'
+		$links = ' links="http://en.wikipedia.org/wiki/Cat,http://en.wikipedia.org/wiki/Dog,javascript:window.alert(17)" ';
+ 		// or local files like: 'cats.htm,dogs.htm,birds.htm' at root dir
 		return $values.$labels.$series.$links; 
 	}
 	if ($type == 'table' || $type == 'table2') {
@@ -249,7 +249,7 @@ function getHelp($type) {
 	if ($type == 'cells')
 		$h = $t.'<ol><li>Write / copy your text content normally into this page.</li><li>Move to HTML mode and copy <b>span tag</b> from one number of example below.</li><li>Use this html to mark your own embedded numbers.</li><li>Update each ID to name your data cell as you wish.</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
 	if ($type == 'direct')
-		$h = $t.'<ol><li>Move to HTML mode and check call of shortcode for its chart below.</li><li>Copy & paste your own data into between "(" and ")" brackets of values, labels, series, and links. If you decide to use links, you could create local files on the root of blog or use standart full url for them.</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
+		$h = $t.'<ol><li>Move to HTML mode and check call of shortcode for its chart below.</li><li>Copy & paste your own data into between "(" and ")" brackets of values, labels, series, and links. If you decide to use links, you could create local files on the root of blog or use standard full url path for them. Link can be also be a call to javascript funtion (see birds below).</li><li>Edit rest of document normally ready & publish it.</li></ol><br />';
 
 	$style = ' style="background-color:darkgray; color:navy; border: 3px outset gray " ';
 	return '<div '.$style.'>' . $h . '</div>';

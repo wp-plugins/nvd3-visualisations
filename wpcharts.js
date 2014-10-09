@@ -196,10 +196,11 @@ function dataRead(infile, id, type, options) {
 	}
 	else if (options.class) { // Data set is embedded into document all over its HTML tags / table
 //		console.info(options);
-		jQuery(document).ready(function() { // Wait until DOM is ready for input
+		jQuery(document).ready(function() { // Wait until DOM is ready for input read
 			var data = parseJSON(cells2set(options), type);
 			// console.info(cells2set(options));
-			// console.info(data);
+//			console.info(data);
+//			console.info(options);
 			chartSelector(id, data, type, options);
 			/*
 			options.series = series;
@@ -413,6 +414,7 @@ function sQuote(w) { return " '"+w+"' "; }
 	// height="100%" width="100%"
 	
 	var resize = ' resize:both; overflow:auto; ';
+	resize = ' ';
 	if (typeof options.noResize != 'undefined')
 	if (options.noResize)
 		resize = '';
@@ -491,7 +493,7 @@ function sQuote(w) { return " '"+w+"' "; }
 	html = html + '</td>'+pickers+'</tr><tr><td>'+printB+expB+svgB+'</td><tr><tr><td id="databuffer" style="color:gray"></td></tr></table></body></html>';
 
 	var cwidth = 100 + parseInt(options.width);
-	var cheight = 100 + parseInt(options.height);
+	var cheight = 200 + parseInt(options.height);
 	myWindow=window.open('','','location=0,status=0,menubar=0,width='+cwidth+',height='+cheight);
 
 	myWindow.document.write(html);
@@ -612,10 +614,13 @@ function getCol(colname, lines) {
 	return out;
 }
 
-function operator(x) {
+function operator(x) { 
 
 	if (typeof NVD3calcme != 'undefined') {
-		var scaler = chartData[NVD3calcme].modifier;
+		if (chartData[NVD3calcme])
+			var scaler = chartData[NVD3calcme].modifier;
+		else  // Chart in popup win
+			var scaler = chartData.modifier;
 		if (scaler)
 			// EU compatible decimal points ","
 			if (scaler.indexOf(",")>0)
@@ -722,13 +727,24 @@ function scaler4Chart(id, op, title, unit, lock, hidden) {
 	jQuery("#chart"+id).append(inbox);
 }
 }
-function rescaleChart(id) {
+function rescaleChart(id) { 
 
 	NVD3calcme = id; // remember me in global +
-	chartData[id].modifier = jQuery('#scaler'+id).val();  // Data's modifier value
+	var cD = chartData[id];
+	if (! cD)
+		cD = chartData;
 
-	var dims = { height:chartData[id].height,  width:chartData[id].width };
-	jsChart(id, chartData[id].infile, chartData[id].type, dims, chartData[id]);
+	cD.modifier = jQuery('#scaler'+id).val();
+/*	
+	if (chartData[id])
+		chartData[id].modifier = jQuery('#scaler'+id).val();  // Data's modifier value
+	else
+		chartData.modifier = jQuery('#scaler'+id).val();  // Chat in popup win
+*/
+	// var dims = { height:chartData[id].height,  width:chartData[id].width };
+	// jsChart(id, chartData[id].infile, chartData[id].type, dims, chartData[id]);
+	var dims = { height:cD.height,  width:cD.width };
+	jsChart(id, cD.infile, cD.type, dims, cD);
 }
 
 // Axis should be date formatted with a chart?
@@ -933,7 +949,7 @@ function NVD3stackedArea(chartID, data, options) {
 // Access to format axis appearence by CSS/SVG text attributes
 function formatAxis(axisClass, opts, optax) {
 
-	console.info(opts);
+//	console.info(opts);
 	var olds = jQuery(axisClass+' .tick text').attr("style");
 	if (opts[optax]) {
 	if (opts[optax].style)
@@ -946,19 +962,26 @@ function formatAxis(axisClass, opts, optax) {
 // Building ext. links for chart's visual elements
 function xlinks(id, opts) {
 
+	if (! opts.links) 			// || opts.links.length >= bars2.length) 
+		return;
+
 	// Chart types that do not work with web links, yet
-	if (opts.type == 'scatterbubble')
+	if (opts.type == 'scatterbubble') {
+		console.warn('Chart type scatterbubble not supported for web links yet.');
 		return;
+	}
 
-	var bars2 = jQuery("#svg"+id+getElement(opts.type) );
-	if (! opts.links) 			// || opts.links.length >= bars2.length)
-		return;
-
+	var bars2 = jQuery( "#svg"+id+getElement(opts.type) );
 	for (h in bars2)
 		if (+h || h == 0) {
-			bars2[h].setAttribute('onclick','window.open(\''+opts.links[h]+'\')');
+			if (typeof opts.links[h] == 'string') {
+			if (opts.links[h].indexOf('javascript:') == 0) // 'javascript:' in opts.links
+				bars2[h].setAttribute('onclick', opts.links[h].substring(11) ); // JavaScript call 2 even
+			else
+				bars2[h].setAttribute('onclick', 'window.open(\''+opts.links[h]+'\')');  // url of new window
 			var oldie = bars2[h].getAttribute('style');
 			bars2[h].setAttribute('style','cursor:pointer; '+oldie);
+			}
 		}
 //	console.info(bars2);
 

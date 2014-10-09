@@ -4,11 +4,11 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NVD3 visualisations give you tools on WordPress to generate impressive business quality charts based on the famous open NVD3 framework of JavaScript.
+NVD3 visualisations give you tools on WordPress to generate impressive business quality charts based on the famous open NVD3 framework of JavaScript. 
 
 == Description ==
 
@@ -160,6 +160,10 @@ Here:
 6. Old Charts Gallery Showing Out on The Same Page of WP's Blog. 
 
 == Changelog ==
+
+= 1.8.3 =
+Version 1.8.3 -
+Option **links** can have javascript calls as a link when you click a segment of chart (eq **javascript:**). Chart's calculator works on chart's popup windows properly too. Quick tutorial for links use when you clone direct input data from gallery of chart picker.
 
 = 1.8.2 =
 Version 1.8.2 -
