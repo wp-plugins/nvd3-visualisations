@@ -40,7 +40,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Accurate layout of each chart based on any valid HTML container tag.
 1. Many charts on the same page/post of WordPress from one API / shortcode call.
 1. Many fancy options available to change chart's look & behavior.
-1. Dynamic & direct illustration of any JavaScript function results.
+1. Dynamic & direct illustration of any own JavaScript function results.
 1. Visual preview of charts from the NVD3 lib's original CSS style file to let you match blog's theme easily.
 1. Handy calculator letting users to modify chart fast by any basic math formulas.
 1. Localized presentation formats for currency, date, time, etc.
@@ -73,24 +73,29 @@ Big thanks for these talents by making NVD3 visualisations for WordPress technic
 Two WP standard ways to install the package.
 
 1. Go to wordpress 'Dashboard' front page.
-1. Select PlugIns / Add New for searching new plugin from internet.
-1. Write 'NVD3' to the search box + Search PlugIns.
-1. Select 'Install Now' under the result of 'NVD3 tools'.
-1. Activate the PlugIn on WordPress after its download.
-1. Create a new page for charts selection gallery by calling [demosGallery] shortcode.
-1. View + bookmark this page and start to clone your charts & edit them.
-1. More tips: go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and start to read from read_me_1st.txt.
+1. Select PlugIns / Add New for searching new plugin from Wordpress library of plugins.
+1. Write 'NVD3 Visualisations' to the search box + Search PlugIns.
+1. Select 'Install Now' under the result of 'NVD3 Visualisations'.
+1. Activate the PlugIn normally on WordPress after its download.
+1. Create a new page (Pages / Add New) for charts selection gallery by calling [demosGallery] shortcode at 1st.
+1. View + bookmark this page for future use on browser and start to clone your charts & edit them.
+1. More tips: go to nvd3 plugin's edit (Plugins / Installed plugins / NVD3 Visualisations / edit) and start to read from read_me_1st.txt file.
 
 Or you may want to do it: 'old traditional way'.
 
-1. Download `nvd3` folder into your local computer.
+1. Download `nvd3` folder into your local computer from WordPress plugins website (https://wordpress.org/plugins/nvd3-visualisations/) normally.
+1. Unzip the package locally.
 1. Upload this folder next to the `/wp-content/plugins/` directory into your WordPress server side.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Create a new page for charts selection gallery by calling [demosGallery] shortcode.
-1. View + bookmark this page and start to clone your charts & edit them.
-1. More tips: go to nvd3 plugin's edit (Plugins->Installed plugins->NVD3 Visualisations->edit) and start to read from read_me_1st.txt.
+1. Create a new page (Pages / Add New) for charts selection gallery by calling [demosGallery] shortcode at 1st.
+1. View + bookmark this page for future use on browser and start to clone your charts & edit them.
+1. More tips: go to nvd3 plugin's edit (Plugins / Installed plugins / NVD3 Visualisations / edit) and start to read from read_me_1st.txt file.
 
 == Frequently Asked Questions ==
+
+= I am not a tech guru & I hate to learn JavaScript API etc, is there any - just a simple way - to draw charts? =
+
+Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post. Each cloning of new chart creates you full example call of [jsChart] shortcode with a lot of options for it that you can try to turn on and off. All this happens safely in preview mode of WordPress before you are happy & ready to publish it all.
 
 = How can I visualize my own data set? =
 
@@ -98,17 +103,18 @@ Or you may want to do it: 'old traditional way'.
 1. Next, you choose if you want this new chart into page / post of WordPress.
 1. Before creating new chart by button you select from 8 different sources where your data is coming from.
 1. New chart button takes you to the 2nd step where you actually populate your own data in.
-1. Rest of publishing follows normal standard work flow of WordPress: just edit, preview & publish it.
+1. You can copy & paste your own data set in & replace the data set that was coming from gallery's template.
+1. Rest of publishing follows normal standard work flow of WordPress: just edit whole page/post, preview & publish it out.
 
-= I just want a quick way to show my small data set and not to edit any external files. Can I do this? =
+= I just want quickly way to show my small data set on page/post (+ change it later there) and not to edit any external files. Can I do this? =
 
-Sure, go to the charts library and select data input method **Direct Input**, press new chart button, and follow its further online help.
+Sure, go to the charts gallery and select data input method **Direct Input**, press new chart button, and follow its further online help.
 
-Also, you migt like to take a look at **shortcode_direct_data.txt** on examples folder, please.
+Also, you might like to take a look at **shortcode_direct_data.txt** on examples folder with this case, please.
 
 = How can I change the margins around the chart bigger? =
 
-You have 2 choices here: outside of chart container (normally div/span element) or inside its svg element. Take a look at example **shortcode_margins_demo.txt** to learn more about these options, please.
+You have 2 choices here: outside of chart container (normally div/span element & container) or inside its svg element. Take a look at example **shortcode_margins_demo.txt** to learn more about these options, please.
 
 = How can I change the look of elements of chart from default (eq its lines, bars, etc)? =
 
@@ -117,21 +123,17 @@ You can set palette of custom colors for each chart (bars, etc) separately with 
 1. If you wish to set own custom palette, use **colors** option. Example - options="{colors:'red,green,blue'}"
 1. If you wish to have fixed set of palettes, use **colorbrewer** option. Example - options="{colorbrewer:{palette:'Blues'}}"
 1. If you wish to build colors smooth gradients. Example - options="{ colors:{startbar:'red', endbar:'lime'} }"
-1. Finally, there is an option **style** that feeds in all legal values to the chart's svg raw structure. A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
+1. Finally, there is an option **style** that feeds in all legal values to the chart's svg in raw structure. A normal example - options="{ style:{'fill':'orange', 'stroke':'navy'} }"
 
-= Where are my data sets (of files) stored and what happens for them if I remove chart's page/post or whole plugin? =
+= Where are my data sets (of files) stored and what happens for them if I remove chart's page/post or (gasp!) this whole plugin? =
 
-Look at the blog's root and the folder called **charts_nvd3**. Data sets are stored there by random names and they stay there until you remove them by FTP client manually. If you create very many/big data sets it is a pretty good idea to clean this folder from time to time.
+Look at your blog's root and the folder called **charts_nvd3**. Data sets are stored there by random names and they stay there until you remove them by FTP client manually. If you create very many/big data sets it is a pretty good idea to clean this folder from time to time.
 
 = Is it possible to have multiple charts on the same WP post or page? =
 
 Good point & question here !
 
 YES indeed, the software is design so that it transparently creates and draws many charts on the same page and gives you exact control where you like to show them.
-
-= I am not a tech guru & I hate to learn JavaScript API etc, is there any - just a simple way - to draw charts? =
-
-Shortcode [jsChart] is your easy solution then: first create charts gallery by [demosGallery] shortcode & then start cloning your own charts to the new page/post. Each cloning of new chart creates you full example call of [jsChart] shortcode with a lot of options for it that you can try to turn on and off. All this happens safely in preview mode of WordPress before you are ready to publish it.
 
 **Note:** since ver.1.8.0 charts gallery is improved to new visual form. If you need/prefer the old (table) type of look, you just call it by [demosGallery_old] shortcode. 
 
