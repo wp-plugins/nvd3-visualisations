@@ -12,7 +12,7 @@ NVD3 visualisations give you tools on WordPress to generate impressive business 
 
 == Description ==
 
-NVD3 visualisations is a full set of visually interactive charts that can be controlled by simple options.
+NVD3 visualisations is a full set of visually interactive charts that you can control by simple options.
 
 You can start to create any example chart into your blog and study it more before you decide if that suits for your visual presentation's needs at hand.
 
