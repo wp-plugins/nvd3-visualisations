@@ -164,6 +164,10 @@ Here:
 
 == Changelog ==
 
+= 1.8.4 =
+Version 1.8.4 -
+Giving input file **mysql** opens standard access to the any valid table of mySQL database. Better examples how to use it and other javascript API calls (eq look at examples/js_api_* files).
+
 = 1.8.3 =
 Version 1.8.3 -
 Option **links** can have javascript calls as a link when you click a segment of chart (eq **javascript:**). Chart's calculator works on chart's popup windows properly too. Quick tutorial for links use when you clone direct input data from gallery of chart picker.

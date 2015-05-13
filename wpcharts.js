@@ -133,14 +133,18 @@ function dataRead(infile, id, type, options) {
 		console.info('mysql!');
 		if (options.mysql) {
 			var host = encodeURIComponent(options.mysql.host);
-			var user = encodeURIComponent(options.mysql.user);
-			var pwd =  encodeURIComponent(options.mysql.pwd);
 			var db =   encodeURIComponent(options.mysql.db);
 			var table= encodeURIComponent(options.mysql.table);
-			var lastrows = ''; 
+			var user = '';
+			if (options.mysql.user)
+				user = '&user='+encodeURIComponent(options.mysql.user);
+			var pwd = '';
+			if (options.mysql.pwd)
+				pwd =  '&pwd='+encodeURIComponent(options.mysql.pwd);
+			var lastrows = ''; // TODO on php side
 			if (options.mysql.rows)
 				lastrows = '&rows='+options.mysql.rows;
-			var query = rootpath+'../getsql.php?table='+table+'&host='+host+'&user='+user+'&pwd='+pwd+'&db='+db+lastrows;
+			var query = rootpath+'../getsql.php?table='+table+'&host='+host+'&db='+db+lastrows+user+pwd;
 			console.info(query);
 			jQuery.getJSON(query, function(data) {
 				readTSV(id, rootpath+data, type, options);
