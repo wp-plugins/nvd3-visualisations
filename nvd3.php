@@ -1,95 +1,128 @@
 <?php
 /* 
 Plugin Name: NVD3 Visualisations
-Plugin URI: http://wordpress.org/extend/plugins/d3-simplecharts/
+Plugin URI: http://wordpress.org/extend/plugins/nvd3-visualisations/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.8.3
+Version: 1.8.4
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara
 License: GPL2 
 */
 
-// All included ext.files
-function write_headers($rood_dir) {
-	echo '<!-- Start of NVD3 -->';
+// Global of currently active CMS system 
+$cms = 'wordpress';
+// $cms = 'drupal';
 
-	$root = plugins_url().'/'.$rood_dir.'/'; 	// Single, MU-site, and SSL setups of WP
-												// http://codex.wordpress.org/Function_Reference/plugins_url
+if ($cms == 'wordpress')
+	require_once "drupal_foo.php";
 
-	// D3.js lib
-	// echo '<script src="'.$root.'d3.v3.1.5.js"></script>'; // Uncomment if problems with new d3 v3.4.6 below
-	echo '<script src="'.$root.'d3.min.js"></script>';
-	// NVD3.js lib
-	echo '<link href="'.$root.'nv.d3.css" rel="stylesheet" type="text/css">'; 
+function myroot($cms) { // Finding root directory for JavaScript + major include libs
+	if (! $cms)
+		$cms = 'wordpress';
 
-	echo '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment this line if you need to develope NVD3 core lib
-	// echo '<script src="'.$root.'nv.d3.js"></script>'; 		// + activate & edit this source file + minimize to above file
-
-	echo '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading
-	echo '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON -> XML conversions
-	echo '<script src="'.$root.'tsv2json.js"></script>';  // Used for TSV -> JSON converting tool
-
-	echo '<script src="'.$root.'colorbrewer.js"></script>'; // Predefined pretty coloring sets
-
-	// NVD3 Visualisations main routines
-	echo '<script src="'.$root.'locale.js"></script>';
-	echo '<script src="'.$root.'wpcharts.js"></script>';
-
-	echo '<!-- End of NVD3 -->';
+	write_headers($cms);
+	setRootDir($cms);
 }
-// Uncomment & write headers part of *every* blog page (=> no need to [loadNVD3])
-// add_action('wp_head', 'write_headers');
-// Note: to make it faster ext.files not included on page/post with no charts.
+ if ($cms == "wordpress") {
+	add_shortcode("rootDir", "myroot");
+	add_shortcode("loadNVD3", "myroot");
+ }
 
-function myroot() { // Finding root directory for JavaScript
-	$rood_dir='nvd3-visualisations';
-	write_headers($rood_dir);
-	setRootDir($rood_dir);
-}
-add_shortcode("rootDir", "myroot");
-add_shortcode("loadNVD3", "myroot");
-
-function setRootDir($rood_dir) {  
+function setRootDir($cms) {
+	if ($cms == 'drupal')
+		$path = '../' . drupal_get_path('module', 'nvd3_visualisations') . '/';
+	else
+		$path = plugins_url() . '/nvd3-visualisations/';
 ?>
 <script>
-	rootpath = '<?php echo plugins_url().'/'.$rood_dir.'/data/' ?>';
+	rootpath = '<?php echo $path . 'data/' ?>';
+	cms = '<?php echo $cms ?>';
 </script>
 <?php
-	return plugins_url() . '/'.$rood_dir.'/';
+	return $path;
 }
 
-function templatePicker($data) {
+// All included ext.files
+function write_headers($cms) {
 
-	myroot();
+	if ($cms == 'drupal') {
+		setRootDir($cms);
+		$root = '../' . drupal_get_path('module', 'nvd3_visualisations') . '/';
+		$libs = array($root.'d3.min.js', $root.'nv.d3.css', $root.'nv.d3.min.js', $root.'nv.d3.min.js', $root.'xml2json.js', $root.'json2xml.js', $root.'tsv2json.js', $root.'colorbrewer.js', $root.'locale.js', $root.'wpcharts.js', $root.'examples/gallery.js');
+		return $libs;
+	}
+
+	$root = '';
+	if ($cms != 'wordpress')
+		return;
+
+//	$root =  dirname(__FILE__) . '/';
+	$root = plugins_url().'/nvd3-visualisations/'; 	// Single, MU-site, and SSL setups of WP
+												// http://codex.wordpress.org/Function_Reference/plugins_url
+	$incs = '<!-- Start of NVD3 -->';
+	// D3.js lib
+	// $incs = $incs . '<script src="'.$root.'d3.v3.1.5.js"></script>'; // Uncomment if problems with new d3 v3.4.6 below
+	$incs = $incs . '<script src="'.$root.'d3.min.js"></script>';
+	// NVD3.js lib
+	$incs = $incs . '<link href="'.$root.'nv.d3.css" rel="stylesheet" type="text/css">'; 
+
+	$incs = $incs . '<script src="'.$root.'nv.d3.min.js"></script>';  // Comment this line if you need to develop NVD3 core lib
+	// $incs = $incs . '<script src="'.$root.'nv.d3.js"></script>'; 		// + activate & edit this source file + minimize to above file
+
+	$incs = $incs . '<script src="'.$root.'xml2json.js"></script>';  // Used for XML data sets reading
+	$incs = $incs . '<script src="'.$root.'json2xml.js"></script>';  // Used for JSON -> XML conversions
+	$incs = $incs . '<script src="'.$root.'tsv2json.js"></script>';  // Used for TSV -> JSON converting tool
+
+	$incs = $incs . '<script src="'.$root.'colorbrewer.js"></script>'; // Predefined pretty coloring sets
+
+	// NVD3 Visualisations main routines
+	$incs = $incs . '<script src="'.$root.'locale.js"></script>';
+	$incs = $incs . '<script src="'.$root.'wpcharts.js"></script>';
+
+	$incs = $incs . '<!-- End of NVD3 -->';
+//	$incs = $incs . '<script>console.info("I am Drupal!");</script>';
+
+	echo $incs;
+}
+/*
+function genLinks($html) {
+$js = 'jQuery(document).ready(function () { console.info("xxx"); jQuery("head").append("'.$html.'"); });';
+drupal_add_js($js,
+  array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+);
+}
+*/
+// Uncomment & get lib files on *every* blog's page/post (eq no need to [loadNVD3] when you call chart's shorcode)
+// add_action('wp_head', 'write_headers');
+// Note: to make it faster ext.files NOT included on page/post with no charts.
+
+function Gallery_WP($data) {
 
 	// Libs for UX
 	echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">';
-	echo '<script src="//code.jquery.com/jquery-1.10.2.js"></script>';
-	echo '<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>';
+	echo '<script src="//code.jquery.com/jquery-1.11.2.js"></script>';
+	echo '<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>';
 
-	$rood_dir='nvd3-visualisations';
-	$root = setRootDir($rood_dir);
+	myroot('wordpress');
+	$root = setRootDir('wordpress');
 	echo '<script src="'.$root.'examples/gallery.js"></script>';
 
-//	$buildTabs = ' jQuery(function() { jQuery( "#tabs" ).tabs(); }); ';
-//	echo '<div id="tabs"></div>';
-//	echo '<script>'.$buildTabs.' jQuery( "#tabs" ).html( nvd3Charter() ); </script>';
 	echo '<span id="mycharts"></span>';
 	echo '<script> nvd3Charter("mycharts"); </script>';
 }
-add_shortcode("NVD3Picker", "templatePicker");
-add_shortcode("demosGallery", "templatePicker");
-
+ if ($cms == "wordpress") {
+	add_shortcode("NVD3Picker", "Gallery_WP");
+	add_shortcode("demosGallery", "Gallery_WP");
+ }
+ 
 // Nice demo gallery for the most of NVD3 chart types - START
 function demoCharts($data) {
 
-	$rood_dir='nvd3-visualisations';
-	write_headers($rood_dir);
+	write_headers(0);
 	$skeleton = demoContainers();
 	$count = $skeleton["count"]; // How many demos to show 
-	$root = setRootDir($rood_dir);
-	// $root = 'wp-content/plugins/nvd3/';
+	$root = setRootDir('wordpress');
 	echo '<script src="'.$root.'examples/gallery.js"></script>';
 
 	// $count = 11;
@@ -99,7 +132,9 @@ function demoCharts($data) {
 
 	return $skeleton["places"] . '<script> nvd3Demos('.$count.', '.$xmldemo.'); </script>';
 }
-add_shortcode("demosGallery_old", "demoCharts");
+ if ($cms == "wordpress") {
+	add_shortcode("demosGallery_old", "demoCharts");
+ }
 
 function demoContainers() { 
 
@@ -255,7 +290,9 @@ function newChart($data) {
 
 	return $html . $jsCall;
 }
-add_shortcode("jsChart", "newChart");
+if ($cms == "wordpress") {
+	add_shortcode("jsChart", "newChart");
+ }
 /*
 // Generata JSON variable from direct data input
 function buildTSV($data) {
@@ -323,7 +360,11 @@ if (strpos($owndata,'.xml')) {
 $msg = '<br /><p>Here is your new chart created by NVD3 Visualisations: <b>edit, publish & enjoy it!</b></p> ';
 // $datalink = 'Data File: <a href="'.$owndata.'" target="_blank"><b>'.$owndata.'</b></a>';
 $datatitle = 'Data File: '.$owndata;
-
+/*
+	echo '<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">';
+	echo '<script src="//code.jquery.com/jquery-1.11.2.js"></script>';
+	echo '<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>';
+*/
 // Return whole editor for a post/page
 return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -373,5 +414,7 @@ return $msg.'<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smo
 </div>
 	';
 }
-add_shortcode("dataEditor", "genEditor");
+ if ($cms == "wordpress") {
+	add_shortcode("dataEditor", "genEditor");
+ }
 ?>

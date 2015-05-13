@@ -2,7 +2,11 @@
 charts = new Array();
 bootup = 1;
 
+if (typeof cms == 'undefined')
+	cms = 'wordpress';
+
 // API component to draw charts directly on WP page by one JS call
+
 function jsChart(id, infile, type, dims, options) {
 
 	if (bootup) {
@@ -54,11 +58,13 @@ function jsChart(id, infile, type, dims, options) {
 		popup = inopts+'<a onclick="svg2Win('+strid+', opts)" style="cursor:pointer" >'+popup+'</a>';
 		jQuery('#chart'+id).append(popup);
 	}
+	// Envelope of chart out
 	jQuery('#chart'+id).append(svg);
 
 	// svgChart(id);
 	type = type.toLowerCase();
 	dataRead(infile, id, type, options);
+
 	return; // jsChart
 
 function checkJQ() {
@@ -93,26 +99,21 @@ function dataRead(infile, id, type, options) {
 		chartSelector(id, data, type, options);
 	});
 	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) { // d3.xml has parsing problems
-//		data = buildXML(data);
+	d3.text(infile,function(error,data) { // d3.xml had its own parsing problems ...
 		data = xml2json(data, ' ');
 		chartSelector(id, data, type, options); 
 	});
 	else if (infile.indexOf(".tsv") > 0)
 	d3.tsv(infile,function(error,data) { 
-//		console.info(data);
 		data = parseJSON(data,type);
-//		console.info(data);
-//		console.info(options);
 		chartSelector(id, data, type, options);
-
-	options.datatype = 'tsv';
-	options.infile = infile;
-	if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+		options.datatype = 'tsv';
+		options.infile = infile;
+		if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
 		if (typeof chartData == 'undefined')
 			chartData = new Array();
 		chartData[id] = new Object( options );
-	}
+		}
 	});
 	else if (infile.indexOf('.csv') > 0)
 	d3.csv(infile,function(error,data) {
@@ -128,7 +129,24 @@ function dataRead(infile, id, type, options) {
 		chartData[id] = new Object( options );
 	}
 	});
-	else if (options.values && !options.tsv) { // Direct input (like D3 simplecharts plugin has)
+	else if (infile == 'mysql') {
+		console.info('mysql!');
+		if (options.mysql) {
+			var host = encodeURIComponent(options.mysql.host);
+			var user = encodeURIComponent(options.mysql.user);
+			var pwd =  encodeURIComponent(options.mysql.pwd);
+			var db =   encodeURIComponent(options.mysql.db);
+			var table= encodeURIComponent(options.mysql.table);
+			var lastrows = ''; 
+			if (options.mysql.rows)
+				lastrows = '&rows='+options.mysql.rows;
+			var query = rootpath+'../getsql.php?table='+table+'&host='+host+'&user='+user+'&pwd='+pwd+'&db='+db+lastrows;
+			console.info(query);
+			jQuery.getJSON(query, function(data) {
+				readTSV(id, rootpath+data, type, options);
+			});
+		}
+	} else if (options.values && !options.tsv) { // Direct input of data
 		console.info('direct!');
 		var titles = ['Labels','DataSet1','DataSet2','DataSet3'];
 		if (options.series)  // Name of data's columns given
@@ -213,6 +231,21 @@ function dataRead(infile, id, type, options) {
 	} else if (typeof infile == 'object') // Pure raw data set by JSON variable (= formats on examples/ folder's JSONs)
 		chartSelector(id, infile, type, options);
 
+function readTSV(id, infile, type, options) {
+	console.info(infile);
+	d3.tsv(infile,function(error,data) { 
+		var data = parseJSON(data,type);
+		chartSelector(id, data, type, options);
+		options.datatype = 'tsv';
+		options.infile = infile;
+		if ((options.exports || options.chartpicker) && !options.inPopup) { // Record data & options into DOM
+		if (typeof chartData == 'undefined')
+			chartData = new Array();
+		chartData[id] = new Object( options );
+		}
+	});
+}
+		
 function colColors(id) {
 
 	var cells = d3.selectAll('#'+id).selectAll('tbody tr').selectAll('td');
@@ -324,71 +357,6 @@ function set2values(aset, labels, series, options) {
 //		console.info(values);
 		return values;
 }
-
-function demoShows(id, data, type, options) {
-
-	// Demo data sets for gallery
-	var demos = { lineplusbar:'linePlusBarData.json', simpleline:'simpleLineData.json', cumulativeline:'cumulativeLineData.json', stackedarea: 'stackedAreaData.json', discretebar:'discreteBarData.json', horizontalmultibar:'multibarData.json', pie:'pieData.json', donut:'pieData.json', bullet:'bulletData.json', scatterbubble:'scatterData.json', multibar:'multiData.json', viewfinder:'viewFinderData.json' };
-
-	if (options.xmldemo)
-		demos[type] = demos[type].replace(/json/g, 'xml');
-
-	// Home dir of demo data sets
-	var infile = 'wp-content/plugins/nvd3/data/'+demos[type];
-	if (rootpath) // Global URL of root set by shortcode of WP
-		 infile = rootpath + demos[type];
-
-	var desc = 'Data File: data/'+demos[type];
-	var subs = '<sup> ?</sup>';
-	var msg = '<b class="title_nvd3" title="'+desc+'">Chart Type: '+type+subs+'</b>';
-	msg = '<br /><a href="'+infile+'" target="_blank">'+msg+'</a>';
-
-	var pp = rootpath+'../postchart.php?new=';
-	var ctype = '&type='+type;
-	var filepath = '&filepath='+demos[type];
-	var tt = 'Clone data set from this example into your new draft on WordPress';
-
-	var shortmsg = '<br />Add this into: ';
-
-	var idmenu = "gmenu"+id;
-	var mpostpage = '<select id='+idmenu+'><option value="post">New Post</option><option value="page">New Page</option></select>';
-
-	var helps = new Array();
-	helps.push('Data input from ext. JSON file');
-	helps.push('Data input from ext. XML file');
-	helps.push('Data input from ext. CSV file');
-	helps.push('Data input from ext. TSV file');
-	helps.push('Data input from HTML tags of page/post');
-	helps.push('Data input from shortcode: values, labels, series');
-	helps.push('Data input from simple table (OpenOffice)');
-	helps.push('Data input from 2x2 dim. table (OpenOffice)');
-	var idmenu2 = "gformat"+id;
-	var mformat = '<select id='+idmenu2+'><option value="json" title="'+helps[0]+'">JSON data</option><option value="xml" title="'+helps[1]+'">XML data</option><option value="csv" title="'+helps[2]+'">CSV data</option><option value="tsv" title="'+helps[3]+'">TSV data</option><option value="cells" title="'+helps[4]+'">Document cells</option><option value="direct" title="'+helps[5]+'">Direct input</option><option value="table" title="'+helps[6]+'">Document TABLE</option><option value="table2" title="'+helps[7]+'">TABLE (2x2 dim.)</option></select>';
-
-	var query = rootpath+"../postchart.php?type="+type;
-	var ctype = demos[type];
-	var mbutt = '<button style="cursor:pointer" onclick="newpost2('+sQuote(query)+', '+sQuote(ctype)+', '+sQuote(idmenu)+', '+sQuote(idmenu2)+')" title="'+tt+'">New Chart</button>'
-
-	var aform = shortmsg + mpostpage + ' from ' + mformat + mbutt;
-
-	if (infile.indexOf(".json") > 0)
-	d3.json(infile,function(error,data) {
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart "'+type+'" from a file: data/'+demos[type]);
-		jQuery("#chart"+id).append(msg+aform);
-	});
-	else if (infile.indexOf('.xml') > 0)
-	d3.text(infile,function(error,data) { // d3.xml has parsing problems
-//		data = buildXML(data);
-		data = xml2json(data, '  ');
-		// console.info(data);
-		chartSelector(id, data, type, options);
-		console.info('Drawing chart "'+type+'" from a XML file: data/'+demos[type]); // demos[type]
-		jQuery("#chart"+id).append(msg+aform);
-	});
-
-function sQuote(w) { return " '"+w+"' "; }
-} // demoShows 
 
 } // dataRead
 } // jsChart
@@ -1697,7 +1665,7 @@ function saveData(header, databox, filename) {
 	mydata = jQuery('#'+header).html() + mydata;
 	// console.info(mydata);
 	// var rec = { infile: filename, data: mydata };
-	var query = 'http://www.tere-tech.eu/balticfinns/wp-content/plugins/nvd3-visualisations/updatechart.php';
+	var query = rootpath+'../updatechart.php';
 
 	jQuery.post( query, { infile: filename, indata: mydata }, function( data ) {
 		if (data)

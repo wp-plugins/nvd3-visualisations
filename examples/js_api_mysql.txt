@@ -1,0 +1,22 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new page normally.
+         2. Copy all lines below inside it (using HTML writing mode only).
+         3. Fill your existing mySQL database real login info to login object (= db, user, host, pwd, and table).
+         4. Save it, preview & publish your new pretty charts on the blog.
+         Note1: keep JavaScript code in 1 line + check it again if you switch to Visual mode for any reason.
+         Note2: be sure that all fields of table are integers/floats in order to show up right on chart.
+         Note3: For better security, remove login.pwd and/or login.user + uncomment them on getsql.php script of server.
+! -->
+
+mySQL Generated Chart
+
+[loadNVD3]
+mySQL Generated Chart
+<div id="chart909"></div>
+
+<script type="text/javascript">var login = {pwd:"accountpassword", user:"accountofdatabase", db:"yourdatabase", host:"your.server.com",  table:"yourtable"}; jsChart( '909', 'mysql', 'donut',  {height:'460', width:'640'} , { mysql:login, shadows: "Gray" } );</script>
+
+

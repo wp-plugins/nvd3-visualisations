@@ -1,0 +1,26 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally on WP.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & enjoy new pretty charts on the blog 
+! -->
+
+These short example show you how to call charts directly from JavaScript API.
+
+Direct Input Example in JavaScript
+
+<div id="chart777"></div>
+<script>
+var id = '777';
+var infile = 'foo';
+var type = 'discretechart';
+var dims = '{height:480, width:640}';
+var options = {values:[11,22,33], labels:['cats','frogs','spiders'], series:['mypets']};
+
+jsChart(id, infile, type, dims, options)
+</script>
+
+
+

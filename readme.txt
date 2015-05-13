@@ -4,7 +4,7 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.8.3
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,7 @@ If you like it give us some stars on WP plugin site so that others can find it m
 1. Fast & short input from intuitive fast options (values, labels, and series).
 1. Direct data input from the html tags of document (eq page/post).
 1. Data's import from valid JSON/XML/CSV/TSV file formats.
+1. Standard mySQL input from its any table of values.
 1. Dynamic JSON inputs from any own JavaScript functions.
 .
 

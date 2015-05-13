@@ -1,0 +1,21 @@
+<!-- Your charts on post / page of WordPress
+
+     Simply, do these steps:
+
+         1. Create new post / page normally.
+         2. Copy all lines below inside it (using HTML writing mode). 
+         3. Save it, preview & publish your new pretty charts.
+! -->
+
+This is advanced call of charts by using directly javascript API interface.
+This example shows how to use direct data input from javascript.
+
+Direct Input Example in JavaScript with Options
+
+<div id="chart777"></div>
+<script>
+jsChart( '777', 'foo', 'pie',  {height:'250', width:'450'} , { values:[11,22,33], labels:['cats','frogs','spiders'], series:['mypets'], shadows: "Black" , showLegend: true, tooltips: true, showControls: true, noPopup: false, noResize: false, title: "Own Data Chart", chartpicker:true, exports:false, autocoloring:true, xaxis:{ hide:false, style:"font-size:10px; fill:navy", transform:"rotate(0 -20,0)" }, yaxis:{ style:"font-size:12px; fill:blue", transform:"rotate(0 -20,0)"  }  } )
+</script>
+
+
+
