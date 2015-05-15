@@ -3,7 +3,7 @@
 Plugin Name: NVD3 Visualisations
 Plugin URI: http://wordpress.org/extend/plugins/nvd3-visualisations/
 Description: Draw business class interactive charts from any data set of files or own custom functions.
-Version: 1.8.4
+Version: 1.8.5
 Author: Jouni Santara
 Organisation: TERE-tech ltd 
 Author URI: http://www.linkedin.com/in/santara

@@ -4,11 +4,11 @@ Donate link: http://www.tere-tech.eu/
 Tags: nvd3, d3, visualisation, visualization, infographic, chart, graph, CSS, CSS3, SVG, vector graphics, DOM, HTML5
 Requires at least: 3.3.2
 Tested up to: 3.9
-Stable tag: 1.8.4
+Stable tag: 1.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-NVD3 visualisations give you tools on WordPress to generate impressive business quality charts based on the famous open NVD3 framework of JavaScript. 
+NVD3 visualisations give you tools on WordPress & Drupal 7 to generate impressive business quality charts based on the famous open NVD3 framework of JavaScript. 
 
 == Description ==
 
@@ -164,9 +164,13 @@ Here:
 
 == Changelog ==
 
+= 1.8.5 =
+Version 1.8.5 -
+Minor addition how to reach better security with mySQL data sets for your account of database.
+
 = 1.8.4 =
 Version 1.8.4 -
-Giving input file **mysql** opens standard access to the any valid table of mySQL database. Better examples how to use it and other javascript API calls (eq look at examples/js_api_* files).
+Giving input file type **mysql** as on option opens standard access to the any valid table of mySQL database. Better examples how to use it and other javascript API calls (eq look at examples/js_api_* files). Table's test file *.sql on examples/ too.
 
 = 1.8.3 =
 Version 1.8.3 -
