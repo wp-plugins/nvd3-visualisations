@@ -19,4 +19,13 @@ mySQL Generated Chart
 
 <script type="text/javascript">var login = {pwd:"accountpassword", user:"accountofdatabase", db:"yourdatabase", host:"your.server.com",  table:"yourtable"}; jsChart( '909', 'mysql', 'donut',  {height:'460', width:'640'} , { mysql:login, shadows: "Gray" } );</script>
 
+More Secure mySQL Chart
+
+<div id="chart777"></div>
+
+<script type="text/javascript">var login = {db:"yourdatabase", host:"your.server.com",  table:"yourtable"}; jsChart( '777', 'mysql', 'donut',  {height:'460', width:'640'} , { mysql:login, shadows: "Gray" } );</script>
+
+Next, uncomment and edit these lines in <b>getsql.php</b> script for your login of database:
+// $user = 'your_account';
+// $pwd = 	'your_password';
 
